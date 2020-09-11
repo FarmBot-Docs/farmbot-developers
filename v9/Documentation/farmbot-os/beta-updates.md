@@ -32,7 +32,7 @@ Now that you've read the warnings and usage documentation, you are ready to actu
 * Click <span class="fb-button fb-green">Update</span>
    * You may need to wait up to 30 minutes for this to take effect.
 
-![out.gif](images/out.gif)
+![out.gif](/images/out.gif)
 
 
 # Downgrading

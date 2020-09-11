@@ -35,13 +35,13 @@ Celery Script is used:
 
 To view examples of CeleryScript, open up a sequence in the sequence editor. In the :fa-gear: menu, set **VIEW CELERYSCRIPT** to <span class="fb-peripheral-on">YES</span>. This will show you the CeleryScript of every step in the sequence.
 
-![Screen Shot 2020-08-27 at 3.57.51 PM.png](images/Screen_Shot_2020-08-27_at_3.57.51_PM.png)
+![Screen Shot 2020-08-27 at 3.57.51 PM.png](/images/Screen_Shot_2020-08-27_at_3.57.51_PM.png)
 
 To switch between viewing CeleryScript and the normal UI, press the :fa-code: button on any step. Updating fields in the normal UI will update the CeleryScript view.
 
-![Toogle CS view.gif](images/Toogle_CS_view.gif)
+![Toogle CS view.gif](/images/Toogle_CS_view.gif)
 
 To view the CeleryScript of the entire sequence, press the :fa-code: button in the sequence header.
 
-![Screen Shot 2020-08-27 at 4.15.31 PM.png](images/Screen_Shot_2020-08-27_at_4.15.31_PM.png)
+![Screen Shot 2020-08-27 at 4.15.31 PM.png](/images/Screen_Shot_2020-08-27_at_4.15.31_PM.png)
 

@@ -6,7 +6,7 @@ createdAt: "2018-05-23T14:51:36.865Z"
 updatedAt: "2019-08-24T22:28:52.197Z"
 ---
 
-![farmbot_ui.png](images/farmbot_ui.png)
+![farmbot_ui.png](/images/farmbot_ui.png)
 
 _The FarmBot Web App user interface_
 

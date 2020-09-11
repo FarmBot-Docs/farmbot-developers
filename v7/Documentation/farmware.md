@@ -365,7 +365,7 @@ __v8:__
 
 
 
-![example_farmware_form.png](images/example_farmware_form.png)
+![example_farmware_form.png](/images/example_farmware_form.png)
 
 Input values are retrieved in a Farmware via `get_config_value`, as shown in this example:
 
