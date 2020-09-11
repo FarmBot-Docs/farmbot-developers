@@ -1,0 +1,47 @@
+---
+title: "Message Broker Examples"
+slug: "message-broker-examples"
+excerpt: "Use Python to communicate directly with FarmBot"
+hidden: false
+createdAt: "2018-05-09T20:39:29.331Z"
+updatedAt: "2019-09-30T23:17:06.730Z"
+---
+These examples use concepts in [CeleryScript](doc:celery-script) and [Message Broker](doc:message-broker).
+
+
+__send message:__
+
+```python
+import json
+import paho.mqtt.publish as publish
+
+# Inputs:
+my_device_id = 'device_1'
+# Never hardcode this value into a production application-
+#  It may change without notice.
+# Instead, use the URL found in the "mqtt" property of your auth token.
+my_mqtt_host = 'clever-octopus.rmq.cloudamqp.com'
+my_token = '????'
+
+# Prepare the Celery Script command.
+message = {
+    'kind': 'send_message',
+    'args': {
+        'message': 'Hello World!',
+        'message_type': 'success'
+    }
+}
+
+# Send the command to the device.
+publish.single(
+    'bot/{}/from_clients'.format(my_device_id),
+    payload=json.dumps(message),
+    hostname=my_mqtt_host,
+    auth={
+        'username': my_device_id,
+        'password': my_token
+        }
+    )
+```
+
+Also see [FarmBot Python Examples](https://github.com/FarmBot-Labs/FarmBot-Python-Examples) on GitHub.
