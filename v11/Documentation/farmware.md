@@ -18,7 +18,7 @@ Farmware is custom Python code that runs on the FarmBot CPU. It is useful when y
 
 Farmware has been plagued by low adoption and an extremely high maintenance burden to support a very small pool of authors. Because of low adoption and numerous legacy issues, FarmBot has made the decision to eventually terminate the current Farmware system in favor of a new, non-compatible replacement. Do not write Farmware if you do not need to.
 
-**Farmware is not the only way to write custom Farmbot software.** Please see [this document](doc:you-might-not-need-farmware) for more information
+**Farmware is not the only way to write custom Farmbot software.** Please see [this document](/v11/Documentation/farmware/you-might-not-need-farmware.md) for more information
 
 # Currently supported languages and packages
 
@@ -329,7 +329,7 @@ requests.post(os.environ['FARMWARE_URL'] + '/api/v1/celery_script',
 
 For a list of all available actions, see the second tab of the above example code, `all`.
 
-Also see the [Celery Script developer documentation](doc:celery-script) and [the corpus](https://github.com/FarmBot/farmbot-js/blob/master/dist/corpus.d.ts) for more information.
+Also see the [Celery Script developer documentation](/v11/Documentation/celery-script.md) and [the corpus](https://github.com/FarmBot/farmbot-js/blob/master/dist/corpus.d.ts) for more information.
 
 # Inputs
 

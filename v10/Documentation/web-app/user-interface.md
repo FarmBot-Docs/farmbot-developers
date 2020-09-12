@@ -22,7 +22,7 @@ The FarmBot web app's **user interface** is a [single page application](https://
 
 # Useful developer utilities
  * `window.store.getState()` Get the current Redux store state from the browser's Javascript console.
- * `window.current_bot` The current FarmBot instance created by [FarmBot JS](doc:farmbot-js) from the browser's Javascript console.
+ * `window.current_bot` The current FarmBot instance created by [FarmBot JS](/v10/Documentation/farmbot-js.md) from the browser's Javascript console.
  * `sudo docker-compose run web npm run typecheck` Runs the TypeScript type checker against the codebase in your terminal. Pull requests can not be accepted unless this step passes.
  * `sudo docker-compose run web npm run test` Runs [unit tests](https://en.wikipedia.org/wiki/Unit_testing) to prevent [regressions](https://en.wikipedia.org/wiki/Software_regression). This check must pass for a pull request to be accepted.
 

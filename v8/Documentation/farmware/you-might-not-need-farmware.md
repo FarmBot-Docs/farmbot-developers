@@ -13,7 +13,7 @@ Farmware is only one way to customize a device. Another, more convenient means o
 
 # Alternatives
 
-The easiest way to control a FarmBot via software is to run the software on a dedicated desktop or server. Device control is possible via the [Message Broker](doc:message-broker). Remote access to device data is possible via the [REST API](doc:rest-api). For examples written in Python, see [Web App API Examples](doc:web-app-api-examples) and [Message Broker Examples](doc:message-broker-examples). There is also a [collection of Python-based examples here](https://github.com/FarmBot-Labs/FarmBot-Python-Examples) .
+The easiest way to control a FarmBot via software is to run the software on a dedicated desktop or server. Device control is possible via the [Message Broker](/v8/Documentation/web-app/message-broker.md). Remote access to device data is possible via the [REST API](/v8/Documentation/web-app/rest-api.md). For examples written in Python, see [Web App API Examples](/v8/Python/web-app-api-examples.md) and [Message Broker Examples](/v8/Python/message-broker-examples.md). There is also a [collection of Python-based examples here](https://github.com/FarmBot-Labs/FarmBot-Python-Examples) .
 
 Unless there is a specific reason to do so, it is advisable to not run software on the device, excluding the edge cases listed in the following section. Running software on a FarmBot device will create a number of challenges that are easily avoided by running the software outside of the device.
 

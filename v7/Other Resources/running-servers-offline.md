@@ -7,7 +7,7 @@ updatedAt: "2019-07-16T20:16:48.500Z"
 ---
 
 __Not Recommended:__
-This is not a simple alternative for users behind a firewall. If you are running Farmbot in an organization with strict security policies or firewalls, see our notes [for IT security professionals](doc:for-it-security-professionals).
+This is not a simple alternative for users behind a firewall. If you are running Farmbot in an organization with strict security policies or firewalls, see our notes [for IT security professionals](/v7/Other Resources/for-it-security-professionals.md).
 
 Do not run an offline setup unless you are a software developer intending to modify (fork) the FarmBot software suite.
 

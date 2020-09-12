@@ -5,7 +5,7 @@ hidden: false
 createdAt: "2018-05-16T22:02:43.413Z"
 updatedAt: "2019-12-13T06:31:24.687Z"
 ---
-The FarmBot API provides an HTTP based [REST API](doc:rest-api). HTTP follows a response-request format, which is great when you are explicitly looking for data. However, some interactions do not lend themselves well to a request/response pattern. For example, if FarmBot must perform an emergency stop, we do not want to constantly check the API for such a message. Instead, we wish to receive such messages as soon as they are created and without explicitly asking. Other use cases include remote procedure calls and real-time data syncing.
+The FarmBot API provides an HTTP based [REST API](/v10/Documentation/web-app/rest-api.md). HTTP follows a response-request format, which is great when you are explicitly looking for data. However, some interactions do not lend themselves well to a request/response pattern. For example, if FarmBot must perform an emergency stop, we do not want to constantly check the API for such a message. Instead, we wish to receive such messages as soon as they are created and without explicitly asking. Other use cases include remote procedure calls and real-time data syncing.
 
 The **message broker** is a sub-component of the web API which provides another method of communication which satisfies this requirement. It is a specially configured instance of [RabbitMQ](https://www.rabbitmq.com) that serves the following functions:
 
@@ -19,9 +19,9 @@ The broker accepts messages over a variety of channels, such as [AMQP](https://w
 
 One place where HTTP fails to be an adequate solution is remote procedure calls. If FarmBot _only_ used HTTP as a communication mechanism, a device would be forced to perform long polling and constantly make HTTP requests to the API for any new remote procedure calls. Polling would create tremendous scalability issues for the web app and provide a sub-par real-time experience for users.
 
-With a real-time message broker, there is no need to check for new messages. Messages (such as a user clicking the "move" button on the [user interface](doc:user-interface)) can be sent back and forth between client, device and server without initiating a request.
+With a real-time message broker, there is no need to check for new messages. Messages (such as a user clicking the "move" button on the [user interface](/v10/Documentation/web-app/user-interface.md)) can be sent back and forth between client, device and server without initiating a request.
 
-**In many ways, the message broker acts as a machine-to-machine chat application.** Any software package, whether it be the [REST API](doc:rest-api), [FarmBot OS](doc:farmbot-os) or a third-party [Farmware](doc:farmware) can send a message to any other entity that is currently connected to the message broker, with correct authorization of course.
+**In many ways, the message broker acts as a machine-to-machine chat application.** Any software package, whether it be the [REST API](/v10/Documentation/web-app/rest-api.md), [FarmBot OS](/v10/Documentation/farmbot-os.md) or a third-party [Farmware](/v10/Documentation/farmware.md) can send a message to any other entity that is currently connected to the message broker, with correct authorization of course.
 
 ![rpc_diagram.png](/images/rpc_diagram.png)
 
@@ -29,7 +29,7 @@ _Example: Sending a Remote Procedure Call_
 
 ## Example: Data Sync
 
-When a user enables auto-sync on their device, the Web API will constantly upload data changes to the bot in real-time and without user intervention. This means that the user no longer needs to push the "sync" button after making changes in the [User Interface](doc:user-interface).
+When a user enables auto-sync on their device, the Web API will constantly upload data changes to the bot in real-time and without user intervention. This means that the user no longer needs to push the "sync" button after making changes in the [User Interface](/v10/Documentation/web-app/user-interface.md).
 
 As mentioned previously, the Web API cannot send outbound messages via HTTP, since the protocol only supports request/response communication. In the case of data updates, FarmBot does not know that data on the API has changed and as such, does not make a request to download the data.
 
@@ -59,7 +59,7 @@ If you are attempting to connect to the message broker from a web browser, you w
  * Building custom device control software.
  * Remotely debugging device issues in a browser.
 
-The best way to connect to the broker via WebSockets is with [FarmBot JS](doc:farmbot-js) (easy). Some advanced users may prefer to directly connect via [MQTT.js](https://github.com/mqttjs/MQTT.js), though this is not appropriate for any use case other than debugging.
+The best way to connect to the broker via WebSockets is with [FarmBot JS](/v10/Documentation/farmbot-js.md) (easy). Some advanced users may prefer to directly connect via [MQTT.js](https://github.com/mqttjs/MQTT.js), though this is not appropriate for any use case other than debugging.
 
 ## MQTT
 If your application does not run in a browser, **MQTT** is the preferred connection mechanism. Examples:
@@ -70,7 +70,7 @@ If your application does not run in a browser, **MQTT** is the preferred connect
 The client used depends heavily on the language of your application and personal preference. A list of MQTT client libraries is [available here](https://github.com/mqtt/mqtt.github.io/wiki/libraries). Please see the specific library documentation for specific instructions.
 
 ## AMQP
-A third connection channel is **AMQP**. This is the channel used by [FarmBot OS](doc:farmbot-os). We do not recommend the use of AMQP and reserve the right to make breaking changes to AMQP usage without notice. You should only use AMQP if you are directly modifying the FarmBot OS source code.
+A third connection channel is **AMQP**. This is the channel used by [FarmBot OS](/v10/Documentation/farmbot-os.md). We do not recommend the use of AMQP and reserve the right to make breaking changes to AMQP usage without notice. You should only use AMQP if you are directly modifying the FarmBot OS source code.
 
 # Sending commands
 FarmBotJS wraps common MQTT and [CeleryScript](https://github.com/FarmBot/farmbot-js/wiki/Celery-Script) operations into a single module. This allows you to focus on controlling FarmBot without needing to understand the underlying protocols of the system.
@@ -135,6 +135,6 @@ Now that you have all the required information we can subscribe to topics (liste
 __See real-world examples:__
 A great way to see real-world FarmBot RPCs is to subscribe to the `/from_clients` channel while trying commands in the [Web App](https://my.farm.bot) interface. You can observe the format and content of different RPCs using a [desktop MQTT client](https://www.hivemq.com/blog/seven-best-mqtt-client-tools).
 
-As mentioned above, commands are sent to the device via the `/from_clients` channel. These commands must be formatted as valid [CeleryScript](doc:celery-script). Conversely, responses from the device are viewable in the `/from_device` channel.
+As mentioned above, commands are sent to the device via the `/from_clients` channel. These commands must be formatted as valid [CeleryScript](/v10/Documentation/celery-script.md). Conversely, responses from the device are viewable in the `/from_device` channel.
 
 Subscribing to the `/status` channel allows developers to get a real-time view of the entire FarmBot OS state tree.

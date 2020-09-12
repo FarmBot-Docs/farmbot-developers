@@ -29,7 +29,7 @@ Reducing [regressions](https://en.wikipedia.org/wiki/Software_regression) is an 
 
 ## Type Checks
 
-The [User Interface](doc:user-interface) is written in [Typescript](https://www.typescriptlang.org). Because it is a statically typed language, it is possible to quickly [type check](https://en.wikipedia.org/wiki/Type_system#Static_type_checking) the application by running `npm run typecheck`. This will catch a large number of bugs, such as spelling errors and type mismatches (such as passing `"1"` instead of `1` in a function call).
+The [User Interface](/v6/Documentation/web-app/user-interface.md) is written in [Typescript](https://www.typescriptlang.org). Because it is a statically typed language, it is possible to quickly [type check](https://en.wikipedia.org/wiki/Type_system#Static_type_checking) the application by running `npm run typecheck`. This will catch a large number of bugs, such as spelling errors and type mismatches (such as passing `"1"` instead of `1` in a function call).
 
 When developing features for the Web App, consider running `npm run typecheck` regularly. An even more effective strategy is to **use an editor that has good Typescript integration**, such as [Visual Studio Code](https://code.visualstudio.com). Such editors are able to find type errors in code _as you write the feature_, which can provide a much better development experience.
 
@@ -41,7 +41,7 @@ Running unit tests is an ideal way to determine if a change to the application w
 
 ### Typescript Tests
 
-The [User Interface](doc:user-interface) unit tests use [jest](https://github.com/facebook/jest) for the majority of testing. Tests can be run via `npm run test`.
+The [User Interface](/v6/Documentation/web-app/user-interface.md) unit tests use [jest](https://github.com/facebook/jest) for the majority of testing. Tests can be run via `npm run test`.
 
 ### Ruby Tests
 

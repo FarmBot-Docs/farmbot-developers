@@ -7,7 +7,7 @@ updatedAt: "2018-08-21T18:05:19.668Z"
 ---
 # Problem: Push Notifications
 
-The FarmBot API provides an HTTP based [REST API](doc:rest-api). HTTP follows a response-request format, which is great when you are explicitly looking for data. REST is a popular format for data storage and retrieval because it follows a stateless request/response cycle.
+The FarmBot API provides an HTTP based [REST API](/v6/Documentation/web-app/rest-api.md). HTTP follows a response-request format, which is great when you are explicitly looking for data. REST is a popular format for data storage and retrieval because it follows a stateless request/response cycle.
 
 Some interactions do not lend themselves well to a request/response pattern. For example, if FarmBot must perform an emergency stop, we do not want to constantly check the API for such a message. Instead, we wish to receive such messages as soon as they are created and without explicitly asking. Emergency stops are not the only use case for such notifications. Other use cases include remote procedure calls and real-time data syncing ("auto-sync").
 
@@ -23,9 +23,9 @@ The broker accepts messages over a variety of channels, such as [AMQP](https://w
 
 One place where HTTP fails to be an adequate solution is remote procedure calls. If FarmBot _only_ used HTTP as a communication mechanism, a device would be forced to perform long polling and constantly make HTTP requests to the API for any new remote procedure calls. Polling would create tremendous scalability issues for the web app and provide a sub-par real-time experience for users.
 
-With a real-time message broker, there is no need to check for new messages. Messages (such as a user clicking the "move" button on the [User Interface](doc:user-interface)) can be sent back and forth between client, device and server without initiating a request.
+With a real-time message broker, there is no need to check for new messages. Messages (such as a user clicking the "move" button on the [User Interface](/v6/Documentation/web-app/user-interface.md)) can be sent back and forth between client, device and server without initiating a request.
 
-**In many ways, the message broker acts as a machine-to-machine chat application.** Any software package, whether it be the [REST API](doc:rest-api), [FarmBot OS](doc:farmbot-os) or a third-party [Farmware](doc:farmware) can send a message to any other entity that is currently connected to the Message Broker.
+**In many ways, the message broker acts as a machine-to-machine chat application.** Any software package, whether it be the [REST API](/v6/Documentation/web-app/rest-api.md), [FarmBot OS](/v6/Documentation/farmbot-os.md) or a third-party [Farmware](/v6/Documentation/farmware.md) can send a message to any other entity that is currently connected to the Message Broker.
 
 ![rpc_diagram.png](/images/rpc_diagram.png)
 
@@ -33,7 +33,7 @@ _Example: Sending a Remote Procedure Call_
 
 ## Example: Data Sync
 
-When a user enables auto-sync on their device, the Web API will constantly upload data changes to the bot in real-time and without user intervention. This means that the user no longer needs to push the "sync" button after making changes in the [User Interface](doc:user-interface).
+When a user enables auto-sync on their device, the Web API will constantly upload data changes to the bot in real-time and without user intervention. This means that the user no longer needs to push the "sync" button after making changes in the [User Interface](/v6/Documentation/web-app/user-interface.md).
 
 As mentioned previously, the Web API cannot send outbound messages via HTTP, since the protocol only supports request/response communication. In the case of data updates, FarmBot does not know that data on the API has changed and as such, does not make a request to download the data.
 
@@ -68,7 +68,7 @@ This is a popular approach for developers that are:
  * Building custom device control software.
  * Remotely debugging device issues in a browser.
 
-The best way to connect to the broker via WebSockets is via [FarmBot JS](doc:farmbot-js) (easy). Some advanced users may prefer to directly connect via [MQTT.js](https://github.com/mqttjs/MQTT.js), though this is not appropriate for any use case other than debugging.
+The best way to connect to the broker via WebSockets is via [FarmBot JS](/v6/Documentation/farmbot-js.md) (easy). Some advanced users may prefer to directly connect via [MQTT.js](https://github.com/mqttjs/MQTT.js), though this is not appropriate for any use case other than debugging.
 
 ## MQTT
 
@@ -85,7 +85,7 @@ A list of MQTT client libraries is [available here](https://github.com/mqtt/mqtt
 
 ## AMQP
 
-A third connection channel is AMQP. This is the channel used by [FarmBot OS](doc:farmbot-os).
+A third connection channel is AMQP. This is the channel used by [FarmBot OS](/v6/Documentation/farmbot-os.md).
 
 We do not recommend the use of AMQP and reserve the right to make breaking changes to AMQP usage without notice.
 
@@ -162,7 +162,7 @@ __See Real-World Examples:__
 A great way to see real-world FarmBot RPCs is to subscribe to the `/from_clients` channel while trying commands in the [Web App](https://my.farmbot.io/) interface. You can observe the format and content of different RPCs using a [desktop MQTT client](https://www.hivemq.com/blog/seven-best-mqtt-client-tools).
 
 
-As mentioned above, commands are sent to the device via the `/from_clients` channel. These commands must be formatted as valid [CeleryScript](doc:celery-script).
+As mentioned above, commands are sent to the device via the `/from_clients` channel. These commands must be formatted as valid [CeleryScript](/v6/Documentation/celery-script.md).
 
 Conversely, responses from the device are viewable in the `/from_device` channel.
 

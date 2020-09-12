@@ -10,7 +10,7 @@ A Farmware generally includes Python code that is run by FarmBot OS. During deve
 
 All of the following methods require a minimum of two files:
 * __A Farmware manifest__: `manifest.json`. (see the [Farmware manifest](farmware#section-farmware-manifest) for general info)
-* __The Farmware code__: a `.py` file that contains or runs the code you've written. (See [Farmware](doc:farmware).)
+* __The Farmware code__: a `.py` file that contains or runs the code you've written. (See [Farmware](/v6/Documentation/farmware.md).)
 
 For example Farmware files, see [Hello Farmware](https://github.com/FarmBot-Labs/hello-farmware).
 
@@ -21,7 +21,7 @@ Farmware is downloaded by FarmBot OS by installing it via the Web App FarmBot OS
 
 Farmware can be run via the Web App by selecting it on the Farmware page and pressing <span class="fb-button fb-green">run</span>. (See [Farmware](https://software.farm.bot/v6/docs/farmware#section-farmware) in the user documentation for basic UI operation.)
 
-Troubleshooting tips can be found on the [Common Farmware Problems](doc:common-farmware-problems) page.
+Troubleshooting tips can be found on the [Common Farmware Problems](/v6/Documentation/farmware/common-farmware-problems.md) page.
 
 A typical heavy development workflow might include all of the following options in order. If a Linux system is not available, one might skip options 2 and 3 (which require running a server or building FarmBot OS). If Python is not available, one might skip options 1-3 and write a Farmware directly on GitHub. Published Farmware are usually hosted in a GitHub repository.
 
@@ -56,10 +56,10 @@ __Pros:__
 * Allows direct editing of Farmware code.
 
 __Cons:__
-* Must be able to compile FarmBot OS on a compatible system. (see [FarmBot OS](doc:farmbot-os)).
+* Must be able to compile FarmBot OS on a compatible system. (see [FarmBot OS](/v6/Documentation/farmbot-os.md)).
 
 ## Process
-1. Follow the instructions for setting up a local development environment for [FarmBot OS](doc:farmbot-os).
+1. Follow the instructions for setting up a local development environment for [FarmBot OS](/v6/Documentation/farmbot-os.md).
 2. Create a Farmware manifest and zip file containing your Python code and start an HTTP server on your computer. (e.g., `python3 -m http.server 8000 --bind 127.0.0.1`). Alternatively, use one of the other hosting methods.
 
 

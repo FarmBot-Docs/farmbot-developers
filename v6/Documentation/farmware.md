@@ -320,7 +320,7 @@ requests.post(os.environ['FARMWARE_URL'] + '/api/v1/celery_script',
 
 For a list of all available actions, see the second tab of the above example code, `all`.
 
-Also see the [Celery Script developer documentation](doc:celery-script) and [the corpus](https://github.com/FarmBot/farmbot-js/blob/master/dist/corpus.d.ts) for more information.
+Also see the [Celery Script developer documentation](/v6/Documentation/celery-script.md) and [the corpus](https://github.com/FarmBot/farmbot-js/blob/master/dist/corpus.d.ts) for more information.
 
 # Inputs
 

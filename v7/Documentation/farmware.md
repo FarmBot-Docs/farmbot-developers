@@ -8,7 +8,7 @@ updatedAt: "2019-07-30T18:42:16.658Z"
 ---
 
 __You Might Not Need a Farmware:__
-**Farmware is not the only way to write custom Farmbot software.** Please see [this document](doc:you-might-not-need-farmware) for more information
+**Farmware is not the only way to write custom Farmbot software.** Please see [this document](/v7/Documentation/farmware/you-might-not-need-farmware.md) for more information
 
 
 
@@ -326,7 +326,7 @@ requests.post(os.environ['FARMWARE_URL'] + '/api/v1/celery_script',
 
 For a list of all available actions, see the second tab of the above example code, `all`.
 
-Also see the [Celery Script developer documentation](doc:celery-script) and [the corpus](https://github.com/FarmBot/farmbot-js/blob/master/dist/corpus.d.ts) for more information.
+Also see the [Celery Script developer documentation](/v7/Documentation/celery-script.md) and [the corpus](https://github.com/FarmBot/farmbot-js/blob/master/dist/corpus.d.ts) for more information.
 
 # Inputs
 

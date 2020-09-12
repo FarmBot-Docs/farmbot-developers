@@ -9,10 +9,10 @@ updatedAt: "2020-02-10T20:05:03.432Z"
 The **REST API** is an HTTP web server commonly referred to as "The API", "The REST API" or simply "The Server". The REST API handles a number of responsibilities including:
 
  * **Data storage, validation, and security:** Prevents data loss between reflashes by storing it in a centralized database, allows users to edit information when the device is offline, validates data and controls access to data via authentication and authorization mechanisms.
- * **Email delivery:** Sends email notifications (such as password resets and critical errors) to end users. All other messaging is handled by the [Message Broker](doc:message-broker), a distinctly decoupled sub-system of the Web API.
+ * **Email delivery:** Sends email notifications (such as password resets and critical errors) to end users. All other messaging is handled by the [Message Broker](/v11/Documentation/web-app/message-broker.md), a distinctly decoupled sub-system of the Web API.
  * **Image uploads and manipulation:** Re-sizes and stores images captured by FarmBot's internal camera.
 
-Generally speaking, the REST API does _not_ control FarmBot. Device control is handled by the [Message Broker](doc:message-broker), [CeleryScript](doc:celery-script) and [FarmBot JS](doc:farmbot-js).
+Generally speaking, the REST API does _not_ control FarmBot. Device control is handled by the [Message Broker](/v11/Documentation/web-app/message-broker.md), [CeleryScript](/v11/Documentation/celery-script.md) and [FarmBot JS](/v11/Documentation/farmbot-js.md).
 
 ## API specifications
 
@@ -124,7 +124,7 @@ You may request pagination for other resources by submitting an issue on Github.
 
 # Generating an API token
 
-You must pass a `token` string into most HTTP requests under the `Authorization` request header. Here are some ways in which you can get a token. Also see our [web app API examples](doc:web-app-api-examples).
+You must pass a `token` string into most HTTP requests under the `Authorization` request header. Here are some ways in which you can get a token. Also see our [web app API examples](/v11/Python/web-app-api-examples.md).
 
 
 ```curl

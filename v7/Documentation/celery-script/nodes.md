@@ -5,7 +5,7 @@ hidden: false
 createdAt: "2019-01-18T04:05:13.071Z"
 updatedAt: "2019-07-16T20:16:48.489Z"
 ---
-With exception to the [REST API](doc:rest-api) and some other edge cases, all communication that happens between FarmBot users, devices and systems is wrapped in a Celery Script node.
+With exception to the [REST API](/v7/Documentation/web-app/rest-api.md) and some other edge cases, all communication that happens between FarmBot users, devices and systems is wrapped in a Celery Script node.
 
 A node is a specially formatted JSON document. It is a composable building block that can be nested and arranged to create trees of commands, similar to the way an [abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) is used to create programming languages.
 
@@ -71,8 +71,8 @@ Some nodes, such as the `"coordinate"` node, are used to represent data.
 
 # The "rpc_request" node
 
-The CeleryScript specification defines three nodes used for real-time control of a device. These nodes are used extensively in the [User Interface](doc:user-interface) for one-off commands, such as device position adjustments.
+The CeleryScript specification defines three nodes used for real-time control of a device. These nodes are used extensively in the [User Interface](/v7/Documentation/web-app/user-interface.md) for one-off commands, such as device position adjustments.
 
- * `rpc_request` -  Initiated by a user (or occasionally, the [REST API](doc:rest-api)) when requesting the device do something. The desired action (eg: `move_relative`, `install_farmware`, etc..) is held in the `body` of this node.
+ * `rpc_request` -  Initiated by a user (or occasionally, the [REST API](/v7/Documentation/web-app/rest-api.md)) when requesting the device do something. The desired action (eg: `move_relative`, `install_farmware`, etc..) is held in the `body` of this node.
  * `rpc_ok` - Sent by a device to an end user. Indicates that the request operation has succeeded.
  * `rpc_error` - Indicates that the request operation has failed. The body of an `rpc_error` will often contain a number of `explanation` nodes describing the circumstances of the failure.

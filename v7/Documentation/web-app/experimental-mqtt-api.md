@@ -19,7 +19,7 @@ This feature was inspired by requests from application developers who wanted to 
 
 # Important Notes
 
- * This is a new feature. Official software packages do not yet rely on MQTT updates and there may still be undiscovered bugs. For applications requiring higher levels of stability, consider using the [REST API](doc:rest-api) for data modification.
+ * This is a new feature. Official software packages do not yet rely on MQTT updates and there may still be undiscovered bugs. For applications requiring higher levels of stability, consider using the [REST API](/v7/Documentation/web-app/rest-api.md) for data modification.
  * The feature set is not complete yet. It is not a drop-in replacement for the REST API in all use cases. A full list of supported resources is available [in the API source code](https://github.com/FarmBot/Farmbot-Web-App/blob/staging/app/lib/resources.rb#L5).
 
 
@@ -27,7 +27,7 @@ This feature was inspired by requests from application developers who wanted to 
 
 # Limitations of HTTP
 
-The [REST API](doc:rest-api) is an appropriate solution for most resource management operations.
+The [REST API](/v7/Documentation/web-app/rest-api.md) is an appropriate solution for most resource management operations.
 
 It does suffer some drawbacks in some circumstances, though:
 
@@ -40,4 +40,4 @@ To address the issues above, the API exposes an experimental feature to update r
 
 # Next Steps
 
-[Create, Update and Delete a Resource via MQTT](doc:create-a-resource)
+[Create, Update and Delete a Resource via MQTT](/v7/Documentation/web-app/create-a-resource.md)

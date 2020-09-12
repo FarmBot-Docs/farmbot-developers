@@ -14,10 +14,10 @@ Like most open source projects, we host our software on [GitHub](https://github.
 # Which technologies must I learn to program a FarmBot?
 For users who _only_ need to control a FarmBot, any language that provides the following will suffice:
 
- * An HTTP client for talking to the [REST API](doc:rest-api).
- * An MQTT client for talking to the [Message Broker](doc:message-broker)
+ * An HTTP client for talking to the [REST API](/v8/Documentation/web-app/rest-api.md).
+ * An MQTT client for talking to the [Message Broker](/v8/Documentation/web-app/message-broker.md)
 
-If you wish to write a [Farmware](doc:farmware), Python is the only language currently supported, but [most developers do not need to write a Farmware](doc:you-might-not-need-farmware).
+If you wish to write a [Farmware](/v8/Documentation/farmware.md), Python is the only language currently supported, but [most developers do not need to write a Farmware](/v8/Documentation/farmware/you-might-not-need-farmware.md).
 
 # Does the web API support ARM-based processors?
 Not at this time. The only software that supports Raspberry Pi is FarmBot OS. Do not attempt to run a web server on a Raspberry Pi.
@@ -26,9 +26,9 @@ Not at this time. The only software that supports Raspberry Pi is FarmBot OS. Do
 FarmBot is comprised of many different software systems and the language used varies across projects. Generally speaking, we use a combination of C++, [Ruby](https://www.ruby-lang.org/en/), [Elixir](https://elixir-lang.org), and [TypeScript](https://www.typescriptlang.org).
 
 # Do I need to know Elixir to program FarmBot?
-No. FarmBot provides a system for plugins known as "Farmware". Farmware may be written in other languages, such as Python. See [Farmware](doc:farmware) documentation for details.
+No. FarmBot provides a system for plugins known as "Farmware". Farmware may be written in other languages, such as Python. See [Farmware](/v8/Documentation/farmware.md) documentation for details.
 
-The best approach is to write a standalone application that interacts with FarmBot externally via [REST API](doc:rest-api), [FarmBot JS](doc:farmbot-js) or the [Message Broker](doc:message-broker).
+The best approach is to write a standalone application that interacts with FarmBot externally via [REST API](/v8/Documentation/web-app/rest-api.md), [FarmBot JS](/v8/Documentation/farmbot-js.md) or the [Message Broker](/v8/Documentation/web-app/message-broker.md).
 
 # Should I clone FarmBot OS on GitHub or use the image?
 You almost certainly want the image. The only exception is if you plan on modifying the FarmBot OS source code.

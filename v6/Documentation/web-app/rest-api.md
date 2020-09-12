@@ -59,10 +59,10 @@ The REST API is an HTTP web server commonly referred to as "The API", "The REST 
 The REST API handles a number of responsibilities including:
 
  * **Data Storage, Validation, Security:** Prevents data loss between reflashes by storing it in a centralized database, allows users to edit information when the device is offline, validates data and controls access to data via authentication and authorization mechanisms.
- * **Email Delivery:** Sends email notifications (such as password resets and critical errors) to end users. All other messaging is handled by the [Message Broker](doc:message-broker), a distinctly decoupled sub-system of the Web API.
+ * **Email Delivery:** Sends email notifications (such as password resets and critical errors) to end users. All other messaging is handled by the [Message Broker](/v6/Documentation/web-app/message-broker.md), a distinctly decoupled sub-system of the Web API.
  * **Image Manipulation and Uploads:** Re-sizes and stores images captured by FarmBot's internal camera.
 
-Genreally speaking, the REST API does _not_ control FarmBot. Device control is handled by the [Message Broker](doc:message-broker), [CeleryScript](doc:celery-script) and [FarmBot JS](doc:farmbot-js).
+Genreally speaking, the REST API does _not_ control FarmBot. Device control is handled by the [Message Broker](/v6/Documentation/web-app/message-broker.md), [CeleryScript](/v6/Documentation/celery-script.md) and [FarmBot JS](/v6/Documentation/farmbot-js.md).
 
 # API Technical Specifications
 
@@ -115,7 +115,7 @@ As of August 2018, the API manages the following resources:
 
 ## How Can I Control the Bot Via HTTP Requests?
 
-The REST API does not control devices. It is only used for data storage, email delivery and image resizing. To control a device remotely, please see documentation for the [Message Broker](doc:message-broker), [CeleryScript](doc:celery-script) and [FarmBot JS](doc:farmbot-js).
+The REST API does not control devices. It is only used for data storage, email delivery and image resizing. To control a device remotely, please see documentation for the [Message Broker](/v6/Documentation/web-app/message-broker.md), [CeleryScript](/v6/Documentation/celery-script.md) and [FarmBot JS](/v6/Documentation/farmbot-js.md).
 
 ## Where Can I See API Example Usage?
 

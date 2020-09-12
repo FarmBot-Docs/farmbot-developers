@@ -25,10 +25,10 @@ The table below shows a rough overview of the developer tools used when working 
 
 For users who _only_ need to control a FarmBot, any language that provides the following will suffice:
 
- * An HTTP client for talking to the [REST API](doc:rest-api).
- * An MQTT client for talking to the [Message Broker](doc:message-broker)
+ * An HTTP client for talking to the [REST API](/v7/Documentation/web-app/rest-api.md).
+ * An MQTT client for talking to the [Message Broker](/v7/Documentation/web-app/message-broker.md)
 
-If you wish to write a [Farmware](doc:farmware), Python is the only language currently supported, but [most developers do not need to write a Farmware](doc:you-might-not-need-farmware).
+If you wish to write a [Farmware](/v7/Documentation/farmware.md), Python is the only language currently supported, but [most developers do not need to write a Farmware](/v7/Documentation/farmware/you-might-not-need-farmware.md).
 
 The document that follows is **not a list of required skills**. It would be **unrealistic for a new developer to learn all of these skills**. Instead, it is an inventory of all languages and tools used by the project. The tools that a developer will need to know will vary depending on the task at hand.
 

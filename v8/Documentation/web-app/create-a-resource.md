@@ -59,4 +59,4 @@ If successful, an `rpc_ok` CeleryScript node will be streamed to the following M
 bot/device_<id>/from_api
 ```
 
-**This is not a JSON resource.** It is merely an indication that the server has accepted the request and processed it. The resource itself will be streamed over the `auto_sync`* channel. For more information about parsing auto-sync messages, see the documentation entry "[Subscribing to Resource Updates](doc:realtime-updates-auto-sync)".
+**This is not a JSON resource.** It is merely an indication that the server has accepted the request and processed it. The resource itself will be streamed over the `auto_sync`* channel. For more information about parsing auto-sync messages, see the documentation entry "[Subscribing to Resource Updates](/v8/Documentation/web-app/realtime-updates-auto-sync.md)".

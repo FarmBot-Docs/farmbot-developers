@@ -7,9 +7,9 @@ updatedAt: "2018-10-15T23:02:31.851Z"
 ---
 
 __Internally used commands:__
-The commands and responses on this page are used for communication between [FarmBot OS](doc:farmbot-os) and the [FarmBot Arduino Firmware](https://github.com/FarmBot/farmbot-arduino-firmware). Outside of that internal communication, commands on this page can only be sent by disconnecting the Arduino from the Raspberry Pi and connecting a USB cable from a computer directly to the Arduino.
+The commands and responses on this page are used for communication between [FarmBot OS](/v6/Documentation/farmbot-os.md) and the [FarmBot Arduino Firmware](https://github.com/FarmBot/farmbot-arduino-firmware). Outside of that internal communication, commands on this page can only be sent by disconnecting the Arduino from the Raspberry Pi and connecting a USB cable from a computer directly to the Arduino.
 
-FarmBot OS communication via [Farmware](doc:farmware) and the [Message Broker](doc:message-broker) consists of higher-level [CeleryScript](doc:celery-script) commands, not the commands on listed on this page.
+FarmBot OS communication via [Farmware](/v6/Documentation/farmware.md) and the [Message Broker](/v6/Documentation/web-app/message-broker.md) consists of higher-level [CeleryScript](/v6/Documentation/celery-script.md) commands, not the commands on listed on this page.
 
 
 

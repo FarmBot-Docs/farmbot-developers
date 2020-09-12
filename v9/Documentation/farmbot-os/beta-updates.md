@@ -21,7 +21,7 @@ If something doesn't work properly please report the issue in [this forum topic]
 * What actually happened
 * Any relevant logs
 
-If your bot rebooted or failed to boot, please [gather a log dump](doc:gathering-a-log-dump) and **privately** share it with a FarmBot staff person.
+If your bot rebooted or failed to boot, please [gather a log dump](/v9/Documentation/farmbot-os/gathering-a-log-dump.md) and **privately** share it with a FarmBot staff person.
 
 # Opting in to beta updates
 Now that you've read the warnings and usage documentation, you are ready to actually opt into beta updates.

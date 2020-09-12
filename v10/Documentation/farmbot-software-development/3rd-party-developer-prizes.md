@@ -31,7 +31,7 @@ Browse our GitHub [project board](https://github.com/orgs/FarmBot/projects/8) an
 
 ## Wrapper libraries
 
-Writing [CeleryScript](doc:celery-script) by hand requires in-depth knowledge of FarmBot internals. A wrapper library such as [FarmBot JS](doc:farmbot-js) or [Farmware Tools](https://github.com/FarmBot-Labs/farmware-tools) allows 3rd party developers to write code using high-level abstractions instead of low level primitives. Wrapper libraries increase productivity, decrease time spent learning platform details and reduce the risk of breaking changes during upgrades.
+Writing [CeleryScript](/v10/Documentation/celery-script.md) by hand requires in-depth knowledge of FarmBot internals. A wrapper library such as [FarmBot JS](/v10/Documentation/farmbot-js.md) or [Farmware Tools](https://github.com/FarmBot-Labs/farmware-tools) allows 3rd party developers to write code using high-level abstractions instead of low level primitives. Wrapper libraries increase productivity, decrease time spent learning platform details and reduce the risk of breaking changes during upgrades.
 
 FarmBot currently offers official wrappers for Javascript and Python and wishes to offer wrappers in as many languages as possible.
 

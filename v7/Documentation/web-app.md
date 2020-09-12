@@ -20,6 +20,6 @@ The [Web App](https://github.com/FarmBot/Farmbot-Web-App) is one software packag
 
 The main components of the Web Application are:
 
- * The [User Interface](doc:user-interface)
- * The [REST API](doc:rest-api)
- * The [Message Broker](doc:message-broker)
+ * The [User Interface](/v7/Documentation/web-app/user-interface.md)
+ * The [REST API](/v7/Documentation/web-app/rest-api.md)
+ * The [Message Broker](/v7/Documentation/web-app/message-broker.md)

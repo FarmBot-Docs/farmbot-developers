@@ -6,7 +6,7 @@ hidden: false
 createdAt: "2018-05-09T20:39:29.331Z"
 updatedAt: "2019-09-30T23:17:06.730Z"
 ---
-These examples use concepts in [CeleryScript](doc:celery-script) and [Message Broker](doc:message-broker).
+These examples use concepts in [CeleryScript](/v9/Documentation/celery-script.md) and [Message Broker](/v9/Documentation/web-app/message-broker.md).
 
 
 __send message:__

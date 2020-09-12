@@ -22,9 +22,9 @@ FarmBot is comprised of many different software systems and the language used va
 
 # Do I need to know Elixir to program FarmBot?
 
-No. FarmBot provides a system for plugins known as "Farmware". Farmware may be written in other languages, such as Python. See [Farmware](doc:farmware) documentation for details.
+No. FarmBot provides a system for plugins known as "Farmware". Farmware may be written in other languages, such as Python. See [Farmware](/v7/Documentation/farmware.md) documentation for details.
 
-An alternative approach is to write a standalone application that interacts with FarmBot externally via [REST API](doc:rest-api) calls or [FarmBot JS](doc:farmbot-js).
+An alternative approach is to write a standalone application that interacts with FarmBot externally via [REST API](/v7/Documentation/web-app/rest-api.md) calls or [FarmBot JS](/v7/Documentation/farmbot-js.md).
 
 # Should I clone FarmBot OS on GitHub or use the image?
 

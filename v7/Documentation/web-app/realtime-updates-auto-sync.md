@@ -5,7 +5,7 @@ hidden: false
 createdAt: "2018-08-16T20:34:22.539Z"
 updatedAt: "2019-07-16T20:16:48.485Z"
 ---
-As we learned in the [previous section](doc:rest-api), resources are downloaded from the API as JSON documents.
+As we learned in the [previous section](/v7/Documentation/web-app/rest-api.md), resources are downloaded from the API as JSON documents.
 
 HTTP is a [stateless protocol](https://en.wikipedia.org/wiki/Stateless_protocol). This offers a number of benefits to application developers but does come with some drawbacks. Most notably, there is a chance that the data you downloaded will go "stale" when people or devices update the resource after you perform the initial resource download.
 
@@ -36,7 +36,7 @@ As we saw in the previous example, polling has a number of drawbacks that make i
 
 Unlike most other resource management use cases, **Auto Sync is performed via MQTT rather than HTTP.**
 
-To receive data updates for a particular resource, login to the [Message Broker](doc:message-broker) and subscribe to an MQTT topic that matches the pattern below:
+To receive data updates for a particular resource, login to the [Message Broker](/v7/Documentation/web-app/message-broker.md) and subscribe to an MQTT topic that matches the pattern below:
 
 ```
 bot/device_DEVICE_ID/sync/RESOURCE_NAME/RESOURCE_ID
@@ -86,4 +86,4 @@ As August 2018, the following resource names are supported: `Crop`, `Device`, `D
 
 # Next Steps
 
-As we've learned in this section, it is possible to subscribe to resource changes via MQTT. **Auto Sync is only for reading data**. If you wish to update resources via MQTT, you may do so via the [Experimental MQTT API](doc:experimental-mqtt-api).
+As we've learned in this section, it is possible to subscribe to resource changes via MQTT. **Auto Sync is only for reading data**. If you wish to update resources via MQTT, you may do so via the [Experimental MQTT API](/v7/Documentation/web-app/experimental-mqtt-api.md).
