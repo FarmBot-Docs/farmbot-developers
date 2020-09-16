@@ -2,18 +2,17 @@
 title: "Farmware"
 slug: "farmware"
 excerpt: "FarmBot OS plugins"
-hidden: false
-createdAt: "2018-05-16T19:40:14.748Z"
-updatedAt: "2019-12-13T17:09:26.258Z"
 ---
 
-__For developers only:__
-This documentation is meant for Farmware developers. For use of Farmware in the Web App, [see here](https://software.farm.bot/docs/farmware).
+* toc
+{:toc}
+
+
+{% include callout.html type="info" title="For developers only" content="This documentation is meant for Farmware developers. For use of Farmware in the Web App, [see here](https://software.farm.bot/docs/farmware)." %}
 
 Farmware is custom Python code that runs on the FarmBot CPU. It is useful when you need to control the device, but cannot control the device remotely due to design considerations. Farmware should only be used in cases when it would be impractical to run software remotely, such as operations that require offline support or extremely low latency.
 
-__You might not need a Farmware:__
-**Farmware is not the only way to write custom Farmbot software.** Please see [this document](/v8/Documentation/farmware/you-might-not-need-farmware.md) for more information
+{% include callout.html type="info" title="You might not need a Farmware" content="**Farmware is not the only way to write custom Farmbot software.** Please see [this document](/v8/Documentation/farmware/you-might-not-need-farmware.md) for more information" %}
 
 
 
@@ -365,7 +364,7 @@ __FarmBot OS v7:__
 
 
 
-![example_farmware_form.png](/images/example_farmware_form.png)
+![example_farmware_form.png](example_farmware_form.png)
 
 Input values are retrieved in a Farmware via `get_config_value`, as shown in this example:
 
@@ -401,8 +400,7 @@ To [install a Farmware](#section-installing-farmware), you need to create a `man
 
 For example, entering `https://raw.githubusercontent.com/FarmBot-Labs/hello-farmware/master/manifest.json` and clicking install on the Farmware page of the Web App would install the `Hello Farmware` Farmware, whose source code is located at the GitHub project [here](https://github.com/FarmBot-Labs/hello-farmware).
 
-__:__
-The Farmware manifest format changed between FarmBot OS v7 and FarmBot OS v8. Be sure to use the manifest format that matches your FarmBot OS version, as shown below.
+{% include callout.html type="warning" title="" content="The Farmware manifest format changed between FarmBot OS v7 and FarmBot OS v8. Be sure to use the manifest format that matches your FarmBot OS version, as shown below." %}
 
 
 

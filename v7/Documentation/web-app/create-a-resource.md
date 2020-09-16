@@ -1,10 +1,11 @@
 ---
 title: "Publishing Resource Updates via MQTT"
 slug: "create-a-resource"
-hidden: false
-createdAt: "2018-08-20T16:02:57.086Z"
-updatedAt: "2019-07-16T20:16:48.486Z"
 ---
+
+* toc
+{:toc}
+
 # Send an Update
 
 Send an MQTT message in the format of:

@@ -1,10 +1,11 @@
 ---
 title: "Special API Endpoints"
 slug: "special-api-endpoints"
-hidden: false
-createdAt: "2019-06-11T16:30:32.480Z"
-updatedAt: "2019-09-30T23:17:06.714Z"
 ---
+
+* toc
+{:toc}
+
 The REST API is relatively uniform in how it handles resources. There are some exceptions, however.
 
 # Tool slots, points, and plants

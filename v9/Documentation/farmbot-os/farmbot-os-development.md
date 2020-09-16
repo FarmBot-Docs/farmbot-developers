@@ -1,10 +1,11 @@
 ---
 title: "FarmBot OS Development"
 slug: "farmbot-os-development"
-hidden: false
-createdAt: "2019-01-18T06:55:47.162Z"
-updatedAt: "2019-12-13T01:50:01.487Z"
 ---
+
+* toc
+{:toc}
+
 Most development will be done in "host" environment. This means that rather than making a change on your computer, then pushing it to the device, we can rapidly develop things from the luxury of our own machine. See this [Nerves getting started guide](https://hexdocs.pm/nerves/getting-started.html) for more information about this. But as a side effect, we will need to be able to configure (at least) two different environment/target combos where:
 
 `environment` is one of:
@@ -25,8 +26,7 @@ And `target` (where the `environment` will run) is one of:
 
 
 
-__Note:__
-You will need to configure your Farmbot API, Frontend, and MQTT services for the below commands to work. You _can_ however use the default `my.farm.bot` servers. see `config/host/auth_secret_template.exs` for more information.
+{% include callout.html type="info" title="Note" content="You will need to configure your Farmbot API, Frontend, and MQTT services for the below commands to work. You _can_ however use the default `my.farm.bot` servers. see `config/host/auth_secret_template.exs` for more information." %}
 
 # Running unit tests
 Tests should be ran while developing features. You should have a *local* Farmbot stack up and running and configured for this to work. `config/host/auth_secret_template.exs` will have more full instructions.

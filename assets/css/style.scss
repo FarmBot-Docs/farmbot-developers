@@ -1,0 +1,45 @@
+---
+---
+
+@import 'jekyll-theme-cayman';
+
+nav {
+  padding: 1rem;
+  background: #0c4d8a;
+  a {
+    padding: 1rem;
+    text-decoration: none !important;
+    color: #ddd;
+  }
+}
+
+.page-header {
+  color: unset;
+  background: unset;
+}
+
+.all {
+  display: flex;
+}
+
+.nav-toc {
+  width: 25%;
+}
+
+.callout {
+  background: #f8f8f9;
+  border-left: 0.25rem solid #dfe2e5;
+  border-color: #8b939c;
+  margin-top: 1rem;
+  padding: 1.3rem;
+  i {
+    float: left;
+    line-height: 2rem;
+    margin-left: -0.5rem;
+  }
+  h3,
+  p {
+    margin-top: 0;
+    margin-left: 1.3rem;
+  }
+}

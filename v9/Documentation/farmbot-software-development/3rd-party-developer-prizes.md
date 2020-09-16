@@ -2,10 +2,11 @@
 title: "3rd Party Developer Prizes"
 slug: "3rd-party-developer-prizes"
 excerpt: "Rewarding open-source contributions"
-hidden: false
-createdAt: "2019-09-25T22:25:43.151Z"
-updatedAt: "2019-11-07T14:19:44.895Z"
 ---
+
+* toc
+{:toc}
+
 As an open-source project, we're always looking at ways to onboard, empower, and reward 3rd party developers to improve and expand upon the FarmBot software ecosystem. The project ideas below have been identified as valuable contributions to the FarmBot community either because they:
 
   * Substantially improve the core experience for a large number of users (building features, fixing bugs)
@@ -22,8 +23,7 @@ Because we think these types of projects are so valuable, we offer prizes to dev
 
 # Project ideas
 
-__Working on something big?:__
-Send an email to developer@farm.bot to let us know what you're working on and why you think it would be a valuable contribution. We're happy to provide developer support as needed.
+{% include callout.html type="info" title="Working on something big?" content="Send an email to developer@farm.bot to let us know what you're working on and why you think it would be a valuable contribution. We're happy to provide developer support as needed." %}
 
 ## Core features and bug fixes
 
@@ -50,6 +50,5 @@ If you've completed a project, send an email to developer@farm.bot to let us kno
 * FarmBot shop gift cards up to $1,000 in value
 * Full FarmBot kits
 
-__Prizes are the cherry on top, not the cake or the icing:__
-Please note that prizes are given out at FarmBot Inc's discretion, and not every contribution will necessarily earn you a prize. We award prizes as a gift to recognize awesome people and high quality contributions. Please don't try to game us or abuse our generosity. Prizes are not payment, not guaranteed, and should not be considered to be compensation.
+{% include callout.html type="warning" title="Prizes are the cherry on top, not the cake or the icing" content="Please note that prizes are given out at FarmBot Inc's discretion, and not every contribution will necessarily earn you a prize. We award prizes as a gift to recognize awesome people and high quality contributions. Please don't try to game us or abuse our generosity. Prizes are not payment, not guaranteed, and should not be considered to be compensation." %}
 

@@ -2,18 +2,17 @@
 title: "Farmware"
 slug: "farmware"
 excerpt: "FarmBot OS plug-Ins to expand FarmBot functionality"
-hidden: false
-createdAt: "2018-05-16T19:40:14.748Z"
-updatedAt: "2019-07-30T18:42:16.658Z"
 ---
 
-__You Might Not Need a Farmware:__
-**Farmware is not the only way to write custom Farmbot software.** Please see [this document](/v7/Documentation/farmware/you-might-not-need-farmware.md) for more information
+* toc
+{:toc}
+
+
+{% include callout.html type="danger" title="You Might Not Need a Farmware" content="**Farmware is not the only way to write custom Farmbot software.** Please see [this document](/v7/Documentation/farmware/you-might-not-need-farmware.md) for more information" %}
 
 
 
-__For Developers:__
-This documentation is meant for Farmware developers. For use of Farmware in the Web App, see the [FarmBot Web App Farmware documentation](https://software.farm.bot/docs/farmware).
+{% include callout.html type="info" title="For Developers" content="This documentation is meant for Farmware developers. For use of Farmware in the Web App, see the [FarmBot Web App Farmware documentation](https://software.farm.bot/docs/farmware)." %}
 
 
 
@@ -365,7 +364,7 @@ __v8:__
 
 
 
-![example_farmware_form.png](/images/example_farmware_form.png)
+![example_farmware_form.png](example_farmware_form.png)
 
 Input values are retrieved in a Farmware via `get_config_value`, as shown in this example:
 
@@ -399,8 +398,7 @@ See [Hello Farmware Input](https://github.com/FarmBot-Labs/hello-farmware-input)
 
  * __Python 3.7__: opencv, numpy, requests, serial, farmware_tools
 
-__Python 3:__
-FarmBot OS (v7+) now uses Python 3. Python 2 is no longer supported.
+{% include callout.html type="warning" title="Python 3" content="FarmBot OS (v7+) now uses Python 3. Python 2 is no longer supported." %}
 
 
 

@@ -1,10 +1,11 @@
 ---
 title: "Parameters"
 slug: "parameters"
-hidden: false
-createdAt: "2019-12-12T22:57:36.919Z"
-updatedAt: "2019-12-13T01:13:59.961Z"
 ---
+
+* toc
+{:toc}
+
 # Writing parameters
 To write a parameter, send an `F22 P V` command, where `P` is the parameter number and `V` is the parameter value.
 
@@ -101,8 +102,7 @@ The firmware uses the following parameters, as found in the code repository at [
 
 ## Deprecated
 
-__:__
-The following parameters are no longer used, though support for them may still remain in the firmware.
+{% include callout.html type="warning" title="" content="The following parameters are no longer used, though support for them may still remain in the firmware." %}
 
 
 

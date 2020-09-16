@@ -1,10 +1,11 @@
 ---
 title: "Development Workflow"
 slug: "feature-development-workflow"
-hidden: false
-createdAt: "2018-06-22T12:52:54.193Z"
-updatedAt: "2018-06-22T15:09:04.812Z"
 ---
+
+* toc
+{:toc}
+
 When developing new features for the Web App, a fast development workflow is essential.
 
 This document outlines the common development practices of developers at FarmBot, Inc.

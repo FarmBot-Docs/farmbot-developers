@@ -2,10 +2,11 @@
 title: "Farmware Hosting and Workflows"
 slug: "farmware-hosting-and-workflows"
 excerpt: "Farmware hosting options"
-hidden: false
-createdAt: "2019-01-09T02:17:58.775Z"
-updatedAt: "2019-12-13T05:19:28.035Z"
 ---
+
+* toc
+{:toc}
+
 A Farmware generally includes Python code that is run by FarmBot OS. During development, you may first write and run the Python code on your local computer. To run it with FarmBot OS, the code must be hosted on a server from which FarmBot OS can download it.
 
 All of the following methods require a minimum of two files:
@@ -14,8 +15,7 @@ All of the following methods require a minimum of two files:
 
 For example Farmware files, see [Hello Farmware](https://github.com/FarmBot-Labs/hello-farmware).
 
-__Farmware code filenames:__
-The following examples use `my_farmware_code.py`, but a different name should be chosen for your main Farmware code file.
+{% include callout.html type="info" title="Farmware code filenames" content="The following examples use `my_farmware_code.py`, but a different name should be chosen for your main Farmware code file." %}
 
 Farmware is downloaded by FarmBot OS by installing it via the Web App FarmBot OS is connected to, which can either be self-hosted or at the public [my.farm.bot](https://my.farm.bot/). The `manifest.json` file URL is used for installation. See [Installing Farmware](https://software.farm.bot/v6/docs/farmware#section-installing-farmware) in the user documentation for basic UI operation.
 
@@ -43,8 +43,7 @@ Step 1. Write some Python code.
 
 Step 2. Run it via Python.
 
-__Using farmware_tools on your computer:__
-To run code that imports `farmware_tools` on your computer (without FarmBot OS), you will need to install the package via `pip install --user farmware_tools`. FarmBot OS already has the package built in.
+{% include callout.html type="info" title="Using farmware_tools on your computer" content="To run code that imports `farmware_tools` on your computer (without FarmBot OS), you will need to install the package via `pip install --user farmware_tools`. FarmBot OS already has the package built in." %}
 
 # Option 2: Localhost (run FarmBot OS locally)
 
@@ -56,8 +55,7 @@ To run code that imports `farmware_tools` on your computer (without FarmBot OS),
 
 
 
-__:__
-This option is not recommended unless you are familiar with Linux and building Elixir apps.
+{% include callout.html type="warning" title="" content="This option is not recommended unless you are familiar with Linux and building Elixir apps." %}
 
 Step 1. Follow the instructions for setting up a local development environment for [FarmBot OS](/v8/Documentation/farmbot-os.md).
 

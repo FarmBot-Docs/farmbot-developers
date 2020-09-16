@@ -1,10 +1,11 @@
 ---
 title: "Message Broker"
 slug: "message-broker"
-hidden: false
-createdAt: "2018-05-16T22:02:43.413Z"
-updatedAt: "2019-12-13T06:31:24.687Z"
 ---
+
+* toc
+{:toc}
+
 The FarmBot API provides an HTTP based [REST API](/v11/Documentation/web-app/rest-api.md). HTTP follows a response-request format, which is great when you are explicitly looking for data. However, some interactions do not lend themselves well to a request/response pattern. For example, if FarmBot must perform an emergency stop, we do not want to constantly check the API for such a message. Instead, we wish to receive such messages as soon as they are created and without explicitly asking. Other use cases include remote procedure calls and real-time data syncing.
 
 The **message broker** is a sub-component of the web API which provides another method of communication which satisfies this requirement. It is a specially configured instance of [RabbitMQ](https://www.rabbitmq.com) that serves the following functions:
@@ -23,7 +24,7 @@ With a real-time message broker, there is no need to check for new messages. Mes
 
 **In many ways, the message broker acts as a machine-to-machine chat application.** Any software package, whether it be the [REST API](/v11/Documentation/web-app/rest-api.md), [FarmBot OS](/v11/Documentation/farmbot-os.md) or a third-party [Farmware](/v11/Documentation/farmware.md) can send a message to any other entity that is currently connected to the message broker, with correct authorization of course.
 
-![rpc_diagram.png](/images/rpc_diagram.png)
+![rpc_diagram.png](rpc_diagram.png)
 
 _Example: Sending a Remote Procedure Call_
 
@@ -35,7 +36,7 @@ As mentioned previously, the Web API cannot send outbound messages via HTTP, sin
 
 The workaround for this problem is to _allow the Web API to send outbound messages via the message broker_. These messages are initiated in a background process on the Web API. The messages are sent over the message broker rather than HTTP. In this case, the Web API acts both as a web _server_ and a message broker _client_.
 
-![data_update_diagram.png](/images/data_update_diagram.png)
+![data_update_diagram.png](data_update_diagram.png)
 
 _Example: Auto-Sync Updates_
 
@@ -117,10 +118,9 @@ In the token above, we can see the following:
 
 ## Step 3: Subscribing to topics
 
-__What's a "Topic"?:__
-If the concepts of publishing, subscribing and topics are unfamiliar to you, please review MQTT protocol concepts. For brevity, we avoid explaining MQTT in the documentation.
+{% include callout.html type="info" title="What's a \"Topic\"?" content="If the concepts of publishing, subscribing and topics are unfamiliar to you, please review MQTT protocol concepts. For brevity, we avoid explaining MQTT in the documentation.
 
-We recommend HiveMQ's excellent ["MQTT Essentials" tutorial](http://www.hivemq.com/mqtt-essentials/) for developers who are new to MQTT.
+We recommend HiveMQ's excellent [\"MQTT Essentials\" tutorial](http://www.hivemq.com/mqtt-essentials/) for developers who are new to MQTT." %}
 
 
 Now that you have all the required information we can subscribe to topics (listed below). In all these examples, you can replace `DEVICE_ID_HERE` with your actual device ID. In the example above, the device ID would be entered as `device_36`.
@@ -132,8 +132,7 @@ Now that you have all the required information we can subscribe to topics (liste
 
 ## Step 4: Publishing commands
 
-__See real-world examples:__
-A great way to see real-world FarmBot RPCs is to subscribe to the `/from_clients` channel while trying commands in the [Web App](https://my.farm.bot) interface. You can observe the format and content of different RPCs using a [desktop MQTT client](https://www.hivemq.com/blog/seven-best-mqtt-client-tools).
+{% include callout.html type="success" title="See real-world examples" content="A great way to see real-world FarmBot RPCs is to subscribe to the `/from_clients` channel while trying commands in the [Web App](https://my.farm.bot) interface. You can observe the format and content of different RPCs using a [desktop MQTT client](https://www.hivemq.com/blog/seven-best-mqtt-client-tools)." %}
 
 As mentioned above, commands are sent to the device via the `/from_clients` channel. These commands must be formatted as valid [CeleryScript](/v11/Documentation/celery-script.md). Conversely, responses from the device are viewable in the `/from_device` channel.
 

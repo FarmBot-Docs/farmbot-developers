@@ -1,19 +1,19 @@
 ---
 title: "User Interface"
 slug: "user-interface"
-hidden: false
-createdAt: "2018-05-23T14:51:36.865Z"
-updatedAt: "2018-09-19T14:17:56.145Z"
 ---
 
-__Core Component:__
-The user interface is a core component that is best left unmodified for compatibility with software updates. If you wish to make a plugin or customization to the software for a special use case, please consider writing a [Farmware](/v6/Documentation/farmware.md) instead.
-
-If you have found a bug fix or add a new core feature to the UI, consider proposing your changes as a [pull request on Github](https://github.com/FarmBot/Farmbot-Web-App/pull/new/staging) to ensure compatibility with future Web App versions.
+* toc
+{:toc}
 
 
+{% include callout.html type="warning" title="Core Component" content="The user interface is a core component that is best left unmodified for compatibility with software updates. If you wish to make a plugin or customization to the software for a special use case, please consider writing a [Farmware](/v6/Documentation/farmware.md) instead.
 
-![farmbot_ui.png](/images/farmbot_ui.png)
+If you have found a bug fix or add a new core feature to the UI, consider proposing your changes as a [pull request on Github](https://github.com/FarmBot/Farmbot-Web-App/pull/new/staging) to ensure compatibility with future Web App versions." %}
+
+
+
+![farmbot_ui.png](farmbot_ui.png)
 
 _The FarmBot Web App user interface_
 

@@ -1,13 +1,13 @@
 ---
 title: "You Might Not Need Farmware"
 slug: "you-might-not-need-farmware"
-hidden: false
-createdAt: "2019-03-25T17:13:46.620Z"
-updatedAt: "2019-05-12T14:28:07.914Z"
 ---
 
-__Most Developers Do Not Need to Use Farmware:__
-FarmBot has always supported remote control of devices without the need for Farmware. We recommend that third-party developers run custom software off the device as traditional software applications. Farmware development should be reserved for use cases with hard requirements that cannot otherwise be met.
+* toc
+{:toc}
+
+
+{% include callout.html type="danger" title="Most Developers Do Not Need to Use Farmware" content="FarmBot has always supported remote control of devices without the need for Farmware. We recommend that third-party developers run custom software off the device as traditional software applications. Farmware development should be reserved for use cases with hard requirements that cannot otherwise be met." %}
 
 Farmware is only one way to customize a device. Another, more convenient means of customizing a FarmBot is to write software that controls the device remotely. **For most device customization, you do not need to write Farmware**.
 

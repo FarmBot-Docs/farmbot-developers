@@ -1,17 +1,17 @@
 ---
 title: "CeleryScript"
 slug: "celery-script"
-hidden: false
-createdAt: "2018-05-09T20:41:15.081Z"
-updatedAt: "2019-07-16T20:16:48.488Z"
 ---
+
+* toc
+{:toc}
+
 
 # What is CeleryScript?
 
 
 
-__CeleryScript is an actively maintained standard:__
-CeleryScript nodes are added, modified and removed often. The latest list of Celery Script nodes can be found [here](https://github.com/FarmBot/farmbot-js/blob/master/dist/corpus.d.ts).
+{% include callout.html type="success" title="CeleryScript is an actively maintained standard" content="CeleryScript nodes are added, modified and removed often. The latest list of Celery Script nodes can be found [here](https://github.com/FarmBot/farmbot-js/blob/master/dist/corpus.d.ts)." %}
 
 The FarmBot system has [many moving parts](/v7/Documentation/farmbot-software-development/high-level-overview.md). Data must be exchanged between systems in a way that is predictable and asynchronous. Sometimes, this data is even used for telling the bot what to do in a similar fashion to traditional programming languages. To accomplish this, we use a special [remote procedure call](https://en.wikipedia.org/wiki/Remote_procedure_call) and data interchange format called "CeleryScript".
 
@@ -54,7 +54,7 @@ The most prominent use case for CeleryScript is the Sequence Editor. A sequence 
 Creating this sequence in the web app...
 
 
-![example_1.png](/images/example_1.png)
+![example_1.png](example_1.png)
 
 ...results in the creation of the following CeleryScript:
 

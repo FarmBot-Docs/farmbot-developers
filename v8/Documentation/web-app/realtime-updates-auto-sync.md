@@ -1,10 +1,11 @@
 ---
 title: "Subscribing to Resource Updates"
 slug: "realtime-updates-auto-sync"
-hidden: false
-createdAt: "2018-08-16T20:34:22.539Z"
-updatedAt: "2019-09-30T23:17:06.711Z"
 ---
+
+* toc
+{:toc}
+
 As we learned in the [previous section](/v8/Documentation/web-app/rest-api.md), resources are downloaded from the API as JSON documents.
 
 HTTP is a [stateless protocol](https://en.wikipedia.org/wiki/Stateless_protocol). This offers a number of benefits to application developers but does come with some drawbacks. Most notably, there is a chance that the data you downloaded will go "stale" when people or devices update the resource after you perform the initial resource download.
@@ -25,7 +26,7 @@ A quick solution is to [perform polling](https://en.wikipedia.org/wiki/Polling_c
  * Computationally expensive, since the application is constantly checking for updates, even when idle.
  * Runs a risk of being rate limited or banned from the server if polling is performed too frequently.
 
-![polling_diagram.png](/images/polling_diagram.png)
+![polling_diagram.png](polling_diagram.png)
 
 _Inefficient HTTP polling._
 
@@ -48,8 +49,7 @@ You will need to replace the CAPITALIZED NAMES above with the following informat
  * `RESOURCE_NAME` - The name of the resource in [CamelCase](https://en.wikipedia.org/wiki/Camel_case). Example: `ToolSlot`, `Sequence`, `FarmEvent`.
  * `RESOURCE_ID` - Integer ID of the resource you wish to receive updates for.
 
-__Don't remember your `DEVICE_ID`?:__
-Check the "BOT" claim of your authorization token.
+{% include callout.html type="info" title="Don't remember your `DEVICE_ID`?" content="Check the \"BOT\" claim of your authorization token." %}
 
 Once you have subscribed to the appropriate channel, you will receive JSON in a format similar to the examples below:
 

@@ -1,19 +1,18 @@
 ---
 title: "Responsible Disclosure of Security Vulnerabilities"
 slug: "responsible-disclosure-of-security-vulnerabilities"
-hidden: false
-createdAt: "2018-10-12T01:19:36.749Z"
-updatedAt: "2019-09-30T23:17:06.733Z"
 ---
+
+* toc
+{:toc}
+
 No technology is ever perfect, and FarmBot believes that working with skilled security researchers and our entire community of users across the globe is crucial in identifying weaknesses in our technology. **If you believe you’ve found a security issue in our product or service we ask that you notify us privately at security@farm.bot as soon as possible so that we may work with you to promptly fix the issue.**
 
-__Do not publicly post the issue:__
-Please, do NOT publicly post about the issue on GitHub, in the FarmBot forum, or in other public places on the Internet. Publicly posting a security vulnerability before a fix is developed may threaten FarmBot and its users and cause more harm than good.
+{% include callout.html type="danger" title="Do not publicly post the issue" content="Please, do NOT publicly post about the issue on GitHub, in the FarmBot forum, or in other public places on the Internet. Publicly posting a security vulnerability before a fix is developed may threaten FarmBot and its users and cause more harm than good." %}
 
 
 
-__No bounties at this time:__
-At this time we do not have a bounty program and we do not offer swag or any other compensation for reported security vulnerabilities.
+{% include callout.html type="info" title="No bounties at this time" content="At this time we do not have a bounty program and we do not offer swag or any other compensation for reported security vulnerabilities." %}
 
 # How to responsibly identify and disclose security issues
   * Upon discovery of a security issue, privately let us know as soon as possible and we’ll make every effort to quickly resolve the issue. You can email us at security@farm.bot. Please include as much information as possible so that we may more quickly diagnose the root cause of the problem.

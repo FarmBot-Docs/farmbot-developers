@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <base href="/farmbot-developers/">
+  </head>
+  <body>
+    <nav>
+      <a href="/farmbot-developers">FarmBot Documentation</a>
+      <a href="https://express.farm.bot/docs">Express</a>
+      <a href="https://genesis.farm.bot/docs">Genesis</a>
+      <a href="https://software.farm.bot/docs">Software</a>
+      <a href="/farmbot-developers">Developer</a>
+      <a href="//meta.farm.bot">Business</a>
+      <a href="//shop.farm.bot">Shop</a>
+    </nav>
+
+    <!--<a id="skip-to-content" href="#content">Skip to the content.</a>-->
+
+    <div class="all">
+      <div class="nav-toc">
+        {% include toc.html %}
+      </div>
+      <div>
+        <header class="page-header" role="banner">
+          <h1 class="project-name">{{ page.title | default: site.title }}</h1>
+          <h2 class="project-tagline">{{ page.excerpt | markdownify }}</h2>
+        </header>
+
+        <main id="content" class="main-content" role="main">
+          {{ content }}
+          <footer class="site-footer"></footer>
+        </main>
+      </div>
+    </div>
+
+  </body>
+</html>

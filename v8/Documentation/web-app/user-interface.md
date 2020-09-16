@@ -1,17 +1,17 @@
 ---
 title: "User Interface"
 slug: "user-interface"
-hidden: false
-createdAt: "2018-05-23T14:51:36.865Z"
-updatedAt: "2019-12-13T08:09:46.196Z"
 ---
 
-__:__
-This document is intended for software developers. For end-user documentation, please see the [Web App User Documentation](https://software.farm.bot/docs/the-farmbot-web-app)
+* toc
+{:toc}
+
+
+{% include callout.html type="info" title="" content="This document is intended for software developers. For end-user documentation, please see the [Web App User Documentation](https://software.farm.bot/docs/the-farmbot-web-app)" %}
 
 The FarmBot web app's **user interface** is a [single page application](https://en.wikipedia.org/wiki/Single-page_application) that allows users to control a FarmBot remotely. It supports editing of [sequences](https://software.farm.bot/docs/sequences), [regimens](https://software.farm.bot/docs/regimens), [events](https://software.farm.bot/docs/farm-events), a virtual garden map, and much more.
 
-![c2365c9-Web-App-on-Different-Devices.png](/images/c2365c9-Web-App-on-Different-Devices.png)
+![c2365c9-Web-App-on-Different-Devices.png](c2365c9-Web-App-on-Different-Devices.png)
 
 ## At a glance
  * **Programming Language:** [TypeScript](https://www.typescriptlang.org/index.html)

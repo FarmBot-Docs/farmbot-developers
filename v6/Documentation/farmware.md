@@ -2,23 +2,21 @@
 title: "Farmware"
 slug: "farmware"
 excerpt: "FarmBot OS plug-Ins to expand FarmBot functionality"
-hidden: false
-createdAt: "2018-05-16T19:40:14.748Z"
-updatedAt: "2019-01-31T22:26:43.149Z"
 ---
 
-__For Developers:__
-This documentation is meant for Farmware developers. For use of Farmware in the Web App, see the [FarmBot Web App Farmware documentation](https://software.farm.bot/docs/farmware).
+* toc
+{:toc}
+
+
+{% include callout.html type="info" title="For Developers" content="This documentation is meant for Farmware developers. For use of Farmware in the Web App, see the [FarmBot Web App Farmware documentation](https://software.farm.bot/docs/farmware)." %}
 
 
 
-__Alpha:__
-Farmware should be considered experimental at this point in time. Some features may be unstable.
+{% include callout.html type="warning" title="Alpha" content="Farmware should be considered experimental at this point in time. Some features may be unstable." %}
 
 
 
-__Examples:__
-For a complete Farmware example, see [Hello Farmware](https://github.com/FarmBot-Labs/hello-farmware). Each of the code samples below can be run as a Farmware by replacing the contents of `hello.py` in `Hello Farmware` with the copied code.
+{% include callout.html type="success" title="Examples" content="For a complete Farmware example, see [Hello Farmware](https://github.com/FarmBot-Labs/hello-farmware). Each of the code samples below can be run as a Farmware by replacing the contents of `hello.py` in `Hello Farmware` with the copied code." %}
 
 Farmware can connect with FarmBot in the following ways:
 
@@ -344,7 +342,7 @@ __Form Building:__
 
 
 
-![example_farmware_form.png](/images/example_farmware_form.png)
+![example_farmware_form.png](example_farmware_form.png)
 
 Input values are retrieved in a Farmware via `get_config_value`, as shown in this example:
 
@@ -378,8 +376,7 @@ See [Hello Farmware Input](https://github.com/FarmBot-Labs/hello-farmware-input)
 
  * __Python 3.7__: opencv, numpy, requests, serial, farmware_tools
 
-__Python 3:__
-FarmBot OS (v7+) now uses Python 3. Python 2 is no longer supported.
+{% include callout.html type="warning" title="Python 3" content="FarmBot OS (v7+) now uses Python 3. Python 2 is no longer supported." %}
 
 
 

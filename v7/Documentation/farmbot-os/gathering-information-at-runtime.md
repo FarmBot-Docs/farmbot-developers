@@ -1,10 +1,11 @@
 ---
 title: "Gathering Information at Runtime"
 slug: "gathering-information-at-runtime"
-hidden: false
-createdAt: "2019-01-14T23:04:15.239Z"
-updatedAt: "2019-07-16T20:16:48.492Z"
 ---
+
+* toc
+{:toc}
+
 There are multiple ways to gather information about FarmBot while it is running:
 
 # FTDI cable

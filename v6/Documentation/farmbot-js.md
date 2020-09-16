@@ -2,10 +2,11 @@
 title: "FarmBot JS"
 slug: "farmbot-js"
 excerpt: "Content here is syndicated from the [repository README](https://github.com/FarmBot/farmbot-js/blob/master/README.md)."
-hidden: false
-createdAt: "2018-05-09T20:40:57.675Z"
-updatedAt: "2019-01-18T17:30:29.665Z"
 ---
+
+* toc
+{:toc}
+
 # Browser support
 
 Works on any browser that supports:
@@ -32,8 +33,7 @@ npm install farmbot
 <script>
 ```
 
-__:__
-Please raise an issue if you require support with other package managers.
+{% include callout.html type="info" title="" content="Please raise an issue if you require support with other package managers." %}
 
 # Running the test suite (advanced)
 

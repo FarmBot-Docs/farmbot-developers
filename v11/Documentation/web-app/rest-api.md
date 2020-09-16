@@ -2,10 +2,11 @@
 title: "REST API"
 slug: "rest-api"
 excerpt: "[Example API requests](https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af)"
-hidden: false
-createdAt: "2018-05-15T21:36:52.836Z"
-updatedAt: "2020-02-10T20:05:03.432Z"
 ---
+
+* toc
+{:toc}
+
 The **REST API** is an HTTP web server commonly referred to as "The API", "The REST API" or simply "The Server". The REST API handles a number of responsibilities including:
 
  * **Data storage, validation, and security:** Prevents data loss between reflashes by storing it in a centralized database, allows users to edit information when the device is offline, validates data and controls access to data via authentication and authorization mechanisms.
@@ -182,8 +183,7 @@ And here's what the response will look like:
 
 
 
-__:__
-The response is provided as JSON for human readability. For your `Authorization` header, you will only be using `data.token.encoded`. In this example, it's the string starting with `eyJ0eXAiOiJ...`
+{% include callout.html type="info" title="" content="The response is provided as JSON for human readability. For your `Authorization` header, you will only be using `data.token.encoded`. In this example, it's the string starting with `eyJ0eXAiOiJ...`" %}
 
 # Security
 The API uses [JSON Web Tokens](https://jwt.io) for authentication and authorization (see "Frequently Asked Questions" section for token generation instructions). Additionally, it uses [Content Security Policies](https://en.wikipedia.org/wiki/Content_Security_Policy) to prevent unauthorized access by malicious software on client machines.

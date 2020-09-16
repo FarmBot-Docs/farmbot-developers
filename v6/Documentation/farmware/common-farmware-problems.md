@@ -2,10 +2,11 @@
 title: "Common Farmware Problems"
 slug: "common-farmware-problems"
 excerpt: "troubleshooting tips"
-hidden: false
-createdAt: "2018-12-13T05:56:01.889Z"
-updatedAt: "2019-01-31T22:33:02.501Z"
 ---
+
+* toc
+{:toc}
+
 # "Farmware installation failed"
 
 Verify the following:
@@ -46,9 +47,8 @@ Some things to look for are:
  * Sending too many logs
  * Performing a polling operation (Doing RPCs on a timer)
 
-__Sending too many logs?:__
-A warning sign that you are sending too many logs is that the server "throttles" your device.
-You will receive a message similar to this if you are throttled:  `"Device is sending too many logs (%s). Suspending log storage and display until %s."`
+{% include callout.html type="info" title="Sending too many logs?" content="A warning sign that you are sending too many logs is that the server \"throttles\" your device.
+You will receive a message similar to this if you are throttled:  `\"Device is sending too many logs (%s). Suspending log storage and display until %s.\"`" %}
 
 ## How to fix a slow Farmware
 

@@ -1,10 +1,11 @@
 ---
 title: "Factory Testing Utilities"
 slug: "factory-testing-utilities"
-hidden: false
-createdAt: "2019-12-19T00:52:48.869Z"
-updatedAt: "2019-12-20T00:47:56.998Z"
 ---
+
+* toc
+{:toc}
+
 Every electronics box is tested at the factory to ensure all of the stepper drivers, peripheral circuits, LEDs, and buttons are functional. We currently have two test `.img` files, one for Genesis electronics and one for Express electronics. Follow the instructions below to conduct a test.
 
 # Setup
@@ -36,6 +37,5 @@ Every electronics box is tested at the factory to ensure all of the stepper driv
 
 
 
-__If a test fails...:__
-If one of the encoder or peripheral load detection tests fail, then the device will flash all button LEDs and LED Indicators <span class="fa fa-sun-o" style="color: red; opacity: 1"></span><span class="fa fa-sun-o" style="color: orange; opacity: 1"></span><span class="fa fa-sun-o" style="color: green; opacity: 1"></span><span class="fa fa-sun-o" style="color: blue; opacity: 1"></span><span class="fa fa-sun-o" style="color: gray; opacity: 1"></span>. Pressing any button will reset the device back to the first test.
+{% include callout.html type="info" title="If a test fails..." content="If one of the encoder or peripheral load detection tests fail, then the device will flash all button LEDs and LED Indicators <span class=\"fa fa-sun-o\" style=\"color: red; opacity: 1\"></span><span class=\"fa fa-sun-o\" style=\"color: orange; opacity: 1\"></span><span class=\"fa fa-sun-o\" style=\"color: green; opacity: 1\"></span><span class=\"fa fa-sun-o\" style=\"color: blue; opacity: 1\"></span><span class=\"fa fa-sun-o\" style=\"color: gray; opacity: 1\"></span>. Pressing any button will reset the device back to the first test." %}
 

@@ -1,10 +1,11 @@
 ---
 title: "ENV Vars and GlobalConfigs"
 slug: "env-vars-and-globalconfigs"
-hidden: false
-createdAt: "2019-05-16T19:07:38.670Z"
-updatedAt: "2019-05-16T20:03:04.059Z"
 ---
+
+* toc
+{:toc}
+
 
 # Why?
 
@@ -29,8 +30,7 @@ For most parts of the app, environment variables are loaded into a `.env` file.
  * Information about the `.env` file format can be found [here](https://docs.docker.com/compose/env-file/)
  * Documentation on legal values can be found [here](https://github.com/FarmBot/Farmbot-Web-App/blob/staging/example.env#L7).
 
-__Important Note:__
-The app also exposes a [secondary configuration system](https://github.com/FarmBot/Farmbot-Web-App/blob/staging/app/models/global_config.rb) called `GlobalConfig`. This secondary system addresses use cases where ENV variables are not appropriate. The system is discussed later in this document.
+{% include callout.html type="info" title="Important Note" content="The app also exposes a [secondary configuration system](https://github.com/FarmBot/Farmbot-Web-App/blob/staging/app/models/global_config.rb) called `GlobalConfig`. This secondary system addresses use cases where ENV variables are not appropriate. The system is discussed later in this document." %}
 
 
 
@@ -66,13 +66,11 @@ A `GlobalConfig`s value can be changed at runtime from the [Rails console](https
 GlobalConfig.create!(key: "FAVORITE_VEGGIE", value: "Carrots")
 ```
 
-__WARNING:__
-Unlike traditional ENV vars, `GlobalConfig` values are _not hidden from the public._ Do not store sensitive data in `GlobalConfig`!
+{% include callout.html type="danger" title="WARNING" content="Unlike traditional ENV vars, `GlobalConfig` values are _not hidden from the public._ Do not store sensitive data in `GlobalConfig`!" %}
 
 ## Solution: Sharing ENV Vars with Clients
 
-__NOTE:__
-This section requires knowledge from the previous section.
+{% include callout.html type="info" title="NOTE" content="This section requires knowledge from the previous section." %}
 
 As stated in the "Problems" section, exposing _all_ ENV vars to a browser would be an extreme security risk. We want to expose _some_ ENV vars to clients, but not all of them.
 

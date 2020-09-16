@@ -1,13 +1,13 @@
 ---
 title: "REST API"
 slug: "rest-api"
-hidden: false
-createdAt: "2018-05-15T21:36:52.836Z"
-updatedAt: "2018-09-19T14:26:06.434Z"
 ---
 
-__One Software Package, Many Uses:__
-The [Web App](https://github.com/FarmBot/Farmbot-Web-App) is one software package that serves multiple use cases. In this document, we will only focus on the RESTful JSON API endpoints. This is typically used for managing configuration and creating "resources" such as `plants` and `tools`.
+* toc
+{:toc}
+
+
+{% include callout.html type="info" title="One Software Package, Many Uses" content="The [Web App](https://github.com/FarmBot/Farmbot-Web-App) is one software package that serves multiple use cases. In this document, we will only focus on the RESTful JSON API endpoints. This is typically used for managing configuration and creating \"resources\" such as `plants` and `tools`." %}
 
 # What are Resources and How Do I Interact With Them?
 

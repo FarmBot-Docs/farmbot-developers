@@ -2,21 +2,20 @@
 title: "FarmBot OS"
 slug: "farmbot-os"
 excerpt: "The operating system and all related software that runs on FarmBot's Raspberry Pi. [GitHub repository](https://github.com/FarmBot/farmbot_os/)"
-hidden: false
-createdAt: "2018-05-09T20:41:28.383Z"
-updatedAt: "2019-12-13T08:20:08.374Z"
 ---
 
-__Trying to install FarmBot OS onto the microSD card?:__
-Please see [the consumer software documentation](https://software.farm.bot/docs/farmbot-os#section-installing-farmbot-os) for help.
+* toc
+{:toc}
+
+
+{% include callout.html type="info" title="Trying to install FarmBot OS onto the microSD card?" content="Please see [the consumer software documentation](https://software.farm.bot/docs/farmbot-os#section-installing-farmbot-os) for help." %}
 
 FarmBot OS is written in [Elixir](https://elixir-lang.org). It uses the [Nerves Framework](https://nerves-project.org) to compile the source code into a single binary image and also handle low-level details such as cross-compilation and driver management. It communicates with the Web App via HTTP and [AMQP](https://www.amqp.org).
 
 # Building FarmBot OS from source
 This project is written in the programming language Elixir and built using the Nerves Project framework.
 
-__Before you begin:__
-You will need a x64 bit non Windows machine to build FarmBot OS from source. We suggest the latest OSX or Ubuntu LTS.
+{% include callout.html type="info" title="Before you begin" content="You will need a x64 bit non Windows machine to build FarmBot OS from source. We suggest the latest OSX or Ubuntu LTS." %}
 
 ## Cloning
 Farmbot OS now bundles and builds the [Arduino Firmware](https://github.com/farmbot/farmbot-arduino-firmware). This is bundled as a `git` submodule. To initialize the repository you can choose to do one of: `git clone https://github.com/FarmBot/farmbot_os.git --recursive` or

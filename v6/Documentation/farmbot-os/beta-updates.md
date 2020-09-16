@@ -1,13 +1,13 @@
 ---
 title: "Beta Updates"
 slug: "beta-updates"
-hidden: false
-createdAt: "2019-01-14T22:41:12.965Z"
-updatedAt: "2019-01-14T23:28:49.678Z"
 ---
 
-__Not for everyone:__
-Please only opt into beta updates if you are working with FarmBot staff to report bugs. Beta updates may be unstable and are not intended for daily usage. They are intended primarily for testing bug fixes and features.
+* toc
+{:toc}
+
+
+{% include callout.html type="warning" title="Not for everyone" content="Please only opt into beta updates if you are working with FarmBot staff to report bugs. Beta updates may be unstable and are not intended for daily usage. They are intended primarily for testing bug fixes and features." %}
 
 # Usage
 When opting into a beta update, please be aware of the changes being made. The [changelog](https://github.com/FarmBot/farmbot_os/blob/staging/CHANGELOG.md#changelog) will have information on what changes will be in the update.
@@ -32,7 +32,7 @@ Now that you've read the warnings and usage documentation, you are ready to actu
 * Click <span class="fb-button fb-green">Update</span>
    * You may need to wait up to 30 minutes for this to take effect.
 
-![out.gif](/images/out.gif)
+![out.gif](out.gif)
 
 
 # Downgrading

@@ -1,13 +1,13 @@
 ---
 title: "History of RPCs in FarmBot"
 slug: "history-of-rpcs-in-farmbot"
-hidden: false
-createdAt: "2019-01-18T03:54:53.128Z"
-updatedAt: "2019-07-16T20:16:48.489Z"
 ---
 
-__Information contained in this page is for historical context and reference:__
+* toc
+{:toc}
 
+
+{% include callout.html type="info" title="Information contained in this page is for historical context and reference" content="" %}
 
 In the early days of FarmBot, we chose [JSON RPC](http://json-rpc.org/wiki/specification) as a means of passing messages between systems. It accomplished the job, but suffered from some issues:
 

@@ -1,10 +1,11 @@
 ---
 title: "About Our Developer Docs"
 slug: "about"
-hidden: false
-createdAt: "2019-01-18T05:58:14.026Z"
-updatedAt: "2019-09-30T23:17:06.708Z"
 ---
+
+* toc
+{:toc}
+
 In October of 2018, our small team gathered at FarmBot HQ in California to envision what we wanted our 3rd party developer experience to be. Through a post-it note brainstorming exercise, we decided that a great developer experience should be **versatile**, **simple**, have **approachable onboarding**, and be **based in community**. Below are the specific resources and attributes that we think define each of these pillars.
 
 # Versatile
@@ -40,18 +41,17 @@ In October of 2018, our small team gathered at FarmBot HQ in California to envis
 - There is community support
 - Documentation is updated/no dead-ends
 
-![MVIMG_20181011_131755.jpg](/images/MVIMG_20181011_131755.jpg)
+![MVIMG_20181011_131755.jpg](MVIMG_20181011_131755.jpg)
 
 _Rick and Connor_
 
 
 
-![MVIMG_20181011_160717.jpg](/images/MVIMG_20181011_160717.jpg)
+![MVIMG_20181011_160717.jpg](MVIMG_20181011_160717.jpg)
 
 _Our developer experience brainstorming board_
 
 
 
-__Always improving:__
-Creating this developer experience will forever be a work in progress, and we openly invite your feedback so that we may improve these resources faster for everyone. If you have any questions or comments, please let us know on [GitHub](http://github.com/FarmBot) or in the [forum](https://forum.farmbot.org/c/software/software-development).
+{% include callout.html type="success" title="Always improving" content="Creating this developer experience will forever be a work in progress, and we openly invite your feedback so that we may improve these resources faster for everyone. If you have any questions or comments, please let us know on [GitHub](http://github.com/FarmBot) or in the [forum](https://forum.farmbot.org/c/software/software-development)." %}
 

@@ -1,10 +1,11 @@
 ---
 title: "Nodes"
 slug: "nodes"
-hidden: false
-createdAt: "2019-01-18T04:05:13.071Z"
-updatedAt: "2019-12-13T04:13:49.511Z"
 ---
+
+* toc
+{:toc}
+
 With exception to the [REST API](/v9/Documentation/web-app/rest-api.md) and some other edge cases, all communication that happens between FarmBot users, devices, and systems is wrapped in a **CeleryScript node**.
 
 A node is a specially formatted JSON document. It is a composable building block that can be nested and arranged to create trees of commands, similar to the way an [abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) is used to create programming languages.
@@ -56,8 +57,7 @@ Some common CeleryScript nodes include:
  * `execute` - Runs a sequence via the `sequence_id` arg.
  * `rpc_request`, `rpc_ok`, `rpc_error` - discussed later in this document.
 
-__Not every CeleryScript node represents a device command:__
-Some nodes, such as the `coordinate` node, are used to represent data.
+{% include callout.html type="info" title="Not every CeleryScript node represents a device command" content="Some nodes, such as the `coordinate` node, are used to represent data." %}
 
 
 

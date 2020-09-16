@@ -2,10 +2,11 @@
 title: "Common Farmware Problems"
 slug: "common-farmware-problems"
 excerpt: "Troubleshooting tips"
-hidden: false
-createdAt: "2018-12-13T05:56:01.889Z"
-updatedAt: "2019-12-13T01:34:45.409Z"
 ---
+
+* toc
+{:toc}
+
 
 # Farmware installation failed
 
@@ -40,8 +41,7 @@ Verify the following:
  * The `farmware_name` provided to `farmware_tools.get_config_value` matches the value for `package` (`package_version`) in `manifest.json`.
  * The `config_name` provided to `farmware_tools.get_config_value` matches the value for the `config` in `manifest.json`.
 
-__:__
-See [Hello Farmware Input](https://github.com/FarmBot-Labs/hello-farmware-input) for an example.
+{% include callout.html type="info" title="" content="See [Hello Farmware Input](https://github.com/FarmBot-Labs/hello-farmware-input) for an example." %}
 
 
 
@@ -61,9 +61,8 @@ Some things to look for are:
  * Sending too many logs
  * Performing a polling operation (Doing RPCs on a timer)
 
-__Sending too many logs?:__
-A warning sign that you are sending too many logs is that the server "throttles" your device.
-You will receive a message similar to this if you are throttled:  `"Device is sending too many logs (%s). Suspending log storage and display until %s."`
+{% include callout.html type="info" title="Sending too many logs?" content="A warning sign that you are sending too many logs is that the server \"throttles\" your device.
+You will receive a message similar to this if you are throttled:  `\"Device is sending too many logs (%s). Suspending log storage and display until %s.\"`" %}
 
 ## How to fix a slow Farmware
 

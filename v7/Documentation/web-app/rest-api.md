@@ -1,13 +1,13 @@
 ---
 title: "REST API (Application Programming Interface)"
 slug: "rest-api"
-hidden: false
-createdAt: "2018-05-15T21:36:52.836Z"
-updatedAt: "2019-07-16T18:27:18.889Z"
 ---
 
-__Usage Examples Available:__
-We keep a list of [example API requests here](https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af).
+* toc
+{:toc}
+
+
+{% include callout.html type="info" title="Usage Examples Available" content="We keep a list of [example API requests here](https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af)." %}
 
 
 

@@ -1,10 +1,11 @@
 ---
 title: "Why Was My Device Blocked?"
 slug: "connectivity-issues"
-hidden: false
-createdAt: "2019-07-10T17:46:10.151Z"
-updatedAt: "2019-07-16T20:25:06.060Z"
 ---
+
+* toc
+{:toc}
+
 If your device attempts to connect to the message broker more than 20 times in a 10 minute period, it will be temporarily blocked from re-connecting. You will be able to reconnect after the 10 minute cool down period. This measure is put in place to protect server resources.
 
 Your device may be blocked from the server for a number of reasons:

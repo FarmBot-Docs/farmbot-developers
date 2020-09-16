@@ -1,15 +1,15 @@
 ---
 title: "Publishing Resources via MQTT, Introduction"
 slug: "experimental-mqtt-api"
-hidden: false
-createdAt: "2018-08-16T20:30:40.013Z"
-updatedAt: "2019-07-16T20:16:48.486Z"
 ---
 
-__Alpha Feature:__
-The feature described below is **highly experimental**. Feedback is appreciated, but please **do not write mission critical code with this feature**. We reserve the right to change the API (or remove it) without notice.
+* toc
+{:toc}
 
-It is also important to note that **the API described below is not a replacement for the REST API yet**. Some features are still missing.
+
+{% include callout.html type="danger" title="Alpha Feature" content="The feature described below is **highly experimental**. Feedback is appreciated, but please **do not write mission critical code with this feature**. We reserve the right to change the API (or remove it) without notice.
+
+It is also important to note that **the API described below is not a replacement for the REST API yet**. Some features are still missing." %}
 
 # Updating Resources over MQTT
 

@@ -1,15 +1,15 @@
 ---
 title: "Running Servers Offline"
 slug: "running-servers-offline"
-hidden: false
-createdAt: "2018-11-19T16:35:54.979Z"
-updatedAt: "2019-07-16T20:16:48.500Z"
 ---
 
-__Not Recommended:__
-This is not a simple alternative for users behind a firewall. If you are running Farmbot in an organization with strict security policies or firewalls, see our notes [for IT security professionals](/v7/Other Resources/for-it-security-professionals.md).
+* toc
+{:toc}
 
-Do not run an offline setup unless you are a software developer intending to modify (fork) the FarmBot software suite.
+
+{% include callout.html type="danger" title="Not Recommended" content="This is not a simple alternative for users behind a firewall. If you are running Farmbot in an organization with strict security policies or firewalls, see our notes [for IT security professionals](/v7/Other Resources/for-it-security-professionals.md).
+
+Do not run an offline setup unless you are a software developer intending to modify (fork) the FarmBot software suite." %}
 
 
 # NTP and Offline Servers

@@ -2,10 +2,11 @@
 title: "CeleryScript"
 slug: "celery-script"
 excerpt: "Find the latest list of Celery Script nodes [here](https://github.com/FarmBot/farmbot-js/blob/master/dist/corpus.d.ts)"
-hidden: false
-createdAt: "2018-05-09T20:41:15.081Z"
-updatedAt: "2020-08-27T23:23:02.675Z"
 ---
+
+* toc
+{:toc}
+
 The FarmBot system has [many moving parts](/v11/Documentation/farmbot-software-development/high-level-overview.md). Data must be exchanged between systems in a way that is predictable and asynchronous. Sometimes, this data is even used for telling the bot what to do in a similar fashion to traditional programming languages. To accomplish this, we use a special [remote procedure call](https://en.wikipedia.org/wiki/Remote_procedure_call) and data interchange format called **CeleryScript**.
 
 CeleryScript nodes are specially formatted JSON documents. FarmBot uses these documents for a variety of storage and communication use cases and also as an internal programming language for sequence scripting. It is a programming language, serialization format, and RPC protocol unified under a single schema known as a **corpus**.
@@ -35,13 +36,13 @@ Celery Script is used:
 
 To view examples of CeleryScript, open up a sequence in the sequence editor. In the :fa-gear: menu, set **VIEW CELERYSCRIPT** to <span class="fb-peripheral-on">YES</span>. This will show you the CeleryScript of every step in the sequence.
 
-![Screen Shot 2020-08-27 at 3.57.51 PM.png](/images/Screen_Shot_2020-08-27_at_3.57.51_PM.png)
+![Screen Shot 2020-08-27 at 3.57.51 PM.png](Screen_Shot_2020-08-27_at_3.57.51_PM.png)
 
 To switch between viewing CeleryScript and the normal UI, press the :fa-code: button on any step. Updating fields in the normal UI will update the CeleryScript view.
 
-![Toogle CS view.gif](/images/Toogle_CS_view.gif)
+![Toogle CS view.gif](Toogle_CS_view.gif)
 
 To view the CeleryScript of the entire sequence, press the :fa-code: button in the sequence header.
 
-![Screen Shot 2020-08-27 at 4.15.31 PM.png](/images/Screen_Shot_2020-08-27_at_4.15.31_PM.png)
+![Screen Shot 2020-08-27 at 4.15.31 PM.png](Screen_Shot_2020-08-27_at_4.15.31_PM.png)
 

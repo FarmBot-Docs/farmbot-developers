@@ -1,10 +1,11 @@
 ---
 title: "Identifying Success and Failure"
 slug: "identifying-success-and-failure"
-hidden: false
-createdAt: "2019-01-18T04:03:24.541Z"
-updatedAt: "2019-12-13T04:25:15.103Z"
 ---
+
+* toc
+{:toc}
+
 Imagine writing a software package that sends a single `rpc_request` node once every five minutes. You could easily track the status of your RPC request by simply waiting for the next `rpc_ok` or `rpc_error` node from the device.
 
 However, what if we are required to send 100 requests in a one-minute timeframe? Identifying success or failure is no longer a trivial task. This is especially true for operations that result in partial failure, where only a portion of the requests succeed.

@@ -1,10 +1,11 @@
 ---
 title: "Frequently Asked Questions"
 slug: "farmbot-os-faq"
-hidden: false
-createdAt: "2019-01-14T23:05:40.186Z"
-updatedAt: "2019-09-30T23:17:06.721Z"
 ---
+
+* toc
+{:toc}
+
 # Why can't I update my Arduino Firmware?
 As of version 3.8.0 we decided to bundle the arduino firmware into farmbot os. There was a couple reasons for this:
 * There is no more version conflicts between the firmware and operating system.

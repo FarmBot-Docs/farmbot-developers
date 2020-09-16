@@ -1,15 +1,15 @@
 ---
 title: "Software Development Tools Used By FarmBot"
 slug: "software-development-tools"
-hidden: false
-createdAt: "2018-07-06T14:07:25.909Z"
-updatedAt: "2019-07-16T16:12:34.611Z"
 ---
 
-__Advanced Topics Ahead!:__
-The document below provides developers a picture of internal system implementation details. For most third-party software developers, in-depth knowledge of each component is not necessary.
+* toc
+{:toc}
 
-Very few developers will interact with every component of the system. As such, an understanding of every tool listed below is not required.
+
+{% include callout.html type="danger" title="Advanced Topics Ahead!" content="The document below provides developers a picture of internal system implementation details. For most third-party software developers, in-depth knowledge of each component is not necessary.
+
+Very few developers will interact with every component of the system. As such, an understanding of every tool listed below is not required." %}
 
 # Summary of our developer tools
 The table below shows a rough overview of the developer tools used when working on various aspects of the FarmBot software system. Realistically, no one would need to know all of these tools; the actual tool set required will vary based on the task you want to perform.

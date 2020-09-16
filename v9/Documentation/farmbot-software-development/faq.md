@@ -1,10 +1,11 @@
 ---
 title: "Frequently Asked Questions"
 slug: "faq"
-hidden: false
-createdAt: "2019-01-18T06:16:25.570Z"
-updatedAt: "2019-12-13T08:02:22.126Z"
 ---
+
+* toc
+{:toc}
+
 # Where can I download FarmBot source code?
 Like most open source projects, we host our software on [GitHub](https://github.com/farmbot). Here are the most popular source code links:
   * [Web App](https://github.com/FarmBot/Farmbot-Web-App) (Ruby, Typescript) - Cloud storage, REST API and user interface.
