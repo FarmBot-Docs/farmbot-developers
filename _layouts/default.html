@@ -1,43 +1,70 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#157878">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-    <base href="/farmbot-developers/">
-  </head>
-  <body>
-    <nav>
-      <a href="/farmbot-developers">FarmBot Documentation</a>
-      <a href="https://express.farm.bot/docs">Express</a>
-      <a href="https://genesis.farm.bot/docs">Genesis</a>
-      <a href="https://software.farm.bot/docs">Software</a>
-      <a href="/farmbot-developers">Developer</a>
-      <a href="//meta.farm.bot">Business</a>
-      <a href="//shop.farm.bot">Shop</a>
-    </nav>
+<html lang="{{ site.lang | default: 'en-US' }}">
 
-    <!--<a id="skip-to-content" href="#content">Skip to the content.</a>-->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0c4d8a">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" type="image/x-icon" href="{{ '/assets/images/favicon.png' | relative_url }}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/fb.css?v=' | append: site.github.build_revision | relative_url }}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inknut+Antiqua:700">
+  <!--<base href="/farmbot-developers/">-->
+</head>
 
-    <div class="all">
-      <div class="nav-toc">
-        {% include toc.html %}
-      </div>
-      <div>
-        <header class="page-header" role="banner">
-          <h1 class="project-name">{{ page.title | default: site.title }}</h1>
-          <h2 class="project-tagline">{{ page.excerpt | markdownify }}</h2>
-        </header>
-
-        <main id="content" class="main-content" role="main">
-          {{ content }}
-          <footer class="site-footer"></footer>
-        </main>
+<body>
+  <nav>
+    <div class="nav-content">
+      <a class="doc-icon" href="/farmbot-developers/v11/Documentation/farmbot-software-development">
+        <img src="/farmbot-developers/assets/images/documentation.png">
+      </a>
+      <div class="nav-links">
+        <a href="http://express.farm.bot">Express</a>
+        <a href="http://genesis.farm.bot">Genesis</a>
+        <a href="http://software.farm.bot">Software</a>
+        <a class="current" href="/farmbot-developers/v11/Documentation/farmbot-software-development">Developer</a>
+        <a href="http://meta.farm.bot">Business</a>
+        <a href="http://shop.farm.bot">Shop</a>
       </div>
     </div>
+  </nav>
 
-  </body>
+  <div class="version">
+    {%- capture version -%}
+    {{ page.url | split: '/' | slice: 1 }}
+    {%- endcapture -%}
+    {%- capture page_path -%}
+    {{ page.url | split: '/' | slice: 2, 999 | join: '/' }}
+    {%- endcapture -%}
+    <div class="version-content">
+      <a class="{% if version == 'v6' %}current-version{% endif %}" href="/farmbot-developers/v6/{{ page_path }}">v6</a>
+      <a class="{% if version == 'v7' %}current-version{% endif %}" href="/farmbot-developers/v7/{{ page_path }}">v7</a>
+      <a class="{% if version == 'v8' %}current-version{% endif %}" href="/farmbot-developers/v8/{{ page_path }}">v8</a>
+      <a class="{% if version == 'v9' %}current-version{% endif %}" href="/farmbot-developers/v9/{{ page_path }}">v9</a>
+      <a class="{% if version == 'v10' %}current-version{% endif %}" href="/farmbot-developers/v10/{{ page_path }}">v10</a>
+      <a class="{% if version == 'v11' %}current-version{% endif %}" href="/farmbot-developers/v11/{{ page_path }}">v11</a>
+    </div>
+  </div>
+
+  <div class="all">
+    <div class="nav-toc">
+      {% include toc.html version=version %}
+    </div>
+    <div class="content">
+      <header class="page-header" role="banner">
+        <h1 class="page-name">{{ page.title | default: site.title }}</h1>
+        <h2 class="page-description">{{ page.excerpt | markdownify }}</h2>
+      </header>
+      <main id="content" class="main-content" role="main">
+        <h2 class="markdown-toc-header">Page Contents</h2>
+        {{ content }}
+        <footer class="site-footer"></footer>
+      </main>
+    </div>
+  </div>
+
+</body>
+
 </html>

@@ -1,6 +1,5 @@
-<div class="callout">
+<div class="callout {{ include.type }}">
   <i class="fa fa-info-circle"></i>
-  <!--{{ include.type }}-->
-  <h3>{{ include.title | markdownify }}</h3>
+  <h3>{{ include.title }}</h3>
   {{ include.content | markdownify }}
 </div>
