@@ -33,7 +33,12 @@ npm install farmbot
 <script>
 ```
 
-{% include callout.html type="info" title="" content="Please raise an issue if you require support with other package managers." %}
+{%
+include callout.html
+type="info"
+title=""
+content="Please raise an issue if you require support with other package managers."
+%}
 
 # Running the test suite (advanced)
 

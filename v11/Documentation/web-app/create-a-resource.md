@@ -7,5 +7,10 @@ slug: "create-a-resource"
 {:toc}
 
 
-{% include callout.html type="danger" title="DEPRECATED" content="Do not use this feature in new software projects." %}
+{%
+include callout.html
+type="danger"
+title="DEPRECATED"
+content="Do not use this feature in new software projects."
+%}
 

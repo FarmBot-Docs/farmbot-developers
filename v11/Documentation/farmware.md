@@ -8,7 +8,12 @@ excerpt: "FarmBot OS plugins"
 {:toc}
 
 
-{% include callout.html type="info" title="For developers only" content="This documentation is meant for Farmware developers. For use of Farmware in the Web App, [see here](https://software.farm.bot/docs/farmware)." %}
+{%
+include callout.html
+type="info"
+title="For developers only"
+content="This documentation is meant for Farmware developers. For use of Farmware in the Web App, [see here](https://software.farm.bot/docs/farmware)."
+%}
 
 Farmware is custom Python code that runs on the FarmBot CPU. It is useful when you need to control the device, but cannot control the device remotely due to design considerations. Farmware should only be used in cases when it would be impractical to run software remotely, such as operations that require offline support or extremely low latency.
 
@@ -18,7 +23,7 @@ Farmware is custom Python code that runs on the FarmBot CPU. It is useful when y
 
 Farmware has been plagued by low adoption and an extremely high maintenance burden to support a very small pool of authors. Because of low adoption and numerous legacy issues, FarmBot has made the decision to eventually terminate the current Farmware system in favor of a new, non-compatible replacement. Do not write Farmware if you do not need to.
 
-**Farmware is not the only way to write custom Farmbot software.** Please see [this document](/v11/Documentation/farmware/you-might-not-need-farmware.md) for more information
+**Farmware is not the only way to write custom Farmbot software.** Please see [this document](farmware/you-might-not-need-farmware.md) for more information
 
 # Currently supported languages and packages
 
@@ -75,41 +80,6 @@ print('My device timezone is: {} (UTC{})'.format(timezone_string, tz_offset_hour
 # Example output (to FTDI): My device timezone is: America/Los_Angeles (UTC-7)
 ```
 
-__legacy GET:__
-
-```python
-import os
-import requests
-
-headers = {'Authorization': 'Bearer ' + os.environ['API_TOKEN'],
-           'content-type': "application/json"}
-response = requests.get('https://my.farmbot.io/api/points', headers=headers)
-points = response.json()
-```
-
-__legacy GET 2:__
-
-```python
-#!/usr/bin/env python
-
-'Get specific data (such as timezone) from the FarmBot Web App.'
-
-import os
-import requests
-
-headers = {'Authorization': 'Bearer ' + os.environ['API_TOKEN'],
-           'content-type': "application/json"}
-response = requests.get('https://my.farmbot.io/api/device', headers=headers)
-device_data = response.json()
-
-# Device timezone info (set via the dropdown in the Web App Device widget)
-timezone_string = device_data['timezone']
-tz_offset_hours = device_data['tz_offset_hrs']
-
-print('My device timezone is: {} (UTC{})'.format(timezone_string, tz_offset_hours))
-# Example output (to FTDI): My device timezone is: America/Los_Angeles (UTC-7)
-```
-
 
 
 
@@ -129,20 +99,6 @@ from farmware_tools import app
 app.patch(endpoint='device', payload={'name': 'My FarmBot'})
 app.put(endpoint='device', payload={'name': 'My FarmBot'})
 app.delete(endpoint='point', _id=1)
-```
-
-__legacy:__
-
-```python
-import os
-import requests
-
-headers = {'Authorization': 'Bearer ' + os.environ['API_TOKEN'],
-           'content-type': "application/json"}
-payload = {'pointer_type': 'Plant', 'x': 100, 'y': 200}
-response = requests.post('https://my.farmbot.io/api/points',
-                         headers=headers, json=payload)
-new_plant = response.json()
 ```
 
 
@@ -186,18 +142,6 @@ FARMBOT_OS_VERSION = ENV.fbos_version
 IMAGES_DIR = ENV.images_dir
 ```
 
-__legacy:__
-
-```python
-import os
-
-API_TOKEN = os.environ['API_TOKEN']
-FARMWARE_URL = os.environ['FARMWARE_URL']
-FARMWARE_TOKEN = os.environ['FARMWARE_TOKEN']
-IMAGES_DIR = os.environ['IMAGES_DIR']
-FARMBOT_OS_VERSION = os.environ['FARMBOT_OS_VERSION']
-```
-
 
 
 # Farmware API
@@ -216,23 +160,6 @@ position_x = device.get_current_position('x')
 pin_13_value = device.get_pin_value(13)
 
 bot_state = device.get_bot_state()
-```
-
-__legacy:__
-
-```python
-import os
-import requests
-
-headers = {
-  'Authorization': 'bearer {}'.format(os.environ['FARMWARE_TOKEN']),
-  'content-type': "application/json"}
-response = requests.get(os.environ['FARMWARE_URL'] + '/api/v1/bot/state',
-              headers=headers)
-
-bot_state = response.json()
-position_x = bot_state['location_data']['position']['x']
-pin_13_value = bot_state['pins']['13']['value']
 ```
 
 See [FarmBotJS BotStateTree](https://github.com/FarmBot/farmbot-js/blob/master/src/interfaces.ts) for a complete list of information available in the the bot's state.
@@ -296,40 +223,9 @@ device.zero(axis='x')
 device.send_celery_script({'kind': 'take_photo', 'args': ''})
 ```
 
-__legacy:__
-
-```python
-import os
-import requests
-
-send_message = {
-  "kind": "send_message",
-  "args": {
-    "message": "Bot is at position {{ x }}, {{ y }}, {{ z }}.",
-    "message_type": "success"
-  },
-  "body": [
-    {
-      "kind": "channel",
-      "args": {
-        "channel_name": "toast"
-      }
-    }
-  ]
-}
-
-
-headers = {
-  'Authorization': 'bearer {}'.format(os.environ['FARMWARE_TOKEN']),
-  'content-type': "application/json"}
-payload = send_message
-requests.post(os.environ['FARMWARE_URL'] + '/api/v1/celery_script',
-              json=payload, headers=headers)
-```
-
 For a list of all available actions, see the second tab of the above example code, `all`.
 
-Also see the [Celery Script developer documentation](/v11/Documentation/celery-script.md) and [the corpus](https://github.com/FarmBot/farmbot-js/blob/master/dist/corpus.d.ts) for more information.
+Also see the [Celery Script developer documentation](celery-script.md) and [the corpus](https://github.com/FarmBot/farmbot-js/blob/master/dist/corpus.d.ts) for more information.
 
 # Inputs
 
@@ -351,21 +247,6 @@ __Form Building (FarmBot OS v8+):__
   }
 ```
 
-__FarmBot OS v7:__
-
-```json
-
-  "package": "Farmware Name",
-  // Other fields omitted for clarity (see the `Farmware manifest` section)
-  "config": [
-    {
-      "name": "key",
-      "label": "Input Name",
-      "value": 10
-    }
-  ]
-```
-
 
 
 ![example_farmware_form.png](example_farmware_form.png)
@@ -384,14 +265,6 @@ VALUE = get_config_value('Farmware Name', 'key')
 # VALUE = get_config_value(farmware_name='Farmware Name', config_name='key', value_type=int)
 ```
 
-__legacy:__
-
-```python
-import os
-
-VALUE = os.environ['farmware_name_key']
-```
-
 The default value in `config` is provided if no change has been made to the Web App Farmware input form.
 
 The default input value type is `int` (integer). For string input, use a `value_type` of `str`.
@@ -404,7 +277,12 @@ To [install a Farmware](#section-installing-farmware), you need to create a `man
 
 For example, entering `https://raw.githubusercontent.com/FarmBot-Labs/hello-farmware/master/manifest.json` and clicking install on the Farmware page of the Web App would install the `Hello Farmware` Farmware, whose source code is located at the GitHub project [here](https://github.com/FarmBot-Labs/hello-farmware).
 
-{% include callout.html type="warning" title="" content="The Farmware manifest format changed between FarmBot OS v7 and FarmBot OS v8. Be sure to use the manifest format that matches your FarmBot OS version, as shown below." %}
+{%
+include callout.html
+type="warning"
+title=""
+content="The Farmware manifest format changed between FarmBot OS v7 and FarmBot OS v8. Be sure to use the manifest format that matches your FarmBot OS version, as shown below."
+%}
 
 
 
@@ -425,34 +303,6 @@ __Farmware Manifest Example (FarmBot OS v8+):__
  "executable": "python",
  "args": "hello-farmware-master/hello.py"
 }
-```
-
-__v7 -> v8 migration instructions:__
-
-```json
-Instructions for migrating Farmware manifests from FarmBot OS v7 to FarmBot OS v8:
-* Add `"farmware_manifest_version": "2.0.0",`.
-* Rename `version` to `package_version`.
-* Remove brackets from `args` value (for example, change `"args": ["run.py"]` to `"args": "run.py"`) and convert to string if necessary (`"run.py arg"`).
-* Change `"min_os_version_major": 6,` to `"farmbot_os_version_requirement": ">= 8.0.0",`.
-* If it exists, change `config` field from an array to an object where the key is the config input order (for example, change `"config": [{"name": "config_name", "label": "config label", "value": "default value"}]` to `"config": {"0": {"name": "config_name", "label": "config label", "value": "default value"}}`).
-* If it exists, remove `farmware_tools_version`.
-```
-
-__FarmBot OS v7:__
-
-```json
-
- "package": "Hello Farmware",
- "language": "python",
- "author": "FarmBot, Inc.",
- "description": "A simple Farmware example that tells FarmBot to log a new message.",
- "version": "1.0.0",
- "min_os_version_major": 6,
- "url": "https://raw.githubusercontent.com/FarmBot-Labs/hello-farmware/master/manifest.json",
- "zip": "https://github.com/FarmBot-Labs/hello-farmware/archive/master.zip",
- "executable": "python",
- "args": ["hello-farmware-master/hello.py"]
 ```
 
 `zip` points to the hosted source code zip file. Github makes this easy: just add `/archive/master.zip` to the end of the GitHub repository URL, and insert `<repository name>-master/` to the beginning of the script filename to run, as seen in the manifest example above.
@@ -494,15 +344,6 @@ __Optional version specification (v8+):__
   "package": "Farmware Name",
   // Other fields omitted for clarity (see the `Farmware manifest` section)
   "farmware_tools_version_requirement": ">= 3.3.0",
-```
-
-__v7:__
-
-```json
-
-  "package": "Farmware Name",
-  // Other fields omitted for clarity (see the `Farmware manifest` section)
-  "farmware_tools_version": "v3.0.0",
 ```
 
 For local development you can install a specific version via `pip install --user farmware_tools==3.3.0`. Use `pip install --user --upgrade farmware_tools` to upgrade.

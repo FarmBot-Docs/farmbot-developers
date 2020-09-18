@@ -23,7 +23,12 @@ Because we think these types of projects are so valuable, we offer prizes to dev
 
 # Project ideas
 
-{% include callout.html type="info" title="Working on something big?" content="Send an email to developer@farm.bot to let us know what you're working on and why you think it would be a valuable contribution. We're happy to provide developer support as needed." %}
+{%
+include callout.html
+type="info"
+title="Working on something big?"
+content="Send an email to developer@farm.bot to let us know what you're working on and why you think it would be a valuable contribution. We're happy to provide developer support as needed."
+%}
 
 ## Core features and bug fixes
 
@@ -31,7 +36,7 @@ Browse our GitHub [project board](https://github.com/orgs/FarmBot/projects/8) an
 
 ## Wrapper libraries
 
-Writing [CeleryScript](/v9/Documentation/celery-script.md) by hand requires in-depth knowledge of FarmBot internals. A wrapper library such as [FarmBot JS](/v9/Documentation/farmbot-js.md) or [Farmware Tools](https://github.com/FarmBot-Labs/farmware-tools) allows 3rd party developers to write code using high-level abstractions instead of low level primitives. Wrapper libraries increase productivity, decrease time spent learning platform details and reduce the risk of breaking changes during upgrades.
+Writing [CeleryScript](../celery-script.md) by hand requires in-depth knowledge of FarmBot internals. A wrapper library such as [FarmBot JS](../farmbot-js.md) or [Farmware Tools](https://github.com/FarmBot-Labs/farmware-tools) allows 3rd party developers to write code using high-level abstractions instead of low level primitives. Wrapper libraries increase productivity, decrease time spent learning platform details and reduce the risk of breaking changes during upgrades.
 
 FarmBot currently offers official wrappers for Javascript and Python and wishes to offer wrappers in as many languages as possible.
 
@@ -50,5 +55,10 @@ If you've completed a project, send an email to developer@farm.bot to let us kno
 * FarmBot shop gift cards up to $1,000 in value
 * Full FarmBot kits
 
-{% include callout.html type="warning" title="Prizes are the cherry on top, not the cake or the icing" content="Please note that prizes are given out at FarmBot Inc's discretion, and not every contribution will necessarily earn you a prize. We award prizes as a gift to recognize awesome people and high quality contributions. Please don't try to game us or abuse our generosity. Prizes are not payment, not guaranteed, and should not be considered to be compensation." %}
+{%
+include callout.html
+type="warning"
+title="Prizes are the cherry on top, not the cake or the icing"
+content="Please note that prizes are given out at FarmBot Inc's discretion, and not every contribution will necessarily earn you a prize. We award prizes as a gift to recognize awesome people and high quality contributions. Please don't try to game us or abuse our generosity. Prizes are not payment, not guaranteed, and should not be considered to be compensation."
+%}
 

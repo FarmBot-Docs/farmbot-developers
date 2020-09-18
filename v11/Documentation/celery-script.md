@@ -7,7 +7,7 @@ excerpt: "Find the latest list of Celery Script nodes [here](https://github.com/
 * toc
 {:toc}
 
-The FarmBot system has [many moving parts](/v11/Documentation/farmbot-software-development/high-level-overview.md). Data must be exchanged between systems in a way that is predictable and asynchronous. Sometimes, this data is even used for telling the bot what to do in a similar fashion to traditional programming languages. To accomplish this, we use a special [remote procedure call](https://en.wikipedia.org/wiki/Remote_procedure_call) and data interchange format called **CeleryScript**.
+The FarmBot system has [many moving parts](farmbot-software-development/high-level-overview.md). Data must be exchanged between systems in a way that is predictable and asynchronous. Sometimes, this data is even used for telling the bot what to do in a similar fashion to traditional programming languages. To accomplish this, we use a special [remote procedure call](https://en.wikipedia.org/wiki/Remote_procedure_call) and data interchange format called **CeleryScript**.
 
 CeleryScript nodes are specially formatted JSON documents. FarmBot uses these documents for a variety of storage and communication use cases and also as an internal programming language for sequence scripting. It is a programming language, serialization format, and RPC protocol unified under a single schema known as a **corpus**.
 
@@ -19,7 +19,7 @@ This document is intended for advanced software development and debugging. Many 
 
 CeleryScript knowledge is required only if you prefer to not use the wrapper library, are developing new features for the FarmBot platform, or are trying to debug specific problems with the system. It's also a great way for an intrepid software developer to learn FarmBot system internals.
 
-Javascript developers are encouraged to use [FarmBot JS](/v11/Documentation/farmbot-js.md) instead of raw CeleryScript for most use cases.
+Javascript developers are encouraged to use [FarmBot JS](farmbot-js.md) instead of raw CeleryScript for most use cases.
 
 **If you are writing CeleryScript for a new or unsupported language** you are highly encouraged to write your own wrapper library, as writing CeleryScript by hand is tedious, error-prone and likely to have future compatibility issues. Conversely, migrating and managing auto-generated CeleryScript is often a trivial task that can be accomplished via scripting.
 
@@ -27,9 +27,9 @@ Javascript developers are encouraged to use [FarmBot JS](/v11/Documentation/farm
 
 Celery Script is used:
 
- * To build an [abstract syntax tree](https://astexplorer.net) of commands in the [sequence editor](https://software.farm.bot/docs/sequences), which get stored and served by the [REST API](/v11/Documentation/web-app/rest-api.md)'s `/sequences` endpoint.
- * To send one-off [movement commands](https://software.farm.bot/docs/controls) and other messages between users and devices over the [message broker](/v11/Documentation/web-app/message-broker.md).
- * To build [Farmware](/v11/Documentation/farmware.md) (plugins) that talk directly to FarmBot.
+ * To build an [abstract syntax tree](https://astexplorer.net) of commands in the [sequence editor](https://software.farm.bot/docs/sequences), which get stored and served by the [REST API](web-app/rest-api.md)'s `/sequences` endpoint.
+ * To send one-off [movement commands](https://software.farm.bot/docs/controls) and other messages between users and devices over the [message broker](web-app/message-broker.md).
+ * To build [Farmware](farmware.md) (plugins) that talk directly to FarmBot.
  * Internal functionality such as changing device configuration on-the-fly and triggering firmware updates.
 
 # Examples

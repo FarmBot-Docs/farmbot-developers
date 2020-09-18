@@ -7,7 +7,12 @@ slug: "user-interface"
 {:toc}
 
 
-{% include callout.html type="info" title="" content="This document is intended for software developers. For end-user documentation, please see the [Web App User Documentation](https://software.farm.bot/docs/the-farmbot-web-app)" %}
+{%
+include callout.html
+type="info"
+title=""
+content="This document is intended for software developers. For end-user documentation, please see the [Web App User Documentation](https://software.farm.bot/docs/the-farmbot-web-app)"
+%}
 
 The FarmBot web app's **user interface** is a [single page application](https://en.wikipedia.org/wiki/Single-page_application) that allows users to control a FarmBot remotely. It supports editing of [sequences](https://software.farm.bot/docs/sequences), [regimens](https://software.farm.bot/docs/regimens), [events](https://software.farm.bot/docs/farm-events), a virtual garden map, and much more.
 
@@ -22,7 +27,7 @@ The FarmBot web app's **user interface** is a [single page application](https://
 
 # Useful developer utilities
  * `window.store.getState()` Get the current Redux store state from the browser's Javascript console.
- * `window.current_bot` The current FarmBot instance created by [FarmBot JS](/v9/Documentation/farmbot-js.md) from the browser's Javascript console.
+ * `window.current_bot` The current FarmBot instance created by [FarmBot JS](../farmbot-js.md) from the browser's Javascript console.
  * `sudo docker-compose run web npm run typecheck` Runs the TypeScript type checker against the codebase in your terminal. Pull requests can not be accepted unless this step passes.
  * `sudo docker-compose run web npm run test` Runs [unit tests](https://en.wikipedia.org/wiki/Unit_testing) to prevent [regressions](https://en.wikipedia.org/wiki/Software_regression). This check must pass for a pull request to be accepted.
 

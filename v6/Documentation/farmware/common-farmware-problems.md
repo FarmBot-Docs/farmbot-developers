@@ -47,8 +47,13 @@ Some things to look for are:
  * Sending too many logs
  * Performing a polling operation (Doing RPCs on a timer)
 
-{% include callout.html type="info" title="Sending too many logs?" content="A warning sign that you are sending too many logs is that the server \"throttles\" your device.
-You will receive a message similar to this if you are throttled:  `\"Device is sending too many logs (%s). Suspending log storage and display until %s.\"`" %}
+{%
+include callout.html
+type="info"
+title="Sending too many logs?"
+content="A warning sign that you are sending too many logs is that the server \"throttles\" your device.
+You will receive a message similar to this if you are throttled:  `\"Device is sending too many logs (%s). Suspending log storage and display until %s.\"`"
+%}
 
 ## How to fix a slow Farmware
 

@@ -7,9 +7,14 @@ slug: "software-development-tools"
 {:toc}
 
 
-{% include callout.html type="danger" title="Advanced Topics Ahead!" content="The document below provides developers a picture of internal system implementation details. For most third-party software developers, in-depth knowledge of each component is not necessary.
+{%
+include callout.html
+type="danger"
+title="Advanced Topics Ahead!"
+content="The document below provides developers a picture of internal system implementation details. For most third-party software developers, in-depth knowledge of each component is not necessary.
 
-Very few developers will interact with every component of the system. As such, an understanding of every tool listed below is not required." %}
+Very few developers will interact with every component of the system. As such, an understanding of every tool listed below is not required."
+%}
 
 # Summary of our developer tools
 The table below shows a rough overview of the developer tools used when working on various aspects of the FarmBot software system. Realistically, no one would need to know all of these tools; the actual tool set required will vary based on the task you want to perform.
@@ -25,10 +30,10 @@ The table below shows a rough overview of the developer tools used when working 
 
 For users who _only_ need to control a FarmBot, any language that provides the following will suffice:
 
- * An HTTP client for talking to the [REST API](/v7/Documentation/web-app/rest-api.md).
- * An MQTT client for talking to the [Message Broker](/v7/Documentation/web-app/message-broker.md)
+ * An HTTP client for talking to the [REST API](../web-app/rest-api.md).
+ * An MQTT client for talking to the [Message Broker](../web-app/message-broker.md)
 
-If you wish to write a [Farmware](/v7/Documentation/farmware.md), Python is the only language currently supported, but [most developers do not need to write a Farmware](/v7/Documentation/farmware/you-might-not-need-farmware.md).
+If you wish to write a [Farmware](../farmware.md), Python is the only language currently supported, but [most developers do not need to write a Farmware](../farmware/you-might-not-need-farmware.md).
 
 The document that follows is **not a list of required skills**. It would be **unrealistic for a new developer to learn all of these skills**. Instead, it is an inventory of all languages and tools used by the project. The tools that a developer will need to know will vary depending on the task at hand.
 

@@ -9,6 +9,6 @@ excerpt: "Setup, customize, and control FarmBot from any device. [GitHub reposit
 
 The web app is one software package that serves multiple use cases. The main components of the web app are:
 
- * The [user interface](/v9/Documentation/web-app/user-interface.md)
- * The [REST API](/v9/Documentation/web-app/rest-api.md)
- * The [message broker](/v9/Documentation/web-app/message-broker.md)
+ * The [user interface](web-app/user-interface.md)
+ * The [REST API](web-app/rest-api.md)
+ * The [message broker](web-app/message-broker.md)

@@ -7,13 +7,18 @@ slug: "you-might-not-need-farmware"
 {:toc}
 
 
-{% include callout.html type="info" title="Most developers do not need to use farmware" content="FarmBot has always supported remote control of devices without the need for Farmware. We recommend that third-party developers run custom software off the device as traditional software applications. Farmware development should be reserved for use cases with hard requirements that cannot otherwise be met." %}
+{%
+include callout.html
+type="info"
+title="Most developers do not need to use farmware"
+content="FarmBot has always supported remote control of devices without the need for Farmware. We recommend that third-party developers run custom software off the device as traditional software applications. Farmware development should be reserved for use cases with hard requirements that cannot otherwise be met."
+%}
 
 Farmware is only one way to customize a device. Another, more convenient means of customizing a FarmBot is to write software that controls the device remotely. **For most device customization, you do not need to write Farmware**.
 
 # Alternatives
 
-The easiest way to control a FarmBot via software is to run the software on a dedicated desktop or server. Device control is possible via the [Message Broker](/v11/Documentation/web-app/message-broker.md). Remote access to device data is possible via the [REST API](/v11/Documentation/web-app/rest-api.md). For examples written in Python, see [Web App API Examples](/v11/Python/web-app-api-examples.md) and [Message Broker Examples](/v11/Python/message-broker-examples.md). There is also a [collection of Python-based examples here](https://github.com/FarmBot-Labs/FarmBot-Python-Examples) .
+The easiest way to control a FarmBot via software is to run the software on a dedicated desktop or server. Device control is possible via the [Message Broker](../web-app/message-broker.md). Remote access to device data is possible via the [REST API](../web-app/rest-api.md). For examples written in Python, see [Web App API Examples](../../Python/web-app-api-examples.md) and [Message Broker Examples](../../Python/message-broker-examples.md). There is also a [collection of Python-based examples here](https://github.com/FarmBot-Labs/FarmBot-Python-Examples) .
 
 Unless there is a specific reason to do so, it is advisable to not run software on the device, excluding the edge cases listed in the following section. Running software on a FarmBot device will create a number of challenges that are easily avoided by running the software outside of the device.
 

@@ -9,9 +9,14 @@ excerpt: "Executes g-code like commands over a serial line to move the FarmBot a
 
 The **firmware** runs on an Arduino microcontroller and is written in C++. The firmware is usually flashed to the Arduino via FarmBot OS.
 
-{% include callout.html type="warning" title="Internally used commands" content="The commands and responses on this page are used for communication between [FarmBot OS](/v8/Documentation/farmbot-os.md) and the [FarmBot Arduino Firmware](https://github.com/FarmBot/farmbot-arduino-firmware). Outside of that internal communication, commands on this page can only be sent by disconnecting the Arduino from the Raspberry Pi and connecting a USB cable from a computer directly to the Arduino.
+{%
+include callout.html
+type="warning"
+title="Internally used commands"
+content="The commands and responses on this page are used for communication between [FarmBot OS](farmbot-os.md) and the [FarmBot Arduino Firmware](https://github.com/FarmBot/farmbot-arduino-firmware). Outside of that internal communication, commands on this page can only be sent by disconnecting the Arduino from the Raspberry Pi and connecting a USB cable from a computer directly to the Arduino.
 
-FarmBot OS communication via [Farmware](/v8/Documentation/farmware.md) and the [Message Broker](/v8/Documentation/web-app/message-broker.md) consists of higher-level [CeleryScript](/v8/Documentation/celery-script.md) commands, not the commands listed on this page." %}
+FarmBot OS communication via [Farmware](farmware.md) and the [Message Broker](web-app/message-broker.md) consists of higher-level [CeleryScript](celery-script.md) commands, not the commands listed on this page."
+%}
 
 
 

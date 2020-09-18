@@ -7,11 +7,16 @@ slug: "software-development-tools"
 {:toc}
 
 
-{% include callout.html type="warning" title="Advanced Topics Ahead!" content="This listing is provided for reference purposes only. For most third-party software developers, in-depth knowledge of each component is not necessary. The information below is an implementation detail and is intended for developers who are curious about the inner workings of the software suite.
+{%
+include callout.html
+type="warning"
+title="Advanced Topics Ahead!"
+content="This listing is provided for reference purposes only. For most third-party software developers, in-depth knowledge of each component is not necessary. The information below is an implementation detail and is intended for developers who are curious about the inner workings of the software suite.
 
 For example, although the REST API uses PostgreSQL as a storage mechanism, very few developers will directly interact with PostgreSQL.
 
-Knowledge of inner components is not required for authorship of Farmware or API usage. It is merely an implementation detail for which knowledge is only required when modifying the core source code." %}
+Knowledge of inner components is not required for authorship of Farmware or API usage. It is merely an implementation detail for which knowledge is only required when modifying the core source code."
+%}
 
 # Firmware
 

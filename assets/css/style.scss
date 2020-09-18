@@ -3,15 +3,24 @@
 
 @import 'jekyll-theme-cayman';
 
+$max-width: 1550px;
+$max-width-min: calc(min(#{$max-width}, 100vw));
+$md-screen-size: 768px;
+$lg-screen-size: 1200px;
+$nav-toc-width: 20rem;
+$markdown-toc-width: 20rem;
+$both-toc-width: calc(#{$nav-toc-width} + #{$markdown-toc-width});
+$blue: #0c4d8a;
+
 nav {
   padding: 1rem;
   padding-top: 0.5rem;
-  background: #0c4d8a;
+  background: $blue;
   a {
     padding: 1rem 0.5rem;
     text-decoration: none !important;
     color: #f4f4f4;
-    padding-bottom: 12px;
+    padding-bottom: 15px;
   }
   a:hover {
     color: white;
@@ -36,6 +45,7 @@ nav {
 .version {
   background: #f6f7f8;
   border-bottom: 1px solid #dadee2;
+  padding: 0.25rem;
   a {
     display: inline-block;
     margin: 0;
@@ -47,6 +57,33 @@ nav {
     }
     &.current-version {
       font-weight: bold;
+    }
+  }
+  .mobile-nav {
+    display: none;
+    @media (max-width: $md-screen-size) {
+      display: inline;
+    }
+    float: right;
+    select {
+      width: 15rem;
+    }
+  }
+}
+
+.banner {
+  text-align: center;
+  a {
+    display: inline-block;
+    padding: 0.25rem 1rem;
+    text-decoration: none;
+    color: #b94a48;
+    background: #f2dede;
+    border: 1px solid #eed3d7;
+    border-radius: 4px;
+    &:hover {
+      color: #8b3735;
+      background: #deacac;
     }
   }
 }
@@ -64,12 +101,12 @@ nav {
 .all,
 .version-content,
 .nav-content {
-  max-width: 1550px;
+  max-width: $max-width;
   margin: auto;
 }
 
 .nav-toc {
-  min-width: 20rem;
+  min-width: $nav-toc-width;
   h3 {
     text-transform: uppercase;
   }
@@ -91,7 +128,7 @@ nav {
     display: block;
     padding: 0.25rem 0.5rem;
     &:hover {
-      color: #0c4d8a;
+      color: $blue;
       background: #f3f3f3;
       transition: background 0.3s ease-out;
     }
@@ -107,13 +144,13 @@ nav {
   }
   .sub {
     margin: 0.5rem;
-    border-left: 3px solid #0c4d8a;
+    border-left: 3px solid $blue;
     a {
       color: #666;
       background: none;
       font-weight: normal;
       &:hover {
-        color: #0c4d8a;
+        color: $blue;
         background: #f3f3f3;
       }
     }
@@ -123,9 +160,9 @@ nav {
 .markdown-toc-header,
 #markdown-toc {
   position: absolute;
-  width: 20rem;
-  left: calc(min(1550px, 100vw) - 41rem);
-  @media (max-width: 1200px) {
+  width: $markdown-toc-width;
+  left: calc(#{$max-width-min} - #{$both-toc-width} - 1rem);
+  @media (max-width: $lg-screen-size) {
     display: none;
   }
 }
@@ -142,7 +179,7 @@ nav {
     text-decoration: none;
     color: #9b9b9b;
     &:hover {
-      color: #0c4d8a;
+      color: $blue;
     }
   }
   li {
@@ -157,7 +194,7 @@ nav {
   display: inline;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $md-screen-size) {
   .nav-links,
   .nav-toc {
     display: none;
@@ -188,14 +225,24 @@ nav {
 }
 
 .main-content {
-  width: calc(min(1550px, 100vw) - 42rem);
-  @media (max-width: 1200px) {
-    width: calc(min(1550px, 100vw) - 20rem);
+  width: calc(#{$max-width-min} - #{$both-toc-width} - 2rem);
+  @media (max-width: $lg-screen-size) {
+    width: calc(#{$max-width-min} - #{$nav-toc-width});
   }
-  @media (max-width: 768px) {
+  @media (max-width: $md-screen-size) {
     width: calc(100vw - 2rem);
   }
+  font-size: 1rem;
   padding-top: 0 !important;
+  img {
+    border: 1px solid #aaa;
+    border-radius: 3px;
+  }
+  h1,
+  h2,
+  h3 {
+    color: $blue;
+  }
 }
 
 h1 {

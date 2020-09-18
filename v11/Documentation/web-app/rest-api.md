@@ -10,10 +10,10 @@ excerpt: "[Example API requests](https://gist.github.com/RickCarlino/10db2df375d
 The **REST API** is an HTTP web server commonly referred to as "The API", "The REST API" or simply "The Server". The REST API handles a number of responsibilities including:
 
  * **Data storage, validation, and security:** Prevents data loss between reflashes by storing it in a centralized database, allows users to edit information when the device is offline, validates data and controls access to data via authentication and authorization mechanisms.
- * **Email delivery:** Sends email notifications (such as password resets and critical errors) to end users. All other messaging is handled by the [Message Broker](/v11/Documentation/web-app/message-broker.md), a distinctly decoupled sub-system of the Web API.
+ * **Email delivery:** Sends email notifications (such as password resets and critical errors) to end users. All other messaging is handled by the [Message Broker](message-broker.md), a distinctly decoupled sub-system of the Web API.
  * **Image uploads and manipulation:** Re-sizes and stores images captured by FarmBot's internal camera.
 
-Generally speaking, the REST API does _not_ control FarmBot. Device control is handled by the [Message Broker](/v11/Documentation/web-app/message-broker.md), [CeleryScript](/v11/Documentation/celery-script.md) and [FarmBot JS](/v11/Documentation/farmbot-js.md).
+Generally speaking, the REST API does _not_ control FarmBot. Device control is handled by the [Message Broker](message-broker.md), [CeleryScript](../celery-script.md) and [FarmBot JS](../farmbot-js.md).
 
 ## API specifications
 
@@ -125,7 +125,7 @@ You may request pagination for other resources by submitting an issue on Github.
 
 # Generating an API token
 
-You must pass a `token` string into most HTTP requests under the `Authorization` request header. Here are some ways in which you can get a token. Also see our [web app API examples](/v11/Python/web-app-api-examples.md).
+You must pass a `token` string into most HTTP requests under the `Authorization` request header. Here are some ways in which you can get a token. Also see our [web app API examples](../../Python/web-app-api-examples.md).
 
 
 ```curl
@@ -183,7 +183,12 @@ And here's what the response will look like:
 
 
 
-{% include callout.html type="info" title="" content="The response is provided as JSON for human readability. For your `Authorization` header, you will only be using `data.token.encoded`. In this example, it's the string starting with `eyJ0eXAiOiJ...`" %}
+{%
+include callout.html
+type="info"
+title=""
+content="The response is provided as JSON for human readability. For your `Authorization` header, you will only be using `data.token.encoded`. In this example, it's the string starting with `eyJ0eXAiOiJ...`"
+%}
 
 # Security
 The API uses [JSON Web Tokens](https://jwt.io) for authentication and authorization (see "Frequently Asked Questions" section for token generation instructions). Additionally, it uses [Content Security Policies](https://en.wikipedia.org/wiki/Content_Security_Policy) to prevent unauthorized access by malicious software on client machines.

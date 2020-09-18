@@ -7,9 +7,14 @@ slug: "experimental-mqtt-api"
 {:toc}
 
 
-{% include callout.html type="danger" title="Alpha Feature" content="The feature described below is **highly experimental**. Feedback is appreciated, but please **do not write mission critical code with this feature**. We reserve the right to change the API (or remove it) without notice.
+{%
+include callout.html
+type="danger"
+title="Alpha Feature"
+content="The feature described below is **highly experimental**. Feedback is appreciated, but please **do not write mission critical code with this feature**. We reserve the right to change the API (or remove it) without notice.
 
-It is also important to note that **the API described below is not a replacement for the REST API yet**. Some features are still missing." %}
+It is also important to note that **the API described below is not a replacement for the REST API yet**. Some features are still missing."
+%}
 
 # Updating Resources over MQTT
 
@@ -19,7 +24,7 @@ This feature was inspired by requests from application developers who wanted to 
 
 # Important Notes
 
- * This is a new feature. Official software packages do not yet rely on MQTT updates and there may still be undiscovered bugs. For applications requiring higher levels of stability, consider using the [REST API](/v7/Documentation/web-app/rest-api.md) for data modification.
+ * This is a new feature. Official software packages do not yet rely on MQTT updates and there may still be undiscovered bugs. For applications requiring higher levels of stability, consider using the [REST API](rest-api.md) for data modification.
  * The feature set is not complete yet. It is not a drop-in replacement for the REST API in all use cases. A full list of supported resources is available [in the API source code](https://github.com/FarmBot/Farmbot-Web-App/blob/staging/app/lib/resources.rb#L5).
 
 
@@ -27,7 +32,7 @@ This feature was inspired by requests from application developers who wanted to 
 
 # Limitations of HTTP
 
-The [REST API](/v7/Documentation/web-app/rest-api.md) is an appropriate solution for most resource management operations.
+The [REST API](rest-api.md) is an appropriate solution for most resource management operations.
 
 It does suffer some drawbacks in some circumstances, though:
 
@@ -40,4 +45,4 @@ To address the issues above, the API exposes an experimental feature to update r
 
 # Next Steps
 
-[Create, Update and Delete a Resource via MQTT](/v7/Documentation/web-app/create-a-resource.md)
+[Create, Update and Delete a Resource via MQTT](create-a-resource.md)

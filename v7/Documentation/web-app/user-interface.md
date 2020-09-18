@@ -27,7 +27,7 @@ The FarmBot graphical user interface is a [single page application](https://en.w
 # Useful Developer Utilities
 
  * `window.store.getState()` Get the current Redux store state from the browser's Javascript console.
- * `window.current_bot` The current FarmBot instance created by [FarmBot JS](/v7/Documentation/farmbot-js.md) from the browser's Javascript console.
+ * `window.current_bot` The current FarmBot instance created by [FarmBot JS](../farmbot-js.md) from the browser's Javascript console.
  * `sudo docker-compose run web npm run typecheck` Runs the TypeScript type checker against the codebase in your terminal. Pull requests can not be accepted unless this step passes.
  * `sudo docker-compose run web npm run test` Runs [unit tests](https://en.wikipedia.org/wiki/Unit_testing) to prevent [regressions](https://en.wikipedia.org/wiki/Software_regression). This check must pass for a pull request to be accepted.
 
@@ -49,4 +49,4 @@ The Web App implements a [content security policy](https://en.wikipedia.org/wiki
 
 ## How Can I Add A Custom Page?
 
-The user interface is not a [content management system](https://en.wikipedia.org/wiki/Content_management_system). Custom pages require modification to the application source code, which is not recommended. It is better to host custom forms and reports on a dedicated server and use the [REST API](/v7/Documentation/web-app/rest-api.md) for inter-server communication.
+The user interface is not a [content management system](https://en.wikipedia.org/wiki/Content_management_system). Custom pages require modification to the application source code, which is not recommended. It is better to host custom forms and reports on a dedicated server and use the [REST API](rest-api.md) for inter-server communication.

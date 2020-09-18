@@ -7,9 +7,14 @@ slug: "user-interface"
 {:toc}
 
 
-{% include callout.html type="warning" title="Core Component" content="The user interface is a core component that is best left unmodified for compatibility with software updates. If you wish to make a plugin or customization to the software for a special use case, please consider writing a [Farmware](/v6/Documentation/farmware.md) instead.
+{%
+include callout.html
+type="warning"
+title="Core Component"
+content="The user interface is a core component that is best left unmodified for compatibility with software updates. If you wish to make a plugin or customization to the software for a special use case, please consider writing a [Farmware](../farmware.md) instead.
 
-If you have found a bug fix or add a new core feature to the UI, consider proposing your changes as a [pull request on Github](https://github.com/FarmBot/Farmbot-Web-App/pull/new/staging) to ensure compatibility with future Web App versions." %}
+If you have found a bug fix or add a new core feature to the UI, consider proposing your changes as a [pull request on Github](https://github.com/FarmBot/Farmbot-Web-App/pull/new/staging) to ensure compatibility with future Web App versions."
+%}
 
 
 
@@ -33,7 +38,7 @@ The FarmBot graphical user interface is a [single page application](https://en.w
 # Useful Developer Utilities
 
  * `window.store.getState()` Get the current Redux store state from the browser's Javascript console.
- * `window.current_bot` The current FarmBot instance created by [FarmBot JS](/v6/Documentation/farmbot-js.md) from the browser's Javascript console.
+ * `window.current_bot` The current FarmBot instance created by [FarmBot JS](../farmbot-js.md) from the browser's Javascript console.
  * `npm run typecheck` Runs the TypeScript type checker against the codebase in your terminal. Pull requests can not be accepted unless this step passes.
  * `npm run test` Runs [unit tests](https://en.wikipedia.org/wiki/Unit_testing) to prevent [regressions](https://en.wikipedia.org/wiki/Software_regression). This check must pass for a pull request to be accepted.
 
@@ -55,4 +60,4 @@ The Web App implements a [content security policy](https://en.wikipedia.org/wiki
 
 ## How Can I Add A Custom Page?
 
-The user interface is not a [content management system](https://en.wikipedia.org/wiki/Content_management_system). Custom pages require modification to the application source code, which is not recommended. It is better to host custom forms and reports on a dedicated server and use the [REST API](/v6/Documentation/web-app/rest-api.md) for inter-server communication.
+The user interface is not a [content management system](https://en.wikipedia.org/wiki/Content_management_system). Custom pages require modification to the application source code, which is not recommended. It is better to host custom forms and reports on a dedicated server and use the [REST API](rest-api.md) for inter-server communication.

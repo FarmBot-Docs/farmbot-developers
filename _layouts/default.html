@@ -31,22 +31,109 @@
     </div>
   </nav>
 
+  {%- capture version -%}
+  {{ page.url | split: '/' | slice: 1 | join: '' | slice: 1, 999 }}
+  {%- endcapture -%}
+
+  {% capture latest_version %}11{% endcapture %}
+
+  {%- capture page_path -%}
+  {{ page.url | split: '/' | slice: 2, 999 | join: '/' }}
+  {%- endcapture -%}
+
   <div class="version">
-    {%- capture version -%}
-    {{ page.url | split: '/' | slice: 1 }}
-    {%- endcapture -%}
-    {%- capture page_path -%}
-    {{ page.url | split: '/' | slice: 2, 999 | join: '/' }}
-    {%- endcapture -%}
     <div class="version-content">
-      <a class="{% if version == 'v6' %}current-version{% endif %}" href="/farmbot-developers/v6/{{ page_path }}">v6</a>
-      <a class="{% if version == 'v7' %}current-version{% endif %}" href="/farmbot-developers/v7/{{ page_path }}">v7</a>
-      <a class="{% if version == 'v8' %}current-version{% endif %}" href="/farmbot-developers/v8/{{ page_path }}">v8</a>
-      <a class="{% if version == 'v9' %}current-version{% endif %}" href="/farmbot-developers/v9/{{ page_path }}">v9</a>
-      <a class="{% if version == 'v10' %}current-version{% endif %}" href="/farmbot-developers/v10/{{ page_path }}">v10</a>
-      <a class="{% if version == 'v11' %}current-version{% endif %}" href="/farmbot-developers/v11/{{ page_path }}">v11</a>
+      <select onchange="if (this.value) window.location.href=this.value">
+        {% for v_int in (6..11) %}
+        {% capture v %}{{ v_int }}{% endcapture %}
+        <option {% if version == v %}selected="selected" {% endif %}
+          value="/farmbot-developers/v{{ v }}/{{ page_path }}">
+          v{{ v }} ({% if v != latest_version %}deprecated{% else %}stable{% endif %})
+        </option>
+        {% endfor %}
+      </select>
+
+      <div class="mobile-nav">
+        <select onchange="if (this.value) window.location.href=this.value">
+          <option value>Navigate the docs...</option>
+          {% capture base %}/farmbot-developers/v{{ version }}{% endcapture %}
+          {% capture documentation %}{{ base }}/Documentation{% endcapture %}
+          <optgroup label="Documentation">
+            {% capture dev %}{{ documentation }}/farmbot-software-development{% endcapture %}
+            <option value="{{ dev }}">FarmBot Software Development</option>
+            <option value="{{ dev }}/high-level-overview">- High Level Overview</option>
+            <option value="{{ dev }}/3rd-party-developer-prizes">- 3rd Party Developer Prizes</option>
+            <option value="{{ dev }}/faq">- Frequently Asked Questions</option>
+            <option value="{{ dev }}/about">- About Our Developer Docs</option>
+            {% capture web_app %}{{ documentation }}/web-app{% endcapture %}
+            <option value="{{ web_app }}">Web App</option>
+            <option value="{{ web_app }}/user-interface">- User Interface</option>
+            <option value="{{ web_app }}/rest-api">- REST API</option>
+            <option value="{{ web_app }}/message-broker">- Message Broker</option>
+            <option value="{{ web_app }}/realtime-updates-auto-sync">- Subscribing to Resource Updates</option>
+            <option value="{{ web_app }}/experimental-mqtt-api">
+              - Publishing Resources via MQTT, Introduction
+            </option>
+            <option value="{{ web_app }}/create-a-resource">- Publishing Resource Updates via MQTT</option>
+            <option value="{{ web_app }}/env-vars-and-globalconfigs">- ENV Vars and GlobalConfigs</option>
+            <option value="{{ web_app }}/special-api-endpoints">- Special API Endpoints</option>
+            {% capture cs %}{{ documentation }}/celery-script{% endcapture %}
+            <option value="{{ cs }}">CeleryScript</option>
+            <option value="{{ cs }}/nodes">- Nodes</option>
+            <option value="{{ cs }}/identifying-success-and-failure">- Identifying Success and Failure</option>
+            <option value="{{ cs }}/out-of-band-responses">- Out of Band Responses</option>
+            <option value="{{ cs }}/celeryscript-glossary">- CeleryScript Glossary</option>
+            <option value="{{ cs }}/history-of-rpcs-in-farmbot">- History of RPCs in FarmBot</option>
+            <option value="{{ documentation }}/farmbot-js">FarmBot JS</option>
+            {% capture fbos %}{{ documentation }}/farmbot-os{% endcapture %}
+            <option value="{{ fbos }}">FarmBot OS</option>
+            <option value="{{ fbos }}/farmbot-os-development">- FarmBot OS Development</option>
+            <option value="{{ fbos }}/gathering-information-at-runtime">- Gathering Information at Runtime</option>
+            <option value="{{ fbos }}/beta-updates">- Beta Updates</option>
+            <option value="{{ fbos }}/gathering-a-log-dump">- Gathering a Log Dump</option>
+            <option value="{{ fbos }}/farmbot-os-faq">- Frequently Asked Questions</option>
+            {% capture farmware %}{{ documentation }}/farmware{% endcapture %}
+            <option value="{{ farmware }}">Farmware</option>
+            <option value="{{ farmware }}/farmware-hosting-and-workflows">- Farmware Hosting and Workflows</option>
+            <option value="{{ farmware }}/common-farmware-problems">- Common Farmware Problems</option>
+            <option value="{{ farmware }}/you-might-not-need-farmware">- You Might Not Need Farmware</option>
+            {% capture firmware %}{{ documentation }}/firmware{% endcapture %}
+            <option value="{{ firmware }}">Firmware</option>
+            <option value="{{ firmware }}/parameters">- Parameters</option>
+            <option value="{{ firmware }}/custom-firmware">- Custom Firmware</option>
+            <option value="{{ documentation }}/assertions">Assertions</option>
+          </optgroup>
+          {% capture python %}{{ base }}/Python{% endcapture %}
+          <optgroup label="Python">
+            <option value="{{ python }}/web-app-api-examples">Web App API Examples</option>
+            <option value="{{ python }}/message-broker-examples">Message Broker Examples</option>
+          </optgroup>
+          {% capture other %}{{ base }}/Other-Resources{% endcapture %}
+          <optgroup label="Other Resources">
+            <option value="{{ other }}/openfarm">OpenFarm</option>
+            <option value="{{ other }}/running-servers-offline">Running Servers Offline</option>
+            <option value="{{ other }}/responsible-disclosure-of-security-vulnerabilities">
+              Responsible Disclosure of Security Vulnerabilities
+            </option>
+            <option value="https://github.com/farmbot">GitHub<i class="fa fa-external-link-square"></i></option>
+            <option value="http://eepurl.com/dJ4P86">Developer Newsletter<i class="fa fa-external-link-square"></i>
+            </option>
+            <option value="{{ other }}/factory-testing-utilities">Factory Testing Utilities</option>
+          </optgroup>
+        </select>
+      </div>
     </div>
   </div>
+
+  {% if version != latest_version %}
+  <div class="banner">
+    <a href="/farmbot-developers/v{{ latest_version }}/{{ page_path }}">
+      <b>Hey!</b> These docs are for version {{ version }},
+      which is no longer officially supported.
+      Click here for the latest version, {{ latest_version }}!
+    </a>
+  </div>
+  {% endif %}
 
   <div class="all">
     <div class="nav-toc">

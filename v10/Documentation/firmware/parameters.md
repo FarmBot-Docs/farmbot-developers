@@ -102,7 +102,12 @@ The firmware uses the following parameters, as found in the code repository at [
 
 ## Deprecated
 
-{% include callout.html type="warning" title="" content="The following parameters are no longer used, though support for them may still remain in the firmware." %}
+{%
+include callout.html
+type="warning"
+title=""
+content="The following parameters are no longer used, though support for them may still remain in the firmware."
+%}
 
 
 

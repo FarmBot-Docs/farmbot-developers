@@ -11,9 +11,14 @@ slug: "celery-script"
 
 
 
-{% include callout.html type="success" title="CeleryScript is an actively maintained standard" content="CeleryScript nodes are added, modified and removed often. The latest list of Celery Script nodes can be found [here](https://github.com/FarmBot/farmbot-js/blob/master/dist/corpus.d.ts)." %}
+{%
+include callout.html
+type="success"
+title="CeleryScript is an actively maintained standard"
+content="CeleryScript nodes are added, modified and removed often. The latest list of Celery Script nodes can be found [here](https://github.com/FarmBot/farmbot-js/blob/master/dist/corpus.d.ts)."
+%}
 
-The FarmBot system has [many moving parts](/v6/Documentation/farmbot-software-development/high-level-overview.md). Data must be exchanged between systems in a way that is predictable and asynchronous. Sometimes, this data is even used for telling the bot what to do in a similar fashion to traditional programming languages. To accomplish this, we use a special [remote procedure call](https://en.wikipedia.org/wiki/Remote_procedure_call) and data interchange format called "CeleryScript".
+The FarmBot system has [many moving parts](farmbot-software-development/high-level-overview.md). Data must be exchanged between systems in a way that is predictable and asynchronous. Sometimes, this data is even used for telling the bot what to do in a similar fashion to traditional programming languages. To accomplish this, we use a special [remote procedure call](https://en.wikipedia.org/wiki/Remote_procedure_call) and data interchange format called "CeleryScript".
 
 CeleryScript nodes are specially formatted JSON documents. FarmBot uses these documents for a variety of storage and communication use cases and also as an internal programming language for sequence scripting.
 
@@ -27,7 +32,7 @@ This document is intended for advanced software development and debugging. Many 
 
 CeleryScript knowledge is required only if you prefer to not use the wrapper library, are developing new features for the FarmBot platform, or are trying to debug specific problems with the system. It's also a great way for an intrepid software developer to learn FarmBot system internals.
 
-Javascript developers are encouraged to use [FarmBot JS](/v6/Documentation/farmbot-js.md) instead of raw CeleryScript for most use cases.
+Javascript developers are encouraged to use [FarmBot JS](farmbot-js.md) instead of raw CeleryScript for most use cases.
 
 **If you are writing CeleryScript for a new or unsupported language** you are highly encouraged to write your own wrapper library, as writing CeleryScript by hand is tedious, error-prone and likely to have future compatibility issues. Conversely, migrating and managing auto-generated CeleryScript is often a trivial task that can be accomplished via scripting.
 
@@ -38,14 +43,14 @@ Celery Script is used:
 
  * To build an [abstract syntax tree](https://astexplorer.net) for sequences in the [sequence editor](https://software.farm.bot/docs/sequences)\*.
  * To send one-off [movement commands](https://software.farm.bot/docs/controls) to a device.
- * To send messages between users and devices over [MQTT](/v6/Documentation/web-app/message-broker.md)
- * To build [3rd party "Farmware"](/v6/Documentation/farmware.md) (plugins) that talk directly to FarmBot
+ * To send messages between users and devices over [MQTT](web-app/message-broker.md)
+ * To build [3rd party "Farmware"](farmware.md) (plugins) that talk directly to FarmBot
  * Internal functionality such as changing device configuration on-the-fly and triggering firmware updates.
 
 
 # Where can I see CeleryScript in use?
 
-Nodes are typically seen in the [Message Broker](doc:message-broker-1) in the form of RPC requests. They are also used in the `/sequences` endpoint of the [REST API](/v6/Documentation/web-app/rest-api.md) as stored sequences.
+Nodes are typically seen in the [Message Broker](doc:message-broker-1) in the form of RPC requests. They are also used in the `/sequences` endpoint of the [REST API](web-app/rest-api.md) as stored sequences.
 
 # Example sequence
 

@@ -7,7 +7,12 @@ slug: "rest-api"
 {:toc}
 
 
-{% include callout.html type="info" title="Usage Examples Available" content="We keep a list of [example API requests here](https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af)." %}
+{%
+include callout.html
+type="info"
+title="Usage Examples Available"
+content="We keep a list of [example API requests here](https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af)."
+%}
 
 
 
@@ -63,10 +68,10 @@ The REST API is an HTTP web server commonly referred to as "The API", "The REST 
 The REST API handles a number of responsibilities including:
 
  * **Data Storage, Validation, Security:** Prevents data loss between reflashes by storing it in a centralized database, allows users to edit information when the device is offline, validates data and controls access to data via authentication and authorization mechanisms.
- * **Email Delivery:** Sends email notifications (such as password resets and critical errors) to end users. All other messaging is handled by the [Message Broker](/v7/Documentation/web-app/message-broker.md), a distinctly decoupled sub-system of the Web API.
+ * **Email Delivery:** Sends email notifications (such as password resets and critical errors) to end users. All other messaging is handled by the [Message Broker](message-broker.md), a distinctly decoupled sub-system of the Web API.
  * **Image Manipulation and Uploads:** Re-sizes and stores images captured by FarmBot's internal camera.
 
-Genreally speaking, the REST API does _not_ control FarmBot. Device control is handled by the [Message Broker](/v7/Documentation/web-app/message-broker.md), [CeleryScript](/v7/Documentation/celery-script.md) and [FarmBot JS](/v7/Documentation/farmbot-js.md).
+Genreally speaking, the REST API does _not_ control FarmBot. Device control is handled by the [Message Broker](message-broker.md), [CeleryScript](../celery-script.md) and [FarmBot JS](../farmbot-js.md).
 
 # API Technical Specifications
 
@@ -132,7 +137,7 @@ As of August 2018, the API manages the following resources:
 
 ## How Can I Control the Bot Via HTTP Requests?
 
-The REST API does not control devices. It is only used for data storage, email delivery and image resizing. To control a device remotely, please see documentation for the [Message Broker](/v7/Documentation/web-app/message-broker.md), [CeleryScript](/v7/Documentation/celery-script.md) and [FarmBot JS](/v7/Documentation/farmbot-js.md).
+The REST API does not control devices. It is only used for data storage, email delivery and image resizing. To control a device remotely, please see documentation for the [Message Broker](message-broker.md), [CeleryScript](../celery-script.md) and [FarmBot JS](../farmbot-js.md).
 
 ## Where Can I See API Example Usage?
 
@@ -208,4 +213,4 @@ TOKEN = response.json()['token']['encoded']
 ```
 
 
-Also see [Web App API Examples](/v7/Python/web-app-api-examples.md).
+Also see [Web App API Examples](../../Python/web-app-api-examples.md).

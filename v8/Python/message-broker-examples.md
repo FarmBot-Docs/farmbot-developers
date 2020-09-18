@@ -7,7 +7,7 @@ excerpt: "Use Python to communicate directly with FarmBot"
 * toc
 {:toc}
 
-These examples use concepts in [CeleryScript](/v8/Documentation/celery-script.md) and [Message Broker](/v8/Documentation/web-app/message-broker.md).
+These examples use concepts in [CeleryScript](../Documentation/celery-script.md) and [Message Broker](../Documentation/web-app/message-broker.md).
 
 
 __send message:__

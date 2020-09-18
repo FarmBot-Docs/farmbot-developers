@@ -7,5 +7,10 @@ slug: "experimental-mqtt-api"
 {:toc}
 
 
-{% include callout.html type="danger" title="THIS FEATURE IS DEPRECATED" content="Do not use this feature for new software projects." %}
+{%
+include callout.html
+type="danger"
+title="THIS FEATURE IS DEPRECATED"
+content="Do not use this feature for new software projects."
+%}
 

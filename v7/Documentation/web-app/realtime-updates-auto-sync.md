@@ -6,7 +6,7 @@ slug: "realtime-updates-auto-sync"
 * toc
 {:toc}
 
-As we learned in the [previous section](/v7/Documentation/web-app/rest-api.md), resources are downloaded from the API as JSON documents.
+As we learned in the [previous section](rest-api.md), resources are downloaded from the API as JSON documents.
 
 HTTP is a [stateless protocol](https://en.wikipedia.org/wiki/Stateless_protocol). This offers a number of benefits to application developers but does come with some drawbacks. Most notably, there is a chance that the data you downloaded will go "stale" when people or devices update the resource after you perform the initial resource download.
 
@@ -37,7 +37,7 @@ As we saw in the previous example, polling has a number of drawbacks that make i
 
 Unlike most other resource management use cases, **Auto Sync is performed via MQTT rather than HTTP.**
 
-To receive data updates for a particular resource, login to the [Message Broker](/v7/Documentation/web-app/message-broker.md) and subscribe to an MQTT topic that matches the pattern below:
+To receive data updates for a particular resource, login to the [Message Broker](message-broker.md) and subscribe to an MQTT topic that matches the pattern below:
 
 ```
 bot/device_DEVICE_ID/sync/RESOURCE_NAME/RESOURCE_ID
@@ -49,7 +49,12 @@ You will need to replace the CAPITALIZED NAMES above with the following informat
  * `RESOURCE_NAME` - The name of the resource in [CamelCase](https://en.wikipedia.org/wiki/Camel_case). Example: `ToolSlot`, `Sequence`, `FarmEvent`.
  * `RESOURCE_ID` - Integer ID of the resource you wish to receive updates for.
 
-{% include callout.html type="info" title="Don't remember your `DEVICE_ID`?" content="Check the \"BOT\" claim of your authorization token." %}
+{%
+include callout.html
+type="info"
+title="Don't remember your `DEVICE_ID`?"
+content="Check the \"BOT\" claim of your authorization token."
+%}
 
 Once you have subscribed to the appropriate channel, you will receive JSON in a format similar to the examples below:
 
@@ -86,4 +91,4 @@ As August 2018, the following resource names are supported: `Crop`, `Device`, `D
 
 # Next Steps
 
-As we've learned in this section, it is possible to subscribe to resource changes via MQTT. **Auto Sync is only for reading data**. If you wish to update resources via MQTT, you may do so via the [Experimental MQTT API](/v7/Documentation/web-app/experimental-mqtt-api.md).
+As we've learned in this section, it is possible to subscribe to resource changes via MQTT. **Auto Sync is only for reading data**. If you wish to update resources via MQTT, you may do so via the [Experimental MQTT API](experimental-mqtt-api.md).

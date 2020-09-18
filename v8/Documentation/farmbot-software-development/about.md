@@ -53,5 +53,10 @@ _Our developer experience brainstorming board_
 
 
 
-{% include callout.html type="success" title="Always improving" content="Creating this developer experience will forever be a work in progress, and we openly invite your feedback so that we may improve these resources faster for everyone. If you have any questions or comments, please let us know on [GitHub](http://github.com/FarmBot) or in the [forum](https://forum.farmbot.org/c/software/software-development)." %}
+{%
+include callout.html
+type="success"
+title="Always improving"
+content="Creating this developer experience will forever be a work in progress, and we openly invite your feedback so that we may improve these resources faster for everyone. If you have any questions or comments, please let us know on [GitHub](http://github.com/FarmBot) or in the [forum](https://forum.farmbot.org/c/software/software-development)."
+%}
 

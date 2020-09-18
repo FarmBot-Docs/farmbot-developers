@@ -7,7 +7,12 @@ slug: "source-of-truth"
 {:toc}
 
 
-{% include callout.html type="warning" title="Advanced material ahead" content="The following is a technical document for advanced developers who require performing high-precision data operations. The majority of developers can view the information below as an implementation detail and not a hard requirement for understanding the FarmBot software stack." %}
+{%
+include callout.html
+type="warning"
+title="Advanced material ahead"
+content="The following is a technical document for advanced developers who require performing high-precision data operations. The majority of developers can view the information below as an implementation detail and not a hard requirement for understanding the FarmBot software stack."
+%}
 
 The [CAP theorem](https://en.wikipedia.org/wiki/CAP_theorem) states that it is impossible for a distributed data store to simultaneously provide more than two out of the following three guarantees:
 

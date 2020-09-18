@@ -7,9 +7,14 @@ slug: "firmware"
 {:toc}
 
 
-{% include callout.html type="warning" title="Internally used commands" content="The commands and responses on this page are used for communication between [FarmBot OS](/v6/Documentation/farmbot-os.md) and the [FarmBot Arduino Firmware](https://github.com/FarmBot/farmbot-arduino-firmware). Outside of that internal communication, commands on this page can only be sent by disconnecting the Arduino from the Raspberry Pi and connecting a USB cable from a computer directly to the Arduino.
+{%
+include callout.html
+type="warning"
+title="Internally used commands"
+content="The commands and responses on this page are used for communication between [FarmBot OS](farmbot-os.md) and the [FarmBot Arduino Firmware](https://github.com/FarmBot/farmbot-arduino-firmware). Outside of that internal communication, commands on this page can only be sent by disconnecting the Arduino from the Raspberry Pi and connecting a USB cable from a computer directly to the Arduino.
 
-FarmBot OS communication via [Farmware](/v6/Documentation/farmware.md) and the [Message Broker](/v6/Documentation/web-app/message-broker.md) consists of higher-level [CeleryScript](/v6/Documentation/celery-script.md) commands, not the commands on listed on this page." %}
+FarmBot OS communication via [Farmware](farmware.md) and the [Message Broker](web-app/message-broker.md) consists of higher-level [CeleryScript](celery-script.md) commands, not the commands on listed on this page."
+%}
 
 
 

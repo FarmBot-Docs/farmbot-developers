@@ -8,7 +8,12 @@ excerpt: "FarmBot OS plugins"
 {:toc}
 
 
-{% include callout.html type="info" title="For developers only" content="This documentation is meant for Farmware developers. For use of Farmware in the Web App, [see here](https://software.farm.bot/docs/farmware)." %}
+{%
+include callout.html
+type="info"
+title="For developers only"
+content="This documentation is meant for Farmware developers. For use of Farmware in the Web App, [see here](https://software.farm.bot/docs/farmware)."
+%}
 
 Farmware is custom Python code that runs on the FarmBot CPU. It is useful when you need to control the device, but cannot control the device remotely due to design considerations. Farmware should only be used in cases when it would be impractical to run software remotely, such as operations that require offline support or extremely low latency.
 
@@ -18,7 +23,7 @@ Farmware is custom Python code that runs on the FarmBot CPU. It is useful when y
 
 Farmware has been plagued by low adoption and an extremely high maintenance burden to support a very small pool of authors. Because of low adoption and numerous legacy issues, FarmBot has made the decision to eventually terminate the current Farmware system in favor of a new, non-compatible replacement. Do not write Farmware if you do not need to.
 
-**Farmware is not the only way to write custom Farmbot software.** Please see [this document](/v9/Documentation/farmware/you-might-not-need-farmware.md) for more information
+**Farmware is not the only way to write custom Farmbot software.** Please see [this document](farmware/you-might-not-need-farmware.md) for more information
 
 # Currently supported languages and packages
 
@@ -329,7 +334,7 @@ requests.post(os.environ['FARMWARE_URL'] + '/api/v1/celery_script',
 
 For a list of all available actions, see the second tab of the above example code, `all`.
 
-Also see the [Celery Script developer documentation](/v9/Documentation/celery-script.md) and [the corpus](https://github.com/FarmBot/farmbot-js/blob/master/dist/corpus.d.ts) for more information.
+Also see the [Celery Script developer documentation](celery-script.md) and [the corpus](https://github.com/FarmBot/farmbot-js/blob/master/dist/corpus.d.ts) for more information.
 
 # Inputs
 
@@ -404,7 +409,12 @@ To [install a Farmware](#section-installing-farmware), you need to create a `man
 
 For example, entering `https://raw.githubusercontent.com/FarmBot-Labs/hello-farmware/master/manifest.json` and clicking install on the Farmware page of the Web App would install the `Hello Farmware` Farmware, whose source code is located at the GitHub project [here](https://github.com/FarmBot-Labs/hello-farmware).
 
-{% include callout.html type="warning" title="" content="The Farmware manifest format changed between FarmBot OS v7 and FarmBot OS v8. Be sure to use the manifest format that matches your FarmBot OS version, as shown below." %}
+{%
+include callout.html
+type="warning"
+title=""
+content="The Farmware manifest format changed between FarmBot OS v7 and FarmBot OS v8. Be sure to use the manifest format that matches your FarmBot OS version, as shown below."
+%}
 
 
 

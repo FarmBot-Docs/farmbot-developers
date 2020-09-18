@@ -23,7 +23,12 @@ Most development will be done in "host" environment. This means that rather than
   * `host` - For development.
   * `rpi3` - Run on Farmbot's intended hardware.
 
-{% include callout.html type="info" title="Note" content="You will need to configure your Farmbot API, Frontend, and MQTT services for the below commands to work. You _can_ however use the default `my.farm.bot` servers. see `config/host/auth_secret_template.exs` for more information." %}
+{%
+include callout.html
+type="info"
+title="Note"
+content="You will need to configure your Farmbot API, Frontend, and MQTT services for the below commands to work. You _can_ however use the default `my.farm.bot` servers. see `config/host/auth_secret_template.exs` for more information."
+%}
 
 # Running unit tests
 Tests should be ran while developing features. You should have a *local* Farmbot stack up and running and configured for this to work. `config/host/auth_secret_template.exs` will have more full instructions.
