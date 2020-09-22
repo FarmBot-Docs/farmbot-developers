@@ -1,93 +1,24 @@
-{% capture base %}/farmbot-developers/v{{ include.version }}{% endcapture %}
-
-{% capture documentation %}{{ base }}/Documentation{% endcapture %}
-<h3>Documentation</h3>
-<ul>
-
-  {% capture dev %}{{ documentation }}/farmbot-software-development{% endcapture %}
-  <li class="parent"><a href="{{ dev }}">FarmBot Software Development</a>
-    <ul class="sub">
-      <li><a href="{{ dev }}/high-level-overview">High Level Overview</a></li>
-      <li><a href="{{ dev }}/3rd-party-developer-prizes">3rd Party Developer Prizes</a></li>
-      <li><a href="{{ dev }}/faq">Frequently Asked Questions</a></li>
-      <li><a href="{{ dev }}/about">About Our Developer Docs</a></li>
-    </ul>
+<ul class="{% if item.pages and item.top != true %}pages{% endif %}">
+  {%- for item in include.toc -%}
+  {%- if item.top -%}
+  <h3>{{ item.title }}</h3>
+  {%- else -%}
+  <li class="{% if item.pages %}parent{% endif %}">
+    {%- if item.external -%}
+    <a href="{{ item.url }}">{{ item.title }}
+      <i class="fa fa-external-link-square"></i>
+    </a>
+    {%- else -%}
+    {%- capture v_url -%}
+    v{{ include.version }}/{{ include.path }}/{{ item.url }}
+    {%- endcapture -%}
+    <a href="{{ v_url | relative_url }}">{{ item.title }}</a>
+    {% endif %}
   </li>
-
-  {% capture web_app %}{{ documentation }}/web-app{% endcapture %}
-  <li class="parent"><a href="{{ web_app }}">Web App</a>
-    <ul class="sub">
-      <li><a href="{{ web_app }}/user-interface">User Interface</a></li>
-      <li><a href="{{ web_app }}/rest-api">REST API</a></li>
-      <li><a href="{{ web_app }}/message-broker">Message Broker</a></li>
-      <li><a href="{{ web_app }}/realtime-updates-auto-sync">Subscribing to Resource Updates</a></li>
-      <li><a href="{{ web_app }}/experimental-mqtt-api">Publishing Resources via MQTT, Introduction</a></li>
-      <li><a href="{{ web_app }}/create-a-resource">Publishing Resource Updates via MQTT</a></li>
-      <li><a href="{{ web_app }}/env-vars-and-globalconfigs">ENV Vars and GlobalConfigs</a></li>
-      <li><a href="{{ web_app }}/special-api-endpoints">Special API Endpoints</a></li>
-    </ul>
-  </li>
-
-  {% capture cs %}{{ documentation }}/celery-script{% endcapture %}
-  <li class="parent"><a href="{{ cs }}">CeleryScript</a>
-    <ul class="sub">
-      <li><a href="{{ cs }}/nodes">Nodes</a></li>
-      <li><a href="{{ cs }}/identifying-success-and-failure">Identifying Success and Failure</a></li>
-      <li><a href="{{ cs }}/out-of-band-responses">Out of Band Responses</a></li>
-      <li><a href="{{ cs }}/celeryscript-glossary">CeleryScript Glossary</a></li>
-      <li><a href="{{ cs }}/history-of-rpcs-in-farmbot">History of RPCs in FarmBot</a></li>
-    </ul>
-  </li>
-
-  <li><a href="{{ documentation }}/farmbot-js">FarmBot JS</a></li>
-
-  {% capture fbos %}{{ documentation }}/farmbot-os{% endcapture %}
-  <li class="parent"><a href="{{ fbos }}">FarmBot OS</a>
-    <ul class="sub">
-      <li><a href="{{ fbos }}/farmbot-os-development">FarmBot OS Development</a></li>
-      <li><a href="{{ fbos }}/gathering-information-at-runtime">Gathering Information at Runtime</a></li>
-      <li><a href="{{ fbos }}/beta-updates">Beta Updates</a></li>
-      <li><a href="{{ fbos }}/gathering-a-log-dump">Gathering a Log Dump</a></li>
-      <li><a href="{{ fbos }}/farmbot-os-faq">Frequently Asked Questions</a></li>
-    </ul>
-  </li>
-
-  {% capture farmware %}{{ documentation }}/farmware{% endcapture %}
-  <li class="parent"><a href="{{ farmware }}">Farmware</a>
-    <ul class="sub">
-      <li><a href="{{ farmware }}/farmware-hosting-and-workflows">Farmware Hosting and Workflows</a></li>
-      <li><a href="{{ farmware }}/common-farmware-problems">Common Farmware Problems</a></li>
-      <li><a href="{{ farmware }}/you-might-not-need-farmware">You Might Not Need Farmware</a></li>
-    </ul>
-  </li>
-
-  {% capture firmware %}{{ documentation }}/firmware{% endcapture %}
-  <li class="parent"><a href="{{ firmware }}">Firmware</a>
-    <ul class="sub">
-      <li><a href="{{ firmware }}/parameters">Parameters</a></li>
-      <li><a href="{{ firmware }}/custom-firmware">Custom Firmware</a></li>
-    </ul>
-  </li>
-
-  <li><a href="{{ documentation }}/assertions">Assertions</a></li>
-
-</ul>
-
-{% capture python %}{{ base }}/Python{% endcapture %}
-<h3>Python</h3>
-<ul>
-  <li><a href="{{ python }}/web-app-api-examples">Web App API Examples</a></li>
-  <li><a href="{{ python }}/message-broker-examples">Message Broker Examples</a></li>
-</ul>
-
-{% capture other %}{{ base }}/Other-Resources{% endcapture %}
-<h3>Other Resources</h3>
-<ul>
-  <li><a href="{{ other }}/openfarm">OpenFarm</a></li>
-  <li><a href="{{ other }}/running-servers-offline">Running Servers Offline</a></li>
-  <li><a href="{{ other }}/responsible-disclosure-of-security-vulnerabilities">Responsible Disclosure of Security
-      Vulnerabilities</a></li>
-  <li><a href="https://github.com/farmbot">GitHub<i class="fa fa-external-link-square"></i></a></li>
-  <li><a href="http://eepurl.com/dJ4P86">Developer Newsletter<i class="fa fa-external-link-square"></i></a></li>
-  <li><a href="{{ other }}/factory-testing-utilities">Factory Testing Utilities</a></li>
+  {%- endif -%}
+  {% if item.pages %}
+  {% capture path %}{{ include.path }}/{{ item.url }}{% endcapture %}
+  {% include toc.html toc=item.pages path=path version=include.version %}
+  {% endif %}
+  {%- endfor -%}
 </ul>

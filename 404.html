@@ -1,8 +1,14 @@
+---
+permalink: /404.html
+---
+
 <!DOCTYPE html>
 <html>
 
 <head>
-  <meta http-equiv="refresh" content="0; url=/farmbot-developers/v11/Documentation/farmbot-software-development" />
+  {% assign version_toc = site.data.toc | where: "version", site.latest_version | first %}
+  {% capture home %}v{{ version_toc.version }}/{{ version_toc.home }}{% endcapture %}
+  <meta http-equiv="refresh" content="0; url={{ home | relative_url }}" />
 </head>
 
 <body>

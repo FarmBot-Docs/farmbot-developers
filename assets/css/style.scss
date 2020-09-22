@@ -10,12 +10,13 @@ $lg-screen-size: 1200px;
 $nav-toc-width: 20rem;
 $markdown-toc-width: 20rem;
 $both-toc-width: calc(#{$nav-toc-width} + #{$markdown-toc-width});
-$blue: #0c4d8a;
+$site-color: {{ site.color }};
+$dark_gray: #384248;
 
 nav {
   padding: 1rem;
   padding-top: 0.5rem;
-  background: $blue;
+  background: $site-color;
   a {
     padding: 1rem 0.5rem;
     text-decoration: none !important;
@@ -24,7 +25,7 @@ nav {
   }
   a:hover {
     color: white;
-    background: #0a3f70;
+    background: darken($site-color, 10%);
     transition: background 0.3s ease-out;
     border-bottom-color: white;
   }
@@ -107,6 +108,7 @@ nav {
 
 .nav-toc {
   min-width: $nav-toc-width;
+  padding-left: 1rem;
   h3 {
     text-transform: uppercase;
   }
@@ -119,7 +121,7 @@ nav {
     padding-inline-start: 0;
   }
   a {
-    color: #384248;
+    color: $dark_gray;
     &:hover {
       text-decoration: none;
     }
@@ -128,7 +130,7 @@ nav {
     display: block;
     padding: 0.25rem 0.5rem;
     &:hover {
-      color: $blue;
+      color: $site-color;
       background: #f3f3f3;
       transition: background 0.3s ease-out;
     }
@@ -142,15 +144,15 @@ nav {
       }
     }
   }
-  .sub {
+  .pages {
     margin: 0.5rem;
-    border-left: 3px solid $blue;
+    border-left: 3px solid $site-color;
     a {
       color: #666;
       background: none;
       font-weight: normal;
       &:hover {
-        color: $blue;
+        color: $site-color;
         background: #f3f3f3;
       }
     }
@@ -169,7 +171,8 @@ nav {
 
 .markdown-toc-header {
   text-transform: uppercase;
-  font-size: 1rem;
+  font-size: 0.9rem;
+  font-family: unset;
 }
 
 #markdown-toc {
@@ -179,7 +182,7 @@ nav {
     text-decoration: none;
     color: #9b9b9b;
     &:hover {
-      color: $blue;
+      color: $site-color;
     }
   }
   li {
@@ -211,7 +214,7 @@ nav {
     margin: 0;
   }
   .page-name {
-    color: #384248;
+    color: $dark_gray;
     font-size: 2rem;
     text-align: left;
   }
@@ -225,9 +228,9 @@ nav {
 }
 
 .main-content {
-  width: calc(#{$max-width-min} - #{$both-toc-width} - 2rem);
+  width: calc(#{$max-width-min} - #{$both-toc-width} - 4rem);
   @media (max-width: $lg-screen-size) {
-    width: calc(#{$max-width-min} - #{$nav-toc-width});
+    width: calc(#{$max-width-min} - #{$nav-toc-width} - 2rem);
   }
   @media (max-width: $md-screen-size) {
     width: calc(100vw - 2rem);
@@ -241,7 +244,22 @@ nav {
   h1,
   h2,
   h3 {
-    color: $blue;
+    color: $dark_gray;
+    font-family: Inknut Antiqua;
+  }
+  .markdown-toc-header {
+    font-family: unset;
+  }
+}
+
+.page-header,
+.main-content {
+  a {
+    color: $site-color;
+    text-decoration: none;
+    &:hover {
+      color: darken($site-color, 10%);
+    }
   }
 }
 

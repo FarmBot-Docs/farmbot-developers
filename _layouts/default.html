@@ -4,140 +4,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0c4d8a">
+  <meta name="theme-color" content="{{ site.color }}">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="icon" type="image/x-icon" href="{{ '/assets/images/favicon.png' | relative_url }}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/fb.css?v=' | append: site.github.build_revision | relative_url }}">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inknut+Antiqua:700">
-  <!--<base href="/farmbot-developers/">-->
 </head>
 
 <body>
   <nav>
     <div class="nav-content">
-      <a class="doc-icon" href="/farmbot-developers/v11/Documentation/farmbot-software-development">
-        <img src="/farmbot-developers/assets/images/documentation.png">
+      <a class="doc-icon" href="{{ '/' | relative_url }}">
+        <img src="{{ 'assets/images/documentation.png' | relative_url }}">
       </a>
       <div class="nav-links">
-        <a href="http://express.farm.bot">Express</a>
-        <a href="http://genesis.farm.bot">Genesis</a>
-        <a href="http://software.farm.bot">Software</a>
-        <a class="current" href="/farmbot-developers/v11/Documentation/farmbot-software-development">Developer</a>
-        <a href="http://meta.farm.bot">Business</a>
+        <a class="{%- if site.baseurl == '/farmbot-express' -%}
+        current
+        {%- endif -%}" href="http://express.farm.bot">Express</a>
+        <a class="{%- if site.baseurl == '/farmbot-genesis' -%}
+        current
+        {%- endif -%}" href="http://genesis.farm.bot">Genesis</a>
+        <a class="{%- if site.baseurl == '/farmbot-software' -%}
+        current
+        {%- endif -%}" href="https://farmbot-docs.github.io/farmbot-software">
+          Software
+        </a>
+        <a class="{%- if site.baseurl == '/farmbot-developers' -%}
+        current
+        {%- endif -%}" href="https://farmbot-docs.github.io/farmbot-developers">
+          Developer
+        </a>
+        <a class="{%- if site.baseurl == '/farmbot-meta' -%}
+        current
+        {%- endif -%}" href="http://meta.farm.bot">Business</a>
         <a href="http://shop.farm.bot">Shop</a>
       </div>
     </div>
   </nav>
 
-  {%- capture version -%}
-  {{ page.url | split: '/' | slice: 1 | join: '' | slice: 1, 999 }}
-  {%- endcapture -%}
-
-  {% capture latest_version %}11{% endcapture %}
-
-  {%- capture page_path -%}
-  {{ page.url | split: '/' | slice: 2, 999 | join: '/' }}
-  {%- endcapture -%}
+  {% assign version =
+    page.url | split: '/' | slice: 1 | join: '' | slice: 1, 999 | to_integer %}
+  {%- assign version_toc = site.data.toc | where: "version", version | first -%}
+  {%- assign page_path = page.url | split: '/' | slice: 2, 999 | join: '/' -%}
 
   <div class="version">
     <div class="version-content">
       <select onchange="if (this.value) window.location.href=this.value">
-        {% for v_int in (6..11) %}
-        {% capture v %}{{ v_int }}{% endcapture %}
-        <option {% if version == v %}selected="selected" {% endif %}
-          value="/farmbot-developers/v{{ v }}/{{ page_path }}">
-          v{{ v }} ({% if v != latest_version %}deprecated{% else %}stable{% endif %})
+        {%- capture v_tags -%}
+        {% for v in (1..site.latest_version) %}v{{ v }} {% endfor %}
+        {%- endcapture -%}
+        {%- assign version_tags = v_tags | split: " " -%}
+        {%- for version_tag in version_tags -%}
+        {%- assign toc = site.data.toc[version_tag] -%}
+        {%- if toc -%}
+        {%- capture target_doc_link -%}
+        v{{ toc.version }}/{{ toc.home }}
+        {%- endcapture -%}
+        <option {% if version == toc.version %}selected="selected" {% endif %}
+          value="{{ target_doc_link | relative_url }}">
+          v{{ toc.version }} ({{ toc.status }})
         </option>
-        {% endfor %}
+        {%- endif -%}
+        {%- endfor -%}
       </select>
 
       <div class="mobile-nav">
         <select onchange="if (this.value) window.location.href=this.value">
           <option value>Navigate the docs...</option>
-          {% capture base %}/farmbot-developers/v{{ version }}{% endcapture %}
-          {% capture documentation %}{{ base }}/Documentation{% endcapture %}
-          <optgroup label="Documentation">
-            {% capture dev %}{{ documentation }}/farmbot-software-development{% endcapture %}
-            <option value="{{ dev }}">FarmBot Software Development</option>
-            <option value="{{ dev }}/high-level-overview">- High Level Overview</option>
-            <option value="{{ dev }}/3rd-party-developer-prizes">- 3rd Party Developer Prizes</option>
-            <option value="{{ dev }}/faq">- Frequently Asked Questions</option>
-            <option value="{{ dev }}/about">- About Our Developer Docs</option>
-            {% capture web_app %}{{ documentation }}/web-app{% endcapture %}
-            <option value="{{ web_app }}">Web App</option>
-            <option value="{{ web_app }}/user-interface">- User Interface</option>
-            <option value="{{ web_app }}/rest-api">- REST API</option>
-            <option value="{{ web_app }}/message-broker">- Message Broker</option>
-            <option value="{{ web_app }}/realtime-updates-auto-sync">- Subscribing to Resource Updates</option>
-            <option value="{{ web_app }}/experimental-mqtt-api">
-              - Publishing Resources via MQTT, Introduction
-            </option>
-            <option value="{{ web_app }}/create-a-resource">- Publishing Resource Updates via MQTT</option>
-            <option value="{{ web_app }}/env-vars-and-globalconfigs">- ENV Vars and GlobalConfigs</option>
-            <option value="{{ web_app }}/special-api-endpoints">- Special API Endpoints</option>
-            {% capture cs %}{{ documentation }}/celery-script{% endcapture %}
-            <option value="{{ cs }}">CeleryScript</option>
-            <option value="{{ cs }}/nodes">- Nodes</option>
-            <option value="{{ cs }}/identifying-success-and-failure">- Identifying Success and Failure</option>
-            <option value="{{ cs }}/out-of-band-responses">- Out of Band Responses</option>
-            <option value="{{ cs }}/celeryscript-glossary">- CeleryScript Glossary</option>
-            <option value="{{ cs }}/history-of-rpcs-in-farmbot">- History of RPCs in FarmBot</option>
-            <option value="{{ documentation }}/farmbot-js">FarmBot JS</option>
-            {% capture fbos %}{{ documentation }}/farmbot-os{% endcapture %}
-            <option value="{{ fbos }}">FarmBot OS</option>
-            <option value="{{ fbos }}/farmbot-os-development">- FarmBot OS Development</option>
-            <option value="{{ fbos }}/gathering-information-at-runtime">- Gathering Information at Runtime</option>
-            <option value="{{ fbos }}/beta-updates">- Beta Updates</option>
-            <option value="{{ fbos }}/gathering-a-log-dump">- Gathering a Log Dump</option>
-            <option value="{{ fbos }}/farmbot-os-faq">- Frequently Asked Questions</option>
-            {% capture farmware %}{{ documentation }}/farmware{% endcapture %}
-            <option value="{{ farmware }}">Farmware</option>
-            <option value="{{ farmware }}/farmware-hosting-and-workflows">- Farmware Hosting and Workflows</option>
-            <option value="{{ farmware }}/common-farmware-problems">- Common Farmware Problems</option>
-            <option value="{{ farmware }}/you-might-not-need-farmware">- You Might Not Need Farmware</option>
-            {% capture firmware %}{{ documentation }}/firmware{% endcapture %}
-            <option value="{{ firmware }}">Firmware</option>
-            <option value="{{ firmware }}/parameters">- Parameters</option>
-            <option value="{{ firmware }}/custom-firmware">- Custom Firmware</option>
-            <option value="{{ documentation }}/assertions">Assertions</option>
-          </optgroup>
-          {% capture python %}{{ base }}/Python{% endcapture %}
-          <optgroup label="Python">
-            <option value="{{ python }}/web-app-api-examples">Web App API Examples</option>
-            <option value="{{ python }}/message-broker-examples">Message Broker Examples</option>
-          </optgroup>
-          {% capture other %}{{ base }}/Other-Resources{% endcapture %}
-          <optgroup label="Other Resources">
-            <option value="{{ other }}/openfarm">OpenFarm</option>
-            <option value="{{ other }}/running-servers-offline">Running Servers Offline</option>
-            <option value="{{ other }}/responsible-disclosure-of-security-vulnerabilities">
-              Responsible Disclosure of Security Vulnerabilities
-            </option>
-            <option value="https://github.com/farmbot">GitHub<i class="fa fa-external-link-square"></i></option>
-            <option value="http://eepurl.com/dJ4P86">Developer Newsletter<i class="fa fa-external-link-square"></i>
-            </option>
-            <option value="{{ other }}/factory-testing-utilities">Factory Testing Utilities</option>
-          </optgroup>
+          {%- include mobile_toc.html toc=version_toc.contents version=version -%}
         </select>
       </div>
     </div>
   </div>
 
-  {% if version != latest_version %}
-  <div class="banner">
-    <a href="/farmbot-developers/v{{ latest_version }}/{{ page_path }}">
+  {% if version != site.latest_version %}
+  <div class="banner {% if version > site.latest_version %}wip{% endif %}">
+    {% capture latest_url %}v{{ site.latest_version }}/{{ page_path }}{% endcapture %}
+    <a href="{{ latest_url | relative_url }}">
       <b>Hey!</b> These docs are for version {{ version }},
+      {% if version > site.latest_version %}
+      which is still under development.
+      {% else %}
       which is no longer officially supported.
-      Click here for the latest version, {{ latest_version }}!
+      {% endif %}
+      Click here for the latest version, {{ site.latest_version }}!
     </a>
   </div>
   {% endif %}
 
   <div class="all">
     <div class="nav-toc">
-      {% include toc.html version=version %}
+      {% include toc.html toc=version_toc.contents version=version %}
     </div>
     <div class="content">
       <header class="page-header" role="banner">

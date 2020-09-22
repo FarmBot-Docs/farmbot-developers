@@ -1,0 +1,110 @@
+version: 9
+status: deprecated
+home: Documentation/farmbot-software-development
+contents:
+  - title: Documentation
+    url: Documentation
+    top: true
+    pages:
+      - title: FarmBot Software Development
+        url: farmbot-software-development
+        pages:
+          - title: High Level Overview
+            url: high-level-overview
+          - title: 3rd Party Developer Prizes
+            url: 3rd-party-developer-prizes
+          - title: Frequently Asked Questions
+            url: faq
+          - title: About Our Developer Docs
+            url: about
+      - title: Web App
+        url: web-app
+        pages:
+          - title: User Interface
+            url: user-interface
+          - title: REST API
+            url: rest-api
+          - title: Message Broker
+            url: message-broker
+          - title: Subscribing to Resource Updates
+            url: realtime-updates-auto-sync
+          - title: Publishing Resources via MQTT, Introduction
+            url: experimental-mqtt-api
+          - title: Publishing Resource Updates via MQTT
+            url: create-a-resource
+          - title: ENV Vars and GlobalConfigs
+            url: env-vars-and-globalconfigs
+          - title: Special API Endpoints
+            url: special-api-endpoints
+      - title: CeleryScript
+        url: celery-script
+        pages:
+          - title: Nodes
+            url: nodes
+          - title: Identifying Success and Failure
+            url: identifying-success-and-failure
+          - title: Out-of-Band Responses
+            url: out-of-band-responses
+          - title: CeleryScript Glossary
+            url: celeryscript-glossary
+          - title: History of RPCs in FarmBot
+            url: history-of-rpcs-in-farmbot
+      - title: FarmBot JS
+        url: farmbot-js
+      - title: FarmBot OS
+        url: farmbot-os
+        pages:
+          - title: FarmBot OS Development
+            url: farmbot-os-development
+          - title: Gathering Information at Runtime
+            url: gathering-information-at-runtime
+          - title: Beta Updates
+            url: beta-updates
+          - title: Gathering a Log Dump
+            url: gathering-a-log-dump
+          - title: Frequently Asked Questions
+            url: farmbot-os-faq
+      - title: Farmware
+        url: farmware
+        pages:
+          - title: Farmware Hosting and Workflows
+            url: farmware-hosting-and-workflows
+          - title: Common Farmware Problems
+            url: common-farmware-problems
+          - title: You Might Not Need Farmware
+            url: you-might-not-need-farmware
+      - title: Firmware
+        url: firmware
+        pages:
+          - title: Parameters
+            url: parameters
+          - title: Custom Firmware
+            url: custom-firmware
+      - title: Assertions
+        url: assertions
+  - title: Python
+    url: Python
+    top: true
+    pages:
+      - title: Web App API Examples
+        url: web-app-api-examples
+      - title: Message Broker Examples
+        url: message-broker-examples
+  - title: Other Resources
+    url: Other-Resources
+    top: true
+    pages:
+      - title: OpenFarm
+        url: openfarm
+      - title: Running Servers Offline
+        url: running-servers-offline
+      - title: Responsible Disclosure of Security Vulnerabilities
+        url: responsible-disclosure-of-security-vulnerabilities
+      - title: GitHub
+        url: https://github.com/FarmBot
+        external: true
+      - title: Developer Newsletter
+        url: http://eepurl.com/dJ4P86
+        external: true
+      - title: Factory Testing Utilities
+        url: factory-testing-utilities
