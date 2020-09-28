@@ -6,8 +6,11 @@ permalink: /index.html
 <html>
 
 <head>
-  {% assign version_toc = site.data.toc | where: "version", site.latest_version | first %}
-  {% capture home %}v{{ version_toc.version }}/{{ version_toc.home }}{% endcapture %}
+  {%- assign version_toc =
+    site.data.toc | where: "version_number", site.latest_version_number | first -%}
+  {%- capture home -%}
+  v{{ version_toc.version_number }}/{{ version_toc.home }}
+  {%- endcapture -%}
   <meta http-equiv="refresh" content="0; url={{ home | relative_url }}" />
 </head>
 

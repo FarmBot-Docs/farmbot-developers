@@ -10,15 +10,17 @@
     </a>
     {%- else -%}
     {%- capture v_url -%}
-    v{{ include.version }}/{{ include.path }}/{{ item.url }}
+    v{{ include.version }}{{ include.path }}/{{ item.url }}
     {%- endcapture -%}
-    <a href="{{ v_url | relative_url }}">{{ item.title }}</a>
+    <a class="{%- if include.current contains v_url -%}current{%- endif -%}"
+      href="{{ v_url | relative_url }}">{{ item.title }}</a>
     {% endif %}
   </li>
   {%- endif -%}
   {% if item.pages %}
   {% capture path %}{{ include.path }}/{{ item.url }}{% endcapture %}
-  {% include toc.html toc=item.pages path=path version=include.version %}
+  {% include toc.html toc=item.pages path=path current=include.current
+    version=include.version %}
   {% endif %}
   {%- endfor -%}
 </ul>

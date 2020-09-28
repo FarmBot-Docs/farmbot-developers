@@ -12,7 +12,7 @@ excerpt: "[GitHub repository](https://github.com/FarmBot/farmbot_os/)"
 include callout.html
 type="info"
 title="Trying to install FarmBot OS onto the microSD card?"
-content="Please see [the consumer software documentation](https://software.farm.bot/docs/farmbot-os#section-installing-farmbot-os) for help."
+content="Please see [the consumer software documentation](https://software.farm.bot/docs/farmbot-os#installing-farmbot-os) for help."
 %}
 
 # Building FarmBot OS from source

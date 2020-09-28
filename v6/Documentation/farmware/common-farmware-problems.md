@@ -17,7 +17,7 @@ Verify the following:
 # "Farmware execution failed"
 
 There are several ways to determine what went wrong:
-* Try running the Farmware code on your computer. (`pip install --user farmware_tools` first if you are using Farmware Tools. See [more about Farmware Tools](doc:farmware#section-more-about-farmware-tools) for details.)
+* Try running the Farmware code on your computer. (`pip install --user farmware_tools` first if you are using Farmware Tools. See [more about Farmware Tools](../farmware.md#more-about-farmware-tools) for details.)
 * Use an FTDI cable to view low-level device logs. `stdout` and `stderr` are sent here.
 * Try catching the error as shown below. This method will not catch syntax errors, and should be used only for temporary debugging purposes on the device.
 

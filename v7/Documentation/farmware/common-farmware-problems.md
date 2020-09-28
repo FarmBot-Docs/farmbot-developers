@@ -18,7 +18,7 @@ Verify the following:
 # "Farmware execution failed"
 
 There are several ways to determine what went wrong:
-* Try running the Farmware code on your computer. (`pip install --user farmware_tools` first if you are using Farmware Tools. See [more about Farmware Tools](doc:farmware#section-more-about-farmware-tools) for details.)
+* Try running the Farmware code on your computer. (`pip install --user farmware_tools` first if you are using Farmware Tools. See [more about Farmware Tools](../farmware.md#more-about-farmware-tools) for details.)
 * Use an FTDI cable to view low-level device logs. `stdout` and `stderr` are sent here.
 * Try catching the error as shown below. This method will not catch syntax errors, and should be used only for temporary debugging purposes on the device.
 
@@ -32,7 +32,7 @@ except Exception as error:
     farmware_tools.device.log(repr(error))
 ```
 
-Only a few specific packages outside of the standard library are available to Farmware. See [currently supported languages and packages](doc:farmware#section-currently-supported-languages-and-packages) for a complete list.
+Only a few specific packages outside of the standard library are available to Farmware. See [currently supported languages and packages](../farmware.md#currently-supported-languages-and-packages) for a complete list.
 
 # Farmware input issues
 

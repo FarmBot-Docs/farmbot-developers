@@ -39,7 +39,7 @@ npm run test
 ```
 
 # Login with an API Token
-Login using your [API token](doc:rest-api#section-generating-an-api-token) from the [FarmBot Web App](http://my.farm.bot).
+Login using your [API token](web-app/rest-api.md#generating-an-api-token) from the [FarmBot Web App](http://my.farm.bot).
 
 
 ```javascript

@@ -173,7 +173,7 @@ new_plant = {
   "device_id": 1
 ```
 
-For a list of available resources, see [Web App API resources](doc:rest-api#section-resource-list).
+For a list of available resources, see [Web App API resources](web-app/rest-api.md#resource-list).
 
 # Environment Variables
 
@@ -406,7 +406,7 @@ See [Hello Farmware Input](https://github.com/FarmBot-Labs/hello-farmware-input)
 
 # Farmware manifest
 
-To [install a Farmware](#section-installing-farmware), you need to create a `manifest.json` file and host it. The manifest URL will be the URL used when installing the Farmware.
+To [install a Farmware](#installing-farmware), you need to create a `manifest.json` file and host it. The manifest URL will be the URL used when installing the Farmware.
 
 For example, entering `https://raw.githubusercontent.com/FarmBot-Labs/hello-farmware/master/manifest.json` and clicking install on the Farmware page of the Web App would install the `Hello Farmware` Farmware, whose source code is located at the GitHub project [here](https://github.com/FarmBot-Labs/hello-farmware).
 
@@ -470,7 +470,7 @@ __FarmBot OS v7:__
 
 A Farmware manifest must be valid JSON and can be checked by any JSON parser or validator.
 
-For additional manifest hosting methods, see [Workflows](doc:workflows).
+For additional manifest hosting methods, see [Workflows](farmware/farmware-hosting-and-workflows.md).
 
 # More about Farmware Tools
 

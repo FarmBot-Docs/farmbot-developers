@@ -12,7 +12,7 @@ excerpt: "The operating system and all related software that runs on FarmBot's R
 include callout.html
 type="info"
 title="Trying to install FarmBot OS onto the microSD card?"
-content="Please see [the consumer software documentation](https://software.farm.bot/docs/farmbot-os#section-installing-farmbot-os) for help."
+content="Please see [the consumer software documentation](https://software.farm.bot/docs/farmbot-os#installing-farmbot-os) for help."
 %}
 
 FarmBot OS is written in [Elixir](https://elixir-lang.org). It uses the [Nerves Framework](https://nerves-project.org) to compile the source code into a single binary image and also handle low-level details such as cross-compilation and driver management. It communicates with the Web App via HTTP and [AMQP](https://www.amqp.org).

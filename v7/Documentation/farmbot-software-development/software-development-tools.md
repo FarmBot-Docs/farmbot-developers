@@ -21,10 +21,10 @@ The table below shows a rough overview of the developer tools used when working 
 
 |                              |                              |
 |------------------------------|------------------------------|
-|[Firmware](#section-firmware) |Arduino microcontroller written in C++
-|[FarmBot OS](#section-farmbot-os)|Elixir
-|[Rest API](#section-rest-api) |Ruby on Rails
-|[Web App](#section-web-app)   |ReactJS, Typescript, and WebPack
+|[Firmware](#firmware) |Arduino microcontroller written in C++
+|[FarmBot OS](#farmbot-os)|Elixir
+|[Rest API](#rest-api) |Ruby on Rails
+|[Web App](#web-app)   |ReactJS, Typescript, and WebPack
 
 # Which technologies must I learn to program a FarmBot?
 

@@ -1,4 +1,6 @@
 theme: jekyll-theme-cayman
 baseurl: /farmbot-developers
 color: '#0c4d8a'
-latest_version: 11
+latest_version_number: 11
+plugins:
+  - jemoji

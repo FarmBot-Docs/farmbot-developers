@@ -50,7 +50,7 @@ Celery Script is used:
 
 # Where can I see CeleryScript in use?
 
-Nodes are typically seen in the [Message Broker](doc:message-broker-1) in the form of RPC requests. They are also used in the `/sequences` endpoint of the [REST API](web-app/rest-api.md) as stored sequences.
+Nodes are typically seen in the [Message Broker](web-app/message-broker.md) in the form of RPC requests. They are also used in the `/sequences` endpoint of the [REST API](web-app/rest-api.md) as stored sequences.
 
 # Example sequence
 

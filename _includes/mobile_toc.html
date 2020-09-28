@@ -3,7 +3,7 @@
 <optgroup label="{{ item.title }}">
   {% else %}
   {%- capture v_url -%}
-  v{{ include.version }}/{{ include.path }}/{{ item.url }}
+  v{{ include.version }}{{ include.path }}/{{ item.url }}
   {%- endcapture -%}
   <option value="{%- if item.external -%}
   {{ item.url }}
@@ -12,7 +12,7 @@
   {%- endif -%}">
     {%- assign
       depth_int = include.path | split: '/' | join: ' ' | number_of_words -%}
-    {%- if depth_int > 1 -%}--&nbsp;{%- endif -%}
+    {%- if depth_int > 1 -%}&nbsp;&nbsp;&nbsp;{%- endif -%}
     {{ item.title }}
     {%- if item.external -%}&nbsp;(external link){%- endif -%}
   </option>

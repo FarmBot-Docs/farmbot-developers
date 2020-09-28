@@ -10,7 +10,7 @@ excerpt: "Farmware hosting options"
 A Farmware generally includes Python code that is run by FarmBot OS. During development, you may first write and run the Python code on your local computer. To run it with FarmBot OS, the code must be hosted on a server from which FarmBot OS can download it.
 
 All of the following methods require a minimum of two files:
-* __A Farmware manifest__: `manifest.json`. (see the [Farmware manifest](farmware#section-farmware-manifest) for general info)
+* __A Farmware manifest__: `manifest.json`. (see the [Farmware manifest](farmware#farmware-manifest) for general info)
 * __The Farmware code__: a `.py` file that contains or runs the code you've written. (See [Farmware](../farmware.md).)
 
 For example Farmware files, see [Hello Farmware](https://github.com/FarmBot-Labs/hello-farmware).
@@ -22,9 +22,9 @@ title="Farmware code filenames"
 content="The following examples use `my_farmware_code.py`, but a different name should be chosen for your main Farmware code file."
 %}
 
-Farmware is downloaded by FarmBot OS by installing it via the Web App FarmBot OS is connected to, which can either be self-hosted or at the public [my.farm.bot](https://my.farm.bot/). The `manifest.json` file URL is used for installation. See [Installing Farmware](https://software.farm.bot/v6/docs/farmware#section-installing-farmware) in the user documentation for basic UI operation.
+Farmware is downloaded by FarmBot OS by installing it via the Web App FarmBot OS is connected to, which can either be self-hosted or at the public [my.farm.bot](https://my.farm.bot/). The `manifest.json` file URL is used for installation. See [Installing Farmware](https://software.farm.bot/v6/docs/farmware#installing-farmware) in the user documentation for basic UI operation.
 
-Farmware can be run via the Web App by selecting it on the Farmware page and pressing <span class="fb-button fb-green">run</span>. (See [Farmware](https://software.farm.bot/v6/docs/farmware#section-farmware) in the user documentation for basic UI operation.)
+Farmware can be run via the Web App by selecting it on the Farmware page and pressing <span class="fb-button fb-green">run</span>. (See [Farmware](https://software.farm.bot/v6/docs/farmware#farmware) in the user documentation for basic UI operation.)
 
 Troubleshooting tips can be found on the [Common Farmware Problems](common-farmware-problems.md) page.
 
@@ -158,7 +158,7 @@ __manifest.json (GitHub):__
  "args": ["repo-name-master/my_farmware_code.py"]
 ```
 
-(where `gh_username` is your GitHub username and `repo-name` is the GitHub repository name) See [Farmware](doc:farmware#section-farmware-manifest) for a real-world example.
+(where `gh_username` is your GitHub username and `repo-name` is the GitHub repository name) See [Farmware](../farmware.md#farmware-manifest) for a real-world example.
 
 
 __manifest.json (Gist):__
