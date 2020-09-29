@@ -48,7 +48,7 @@ _Example: Auto-Sync Updates_
 
 A device or user may log in to the message broker using a username and password:
 
- * **Username:** Use the `"bot"` claim* of your [autorization token](https://developer.farm.bot/v6/docs/rest-api#how-do-i-generate-an-api-token-) as a username
+ * **Username:** Use the `"bot"` claim* of your [autorization token](rest-api.md#how-do-i-generate-an-api-token) as a username
  * **Password:** Use the `encoded` authorization token as a password. It is a very long string that contains two `.` characters in it. It is contained in the `encoded` property of your auth token.
 
 **The specific login process will vary based on the communication channel used (see below).**
@@ -118,7 +118,7 @@ Before sending commands, you need the following information:
 2. The device's ID (see `"bot"` claim of the API token)
 3. The MQTT server host name (See `"mqtt"` claim of API token).
 
-All of this information is provided by the API when you create an API token. Instructions for generating a token can be found [here](https://developer.farm.bot/v6/docs/rest-api#how-do-i-generate-an-api-token-).
+All of this information is provided by the API when you create an API token. Instructions for generating a token can be found [here](rest-api.md#how-do-i-generate-an-api-token).
 
 Here is an example token:
 
