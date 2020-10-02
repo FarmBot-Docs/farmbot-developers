@@ -193,3 +193,7 @@ Step 3. Install via the raw `manifest.json` file url and run.
 Step 4. After editing the Farmware,
   * if using GitHub, it can be updated by bumping the `version` value in `manifest.json` and pressing the UPDATE button in the Web App.
   * if using Gist, the Farmware must be uninstalled and re-installed. (Bumping the version is not necessary when using Gist).
+
+# What's next?
+
+ * [Common Farmware Problems](common-farmware-problems.md)

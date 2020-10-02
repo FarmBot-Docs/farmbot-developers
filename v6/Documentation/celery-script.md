@@ -125,3 +125,11 @@ __Celery Script Sequence Example:__
   ]
 ```
 
+
+# What's next?
+
+ * [Nodes](celery-script/nodes.md)
+ * [Identifying Success and Failure](celery-script/identifying-success-and-failure.md)
+ * [Out-of-Band Responses](celery-script/out-of-band-responses.md)
+ * [CeleryScript Glossary](celery-script/celeryscript-glossary.md)
+ * [History of RPCs in FarmBot](celery-script/history-of-rpcs-in-farmbot.md)

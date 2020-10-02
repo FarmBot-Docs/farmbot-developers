@@ -347,3 +347,8 @@ __Optional version specification (v8+):__
 ```
 
 For local development you can install a specific version via `pip install --user farmware_tools==3.3.0`. Use `pip install --user --upgrade farmware_tools` to upgrade.
+
+# What's next?
+
+ * [Farmware Hosting and Workflows](farmware/farmware-hosting-and-workflows.md)
+ * [Common Farmware Problems](farmware/common-farmware-problems.md)

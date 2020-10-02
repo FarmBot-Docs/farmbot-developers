@@ -66,3 +66,7 @@ __move_relative RPC:__
 }
 ```
 
+
+# What's next?
+
+ * [Out-of-Band Responses](out-of-band-responses.md)

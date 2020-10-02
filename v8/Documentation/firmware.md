@@ -157,3 +157,8 @@ Sets zero for an axis. For more information, see [Calibration and Homing](https:
 # Pin assignment
 
 For Arduino and Farmduino board pin assignments, see [src/pins.h](https://github.com/FarmBot/farmbot-arduino-firmware/blob/master/src/pins.h).
+
+# What's next?
+
+ * [Parameters](firmware/parameters.md)
+ * [Custom Firmware](firmware/custom-firmware.md)

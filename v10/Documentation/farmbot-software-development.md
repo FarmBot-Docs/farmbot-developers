@@ -17,3 +17,10 @@ content="[Click here](http://eepurl.com/dJ4P86) to subscribe to our developer-sp
 
 # License
 Please see our [licensing page](https://meta.farm.bot/docs/licensing) to understand how our various works (hardware, software, documentation, etc) are licensed.
+
+# What's next?
+
+ * [High Level Overview](farmbot-software-development/high-level-overview.md)
+ * [3rd Party Developer Prizes](farmbot-software-development/3rd-party-developer-prizes.md)
+ * [Frequently Asked Questions](farmbot-software-development/faq.md)
+ * [About Our Developer Docs](farmbot-software-development/about.md)

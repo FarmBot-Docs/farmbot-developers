@@ -9,3 +9,7 @@ link_external: true
 * toc
 {:toc}
 
+
+# What's next?
+
+ * [Getting Started](../Documentation/farmbot-software-development.md)

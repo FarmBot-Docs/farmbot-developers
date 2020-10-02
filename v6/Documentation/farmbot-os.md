@@ -48,3 +48,11 @@ If you have the above set up you will need some software dependencies:
 * opencv-python
 
 Following [this](http://embedded-elixir.com/post/2017-05-23-using-asdf-vm/) guide will get you mostly setup.
+
+# What's next?
+
+ * [Development](farmbot-os/farmbot-os-development.md)
+ * [Gathering Information at Runtime](farmbot-os/gathering-information-at-runtime.md)
+ * [Beta Updates](farmbot-os/beta-updates.md)
+ * [Gathering a Log Dump](farmbot-os/gathering-a-log-dump.md)
+ * [FAQ](farmbot-os/farmbot-os-faq.md)

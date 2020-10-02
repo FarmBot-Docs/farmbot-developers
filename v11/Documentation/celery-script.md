@@ -46,3 +46,11 @@ To view the CeleryScript of the entire sequence, press the <i class="fa fa-code"
 
 ![Screen Shot 2020-08-27 at 4.15.31 PM.png](Screen_Shot_2020-08-27_at_4.15.31_PM.png)
 
+
+# What's next?
+
+ * [Nodes](celery-script/nodes.md)
+ * [Identifying Success and Failure](celery-script/identifying-success-and-failure.md)
+ * [Out-of-Band Responses](celery-script/out-of-band-responses.md)
+ * [CeleryScript Glossary](celery-script/celeryscript-glossary.md)
+ * [History of RPCs in FarmBot](celery-script/history-of-rpcs-in-farmbot.md)

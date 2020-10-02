@@ -81,3 +81,7 @@ The CeleryScript specification defines three nodes used for real-time control of
  * `rpc_request` -  Initiated by a user (or occasionally, the [REST API](../web-app/rest-api.md)) when requesting the device do something. The desired action (eg: `move_relative`, `install_farmware`, etc..) is held in the `body` of this node.
  * `rpc_ok` - Sent by a device to an end user. Indicates that the request operation has succeeded.
  * `rpc_error` - Indicates that the request operation has failed. The body of an `rpc_error` will often contain a number of `explanation` nodes describing the circumstances of the failure.
+
+# What's next?
+
+ * [Identifying Success and Failure](identifying-success-and-failure.md)

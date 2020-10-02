@@ -26,3 +26,10 @@ content="The FarmBot developer documentation hub **is still under active develop
 
 # License
 Please see our [licensing page](https://meta.farm.bot/docs/licensing) to understand how our various works (hardware, software, documentation, etc) are licensed.
+
+# What's next?
+
+ * [High Level Overview](farmbot-software-development/high-level-overview.md)
+ * [Software Development Tools Used By FarmBot](farmbot-software-development/software-development-tools.md)
+ * [Frequently Asked Questions](farmbot-software-development/faq.md)
+ * [About Our Developer Docs](farmbot-software-development/about.md)
