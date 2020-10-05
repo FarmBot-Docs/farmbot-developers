@@ -1,7 +1,7 @@
 ---
 title: "Farmware Hosting and Workflows"
 slug: "farmware-hosting-and-workflows"
-excerpt: "Farmware hosting options"
+description: "Farmware hosting options"
 ---
 
 * toc

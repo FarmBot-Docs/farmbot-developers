@@ -1,14 +1,14 @@
 ---
 title: "High Level Overview"
 slug: "high-level-overview"
-excerpt: "How each component of FarmBot software fits together."
+description: "How each component of FarmBot software fits together."
 ---
 
 * toc
 {:toc}
 
 
-![flow_chart.png](flow_chart.png)
+![flow_chart.png](_images/flow_chart.png)
 
 
 
@@ -66,5 +66,5 @@ The table below lists common FarmBot use cases and their appropriate software pa
 
 
 
-![block_diagram.png](block_diagram.png)
+![block_diagram.png](_images/block_diagram.png)
 

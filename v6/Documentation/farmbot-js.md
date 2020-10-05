@@ -1,7 +1,7 @@
 ---
 title: "FarmBot JS"
 slug: "farmbot-js"
-excerpt: "Content here is syndicated from the [repository README](https://github.com/FarmBot/farmbot-js/blob/master/README.md)."
+description: "Content here is syndicated from the [repository README](https://github.com/FarmBot/farmbot-js/blob/master/README.md)."
 ---
 
 * toc

@@ -1,7 +1,7 @@
 ---
 title: "Firmware"
 slug: "firmware"
-excerpt: "Executes g-code like commands over a serial line to move the FarmBot and operate its peripherals. [GitHub repository](https://github.com/FarmBot/farmbot-arduino-firmware)."
+description: "Executes g-code like commands over a serial line to move the FarmBot and operate its peripherals. [GitHub repository](https://github.com/FarmBot/farmbot-arduino-firmware)."
 ---
 
 * toc

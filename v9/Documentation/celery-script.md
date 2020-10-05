@@ -49,7 +49,7 @@ The most prominent use case for CeleryScript is the Sequence Editor. A sequence 
 Creating this sequence in the web app...
 
 
-![example_1.png](example_1.png)
+![example_1.png](_images/example_1.png)
 
 ...results in the creation of the following CeleryScript:
 

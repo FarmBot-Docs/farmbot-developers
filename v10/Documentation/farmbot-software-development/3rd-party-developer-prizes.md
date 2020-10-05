@@ -1,7 +1,7 @@
 ---
 title: "3rd Party Developer Prizes"
 slug: "3rd-party-developer-prizes"
-excerpt: "Rewarding open-source contributions"
+description: "Rewarding open-source contributions"
 ---
 
 * toc

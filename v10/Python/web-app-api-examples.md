@@ -1,7 +1,7 @@
 ---
 title: "Web App API Examples"
 slug: "web-app-api-examples"
-excerpt: "Retrieve and modify data in the FarmBot [Web App](../Documentation/web-app.md) using Python"
+description: "Retrieve and modify data in the FarmBot [Web App](../Documentation/web-app.md) using Python"
 ---
 
 * toc

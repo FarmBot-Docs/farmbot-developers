@@ -18,7 +18,7 @@ If you have found a bug fix or add a new core feature to the UI, consider propos
 
 
 
-![farmbot_ui.png](farmbot_ui.png)
+![farmbot_ui.png](_images/farmbot_ui.png)
 
 _The FarmBot Web App user interface_
 

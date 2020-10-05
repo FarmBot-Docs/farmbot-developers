@@ -1,7 +1,7 @@
 ---
 title: "Farmware"
 slug: "farmware"
-excerpt: "FarmBot OS plugins"
+description: "FarmBot OS plugins"
 ---
 
 * toc
@@ -249,7 +249,7 @@ __Form Building (FarmBot OS v8+):__
 
 
 
-![example_farmware_form.png](example_farmware_form.png)
+![example_farmware_form.png](_images/example_farmware_form.png)
 
 Input values are retrieved in a Farmware via `get_config_value`, as shown in this example:
 
@@ -309,7 +309,7 @@ __Farmware Manifest Example (FarmBot OS v8+):__
 
 A Farmware manifest must be valid JSON and can be checked by any JSON parser or validator.
 
-For additional manifest hosting methods, see [Workflows](farmware/farmware-hosting-and-workflows.md).
+For additional manifest hosting methods, see [Farmware Hosting and Workflows](farmware/farmware-hosting-and-workflows.md).
 
 # More about Farmware Tools
 

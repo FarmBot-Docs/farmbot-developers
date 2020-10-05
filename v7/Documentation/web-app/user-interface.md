@@ -7,7 +7,7 @@ slug: "user-interface"
 {:toc}
 
 
-![farmbot_ui.png](farmbot_ui.png)
+![farmbot_ui.png](_images/farmbot_ui.png)
 
 _The FarmBot Web App user interface_
 

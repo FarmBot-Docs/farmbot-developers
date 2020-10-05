@@ -1,7 +1,7 @@
 ---
 title: "Common Farmware Problems"
 slug: "common-farmware-problems"
-excerpt: "Troubleshooting tips"
+description: "Troubleshooting tips"
 ---
 
 * toc

@@ -1,7 +1,7 @@
 ---
 title: "REST API"
 slug: "rest-api"
-excerpt: "[Example API requests](https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af)"
+description: "[Example API requests](https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af)"
 ---
 
 * toc

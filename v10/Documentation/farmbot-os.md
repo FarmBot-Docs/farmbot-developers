@@ -1,7 +1,7 @@
 ---
 title: "FarmBot OS"
 slug: "farmbot-os"
-excerpt: "The operating system and all related software that runs on FarmBot's Raspberry Pi. [GitHub repository](https://github.com/FarmBot/farmbot_os/)"
+description: "The operating system and all related software that runs on FarmBot's Raspberry Pi. [GitHub repository](https://github.com/FarmBot/farmbot_os/)"
 ---
 
 * toc

@@ -1,7 +1,7 @@
 ---
 title: "Message Broker Examples"
 slug: "message-broker-examples"
-excerpt: "Use Python to communicate directly with FarmBot"
+description: "Use Python to communicate directly with FarmBot"
 ---
 
 * toc

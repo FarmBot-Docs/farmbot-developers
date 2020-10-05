@@ -24,7 +24,7 @@ With a real-time message broker, there is no need to check for new messages. Mes
 
 **In many ways, the message broker acts as a machine-to-machine chat application.** Any software package, whether it be the [REST API](rest-api.md), [FarmBot OS](../farmbot-os.md) or a third-party [Farmware](../farmware.md) can send a message to any other entity that is currently connected to the message broker, with correct authorization of course.
 
-![rpc_diagram.png](rpc_diagram.png)
+![rpc_diagram.png](_images/rpc_diagram.png)
 
 _Example: Sending a Remote Procedure Call_
 
@@ -36,7 +36,7 @@ As mentioned previously, the Web API cannot send outbound messages via HTTP, sin
 
 The workaround for this problem is to _allow the Web API to send outbound messages via the message broker_. These messages are initiated in a background process on the Web API. The messages are sent over the message broker rather than HTTP. In this case, the Web API acts both as a web _server_ and a message broker _client_.
 
-![data_update_diagram.png](data_update_diagram.png)
+![data_update_diagram.png](_images/data_update_diagram.png)
 
 _Example: Auto-Sync Updates_
 

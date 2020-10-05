@@ -1,7 +1,7 @@
 ---
 title: "Farmware"
 slug: "farmware"
-excerpt: "FarmBot OS plug-Ins to expand FarmBot functionality"
+description: "FarmBot OS plug-Ins to expand FarmBot functionality"
 ---
 
 * toc
@@ -374,7 +374,7 @@ __v8:__
 
 
 
-![example_farmware_form.png](example_farmware_form.png)
+![example_farmware_form.png](_images/example_farmware_form.png)
 
 Input values are retrieved in a Farmware via `get_config_value`, as shown in this example:
 

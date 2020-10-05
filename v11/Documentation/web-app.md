@@ -1,7 +1,7 @@
 ---
 title: "Web App"
 slug: "web-app"
-excerpt: "Setup, customize, and control FarmBot from any device. [GitHub repository](https://github.com/FarmBot/Farmbot-Web-App)."
+description: "Setup, customize, and control FarmBot from any device. [GitHub repository](https://github.com/FarmBot/Farmbot-Web-App)."
 ---
 
 * toc

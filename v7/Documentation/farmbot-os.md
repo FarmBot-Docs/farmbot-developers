@@ -1,7 +1,7 @@
 ---
 title: "FarmBot OS (Operating System)"
 slug: "farmbot-os"
-excerpt: "[GitHub repository](https://github.com/FarmBot/farmbot_os/)"
+description: "[GitHub repository](https://github.com/FarmBot/farmbot_os/)"
 ---
 
 * toc
