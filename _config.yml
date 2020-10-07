@@ -2,7 +2,7 @@ title: FarmBot Software Development Documentation
 url: dev.farm.bot
 logo: /assets/images/documentation.png
 theme: jekyll-theme-cayman
-baseurl: /farmbot-developers
+baseurl: /
 color: '#0c4d8a'
 latest_version_number: 12
 plugins:
