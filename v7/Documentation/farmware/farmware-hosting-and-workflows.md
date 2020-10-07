@@ -10,7 +10,7 @@ description: "Farmware hosting options"
 A Farmware generally includes Python code that is run by FarmBot OS. During development, you may first write and run the Python code on your local computer. To run it with FarmBot OS, the code must be hosted on a server from which FarmBot OS can download it.
 
 All of the following methods require a minimum of two files:
-* __A Farmware manifest__: `manifest.json`. (see the [Farmware manifest](farmware#farmware-manifest) for general info)
+* __A Farmware manifest__: `manifest.json`. (see the [Farmware manifest](../farmware.md#farmware-manifest) for general info)
 * __The Farmware code__: a `.py` file that contains or runs the code you've written. (See [Farmware](../farmware.md).)
 
 For example Farmware files, see [Hello Farmware](https://github.com/FarmBot-Labs/hello-farmware).
