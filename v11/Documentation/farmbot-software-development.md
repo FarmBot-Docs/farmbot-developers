@@ -2,6 +2,7 @@
 title: "FarmBot Software Development"
 slug: "farmbot-software-development"
 description: "Target audience: **software developers**. For end-users, see [FarmBot Software Documentation](https://software.farm.bot/docs)."
+redirect_from: /docs/v11/
 ---
 
 * toc

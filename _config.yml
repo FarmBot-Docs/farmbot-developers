@@ -7,6 +7,7 @@ color: '#0c4d8a'
 latest_version_number: 12
 plugins:
   - jemoji
+  - jekyll-redirect-from
 include:
   - _images
   - _redirects
@@ -15,3 +16,4 @@ exclude:
   - LICENSE
   - Gemfile
   - Gemfile.lock
+  - vendor
