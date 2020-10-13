@@ -162,7 +162,7 @@ pin_13_value = device.get_pin_value(13)
 bot_state = device.get_bot_state()
 ```
 
-See [FarmBotJS BotStateTree](https://github.com/FarmBot/farmbot-js/blob/master/src/interfaces.ts) for a complete list of information available in the the bot's state.
+See [FarmBotJS BotStateTree](https://github.com/FarmBot/farmbot-js/blob/main/src/interfaces.ts) for a complete list of information available in the the bot's state.
 
 # Celery Script
 
@@ -201,7 +201,7 @@ device.run_farmware(label='take-photo')
 device.factory_reset(package='farmbot_os')
 device.find_home(axis='x')
 device.home(axis='x')
-device.install_farmware(url='https://raw.githubusercontent.com/FarmBot-Labs/hello-farmware/master/manifest.json')
+device.install_farmware(url='https://raw.githubusercontent.com/FarmBot-Labs/hello-farmware/main/manifest.json')
 device.install_first_party_farmware()
 device.move_absolute(location=device.assemble_coordinate(1, 2, 3), speed=100, offset=device.assemble_coordinate(0, 0, 0))
 device.move_relative(x=100, y=0, z=0, speed=100)
@@ -225,7 +225,7 @@ device.send_celery_script({'kind': 'take_photo', 'args': ''})
 
 For a list of all available actions, see the second tab of the above example code, `all`.
 
-Also see the [Celery Script developer documentation](celery-script.md) and [the corpus](https://github.com/FarmBot/farmbot-js/blob/master/dist/corpus.d.ts) for more information.
+Also see the [Celery Script developer documentation](celery-script.md) and [the corpus](https://github.com/FarmBot/farmbot-js/blob/main/dist/corpus.d.ts) for more information.
 
 # Inputs
 
@@ -275,7 +275,7 @@ See [Hello Farmware Input](https://github.com/FarmBot-Labs/hello-farmware-input)
 
 To [install a Farmware](https://software.farm.bot/v12/The-FarmBot-Web-App/farmware#installing-farmware), you need to create a `manifest.json` file and host it. The manifest URL will be the URL used when installing the Farmware.
 
-For example, entering `https://raw.githubusercontent.com/FarmBot-Labs/hello-farmware/master/manifest.json` and clicking install on the Farmware page of the Web App would install the `Hello Farmware` Farmware, whose source code is located at the GitHub project [here](https://github.com/FarmBot-Labs/hello-farmware).
+For example, entering `https://raw.githubusercontent.com/FarmBot-Labs/hello-farmware/main/manifest.json` and clicking install on the Farmware page of the Web App would install the `Hello Farmware` Farmware, whose source code is located at the GitHub project [here](https://github.com/FarmBot-Labs/hello-farmware).
 
 {%
 include callout.html
@@ -298,14 +298,14 @@ __Farmware Manifest Example (FarmBot OS v8+):__
  "farmware_manifest_version": "2.0.0",
  "package_version": "1.0.0",
  "farmbot_os_version_requirement": ">= 8.0.0",
- "url": "https://raw.githubusercontent.com/FarmBot-Labs/hello-farmware/master/manifest.json",
- "zip": "https://github.com/FarmBot-Labs/hello-farmware/archive/master.zip",
+ "url": "https://raw.githubusercontent.com/FarmBot-Labs/hello-farmware/main/manifest.json",
+ "zip": "https://github.com/FarmBot-Labs/hello-farmware/archive/main.zip",
  "executable": "python",
- "args": "hello-farmware-master/hello.py"
+ "args": "hello-farmware-main/hello.py"
 }
 ```
 
-`zip` points to the hosted source code zip file. Github makes this easy: just add `/archive/master.zip` to the end of the GitHub repository URL, and insert `<repository name>-master/` to the beginning of the script filename to run, as seen in the manifest example above.
+`zip` points to the hosted source code zip file. Github makes this easy: just add `/archive/main.zip` to the end of the GitHub repository URL, and insert `<repository name>-main/` to the beginning of the script filename to run, as seen in the manifest example above.
 
 A Farmware manifest must be valid JSON and can be checked by any JSON parser or validator.
 

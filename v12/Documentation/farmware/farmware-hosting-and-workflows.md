@@ -160,10 +160,10 @@ __manifest.json (GitHub, FBOS v8+):__
  "farmware_manifest_version": "2.0.0",
  "package_version": "1.0.0",
  "farmbot_os_version_requirement": ">= 8.0.0",
- "url": "https://raw.githubusercontent.com/gh_username/repo-name/master/manifest.json",
- "zip": "https://github.com/gh_username/repo-name/archive/master.zip",
+ "url": "https://raw.githubusercontent.com/gh_username/repo-name/main/manifest.json",
+ "zip": "https://github.com/gh_username/repo-name/archive/main.zip",
  "executable": "python",
- "args": "repo-name-master/my_farmware_code.py"
+ "args": "repo-name-main/my_farmware_code.py"
 ```
 
 (where `gh_username` is your GitHub username and `repo-name` is the GitHub repository name) See [Farmware](../farmware.md#farmware-manifest) for a real-world example.
@@ -181,9 +181,9 @@ __manifest.json (Gist, FBOS v8+):__
  "package_version": "1.0.0",
  "farmbot_os_version_requirement": ">= 8.0.0",
  "url": "",
- "zip": "https://gist.github.com/gh_username/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/archive/master.zip",
+ "zip": "https://gist.github.com/gh_username/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/archive/main.zip",
  "executable": "python",
- "args": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-master/my_farmware_code.py"
+ "args": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-main/my_farmware_code.py"
 ```
 
 (where `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx` is the Gist ID found in the URL)

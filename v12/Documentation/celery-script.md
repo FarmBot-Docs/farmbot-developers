@@ -1,7 +1,7 @@
 ---
 title: "CeleryScript"
 slug: "celery-script"
-description: "Find the latest list of Celery Script nodes [here](https://github.com/FarmBot/farmbot-js/blob/master/dist/corpus.d.ts)"
+description: "Find the latest list of Celery Script nodes [here](https://github.com/FarmBot/farmbot-js/blob/main/dist/corpus.d.ts)"
 ---
 
 * toc

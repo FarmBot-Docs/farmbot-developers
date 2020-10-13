@@ -20,7 +20,7 @@ To read parameters, use one of the following two commands.
 The firmware will respond in the format `R21 P V`, where `P` is the parameter number and `V` is the parameter value.
 
 # List of parameters
-The firmware uses the following parameters, as found in the code repository at [src/ParameterList.h](https://github.com/FarmBot/farmbot-arduino-firmware/blob/master/src/ParameterList.h).
+The firmware uses the following parameters, as found in the code repository at [src/ParameterList.h](https://github.com/FarmBot/farmbot-arduino-firmware/blob/main/src/ParameterList.h).
 
 ## General
 

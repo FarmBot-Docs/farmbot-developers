@@ -90,7 +90,7 @@ bot
 ```
 
 ## Currently supported commands
-[See the annotated type definitions for available methods and properties.](https://github.com/FarmBot/farmbot-js/blob/master/dist/farmbot.d.ts)
+[See the annotated type definitions for available methods and properties.](https://github.com/FarmBot/farmbot-js/blob/main/dist/farmbot.d.ts)
 
 # Events
 

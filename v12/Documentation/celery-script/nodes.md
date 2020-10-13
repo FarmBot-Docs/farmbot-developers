@@ -68,7 +68,7 @@ content="Some nodes, such as the `coordinate` node, are used to represent data."
 
 # Available nodes
 
-See also the [corpus.d.ts](https://github.com/FarmBot/farmbot-js/blob/master/dist/corpus.d.ts) file.
+See also the [corpus.d.ts](https://github.com/FarmBot/farmbot-js/blob/main/dist/corpus.d.ts) file.
 
 |kind                          |args                          |Description                   |
 |------------------------------|------------------------------|------------------------------|
