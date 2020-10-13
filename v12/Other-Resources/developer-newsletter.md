@@ -4,6 +4,7 @@ slug: "developer-newsletter"
 type: "link"
 link_url: "http://eepurl.com/dJ4P86"
 link_external: true
+redirect_to: http://eepurl.com/dJ4P86
 ---
 
 * toc
