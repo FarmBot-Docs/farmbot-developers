@@ -1,5 +1,6 @@
 title: FarmBot Software Development Documentation
 url: dev.farm.bot
+description: Documentation for 3rd-party developers to work with the FarmBot API
 logo: /assets/images/documentation.png
 theme: jekyll-theme-cayman
 remote_theme: FarmBot-Docs/farmbot-theme@main
