@@ -11,7 +11,7 @@ slug: "running-servers-offline"
 include callout.html
 type="danger"
 title="Not Recommended"
-content="This is not a simple alternative for users behind a firewall. If you are running Farmbot in an organization with strict security policies or firewalls, see our notes [for IT security professionals](../Other-Resources/for-it-security-professionals.md).
+content="This is not a simple alternative for users behind a firewall. If you are running Farmbot in an organization with strict security policies or firewalls, see our notes [for IT security professionals](for-it-security-professionals.md).
 
 Do not run an offline setup unless you are a software developer intending to modify (fork) the FarmBot software suite."
 %}
