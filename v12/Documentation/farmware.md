@@ -249,7 +249,7 @@ __Form Building (FarmBot OS v8+):__
 
 
 
-![example_farmware_form.png](_images/example_farmware_form.png)
+![example farmware form](_images/example_farmware_form.png)
 
 Input values are retrieved in a Farmware via `get_config_value`, as shown in this example:
 

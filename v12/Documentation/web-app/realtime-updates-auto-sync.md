@@ -26,7 +26,7 @@ A quick solution is to [perform polling](https://en.wikipedia.org/wiki/Polling_c
  * Computationally expensive, since the application is constantly checking for updates, even when idle.
  * Runs a risk of being rate limited or banned from the server if polling is performed too frequently.
 
-![polling_diagram.png](_images/polling_diagram.png)
+![polling diagram](_images/polling_diagram.png)
 
 _Inefficient HTTP polling._
 

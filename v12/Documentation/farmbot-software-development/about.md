@@ -41,13 +41,13 @@ In October of 2018, our small team gathered at FarmBot HQ in California to envis
 - There is community support
 - Documentation is updated/no dead-ends
 
-![MVIMG_20181011_131755.jpg](_images/MVIMG_20181011_131755.jpg)
+![Rick and Connor](_images/rick_and_connor.jpg)
 
 _Rick and Connor_
 
 
 
-![MVIMG_20181011_160717.jpg](_images/MVIMG_20181011_160717.jpg)
+![developer experience brainstorming board](_images/developer_experience_brainstorming_board.jpg)
 
 _Our developer experience brainstorming board_
 

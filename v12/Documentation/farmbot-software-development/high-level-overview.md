@@ -8,7 +8,7 @@ description: "How each component of FarmBot software fits together."
 {:toc}
 
 
-![flow_chart.png](_images/flow_chart.png)
+![flow chart](_images/flow_chart.png)
 
 The table below shows a rough overview of the codebases of the FarmBot software system and their development languages. Realistically, no one would need to know all of these languages; the actual tool set required will vary based on the task you want to perform.
 
@@ -75,5 +75,5 @@ The table below lists common FarmBot use cases and their appropriate software pa
 
 
 
-![block_diagram.png](_images/block_diagram.png)
+![block diagram](_images/block_diagram.png)
 
