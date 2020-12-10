@@ -90,6 +90,16 @@ contents:
         url: web-app-api-examples
       - title: Message Broker Examples
         url: message-broker-examples
+  - title: How it works
+    url: How-it-works
+    top: true
+    pages:
+      - title: Point group sorting
+        url: point-group-sorting
+      - title: Weed detection
+        url: weed-detection
+      - title: Measure soil height
+        url: measure-soil-height
   - title: Other Resources
     url: Other-Resources
     top: true
