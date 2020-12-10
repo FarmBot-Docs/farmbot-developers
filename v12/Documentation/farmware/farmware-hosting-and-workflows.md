@@ -80,7 +80,7 @@ Step 2. Create a Farmware manifest and zip file containing your Python code and 
 __manifest.json (FBOS v8+):__
 
 ```json
-
+{
  "package": "my-farmware",
  "language": "python",
  "author": "me",
@@ -92,6 +92,7 @@ __manifest.json (FBOS v8+):__
  "zip": "http://127.0.0.1:8000/zipped_farmware.zip",
  "executable": "python",
  "args": "my_farmware_code.py"
+}
 ```
 
 Step 3. Install the Farmware via the `manifest.json` file url at the HTTP server address. (e.g., `http://127.0.0.1:8000/manifest.json` if using the locally hosted method)
@@ -114,7 +115,7 @@ Step 1. Create a Farmware manifest and zip file containing your Python code.
 __manifest.json (FBOS v8+):__
 
 ```json
-
+{
  "package": "my-farmware",
  "language": "python",
  "author": "me",
@@ -126,6 +127,7 @@ __manifest.json (FBOS v8+):__
  "zip": "http://192.168.0.100:8000/zipped_farmware.zip",
  "executable": "python",
  "args": "my_farmware_code.py"
+}
 ```
 
 (where `192.168.0.100` is the IP address of your computer running the file server and `zipped_farmware.zip` is the name of the zip file containing `my_farmware_code.py`)
@@ -152,7 +154,7 @@ Step 2. Add a `manifest.json` file.
 __manifest.json (GitHub, FBOS v8+):__
 
 ```json
-
+{
  "package": "my-farmware",
  "language": "python",
  "author": "me",
@@ -164,6 +166,7 @@ __manifest.json (GitHub, FBOS v8+):__
  "zip": "https://github.com/gh_username/repo-name/archive/main.zip",
  "executable": "python",
  "args": "repo-name-main/my_farmware_code.py"
+}
 ```
 
 (where `gh_username` is your GitHub username and `repo-name` is the GitHub repository name) See [Farmware](../farmware.md#farmware-manifest) for a real-world example.
@@ -172,7 +175,7 @@ __manifest.json (GitHub, FBOS v8+):__
 __manifest.json (Gist, FBOS v8+):__
 
 ```json
-
+{
  "package": "my-farmware",
  "language": "python",
  "author": "me",
@@ -184,6 +187,7 @@ __manifest.json (Gist, FBOS v8+):__
  "zip": "https://gist.github.com/gh_username/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/archive/main.zip",
  "executable": "python",
  "args": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-main/my_farmware_code.py"
+}
 ```
 
 (where `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx` is the Gist ID found in the URL)

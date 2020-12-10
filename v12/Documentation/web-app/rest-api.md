@@ -47,7 +47,7 @@ Every resource has a URL, and the [HTTP verb](https://developer.mozilla.org/en-U
 
 As an example, if we wished to change the name of our device to "carrot overlord", we could perform an HTTP `PUT` to the URL `https://my.farm.bot/api/device/325` with the following request body:
 
-```
+```json
 {
   "name": "Carrot Overlord"
 }
@@ -59,7 +59,7 @@ Such a request would generate the following HTTP response:
 __JSON HTTP RESPONSE:__
 
 ```json
-
+{
   "id": 325,
   "name": "Carrot Overlord",
   "timezone": "America/Curacao",
@@ -69,6 +69,7 @@ __JSON HTTP RESPONSE:__
   "fbos_version": null,
   "throttled_until": null,
   "throttled_at": null
+}
 ```
 
 # Resource list
@@ -165,7 +166,7 @@ And here's what the response will look like:
 
 
 ```json
-
+{
     "token": {
         "unencoded": {
             // Some fields removed for brevity.
@@ -179,6 +180,7 @@ And here's what the response will look like:
         // THE IMPORTANT PART IS HERE (shortened for clarity):
          "eyJ0eXAiOiJ...Ry7CiA"
     }
+}
 ```
 
 

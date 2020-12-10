@@ -98,7 +98,7 @@ Here is an example token:
 
 
 ```json
-
+{
   "token": {
     "unencoded": {
       ... EXTRA INFORMATION REMOVED FOR CLARITY ...
@@ -107,6 +107,7 @@ Here is an example token:
     },
     "encoded": "eyJ0eXAiOiJK.eyJzdWIiOiJlbGl.6YWJldGhAaGFu"
  ... EXTRA INFORMATION REMOVED FOR CLARITY ...
+}
 }
 ```
 

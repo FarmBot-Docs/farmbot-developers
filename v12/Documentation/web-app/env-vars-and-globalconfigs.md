@@ -103,7 +103,7 @@ On production, `globalConfig` contains the following values:
 __globalConfig:__
 
 ```javascript
-
+{
   // Current application environment:
   "NODE_ENV":"production",
 
@@ -120,6 +120,7 @@ __globalConfig:__
   // Web App version the server runs:
   "LONG_REVISION":"191b0ead3dfe1cc43ee416a5ff27a064af556192",
   "SHORT_REVISION":"191b0ead"
+}
 ```
 
 As stated, the server's environment variables are not exposed to the public. We also mentioned that we had a second configuration system that complements traditional server ENV vars- the `GlobalConfig` database table.

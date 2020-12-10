@@ -25,7 +25,7 @@ Here is an example `install_farmware` node, which tells a device to download and
 __install_farmware Celery Script node example:__
 
 ```json
-
+{
     // THE "kind" ATTRIBUTE:
     // Every CS node MUST have a "kind" attribute.
     // This is the nodes name.

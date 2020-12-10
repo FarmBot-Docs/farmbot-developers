@@ -107,7 +107,7 @@ app.delete(endpoint='point', _id=1)
 __output of add_plant (new_plant):__
 
 ```json
-new_plant = {
+{
   "pointer_type": "Plant",
   "name": "Unknown Plant",
   "openfarm_slug": "not-set",
@@ -121,6 +121,7 @@ new_plant = {
   "z": 0,
   "id": 101,
   "device_id": 1
+}
 ```
 
 For a list of available resources, see [Web App API resources](web-app/rest-api.md#resource-list).
@@ -235,7 +236,7 @@ If a Farmware requires inputs, an input form can be added to the Web App Farmwar
 __Form Building (FarmBot OS v8+):__
 
 ```json
-
+{
   "package": "Farmware Name",
   // Other fields omitted for clarity (see the `Farmware manifest` section)
   "config": {
@@ -245,6 +246,7 @@ __Form Building (FarmBot OS v8+):__
       "value": 10
     }
   }
+}
 ```
 
 
@@ -290,7 +292,7 @@ content="The Farmware manifest format changed between FarmBot OS v7 and FarmBot 
 __Farmware Manifest Example (FarmBot OS v8+):__
 
 ```json
-
+{
  "package": "Hello Farmware",
  "language": "python",
  "author": "FarmBot, Inc.",
@@ -340,10 +342,11 @@ While the latest version of `farmware_tools` is available for import in any Farm
 __Optional version specification (v8+):__
 
 ```json
-
+{
   "package": "Farmware Name",
   // Other fields omitted for clarity (see the `Farmware manifest` section)
   "farmware_tools_version_requirement": ">= 3.3.0",
+}
 ```
 
 For local development you can install a specific version via `pip install --user farmware_tools==3.3.0`. Use `pip install --user --upgrade farmware_tools` to upgrade.
