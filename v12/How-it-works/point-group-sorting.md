@@ -38,26 +38,28 @@ sortBy(points, ["body.y", "body.x"]).reverse()
 {% include callout.html type="info" content="Not yet available in FarmBot OS." %}
 ```javascript
 const ordered = [];
-sortBy(points.map(p => p.body.x))
-.map((x, index) =>
-  index % 2 == 0
-    ? sortBy(points.filter(p => p.body.x == x), "body.y")
-    : sortBy(points.filter(p => p.body.x == x), "body.y").reverse();
-})
-.map(row => row.map(p => ordered.push(p)))
+uniq(points.map(p => p.body.x))
+  .sort()
+  .map((x, index) =>
+    index % 2 == 0
+      ? sortBy(points.filter(p => p.body.x == x), "body.y")
+      : sortBy(points.filter(p => p.body.x == x), "body.y").reverse();
+  })
+  .map(row => row.map(p => ordered.push(p)))
 ```
 
 # Y/X Alternating
 {% include callout.html type="info" content="Not yet available in FarmBot OS." %}
 ```javascript
 const ordered = [];
-sortBy(points.map(p => p.body.y))
-.map((y, index) =>
-  index % 2 == 0
-    ? sortBy(points.filter(p => p.body.y == y), "body.x")
-    : sortBy(points.filter(p => p.body.y == y), "body.x").reverse();
-})
-.map(row => row.map(p => ordered.push(p)))
+uniq(points.map(p => p.body.y))
+  .sort()
+  .map((y, index) =>
+    index % 2 == 0
+      ? sortBy(points.filter(p => p.body.y == y), "body.x")
+      : sortBy(points.filter(p => p.body.y == y), "body.x").reverse();
+  })
+  .map(row => row.map(p => ordered.push(p)))
 ```
 
 # Optimized
