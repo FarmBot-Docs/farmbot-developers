@@ -261,7 +261,7 @@ update_firmware_config({encoder_enabled_z = 1.0})
 
 # variable()
 
-If the sequence executing the <span class="fb-step fb-lua">Lua</span> command contains a [sequence variable](https://software.farm.bot/v12/The-FarmBot-Web-App/sequences/variables.html), you can access its content by calling the `variable()` function:
+If the sequence executing the <span class="fb-step fb-lua">Lua</span> command contains a [sequence variable](https://software.farm.bot/docs/variables), you can access its content by calling the `variable()` function:
 
 ```lua
 -- Assumes you are inside of a function that has a variable:
