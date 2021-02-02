@@ -80,10 +80,8 @@ contents:
             url: parameters
           - title: Custom Firmware
             url: custom-firmware
-      - title: Lua Scripting
-        url: lua-scripting
-      - title: Lua Assertions
-        url: assertions
+      - title: Lua
+        url: lua
   - title: Python
     url: Python
     top: true
