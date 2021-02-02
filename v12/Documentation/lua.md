@@ -1,7 +1,7 @@
 ---
-title: "Lua Scripting"
-slug: "lua-scripting"
-description: "An overview of the functions available when writing Lua code."
+title: "Lua"
+slug: "lua"
+description: "List of available Lua functions in FBOS"
 ---
 
 * toc
@@ -9,8 +9,8 @@ description: "An overview of the functions available when writing Lua code."
 
 The [sequence editor](https://software.farm.bot/docs/sequences) is an easy to use tool for automating FarmBot operations. However, advanced users who are familiar with computer programming concepts may opt for a more advanced interface. For these users, we provide several methods to insert **Lua code fragments** directly into sequences:
 
- * By using the <span class="fb-step fb-lua">Lua</span> command.
- * By using the <span class="fb-step fb-assertion">Assert</span> command ([learn more](assertions.md)).
+ * By using the <span class="fb-step fb-lua">Lua</span> command ([learn more](https://software.farm.bot/docs/advanced-sequence-commands)).
+ * By using the <span class="fb-step fb-assertion">Assertion</span> command ([learn more](https://software.farm.bot/docs/advanced-sequence-commands)).
  * By adding a **formula** to a <span class="fb-step fb-move">Move</span> command input field ([learn more](https://software.farm.bot/v12/The-FarmBot-Web-App/sequences/sequence-commands.html#advanced-options)).
 
  The table below shows the features available to each of the methods:
@@ -18,7 +18,7 @@ The [sequence editor](https://software.farm.bot/docs/sequences) is an easy to us
 |Command|Executes Lua code|Variable access|Recovery options|
 |-------|-----------------|---------------|----------------|
 |<span class="fb-step fb-lua">Lua</span>|:white_check_mark:|:white_check_mark:|:no_entry:|
-|<span class="fb-step fb-assertion">Assert</span>|:white_check_mark:|:no_entry:|:white_check_mark:|
+|<span class="fb-step fb-assertion">Assertion</span>|:white_check_mark:|:no_entry:|:white_check_mark:|
 |<span class="fb-step fb-move">Move</span> formula inputs|:white_check_mark:|:no_entry:|:no_entry:|
 
 All of the available Lua functions are listed below. Additionally, you may access most of the functions available in the [Lua 5.2 standard library](https://www.lua.org/manual/5.2/). If you have questions about the available functions or would like us to make new features available, please let us know in the [FarmBot Forum](https://forum.farmbot.org/).
@@ -273,5 +273,5 @@ send_message("info", x_pos, {"toast"});
 include callout.html
 type="info"
 title="Only available in the <span class='fb-step fb-lua'>Lua</span> command"
-content="`variable()` is not yet available to <span class='fb-step fb-move'>Move</span> input formuals or the <span class='fb-step fb-assertion'>Assert</span> command."
+content="`variable()` is not yet available to <span class='fb-step fb-move'>Move</span> input formuals or the <span class='fb-step fb-assertion'>Assertion</span> command."
 %}
