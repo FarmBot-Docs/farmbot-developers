@@ -17,7 +17,7 @@ The [sequence editor](https://software.farm.bot/docs/sequences) is an easy to us
 
 |Command|Executes Lua code|Variable access|Recovery options|
 |-------|-----------------|---------------|----------------|
-|<span class="fb-step fb-lua">Lua</span>|:white_check_mark:|**BETA**|:no_entry:|
+|<span class="fb-step fb-lua">Lua</span>|:white_check_mark:|:white_check_mark:|:no_entry:|
 |<span class="fb-step fb-assertion">Assertion</span>|:white_check_mark:|:no_entry:|:white_check_mark:|
 |<span class="fb-step fb-move">Move</span> formula inputs|:white_check_mark:|:no_entry:|:no_entry:|
 
@@ -265,7 +265,7 @@ update_firmware_config({encoder_enabled_z = 1.0})
 include callout.html
 type="warning"
 title="BETA"
-content="The `variable()` function is not yet available to <span class='fb-step fb-move'>Move</span> input formuals or the <span class='fb-step fb-assertion'>Assertion</span> command. Additionally, it currently only works with single points and not groups."
+content="The `variable()` function is not yet available to <span class='fb-step fb-move'>Move</span> input formuals or the <span class='fb-step fb-assertion'>Assertion</span> command."
 %}
 
 If the sequence executing the <span class="fb-step fb-lua">Lua</span> command contains a [sequence variable](https://software.farm.bot/docs/variables), you can access its content by calling the `variable()` function:
