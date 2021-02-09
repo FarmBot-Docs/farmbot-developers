@@ -68,6 +68,29 @@ Unlock a previously locked device.
 emergency_unlock()
 ```
 
+# env(key, value)
+
+Store a key/value pair to disk. This information will be stored on the device SD card and eventually copied to the user's Web App account.
+
+`key` and `value` must be strings. No other values are allowed. Values may not exceed 300 characters in length.
+
+```
+env("MY_API_TOKEN", "abc123")
+```
+
+# env(key)
+
+Retrieve a previously stored value. Returns `nil` if no value is found.
+
+```lua
+api_token = env("MY_API_TOKEN")
+if api_token then
+  send_message("info", "Token value is " .. api_token)
+else
+  send_message("info", "Value not found")
+end
+```
+
 # fbos_version()
 
 Returns a string representation of FarmBot OS's version.
@@ -177,6 +200,62 @@ go_to_home("all")
 go_to_home()
 ```
 
+# http(config)
+
+Performs an HTTP request. Example:
+
+```lua
+response, error = http({
+  -- REQUIRED
+  url="https://my.farm.bot/api/farmware_envs",
+  -- OPTIONAL. Default value is "get".
+  method="POST",
+  -- OPTIONAL. Only strings and numbers.
+  headers={
+    Authorization="bearer eyJ....4cw",
+    Accept="application/json"
+  },
+  -- OPTIONAL. Must be a string. Use included JSON lbrary for
+  --           JSON APIs
+  body=json.encode({
+  })
+})
+
+if error then
+  -- The `error` object is reserved for non-HTTP errors.
+  -- Example: missing URL.
+  -- `error` will be `nil` if no issues are found.
+  send_message("info", "Unknown error: " .. inspect(error))
+else
+  -- The `response` object has three properties:
+  --   `status`: Number              - Response code. Example: 200.
+  --   `body`: String                - Response body. Always a string.
+  --   `headers`: Map<String, String> - Response headers.
+end
+```
+
+# inspect(lua)
+
+Alias for `json.encode`.
+
+# json.decode
+
+Converts a JSON encoded string to a Lua table:
+
+```lua
+result, error = json.decode('{"foo":"bar","example":123}')
+-- { foo="bar", example=123 }
+```
+
+# json.encode(lua)
+
+Converts a Lua variable into stringified JSON.
+
+```lua
+result, error = json.encode({ foo="bar", example=123 })
+-- => '{"foo":"bar","example":123}'
+```
+
 # move_absolute()
 
 Move to an absolute coordinate position.
@@ -230,6 +309,22 @@ send_message("success", "You've got mail!", "email")
 
 -- Send a message to multiple channels:
 send_message("info", "All systems running.", {"toast", "espeak"})
+```
+
+# take_photo()
+
+**KNOWN BUG:** Take photo may return errors asyncronously, which may lead some developers to believe the `take_photo` operation has succeeded when it actually fails in the background.
+
+Takes a photo using the device camera. Returns `nil` on success. Returns an error object if capture fails.
+
+```lua
+error = take_photo()
+
+if error then
+  send_message("error", "Capture failed " .. inspect(error))
+else
+  send_message("info", "Capture OK")
+end
 ```
 
 # update_device()
