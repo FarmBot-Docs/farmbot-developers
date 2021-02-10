@@ -70,6 +70,10 @@ emergency_unlock()
 
 # env(key, value)
 
+**NOTE:** Once set, an ENV can be deleted or edited by searching for the keyword "env" within the [settings page](https://my.farm.bot/app/designer/settings):
+
+![The ENV editor in the settings page](_images/env_editor.png)
+
 Store a key/value pair to disk. This information will be stored on the device SD card and eventually copied to the user's Web App account.
 
 `key` and `value` must be strings. No other values are allowed. Values may not exceed 300 characters in length.
