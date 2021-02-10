@@ -23,9 +23,7 @@ The [sequence editor](https://software.farm.bot/docs/sequences) is an easy to us
 
 All of the available Lua functions are listed below. Additionally, you may access most of the functions available in the [Lua 5.2 standard library](https://www.lua.org/manual/5.2/). If you have questions about the available functions or would like us to make new features available, please let us know in the [FarmBot Forum](https://forum.farmbot.org/).
 
-# Example Usage: Sending a Slack™ Chat Messages with FarmBot
-
-It is possible to use Lua to send data to third party APIs like chat apps. See our Slack chat app tutorial [here](lua/lua-examples.md)
+For examples of how to use Lua to send data to third party APIs like chat apps, see our [Slack chat app tutorial](lua/lua-examples.md)
 
 # coordinate()
 
@@ -72,25 +70,28 @@ Unlock a previously locked device.
 emergency_unlock()
 ```
 
-# env(key, value)
+# env()
 
-**NOTE:** Once set, an ENV can be deleted or edited by searching for the keyword "env" within the [settings page](https://my.farm.bot/app/designer/settings):
+Store and retrieve key/value pairs to disk. This information will be stored on the device SD card and eventually synced with your web app account.
 
-![The ENV editor in the settings page](_images/env_editor.png)
+`key` and `value` must be strings. No other values are allowed. Values may not exceed 1,000 characters in length.
 
-Store a key/value pair to disk. This information will be stored on the device SD card and eventually copied to the user's Web App account.
+To create or update a key/value pair:
 
-`key` and `value` must be strings. No other values are allowed. Values may not exceed 300 characters in length.
+```lua
+env("key", "value")
 
-```
+-- Example:
 env("MY_API_TOKEN", "abc123")
 ```
 
-# env(key)
-
-Retrieve a previously stored value. Returns `nil` if no value is found.
+To retrieve a previously stored value:
 
 ```lua
+env("key")
+-- Returns `nil` if no value is found.
+
+-- Example:
 api_token = env("MY_API_TOKEN")
 if api_token then
   send_message("info", "Token value is " .. api_token)
@@ -208,7 +209,7 @@ go_to_home("all")
 go_to_home()
 ```
 
-# http(config)
+# http()
 
 Performs an HTTP request. Example:
 
@@ -242,11 +243,11 @@ else
 end
 ```
 
-# inspect(lua)
+# inspect()
 
 Alias for `json.encode`.
 
-# json.decode
+# json.decode()
 
 Converts a JSON encoded string to a Lua table:
 
@@ -255,7 +256,7 @@ result, error = json.decode('{"foo":"bar","example":123}')
 -- { foo="bar", example=123 }
 ```
 
-# json.encode(lua)
+# json.encode()
 
 Converts a Lua variable into stringified JSON.
 
@@ -378,3 +379,7 @@ If the sequence executing the <span class="fb-step fb-lua">Lua</span> command co
 x_pos = variable().x
 send_message("info", x_pos, {"toast"});
 ```
+
+# What's next?
+
+ * [Lua Examples](lua/lua-examples.md)
