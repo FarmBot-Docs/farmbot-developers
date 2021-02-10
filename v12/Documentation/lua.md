@@ -25,7 +25,7 @@ All of the available Lua functions are listed below. Additionally, you may acces
 
 # Example Usage: Sending a Slack™ Chat Messages with FarmBot
 
-It is possible to use Lua to send data to third party APIs like chat apps. See our Slack chat app tutorial [here](lua-examples.md)
+It is possible to use Lua to send data to third party APIs like chat apps. See our Slack chat app tutorial [here](lua/lua-examples.md)
 
 # coordinate()
 

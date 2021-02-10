@@ -11,7 +11,7 @@ description: "Advanced FarmBot customization via Lua scripts."
 
 ![Screenshot of Slack chat message sent by FarmBot](_images/slack_message.png)
 
-It is possible for FarmBot to send outbound HTTP requests using [Lua scripting](lua.md). This feature can be used to create third-party integrations with proprietary software products that offer web hook integrations, such as [Slack](https://slack.com/).
+It is possible for FarmBot to send outbound HTTP requests using [Lua scripting](../lua.md). This feature can be used to create third-party integrations with proprietary software products that offer web hook integrations, such as [Slack](https://slack.com/).
 
 In the tutorial below, we will demonstrate how it is possible to send messages from FarmBot to Slack.
 
@@ -30,7 +30,7 @@ By the end of setup, you will have a URL that can be used to generate messages o
 
 ## Step II: Create a Sequence
 
-Once you have a Slack Webhook URL, you can create a sequence with a Lua block. Visit the [sequence editor](https://software.farm.bot/docs/sequences) and create a new sequence that contains an empty [Lua block](lua.md):
+Once you have a Slack Webhook URL, you can create a sequence with a Lua block. Visit the [sequence editor](https://software.farm.bot/docs/sequences) and create a new sequence that contains an empty [Lua block](../lua.md):
 
 ![A sequence with an empty Lua block](_images/empty_lua_sequence.png)
 

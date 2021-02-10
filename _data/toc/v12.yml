@@ -82,8 +82,9 @@ contents:
             url: custom-firmware
       - title: Lua
         url: lua
-      - title: Lua Examples
-        url: lua-examples
+        pages:
+          - title: Examples
+            url: lua-examples
   - title: Python
     url: Python
     top: true
