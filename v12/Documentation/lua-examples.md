@@ -30,7 +30,7 @@ By the end of setup, you will have a URL that can be used to generate messages o
 
 ## Step II: Create a Sequence
 
-Once you have a Slack Webhook URL, you can create a sequence with a Lua block. Visit the [sequence editor](https://software.farm.bot/v12/The-FarmBot-Web-App/sequences.html) and create a new sequence that contains an empty [Lua block](lua.md):
+Once you have a Slack Webhook URL, you can create a sequence with a Lua block. Visit the [sequence editor](https://software.farm.bot/docs/sequences) and create a new sequence that contains an empty [Lua block](lua.md):
 
 ![A sequence with an empty Lua block](_images/empty_lua_sequence.png)
 
@@ -60,7 +60,7 @@ When you finish pasting the code above, you can test it via the RUN button.
 
 Once the sequence is coded and saved, you can run it in a variety of ways:
 
- * By using the RUN button in the [sequence editor](https://software.farm.bot/v12/The-FarmBot-Web-App/sequences.html).
- * By binding the sequence to a physical button on the device via [pin binding](https://software.farm.bot/v12/The-FarmBot-Web-App/settings/pin-bindings.html).
- * On a recurring timer, via [Farm Events](https://software.farm.bot/v12/The-FarmBot-Web-App/events.html)
+ * By using the RUN button in the [sequence editor](https://software.farm.bot/docs/sequences).
+ * By binding the sequence to a physical button on the device via [pin binding](https://software.farm.bot/docs/pin-bindings).
+ * On a recurring timer, via [Farm Events](https://software.farm.bot/docs/events)
  * Via third party software, using [FarmBot.JS](https://github.com/FarmBot/farmbot-js)
