@@ -23,6 +23,10 @@ The [sequence editor](https://software.farm.bot/docs/sequences) is an easy to us
 
 All of the available Lua functions are listed below. Additionally, you may access most of the functions available in the [Lua 5.2 standard library](https://www.lua.org/manual/5.2/). If you have questions about the available functions or would like us to make new features available, please let us know in the [FarmBot Forum](https://forum.farmbot.org/).
 
+# Example Usage: Sending a Slack™ Chat Messages with FarmBot
+
+It is possible to use Lua to send data to third party APIs like chat apps. See our Slack chat app tutorial [here](lua-examples.md)
+
 # coordinate()
 
 Generate a coordinate for use in location-based functions such as `move_absolute` and `check_position`.
