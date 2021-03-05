@@ -275,6 +275,29 @@ move_absolute(1.0, 2, 3.4)
 move_absolute(coordinate(1.0, 20, 30))
 ```
 
+# new_sensor_reading()
+
+Plot a sensor reading point on the [sensors panel](https://my.farm.bot/app/designer/sensors). Please note that calling `new_sensor_reading()` does not perform any readings, it only records a value. See also: `read_pin()`
+
+```lua
+DIGITAL = 0
+ANALOG = 1
+position, error = get_position()
+
+i = 0
+while (i < 10) do
+  i = i + 1
+  new_sensor_reading({
+    x=position.x,
+    y=position.y,
+    z=position.z,
+    mode=ANALOG,
+    pin=0,
+    value=(math.random() * 1024)
+  })
+end
+```
+
 # read_pin()
 
 `read_pin(pin_num, mode?)` reads a pin when given a pin number and read mode (`"analog"` or `"digital"`). Defaults to `"digital"` if no mode is given:
