@@ -24,3 +24,14 @@ algolia:
   application_id: Z1MM044EZ8
   index_name: developers
   search_only_api_key: cad8ec927860485f3a8ac1ce2372be28
+  nodes_to_index: 'p,table,h1'
+  max_record_size: 20000
+  files_to_exclude:
+    - index.md
+    - v6/**/*
+    - v7/**/*
+    - v8/**/*
+    - v9/**/*
+    - v10/**/*
+    - v11/**/*
+    - v12/**/*
