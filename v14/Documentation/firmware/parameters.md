@@ -69,6 +69,8 @@ The firmware uses the following parameters, as found in the code repository at [
 |145<br>146<br>147             |`MOVEMENT_STOP_AT_MAX_X`<br>`MOVEMENT_STOP_AT_MAX_Y`<br>`MOVEMENT_STOP_AT_MAX_Z`|Determines if the bot is allowed to move past the maximum position
 |141<br>142<br>143             |`MOVEMENT_AXIS_NR_STEPS_X`<br>`MOVEMENT_AXIS_NR_STEPS_Y`<br>`MOVEMENT_AXIS_NR_STEPS_Z`|Size of an axis in steps (lower byte)
 |151<br>152<br>153             |`MOVEMENT_AXIS_NR_STEPS_H_X`<br>`MOVEMENT_AXIS_NR_STEPS_H_Y`<br>`MOVEMENT_AXIS_NR_STEPS_H_Z`|Size of an axis in steps (higher byte)
+|161<br>162<br>163             |`MOVEMENT_CALIBRATION_RETRY_X`<br>`MOVEMENT_CALIBRATION_RETRY_Y`<br>`MOVEMENT_CALIBRATION_RETRY_Z`|Number of calibration attempts
+|171<br>172<br>173             |`MOVEMENT_CALIBRATION_DEADZONE_X`<br>`MOVEMENT_CALIBRATION_DEADZONE_Y`<br>`MOVEMENT_CALIBRATION_DEADZONE_Z`|Calibration retry grouping distance
 
 ## TMC2130 stepper drivers
 
@@ -77,6 +79,7 @@ The firmware uses the following parameters, as found in the code repository at [
 |81<br>82<br>83                |`MOVEMENT_MOTOR_CURRENT_X`<br>`MOVEMENT_MOTOR_CURRENT_Y`<br>`MOVEMENT_MOTOR_CURRENT_Z`|Sets the current in milliamps
 |85<br>86<br>87                |`MOVEMENT_STALL_SENSITIVITY_X`<br>`MOVEMENT_STALL_SENSITIVITY_Y`<br>`MOVEMENT_STALL_SENSITIVITY_Z`|Sets the amount of back emf required to trigger a stall
 |91<br>92<br>93                |`MOVEMENT_MICROSTEPS_X`<br>`MOVEMENT_MICROSTEPS_Y`<br>`MOVEMENT_MICROSTEPS_Z`|Sets the number of microsteps per step
+|165<br>166<br>167             |`MOVEMENT_AXIS_STEALTH_X`<br>`MOVEMENT_AXIS_STEALTH_Y`<br>`MOVEMENT_AXIS_STEALTH_Z`|Enables quiet motor mode
 
 ## Encoders
 

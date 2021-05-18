@@ -31,7 +31,7 @@ If your bot rebooted or failed to boot, please [gather a log dump](gathering-a-l
 # Opting in to beta updates
 Now that you've read the warnings and usage documentation, you are ready to actually opt into beta updates.
 
-* Click the FarmBotOS Version on the [device](https://my.farm.bot/app/device) panel.
+* Click the FarmBotOS Version in the FarmBot section of the [settings](https://my.farm.bot/app/designer/settings) panel.
 * Change the **OS RELEASE CHANNEL** option to `beta`.
 * Agree to the warning.
 * Click <span class="fb-button fb-green">Update</span>
