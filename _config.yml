@@ -6,7 +6,7 @@ theme: jekyll-theme-cayman
 remote_theme: FarmBot-Docs/farmbot-theme@main
 baseurl: /
 color: '#0c4d8a'
-latest_version_number: 13
+latest_version_number: 14
 plugins:
   - jemoji
   - jekyll-redirect-from
