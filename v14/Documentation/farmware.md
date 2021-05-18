@@ -275,7 +275,7 @@ See [Hello Farmware Input](https://github.com/FarmBot-Labs/hello-farmware-input)
 
 # Farmware manifest
 
-To [install a Farmware](https://software.farm.bot/v13/The-FarmBot-Web-App/farmware#installing-farmware), you need to create a `manifest.json` file and host it. The manifest URL will be the URL used when installing the Farmware.
+To [install a Farmware](https://software.farm.bot/v14/The-FarmBot-Web-App/farmware#installing-farmware), you need to create a `manifest.json` file and host it. The manifest URL will be the URL used when installing the Farmware.
 
 For example, entering `https://raw.githubusercontent.com/FarmBot-Labs/hello-farmware/main/manifest.json` and clicking install on the Farmware page of the Web App would install the `Hello Farmware` Farmware, whose source code is located at the GitHub project [here](https://github.com/FarmBot-Labs/hello-farmware).
 

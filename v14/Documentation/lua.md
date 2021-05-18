@@ -11,7 +11,7 @@ The [sequence editor](https://software.farm.bot/docs/sequences) is an easy to us
 
  * By using the <span class="fb-step fb-lua">Lua</span> command ([learn more](https://software.farm.bot/docs/advanced-sequence-commands)).
  * By using the <span class="fb-step fb-assertion">Assertion</span> command ([learn more](https://software.farm.bot/docs/advanced-sequence-commands)).
- * By adding a **formula** to a <span class="fb-step fb-move">Move</span> command input field ([learn more](https://software.farm.bot/v13/The-FarmBot-Web-App/sequences/sequence-commands.html#advanced-options)).
+ * By adding a **formula** to a <span class="fb-step fb-move">Move</span> command input field ([learn more](https://software.farm.bot/v14/The-FarmBot-Web-App/sequences/sequence-commands.html#advanced-options)).
 
  The table below shows the features available to each of the methods:
 
