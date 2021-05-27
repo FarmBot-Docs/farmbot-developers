@@ -343,9 +343,24 @@ send_message("success", "You've got mail!", "email")
 send_message("info", "All systems running.", {"toast", "espeak"})
 ```
 
+# set_pin_io_mode()
+
+Sets the I/O mode of an Arduino pin. It is slightly similar to the [`pinMode()` function in the Arduino IDE](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/).
+
+**Valid pin modes:** `"input"`, `"input_pullup"`, `"output"`.
+
+```lua
+result, error = set_pin_io_mode(13, "output")
+if error then
+  send_message("error", inspect(error))
+else
+  send_message("info", inspect(result))
+end
+```
+
 # take_photo()
 
-**KNOWN BUG:** Take photo may return errors asyncronously, which may lead some developers to believe the `take_photo` operation has succeeded when it actually fails in the background.
+**KNOWN BUG:** Take photo may return errors asynchronously, which may lead some developers to believe the `take_photo` operation has succeeded when it actually fails in the background.
 
 Takes a photo using the device camera. Returns `nil` on success. Returns an error object if capture fails.
 
@@ -358,6 +373,64 @@ else
   send_message("info", "Capture OK")
 end
 ```
+# uart.close()
+
+See documentation for `uart.open()`.
+
+# uart.list()
+
+Returns a list of UART devices
+
+**WARNING!:** UART Lua support is experimental and may not work correctly yet. Please provide us feedback on [the FarmBot forum](https://forum.farmbot.org/) so that we may become aware of reliability issues.
+
+```lua
+uart_list = uart.list()
+
+for _number, device_path in ipairs(uart_list) do
+  send_message("debug", inspect(device_path), {"toast"})
+end
+```
+
+# uart.open()
+
+Open a UART device (typically, via USB) for reading and writing. Please note that the UART devices must be connected to the Raspberry Pi, not the Arduino.
+
+**WARNING!:** UART Lua support is experimental and may not work correctly yet. Please provide us feedback on [the FarmBot forum](https://forum.farmbot.org/) so that we may become aware of reliability issues.
+
+```lua
+-- device name, baud rate:
+my_uart, error = uart.open("ttyAMA0", 115200)
+
+if error then
+    send_message("error", inspect(error), "toast")
+    return
+end
+
+if my_uart then
+    -- Wait 60s for data...
+    string, error2 = my_uart.read(15000)
+    if error2 then
+        send_message("error", inspect(error2), "toast")
+    else
+        send_message("info", inspect(string), "toast")
+    end
+
+    error3 = my_uart.write("Hello, world!")
+
+    if error3 then
+        -- Handle errors etc..
+    end
+
+    my_uart.close()
+end
+```
+# uart.read()
+
+See documentation for `uart.open()`.
+
+# uart.write()
+
+See documentation for `uart.open()`.
 
 # update_device()
 
