@@ -358,6 +358,15 @@ else
 end
 ```
 
+# sleep()
+
+Pause execution for a certain number of milliseconds. **Crashes if the value is three minutes or greater.**
+
+```lua
+-- Sleep for 1 second:
+sleep(1000)
+```
+
 # take_photo()
 
 **KNOWN BUG:** Take photo may return errors asynchronously, which may lead some developers to believe the `take_photo` operation has succeeded when it actually fails in the background.
