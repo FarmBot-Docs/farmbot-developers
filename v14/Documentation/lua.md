@@ -1,7 +1,7 @@
 ---
 title: "Lua"
 slug: "lua"
-description: "List of available Lua functions in FBOS"
+description: "List of available Lua functions in FarmBot OS"
 ---
 
 * toc
