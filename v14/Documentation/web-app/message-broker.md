@@ -22,7 +22,7 @@ One place where HTTP fails to be an adequate solution is remote procedure calls.
 
 With a real-time message broker, there is no need to check for new messages. Messages (such as a user clicking the "move" button on the [user interface](user-interface.md)) can be sent back and forth between client, device and server without initiating a request.
 
-**In many ways, the message broker acts as a machine-to-machine chat application.** Any software package, whether it be the [REST API](rest-api.md), [FarmBot OS](../farmbot-os.md) or a third-party [Farmware](../farmware.md) can send a message to any other entity that is currently connected to the message broker, with correct authorization of course.
+**In many ways, the message broker acts as a machine-to-machine chat application.** Any software package, whether it be the [REST API](rest-api.md), [FarmBot OS](../farmbot-os.md) or a third-party script can send a message to any other entity that is currently connected to the message broker, with correct authorization of course.
 
 ![rpc diagram](_images/rpc_diagram.png)
 

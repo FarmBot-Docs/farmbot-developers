@@ -87,7 +87,7 @@ The table below illustrates example MQTT topic subscriptions.
 |`bot/device_456/sync/Sequence/#`|Subscribes to any change to any `Sequence` resource.
 |`bot/device_789/sync/#`       |Subscribes to _all_ resource updates.
 
-As August 2018, the following resource names are supported: `Crop`, `Device`, `DiagnosticDump`, `FarmEvent`, `FarmwareInstallation`, `FbosConfig`, `FirmwareConfig`, `Image`, `Log`, `Peripheral`, `PinBinding`, `PlantTemplate`, `Point`, `Regimen`, `SavedGarden`, `Sensor`, `SensorReading`, `Sequence`, `Tool`, `User`, `WebAppConfig`, `WebcamFeed`.
+As August 2018, the following resource names are supported: `Crop`, `Device`, `DiagnosticDump`, `FarmEvent`, `FbosConfig`, `FirmwareConfig`, `Image`, `Log`, `Peripheral`, `PinBinding`, `PlantTemplate`, `Point`, `Regimen`, `SavedGarden`, `Sensor`, `SensorReading`, `Sequence`, `Tool`, `User`, `WebAppConfig`, `WebcamFeed`.
 
 # Next Steps
 

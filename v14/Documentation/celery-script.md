@@ -29,7 +29,6 @@ Celery Script is used:
 
  * To build an [abstract syntax tree](https://astexplorer.net) of commands in the [sequence editor](https://software.farm.bot/docs/sequences), which get stored and served by the [REST API](web-app/rest-api.md)'s `/sequences` endpoint.
  * To send one-off [movement commands](https://software.farm.bot/docs/controls) and other messages between users and devices over the [message broker](web-app/message-broker.md).
- * To build [Farmware](farmware.md) (plugins) that talk directly to FarmBot.
  * Internal functionality such as changing device configuration on-the-fly and triggering firmware updates.
 
 # Examples

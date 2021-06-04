@@ -69,7 +69,6 @@ The table below lists common FarmBot use cases and their appropriate software pa
 |Remotely managing device when device is offline|[Web App](../web-app.md) and [REST API](../web-app/rest-api.md)
 |Managing device and account data.|[Web App](../web-app.md) and [REST API](../web-app/rest-api.md)
 |Powering actuators            |[Firmware](../firmware.md)
-|User-defined plugins          |[FarmBot OS](../farmbot-os.md) ([Farmware](../farmware.md))
 |Recurring tasks               |[FarmBot OS](../farmbot-os.md)
 |Long-running operations, such as watering sequences|[FarmBot OS](../farmbot-os.md)
 

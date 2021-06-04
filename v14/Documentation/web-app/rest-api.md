@@ -83,7 +83,7 @@ As of February 2020, the API manages the following resources:
 |diagnostic_dumps |A dump of all internal FarmBot logs used to assist in troubleshooting.
 |export_data      |A dump of all the resources listed above.
 |farm_events      |Executes a sequence or regimen based on time. Eg: "Execute this sequence every 6 hours".
-|farmware_envs    |Key/value pairs used by Farmware authors for persistent storage.
+|farmware_envs    |Key/value pairs used for persistent storage.
 |fbos_config      |Configuration for FarmBot OS.
 |firmware_config  |Configuration for the Arduino Firmware
 |global_bulletins |(advanced)An anouncement intended for all users of a server
@@ -120,7 +120,7 @@ GET https://my.farm.bot/api/sensor_readings?page=3&per=10
 In the example above, you may notice that the GET request contains a special [query string](https://en.wikipedia.org/wiki/Query_string) for the page size (`&per=10`) and page number (`?page=3`).
 
 The following resources support pagination:
-`alerts`, `farm_events`, `farmware_envs`, `farmware_installations`, `peripherals`, `pin_bindings`, `plant_templates`, `point_groups`, `regimens`, `saved_gardens`, `sensor_readings`, `sensors`, `tools`, `webcam_feeds`.
+`alerts`, `farm_events`, `farmware_envs`, `peripherals`, `pin_bindings`, `plant_templates`, `point_groups`, `regimens`, `saved_gardens`, `sensor_readings`, `sensors`, `tools`, `webcam_feeds`.
 
 You may request pagination for other resources by submitting an issue on Github.
 

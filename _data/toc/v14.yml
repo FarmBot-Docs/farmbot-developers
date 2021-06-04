@@ -64,15 +64,6 @@ contents:
             url: gathering-a-log-dump
           - title: Frequently Asked Questions
             url: farmbot-os-faq
-      - title: Farmware
-        url: farmware
-        pages:
-          - title: Farmware Hosting and Workflows
-            url: farmware-hosting-and-workflows
-          - title: Common Farmware Problems
-            url: common-farmware-problems
-          - title: You Might Not Need Farmware
-            url: you-might-not-need-farmware
       - title: Firmware
         url: firmware
         pages:

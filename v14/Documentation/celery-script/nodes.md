@@ -19,10 +19,10 @@ A CeleryScript node is comprised of:
  *  An optional `body` argument which, if defined, will contain a list of other CeleryScript nodes. A body will only ever contain CeleryScript nodes and will never contain primitive values such as strings or numbers.
  * An optional `comment` (string) field to aid developer readability.
 
-Here is an example `install_farmware` node, which tells a device to download and install a 3rd party add-on:
+Here is an example `reboot` node, which tells a device to restart the specified app:
 
 
-__install_farmware Celery Script node example:__
+__reboot Celery Script node example:__
 
 ```json
 {
@@ -31,12 +31,12 @@ __install_farmware Celery Script node example:__
     // This is the nodes name.
     // Legal "kind" types are listed here:
     // https://github.com/FarmBot/farmbot-js/blob/7044292a6591753b3edad3ed7bf3a8a08a41fac4/dist/corpus.d.ts#L418
-    "kind": "install_farmware",
+    "kind": "reboot",
 
     // THE "args" (arguments) FIELD:
     // Every node has an "args" object. It is REQUIRED.
     // The arguments for a node will vary based on the "kind".
-    "args": { url: "http://foo.bar/manifest.json" },
+    "args": { package: "farmbot_os" },
 
     // THE "comment" FIELD:
     // You do not need to use this (or even include it), but you can if it is helpful.
@@ -90,8 +90,6 @@ See also the [corpus.d.ts](https://github.com/FarmBot/farmbot-js/blob/main/dist/
 |`home`                        |                              |Command instructing FarmBot to go to the home position (this is different than finding home)
 |`identifier`                  |                              |
 |`if`                          |                              |Allows FarmBot to evaluate if a condition is true or false and take a corresponding action
-|`install_farmware`            |                              |Instructs FarmBot to install a 3rd party [Farmware](../farmware.md)
-|`install_first_party_farmware`|                              |Instructs FarmBot to install a 1st party [Farmware](../farmware.md)
 |`internal_entry_point`        |                              |
 |`internal_farm_event`         |                              |
 |`internal_regimen`            |                              |
@@ -108,7 +106,6 @@ See also the [corpus.d.ts](https://github.com/FarmBot/farmbot-js/blob/main/dist/
 |`read_pin`                    |                              |Command for [reading a pin](https://software.farm.bot/docs/sequence-commands#read-sensor)
 |`read_status`                 |                              |
 |`reboot`                      |                              |Instructs FarmBot to reboot
-|`remove_farmware`             |                              |Instructs FarmBot to remove a [Farmware](../farmware.md)
 |`resource_update`             |                              |
 |`rpc_error`                   |                              |Indicates that the request operation has failed
 |`rpc_ok`                      |                              |Indicates that the request operation has succeeded
@@ -122,7 +119,6 @@ See also the [corpus.d.ts](https://github.com/FarmBot/farmbot-js/blob/main/dist/
 |`take_photo`                  |                              |Instructs FarmBot to [take a photo](https://software.farm.bot/docs/sequence-commands#take-photo) and upload it to the API
 |`toggle_pin`                  |                              |Command for toggling the state of a pin
 |`tool`                        |                              |
-|`update_farmware`             |                              |Instructs FarmBot to update a [Farmware](../farmware.md)
 |`variable_declaration`        |                              |
 |`wait`                        |                              |Command for [waiting](https://software.farm.bot/docs/sequence-commands#wait) a time in milliseconds
 |`write_pin`                   |                              |Command for [writing](https://software.farm.bot/docs/sequence-commands#control-peripheral) a digital or analog value to a pin
@@ -134,7 +130,7 @@ See also the [corpus.d.ts](https://github.com/FarmBot/farmbot-js/blob/main/dist/
 
 The CeleryScript specification defines three nodes used for real-time control of a device. These nodes are used extensively in the [user interface](../web-app/user-interface.md) for one-off commands, such as device position adjustments.
 
- * `rpc_request` -  Initiated by a user (or occasionally, the [REST API](../web-app/rest-api.md)) when requesting the device do something. The desired action (eg: `move_relative`, `install_farmware`, etc..) is held in the `body` of this node.
+ * `rpc_request` -  Initiated by a user (or occasionally, the [REST API](../web-app/rest-api.md)) when requesting the device do something. The desired action (eg: `move_relative`, `reboot`, etc..) is held in the `body` of this node.
  * `rpc_ok` - Sent by a device to an end user. Indicates that the request operation has succeeded.
  * `rpc_error` - Indicates that the request operation has failed. The body of an `rpc_error` will often contain a number of `explanation` nodes describing the circumstances of the failure.
 

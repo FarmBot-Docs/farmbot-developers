@@ -18,8 +18,6 @@ For users who _only_ need to control a FarmBot, any language that provides the f
  * An HTTP client for talking to the [REST API](../web-app/rest-api.md).
  * An MQTT client for talking to the [Message Broker](../web-app/message-broker.md)
 
-If you wish to write a [Farmware](../farmware.md), Python is the only language currently supported, but [most developers do not need to write a Farmware](../farmware/you-might-not-need-farmware.md).
-
 # Does the web API support ARM-based processors?
 Not at this time. The only software that supports Raspberry Pi is FarmBot OS. Do not attempt to run a web server on a Raspberry Pi.
 
@@ -27,9 +25,7 @@ Not at this time. The only software that supports Raspberry Pi is FarmBot OS. Do
 FarmBot is comprised of many different software systems and the language used varies across projects. Generally speaking, we use a combination of C++, [Ruby](https://www.ruby-lang.org/en/), [Elixir](https://elixir-lang.org), and [TypeScript](https://www.typescriptlang.org).
 
 # Do I need to know Elixir to program FarmBot?
-No. FarmBot provides a system for plugins known as "Farmware". Farmware may be written in other languages, such as Python. See [Farmware](../farmware.md) documentation for details.
-
-The best approach is to write a standalone application that interacts with FarmBot externally via [REST API](../web-app/rest-api.md), [FarmBot JS](../farmbot-js.md) or the [Message Broker](../web-app/message-broker.md).
+No. The best approach is to write a standalone application that interacts with FarmBot externally via [REST API](../web-app/rest-api.md), [FarmBot JS](../farmbot-js.md) or the [Message Broker](../web-app/message-broker.md).
 
 # Should I clone FarmBot OS on GitHub or use the image?
 You almost certainly want the image. The only exception is if you plan on modifying the FarmBot OS source code.
@@ -38,4 +34,4 @@ You almost certainly want the image. The only exception is if you plan on modify
 If your device attempts to connect to the message broker more than 20 times in a 10 minute period, it will be temporarily blocked from re-connecting. You will be able to reconnect after the 10 minute cool down period. This measure is put in place to protect server resources. Your device may be blocked from the server for a number of reasons:
 
  * (Most common) Your device does not have an adequately reliable internet connection, which is causing the device to reconnect to the network too often. This is commonly seen on cellular networks and in setups where the device is too far from the WiFi access point. **FarmBot requires a stable internet connection to function properly.** More information is available [here](https://software.farm.bot/docs/connecting-farmbot-to-the-internet).
- * (Less common) If you are a third party software developer, the error may be caused by bugs in third party software, such as code that connects to the MQTT broker within a loop. Ensure that your plugin or farmware does not leak TCP connections.
+ * (Less common) If you are a third party software developer, the error may be caused by bugs in third party software, such as code that connects to the MQTT broker within a loop. Ensure that your plugin or script does not leak TCP connections.
