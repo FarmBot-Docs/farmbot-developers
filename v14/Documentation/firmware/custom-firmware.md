@@ -6,7 +6,18 @@ slug: "custom-firmware"
 * toc
 {:toc}
 
-If you do not want to use the firmware installed by FarmBot OS, you can still install custom firmware using the standard Arduino IDE with the steps below.
+If you do not want to use the firmware installed by FarmBot OS, you can still install custom firmware using one of the methods below.
+
+# custom.hex firmware
+
+1. Power down FarmBot.
+2. Remove the microSD card and insert it into your computer.
+3. Copy your `custom.hex` firmware file to the drive that shows up.
+4. Eject the microSD card and put it back into FarmBot.
+5. Power back on.
+6. FarmBot will use the custom firmware until the file is deleted.
+
+# Arduino IDE
 
 1. Download and install the [Arduino IDE](https://www.arduino.cc/en/Main/Software) onto your computer.
 2. Download and unzip the latest [FarmBot Arduino Firmware](https://github.com/FarmBot/farmbot-arduino-firmware).
