@@ -472,13 +472,6 @@ update_firmware_config({encoder_enabled_z = 1.0})
 
 # variable(name?)
 
-{%
-include callout.html
-type="warning"
-title="BETA"
-content="The `variable()` function is not yet available to <span class='fb-step fb-move'>Move</span> input formuals or the <span class='fb-step fb-assertion'>Assertion</span> command."
-%}
-
 If the sequence executing the <span class="fb-step fb-lua">Lua</span> command contains a [sequence variable](https://software.farm.bot/docs/variables), you can access its content by calling the `variable()` function:
 
 ```lua
