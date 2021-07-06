@@ -25,7 +25,7 @@ All of the available Lua functions are listed below. Additionally, you may acces
 
 For examples of how to use Lua to send data to third party APIs like chat apps, see our [Slack chat app tutorial](lua/lua-examples.md)
 
-# coordinate()
+# coordinate(x, y, z)
 
 Generate a coordinate for use in location-based functions such as `move_absolute` and `check_position`.
 
@@ -35,7 +35,7 @@ coordinate(1.0, 20, 30)
 -- {x = 1.0, y = 20,  z = 30}
 ```
 
-# check_position()
+# check_position(coord, tolerance)
 
 `check_position(coordinate, tolerance)` returns `true` if the device is within the `tolerance` range of `coordinate`.
 
@@ -70,7 +70,7 @@ Unlock a previously locked device.
 emergency_unlock()
 ```
 
-# env()
+# env(key, value) / env(key)
 
 Store and retrieve key/value pairs to disk. This information will be stored on the device SD card and eventually synced with your web app account.
 
@@ -108,7 +108,7 @@ Returns a string representation of FarmBot OS's version.
 fbos_version()
 ```
 
-# find_axis_length()
+# find_axis_length(axis?)
 
 Determines the length of an axis using stall detection, rotary encoders, or limit switch hardware.
 
@@ -123,7 +123,7 @@ find_axis_length()
 find_axis_length("all")
 ```
 
-# find_home()
+# find_home(axis?)
 
 Finds the `0` (home) position for an axis using stall detection, rotary encoders, or limit switch hardware.
 
@@ -146,7 +146,7 @@ Returns a string representation of the firmware version on the Farmduino/Arduino
 firmware_version()
 ```
 
-# get_device()
+# get_device(property?)
 
 Fetch device properties. This is the same [device resource found on the API](https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af).
 
@@ -158,7 +158,7 @@ get_device()
 get_device("name")
 ```
 
-# get_fbos_config()
+# get_fbos_config(property?)
 
 Fetch FarmBot OS configuration properties. This is the same [FarmBot OS configuration resource found on the API](https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af).
 
@@ -170,7 +170,7 @@ get_fbos_config()
 get_fbos_config("disable_factory_reset")
 ```
 
-# get_firmware_config()
+# get_firmware_config(property?)
 
 Fetch firmware configuration properties. This is the same [firmware configuration resource found on the API](https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af).
 
@@ -194,7 +194,7 @@ else
 end
 ```
 
-# go_to_home()
+# go_to_home(axis?)
 
 Move to the `0` (home) position of a given axis.
 
@@ -209,7 +209,7 @@ go_to_home("all")
 go_to_home()
 ```
 
-# http()
+# http(params)
 
 Performs an HTTP request. Example:
 
@@ -243,11 +243,11 @@ else
 end
 ```
 
-# inspect()
+# inspect(any)
 
 Alias for `json.encode`.
 
-# json.decode()
+# json.decode(string)
 
 Converts a JSON encoded string to a Lua table:
 
@@ -256,7 +256,7 @@ result, error = json.decode('{"foo":"bar","example":123}')
 -- { foo="bar", example=123 }
 ```
 
-# json.encode()
+# json.encode(any)
 
 Converts a Lua variable into stringified JSON.
 
@@ -265,7 +265,7 @@ result, error = json.encode({ foo="bar", example=123 })
 -- => '{"foo":"bar","example":123}'
 ```
 
-# move_absolute()
+# move_absolute(x, y, z) / move_absolute(coord)
 
 Move to an absolute coordinate position.
 
@@ -275,7 +275,7 @@ move_absolute(1.0, 2, 3.4)
 move_absolute(coordinate(1.0, 20, 30))
 ```
 
-# new_sensor_reading()
+# new_sensor_reading(params)
 
 Plot a sensor reading point on the [sensors panel](https://my.farm.bot/app/designer/sensors). Please note that calling `new_sensor_reading()` does not perform any readings, it only records a value. See also: `read_pin()`
 
@@ -298,7 +298,7 @@ while (i < 10) do
 end
 ```
 
-# read_pin()
+# read_pin(pin, mode?)
 
 `read_pin(pin_num, mode?)` reads a pin when given a pin number and read mode (`"analog"` or `"digital"`). Defaults to `"digital"` if no mode is given:
 
@@ -308,7 +308,7 @@ pin24 = read_pin(24, "digital")
 pin25 = read_pin(25, "analog")
 ```
 
-# read_status()
+# read_status(...path?)
 
 `read_status(...path?)` reads the entire device state tree into memory.
 
@@ -322,7 +322,7 @@ read_status("location_data", "raw_encoders", "x")
 status = read_status().location_data.raw_encoders.x
 ```
 
-# send_message()
+# send_message(type, message, channels)
 
 `send_message(type, message, channels?)`
 
@@ -343,7 +343,7 @@ send_message("success", "You've got mail!", "email")
 send_message("info", "All systems running.", {"toast", "espeak"})
 ```
 
-# set_pin_io_mode()
+# set_pin_io_mode(pin, mode)
 
 Sets the I/O mode of an Arduino pin. It is slightly similar to the [`pinMode()` function in the Arduino IDE](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/).
 
@@ -358,7 +358,7 @@ else
 end
 ```
 
-# sleep()
+# sleep(ms)
 
 Pause execution for a certain number of milliseconds. **Crashes if the value is three minutes or greater.**
 
@@ -382,6 +382,7 @@ else
   send_message("info", "Capture OK")
 end
 ```
+
 # uart.close()
 
 See documentation for `uart.open()`.
@@ -400,7 +401,7 @@ for _number, device_path in ipairs(uart_list) do
 end
 ```
 
-# uart.open()
+# uart.open(path, baud)
 
 Open a UART device (typically, via USB) for reading and writing. Please note that the UART devices must be connected to the Raspberry Pi, not the Arduino.
 
@@ -433,6 +434,7 @@ if my_uart then
     my_uart.close()
 end
 ```
+
 # uart.read()
 
 See documentation for `uart.open()`.
@@ -441,7 +443,7 @@ See documentation for `uart.open()`.
 
 See documentation for `uart.open()`.
 
-# update_device()
+# update_device(params)
 
 Update device properties. This is the same [device resource found on the API](https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af).
 
@@ -459,7 +461,7 @@ update_fbos_config({key = "value"})
 update_fbos_config({disable_factory_reset = true})
 ```
 
-# update_firmware_config()
+# update_firmware_config(params)
 
 Update firmware configuration properties. This is the same [firmware configuration resource found on the API](https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af).
 
@@ -468,7 +470,7 @@ update_firmware_config({key = "value"})
 update_firmware_config({encoder_enabled_z = 1.0})
 ```
 
-# variable()
+# variable(name?)
 
 {%
 include callout.html
@@ -483,6 +485,16 @@ If the sequence executing the <span class="fb-step fb-lua">Lua</span> command co
 -- Assumes you are inside of a function that has a variable:
 x_pos = variable().x
 send_message("info", x_pos, {"toast"});
+```
+
+# write_pin(pin, mode, value)
+
+Available in FBOS >= 14.2.1.
+
+Sets a pin to a particular mode and value:
+
+```lua
+write_pin(13, "analog", 128)
 ```
 
 # What's next?
