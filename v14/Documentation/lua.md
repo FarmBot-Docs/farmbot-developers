@@ -494,7 +494,7 @@ send_message("info", x_pos, {"toast"});
 
 # write_pin(pin, mode, value)
 
-Available in FBOS >= 14.2.1.
+{% include callout.html type="info" content="Available in FarmBot OS v14.2.1 and newer." %}
 
 Sets a pin to a particular mode and value:
 
