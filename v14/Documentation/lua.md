@@ -367,6 +367,18 @@ Pause execution for a certain number of milliseconds. **Crashes if the value is 
 sleep(1000)
 ```
 
+# soil_height(x, y)
+
+Given an X and Y coordinate, returns a best-effort estimate of the Z axis height of the soil. This function requires at least 3 soil height measurments. When there are less than 3 measurements available, it will return the SOIL HEIGHT setting from the device settings page.
+
+```lua
+x = 10
+y = 29
+my_soil_height = soil_height(x, y)
+send_message("info", "Distance to soil at (10, 29): " .. inspect(my_soil_height))
+-- => "Distance to soil at (10, 29): -409.84"
+```
+
 # take_photo()
 
 **KNOWN BUG:** Take photo may return errors asynchronously, which may lead some developers to believe the `take_photo` operation has succeeded when it actually fails in the background.
