@@ -2,7 +2,6 @@ title: FarmBot Software Development Documentation
 url: https://developer.farm.bot
 description: Documentation for 3rd-party developers to work with the FarmBot API
 logo: /assets/images/documentation.png
-theme: jekyll-theme-cayman
 remote_theme: FarmBot-Docs/farmbot-theme@main
 baseurl: /
 color: '#0c4d8a'
@@ -11,6 +10,7 @@ plugins:
   - jemoji
   - jekyll-redirect-from
   - jekyll-remote-theme
+  - jekyll-seo-tag
 include:
   - _images
   - _redirects
