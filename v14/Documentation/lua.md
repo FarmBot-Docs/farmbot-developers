@@ -13,14 +13,6 @@ The [sequence editor](https://software.farm.bot/docs/sequences) is an easy to us
  * By using the <span class="fb-step fb-assertion">Assertion</span> command ([learn more](https://software.farm.bot/docs/advanced-sequence-commands)).
  * By adding a **formula** to a <span class="fb-step fb-move">Move</span> command input field ([learn more](https://software.farm.bot/v14/The-FarmBot-Web-App/sequences/sequence-commands.html#advanced-options)).
 
- The table below shows the features available to each of the methods:
-
-|Command|Executes Lua code|Variable access|Recovery options|
-|-------|-----------------|---------------|----------------|
-|<span class="fb-step fb-lua">Lua</span>|:white_check_mark:|:white_check_mark:|:no_entry:|
-|<span class="fb-step fb-assertion">Assertion</span>|:white_check_mark:|:no_entry:|:white_check_mark:|
-|<span class="fb-step fb-move">Move</span> formula inputs|:white_check_mark:|:no_entry:|:no_entry:|
-
 All of the available Lua functions are listed below. Additionally, you may access most of the functions available in the [Lua 5.2 standard library](https://www.lua.org/manual/5.2/). If you have questions about the available functions or would like us to make new features available, please let us know in the [FarmBot Forum](https://forum.farmbot.org/).
 
 For examples of how to use Lua to send data to third party APIs like chat apps, see our [Slack chat app tutorial](lua/lua-examples.md)
@@ -358,13 +350,13 @@ else
 end
 ```
 
-# sleep(ms)
+# wait(ms)
 
 Pause execution for a certain number of milliseconds. **Crashes if the value is three minutes or greater.**
 
 ```lua
--- Sleep for 1 second:
-sleep(1000)
+-- wait for 1 second:
+wait(1000)
 ```
 
 # soil_height(x, y)
@@ -482,13 +474,13 @@ update_firmware_config({key = "value"})
 update_firmware_config({encoder_enabled_z = 1.0})
 ```
 
-# variable(name?)
+# variable(name)
 
-If the sequence executing the <span class="fb-step fb-lua">Lua</span> command contains a [sequence variable](https://software.farm.bot/docs/variables), you can access its content by calling the `variable()` function:
+If the sequence executing the <span class="fb-step fb-lua">Lua</span> command contains a [sequence variable](https://software.farm.bot/docs/variables), you can access its content by calling the `variable(name)` function:
 
 ```lua
 -- Assumes you are inside of a function that has a variable:
-x_pos = variable().x
+x_pos = variable("parent").x
 send_message("info", x_pos, {"toast"});
 ```
 
