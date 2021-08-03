@@ -64,6 +64,8 @@ contents:
             url: gathering-a-log-dump
           - title: Frequently Asked Questions
             url: farmbot-os-faq
+          - title: Sidecar Hardware
+            url: sidecar-hardware
       - title: Firmware
         url: firmware
         pages:
