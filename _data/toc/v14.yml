@@ -62,10 +62,10 @@ contents:
             url: beta-updates
           - title: Gathering a Log Dump
             url: gathering-a-log-dump
-          - title: Frequently Asked Questions
-            url: farmbot-os-faq
           - title: Sidecar Hardware
             url: sidecar-hardware
+          - title: Frequently Asked Questions
+            url: farmbot-os-faq
       - title: Firmware
         url: firmware
         pages:
