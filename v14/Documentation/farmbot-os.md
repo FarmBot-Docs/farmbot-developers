@@ -49,6 +49,5 @@ If you have the above set up you will need the following software dependencies. 
  * [Development](farmbot-os/farmbot-os-development.md)
  * [Gathering Information at Runtime](farmbot-os/gathering-information-at-runtime.md)
  * [Beta Updates](farmbot-os/beta-updates.md)
- * [Gathering a Log Dump](farmbot-os/gathering-a-log-dump.md)
  * [Sidecar Hardware](farmbot-os/sidecar-hardware.md)
  * [FAQ](farmbot-os/farmbot-os-faq.md)

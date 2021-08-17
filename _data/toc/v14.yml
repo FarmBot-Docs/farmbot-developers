@@ -60,8 +60,6 @@ contents:
             url: gathering-information-at-runtime
           - title: Beta Updates
             url: beta-updates
-          - title: Gathering a Log Dump
-            url: gathering-a-log-dump
           - title: Sidecar Hardware
             url: sidecar-hardware
           - title: Frequently Asked Questions

@@ -80,13 +80,13 @@ As of February 2020, the API manages the following resources:
 |alerts           |A single item in the message center. Only useful to site administrators.
 |corpus           |A glossary of all Celery Script node types in JSON format.
 |device           |Device account settings.
-|diagnostic_dumps |A dump of all internal FarmBot logs used to assist in troubleshooting.
 |export_data      |A dump of all the resources listed above.
 |farm_events      |Executes a sequence or regimen based on time. Eg: "Execute this sequence every 6 hours".
 |farmware_envs    |Key/value pairs used for persistent storage.
 |fbos_config      |Configuration for FarmBot OS.
 |firmware_config  |Configuration for the Arduino Firmware
-|global_bulletins |(advanced)An anouncement intended for all users of a server
+|folders          |Organization for sequences.
+|global_bulletins |(advanced)An announcement intended for all users of a server
 |global_config    |Configuration for all users of a server.
 |images           |Meta data about photos taken by FarmBot.
 |logs             |Messages from a device.
@@ -97,6 +97,7 @@ As of February 2020, the API manages the following resources:
 |point_groups     |A collection of points based on a criteria or predefined set of points(eg: "weeds", "my basil plants" etc..)
 |public_key       |(advanced) A public encryption key owned by the API server.
 |regimens         |Executes sequence(s) based on arbitrary dates and time on a calendar.
+|releases         |FarmBot OS releases.
 |saved_gardens    |A pre arranged configuration of plants in a garden.
 |sensor_readings  |A single reading from a sensor, recorded to the API.
 |sensors          |Meta data about input hardware.
@@ -107,6 +108,7 @@ As of February 2020, the API manages the following resources:
 |users            |Device operator data such as registration email.
 |web_app_config   |User interface preferences.
 |webcam_feeds     |Meta data about an external webcam (stream URL)
+|wizard_step_results|Setup wizard result data.
 
 # Pagination
 Some endpoints will return so much data that it is desirable to break the results into smaller "pages" of a fixed length.

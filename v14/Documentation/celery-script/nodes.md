@@ -78,7 +78,6 @@ See also the [corpus.d.ts](https://github.com/FarmBot/farmbot-js/blob/main/dist/
 |`channel`                     |                              |
 |`check_updates`               |                              |Instructs FarmBot to check for software updates
 |`coordinate`                  |                              |
-|`dump_info`                   |                              |Instructs FarmBot to create a [diagnostic report](https://software.farm.bot/docs/diagnostic-reports)
 |`emergency_lock`              |                              |Emergency stops the FarmBot
 |`emergency_unlock`            |                              |Unlocks the FarmBot from being emergency stopped
 |`execute`                     |                              |Command for executing a sequence ([more info](https://software.farm.bot/docs/sequence-commands#execute-sequence))

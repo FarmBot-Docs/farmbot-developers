@@ -14,7 +14,6 @@ Not every piece of data that FarmBot works with can be transmitted as CeleryScri
 |`read_pin`                    |Updates the bot state tree and broadcasts over the appropriate status channel on the [Message Broker](../web-app/message-broker.md).
 |`read_status`                 |Forces the bot to re-transmit the entire status tree over the appropriate channel on the [Message Broker](../web-app/message-broker.md).
 |`sync`                        |Causes the bot to upload and download newly created resources on the [REST API](../web-app/rest-api.md).
-|`dump_info`                   |Creates a device diagnostic report that is only visible to server admins for the sake of troubleshooting.
 
 
 
