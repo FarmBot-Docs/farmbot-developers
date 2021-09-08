@@ -1,5 +1,5 @@
 ---
 permalink: /docs/assertions
-page_path: /Documentation/lua
+page_path: /lua/intro
 layout: redirect
 ---

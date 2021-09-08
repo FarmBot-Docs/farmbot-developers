@@ -70,58 +70,60 @@ content="Some nodes, such as the `coordinate` node, are used to represent data."
 
 See also the [corpus.d.ts](https://github.com/FarmBot/farmbot-js/blob/main/dist/corpus.d.ts) file.
 
-|kind                          |args                          |Description                   |
-|------------------------------|------------------------------|------------------------------|
-|`assertion`                   |                              |Command for assertion style automated testing ([more info](https://software.farm.bot/docs/sequence-commands#assertion))
-|`calibrate`                   |                              |Command for performing an axis [calibration](https://software.farm.bot/docs/sequence-commands#calibrate)
-|`change_ownership`            |                              |Transfers ownership of a FarmBot device from one web app account to another
-|`channel`                     |                              |
-|`check_updates`               |                              |Instructs FarmBot to check for software updates
-|`coordinate`                  |                              |
-|`emergency_lock`              |                              |Emergency stops the FarmBot
-|`emergency_unlock`            |                              |Unlocks the FarmBot from being emergency stopped
-|`execute`                     |                              |Command for executing a sequence ([more info](https://software.farm.bot/docs/sequence-commands#execute-sequence))
-|`execute_script`              |                              |
-|`explanation`                 |                              |
-|`factory_reset`               |                              |Instructs the FarmBot to factory reset
-|`find_home`                   |                              |Command for [finding home](https://software.farm.bot/docs/sequence-commands#find-home) along an axis
-|`flash_firmware`              |                              |Instructs FarmBot to flash firmware to the microcontroller
-|`home`                        |                              |Command instructing FarmBot to go to the home position (this is different than finding home)
-|`identifier`                  |                              |
-|`if`                          |                              |Allows FarmBot to evaluate if a condition is true or false and take a corresponding action
-|`internal_entry_point`        |                              |
-|`internal_farm_event`         |                              |
-|`internal_regimen`            |                              |
-|`move_absolute`               |                              |Command for moving FarmBot to an absolute coordinate position ([more info](https://software.farm.bot/docs/sequence-commands#move-to))
-|`move_relative`               |                              |Command for moving FarmBot a relative amount from the current location ([more info](https://software.farm.bot/docs/sequence-commands#move-relative))
-|`named_pin`                   |                              |
-|`nothing`                     |                              |
-|`pair`                        |                              |
-|`parameter_application`       |                              |
-|`parameter_declaration`       |                              |
-|`point`                       |                              |Represents a point (location) in the farm designer map such as a plant, weed, point, or tool slot
-|`point_group`                 |                              |A group of points (locations) in the farm designer map
-|`power_off`                   |                              |Instructs FarmBot to shutdown completely
-|`read_pin`                    |                              |Command for [reading a pin](https://software.farm.bot/docs/sequence-commands#read-sensor)
-|`read_status`                 |                              |
-|`reboot`                      |                              |Instructs FarmBot to reboot
-|`resource_update`             |                              |
-|`rpc_error`                   |                              |Indicates that the request operation has failed
-|`rpc_ok`                      |                              |Indicates that the request operation has succeeded
-|`rpc_request`                 |                              |Requests the device do something
-|`scope_declaration`           |                              |
-|`send_message`                |                              |Command for [sending a message](https://software.farm.bot/docs/sequence-commands#send-message)
-|`sequence`                    |                              |
-|`set_servo_angle`             |                              |Command for moving servo motors
-|`set_user_env`                |                              |
-|`sync`                        |                              |Instructs FarmBot to sync with the API
-|`take_photo`                  |                              |Instructs FarmBot to [take a photo](https://software.farm.bot/docs/sequence-commands#take-photo) and upload it to the API
-|`toggle_pin`                  |                              |Command for toggling the state of a pin
-|`tool`                        |                              |
-|`variable_declaration`        |                              |
-|`wait`                        |                              |Command for [waiting](https://software.farm.bot/docs/sequence-commands#wait) a time in milliseconds
-|`write_pin`                   |                              |Command for [writing](https://software.farm.bot/docs/sequence-commands#control-peripheral) a digital or analog value to a pin
-|`zero`                        |                              |Command for setting the current location to [zero](https://software.farm.bot/docs/sequence-commands#set-zero) along an axis
+|kind                   |type   |also known as     |Description                   |
+|-----------------------|-------|------------------|------------------------------|
+|`assertion`            |command|                  |Command for assertion style automated testing ([more info](https://software.farm.bot/docs/advanced-sequence-commands#assertion))
+|`calibrate`            |command|find axis length  |Command for performing an axis [calibration (find axis length)](https://software.farm.bot/docs/movement-sequence-commands#calibrate)
+|`change_ownership`     |command|                  |Transfers ownership of a FarmBot device from one web app account to another
+|`channel`              |       |                  |
+|`check_updates`        |command|update            |Instructs FarmBot to check for (and install) software updates
+|`coordinate`           |       |                  |
+|`emergency_lock`       |command|e-stop            |Emergency stops the FarmBot
+|`emergency_unlock`     |command|unlock            |Unlocks the FarmBot from being emergency stopped
+|`execute`              |command|execute sequence  |Command for executing a sequence ([more info](https://software.farm.bot/docs/logic-sequence-commands#execute-sequence))
+|`execute_script`       |command|                  |
+|`explanation`          |       |                  |Description of `rpc_error`
+|`factory_reset`        |command|soft reset        |Instructs the FarmBot to factory reset
+|`find_home`            |command|                  |Command for [finding home](https://software.farm.bot/docs/movements-sequence-commands#find-home) along an axis
+|`flash_firmware`       |command|                  |Instructs FarmBot to flash firmware to the microcontroller
+|`home`                 |command|move to home      |Command instructing FarmBot to go to the home position (this is different than finding home)
+|`identifier`           |       |                  |
+|`if`                   |command|                  |Allows FarmBot to evaluate if a condition is true or false and take a corresponding action
+|`internal_entry_point` |       |                  |
+|`internal_farm_event`  |       |                  |
+|`internal_regimen`     |       |                  |
+|`lua`                  |command|                  |see [lua documentation](../../lua/intro.md)
+|`move`                 |command|                  |Command for moving FarmBot ([more info](https://software.farm.bot/docs/movements-sequence-commands#move))
+|`move_absolute`        |command|move to           |Command for moving FarmBot to an absolute coordinate position ([more info](https://software.farm.bot/docs/movements-sequence-commands#move-to))
+|`move_relative`        |command|                  |Command for moving FarmBot a relative amount from the current location ([more info](https://software.farm.bot/docs/movements-sequence-commands#move-relative))
+|`named_pin`            |       |                  |
+|`nothing`              |       |                  |
+|`pair`                 |       |                  |
+|`parameter_application`|       |                  |
+|`parameter_declaration`|       |                  |
+|`point`                |       |                  |Represents a point (location) in the farm designer map such as a plant, weed, point, or tool slot
+|`point_group`          |       |                  |A group of points (locations) in the farm designer map
+|`power_off`            |command|shutdown          |Instructs FarmBot to shutdown completely
+|`read_pin`             |command|read sensor       |Command for [reading a pin (read sensor)](https://software.farm.bot/docs/peripherals-and-sensors-sequence-commands#read-sensor)
+|`read_status`          |command|                  |Instructs FarmBot to send a status message with a full state tree
+|`reboot`               |command|                  |Instructs FarmBot to reboot
+|`rpc_error`            |       |                  |Indicates that the request operation has failed
+|`rpc_ok`               |       |                  |Indicates that the request operation has succeeded
+|`rpc_request`          |       |                  |Requests the device do something
+|`scope_declaration`    |       |                  |
+|`send_message`         |command|                  |Command for [sending a message](https://software.farm.bot/docs/logic-sequence-commands#send-message)
+|`sequence`             |       |                  |
+|`set_servo_angle`      |command|control servo     |Command for moving servo motors
+|`set_user_env`         |       |                  |
+|`sync`                 |command|                  |Instructs FarmBot to sync with the API
+|`take_photo`           |command|                  |Instructs FarmBot to [take a photo](https://software.farm.bot/docs/image-proceessing-sequence-commands#take-photo) and upload it to the API
+|`toggle_pin`           |command|toggle peripheral |Command for toggling the state of a pin (toggle peripheral)
+|`tool`                 |       |                  |
+|`update_resource`      |command|mark as           |see documentation for [mark as](https://software.farm.bot/docs/logic-sequence-commands#mark-as) command
+|`variable_declaration` |       |                  |
+|`wait`                 |command|                  |Command for [waiting](https://software.farm.bot/docs/logic-sequence-commands#wait) a time in milliseconds
+|`write_pin`            |command|control peripheral|Command for [writing (control peripheral)](https://software.farm.bot/docs/peripherals-and-sensors-sequence-commands#control-peripheral) a digital or analog value to a pin
+|`zero`                 |command|set home          |Command for setting the current location to [zero (set home)](https://software.farm.bot/docs/movements-sequence-commands#set-zero) along an axis
 
 
 
