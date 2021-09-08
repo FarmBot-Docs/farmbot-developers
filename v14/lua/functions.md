@@ -1,21 +1,30 @@
 ---
-title: "Lua"
-slug: "lua"
+title: "Lua Functions"
+slug: "functions"
 description: "List of available Lua functions in FarmBot OS"
 ---
 
 * toc
 {:toc}
 
-The [sequence editor](https://software.farm.bot/docs/sequences) is an easy to use tool for automating FarmBot operations. However, advanced users who are familiar with computer programming concepts may opt for a more advanced interface. For these users, we provide several methods to insert **Lua code fragments** directly into sequences:
-
- * By using the <span class="fb-step fb-lua">Lua</span> command ([learn more](https://software.farm.bot/docs/advanced-sequence-commands)).
- * By using the <span class="fb-step fb-assertion">Assertion</span> command ([learn more](https://software.farm.bot/docs/advanced-sequence-commands)).
- * By adding a **formula** to a <span class="fb-step fb-move">Move</span> command input field ([learn more](https://software.farm.bot/v14/The-FarmBot-Web-App/sequences/sequence-commands.html#advanced-options)).
 
 All of the available Lua functions are listed below. Additionally, you may access most of the functions available in the [Lua 5.2 standard library](https://www.lua.org/manual/5.2/). If you have questions about the available functions or would like us to make new features available, please let us know in the [FarmBot Forum](https://forum.farmbot.org/).
 
-For examples of how to use Lua to send data to third party APIs like chat apps, see our [Slack chat app tutorial](lua/lua-examples.md)
+# base64.encode()
+
+{%
+include callout.html
+type="info"
+title="Coming soon"
+content="This Lua function is coming soon."
+%}
+
+Performs `base64` encoding on an object such as an image. Useful for uploading images to 3rd party APIs. Can also be used in reverse: `base64.decode()`.
+
+```lua
+data = take_photo_raw()
+return base64.encode(data)
+```
 
 # coordinate(x, y, z)
 
@@ -373,9 +382,14 @@ send_message("info", "Distance to soil at (10, 29): " .. inspect(my_soil_height)
 
 # take_photo()
 
-**KNOWN BUG:** Take photo may return errors asynchronously, which may lead some developers to believe the `take_photo` operation has succeeded when it actually fails in the background.
+{%
+include callout.html
+type="bug"
+title="Known bug"
+content="`take_photo` may return errors asyncronously, which may lead developers to believe the operation has succeeded when it actually fails in the background."
+%}
 
-Takes a photo using the device camera. Returns `nil` on success. Returns an error object if capture fails.
+Takes a photo using the device camera and uploads it to the web app. Returns `nil` on success. Returns an error object if capture fails.
 
 ```lua
 error = take_photo()
@@ -387,15 +401,42 @@ else
 end
 ```
 
+# take_photo_raw()
+
+{%
+include callout.html
+type="info"
+title="Coming soon"
+content="This Lua function is coming soon."
+%}
+
+Takes a photo using the device camera and holds it in memory. Useful for further processing the photo for uploading to 3rd party APIs.
+
+{%
+include callout.html
+type="info"
+content="`take_photo_raw()` will not upload the photo to the web app."
+%}
+
+```lua
+data = take_photo_raw()
+return base64.encode(data)
+```
+
 # uart.close()
 
 See documentation for `uart.open()`.
 
 # uart.list()
 
-Returns a list of UART devices
+Returns a list of UART devices.
 
-**WARNING!:** UART Lua support is experimental and may not work correctly yet. Please provide us feedback on [the FarmBot forum](https://forum.farmbot.org/) so that we may become aware of reliability issues.
+{%
+include callout.html
+type="warning"
+title="Experimental"
+content="UART Lua support is experimental and may not work correctly yet. Please provide us feedback on [the FarmBot forum](https://forum.farmbot.org/) so that we may become aware of reliability issues."
+%}
 
 ```lua
 uart_list = uart.list()
@@ -409,7 +450,12 @@ end
 
 Open a UART device (typically, via USB) for reading and writing. Please note that the UART devices must be connected to the Raspberry Pi, not the Arduino.
 
-**WARNING!:** UART Lua support is experimental and may not work correctly yet. Please provide us feedback on [the FarmBot forum](https://forum.farmbot.org/) so that we may become aware of reliability issues.
+{%
+include callout.html
+type="warning"
+title="Experimental"
+content="UART Lua support is experimental and may not work correctly yet. Please provide us feedback on [the FarmBot forum](https://forum.farmbot.org/) so that we may become aware of reliability issues."
+%}
 
 ```lua
 -- device name, baud rate:
@@ -496,4 +542,4 @@ write_pin(13, "analog", 128)
 
 # What's next?
 
- * [Lua Examples](lua/lua-examples.md)
+ * [Lua Examples](examples.md)
