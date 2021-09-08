@@ -28,10 +28,6 @@ contents:
             url: message-broker
           - title: Subscribing to Resource Updates
             url: realtime-updates-auto-sync
-          - title: Publishing Resources via MQTT, Introduction
-            url: experimental-mqtt-api
-          - title: Publishing Resource Updates via MQTT
-            url: create-a-resource
           - title: ENV Vars and GlobalConfigs
             url: env-vars-and-globalconfigs
           - title: Special API Endpoints
