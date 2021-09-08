@@ -71,11 +71,21 @@ contents:
             url: parameters
           - title: Custom Firmware
             url: custom-firmware
-      - title: Lua
-        url: lua
+  - title: Lua
+    url: lua
+    top: true
+    pages:
+      - title: Intro
+        url: intro
+      - title: Functions
+        url: functions
+      - title: Examples
+        url: examples
         pages:
-          - title: Examples
-            url: lua-examples
+        - title: Send Slack Messages
+          url: send-slack-messages
+        - title: Identify Plants
+          url: identify-plants
   - title: Python
     url: Python
     top: true
