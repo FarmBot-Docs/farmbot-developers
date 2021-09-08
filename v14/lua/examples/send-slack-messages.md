@@ -7,7 +7,7 @@ description: "Example Lua code for sending messages to a Slack channel"
 * toc
 {:toc}
 
-It is possible for FarmBot to send outbound HTTP requests using [Lua](../../lua.md). This feature can be used to create third-party integrations with proprietary software products that offer webhook integrations, such as [Slack](https://slack.com/).
+It is possible for FarmBot to send outbound HTTP requests using [Lua](../../lua/intro.md). This feature can be used to create third-party integrations with proprietary software products that offer webhook integrations, such as [Slack](https://slack.com/).
 
 In this tutorial, we will demonstrate how it is possible to send messages from FarmBot to Slack using this abbreviated process:
 
