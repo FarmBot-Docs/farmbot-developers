@@ -47,6 +47,7 @@ Once you have a Plant.ID token, navigate to the [sequence editor](https://softwa
 Add a <span class="fb-step fb-lua">Lua</span> command to the sequence and paste in the following code:
 
 ```lua
+p = variable("parent")
 r = 40
 rad = (math.pi * 2) / 6
 o_x = tonumber(env("CAMERA_CALIBRATION_camera_offset_x") or "0")
@@ -61,7 +62,7 @@ end
 function s(num)
     x = p.x - o_x + (r * math.cos(rad * num))
     y = p.y - o_y + (r * math.sin(rad * num))
-    z = soil_height(x, y) * 0.6
+    z = 0
     move_absolute(x, y, z)
     data = take_photo_raw()
     return base64.encode(data)
@@ -75,28 +76,39 @@ headers["Api-Key"] = token
 body = {
     images = images,
     modifiers = {"health_all", "crops_medium"},
-    plant_details = {
-        "common_names", "edible_parts", "gbif_id", "name_authority",
-        "propagation_methods", "synonyms", "taxonomy", "url",
-        "wiki_description", "wiki_image", "wiki_images"
+    plant_details = {"common_names"}
 }
-ok, err = http({
+response, err = http({
     url = "https://api.plant.id/v2/identify",
     method = "POST",
     headers = headers,
     body = json.encode(body)
 })
 
+function common_name(num)
+  return data["suggestions"][num]["plant_details"]["common_names"][1]
+end
+
+function probability(num)
+  return math.floor((data["suggestions"][num]["probability"]) * 100 + 0.5)
+end
+
+function result(num)
+  return common_name(num) .. " (" .. probability(num) .. "%)"
+end
+
 if err then
-    send_message("error", inspect(err), "toast")
+  send_message("error", inspect(err), "toast")
 else
-    data = json.decode(ok.body)
-    name = "Plant name: " .. data["suggestions"][1]["plant_name"]
-    send_message("info", inspect(name), "toast")
+  data = json.decode(response.body)
+  report = "Possible plants: " .. result(1) .. ", " .. result(2) .. ", " .. result(3)
+  send_message("info", inspect(report), "toast")
 end
 ```
 
 Now <span class="fb-button fb-green">SAVE</span> the sequence and wait for it to sync with the FarmBot. You can then test it with the <span class="fb-button fb-orange">RUN</span> button to make sure it functions as expected.
+
+![plant.id results](_images/identify_plant_results.png)
 
 # Step 4: Run the sequence
 
