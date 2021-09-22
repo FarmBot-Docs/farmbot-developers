@@ -1,5 +1,5 @@
 version_number: 13
-status: stable
+status: deprecated
 home: Documentation/farmbot-software-development
 contents:
   - title: Documentation
