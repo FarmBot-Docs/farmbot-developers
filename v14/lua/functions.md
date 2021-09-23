@@ -14,9 +14,9 @@ All of the available Lua functions are listed below. Additionally, you may acces
 
 {%
 include callout.html
-type="info"
-title="Coming soon"
-content="This Lua function is coming soon."
+type="warning"
+title="Beta"
+content="This Lua function is available in FBOS v14.4.0 though it is subject to change."
 %}
 
 Performs `base64` encoding on an object such as an image. Useful for uploading images to 3rd party APIs. Can also be used in reverse: `base64.decode()`.
@@ -405,9 +405,9 @@ end
 
 {%
 include callout.html
-type="info"
-title="Coming soon"
-content="This Lua function is coming soon."
+type="warning"
+title="Beta"
+content="This Lua function is available in FBOS v14.4.0 though it is subject to change."
 %}
 
 Takes a photo using the device camera and holds it in memory. Useful for further processing the photo for uploading to 3rd party APIs.
@@ -531,8 +531,6 @@ send_message("info", x_pos, {"toast"});
 ```
 
 # write_pin(pin, mode, value)
-
-{% include callout.html type="info" content="Available in FarmBot OS v14.2.1 and newer." %}
 
 Sets a pin to a particular mode and value:
 

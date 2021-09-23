@@ -7,13 +7,6 @@ description: "Use the Plant.ID API to identify plants in your garden"
 * toc
 {:toc}
 
-{%
-include callout.html
-type="info"
-title="Coming soon"
-content="This example features Lua functions that are coming soon."
-%}
-
 It is possible for FarmBot to upload images to a 3rd party API for further processing, archiving, machine learning, and more. In this tutorial, we will demonstrate how to upload images from FarmBot to the [Plant.ID](https://plant.id/) API using this abbreviated process:
 
 1. FarmBot takes six photos in a circle around a plant.
