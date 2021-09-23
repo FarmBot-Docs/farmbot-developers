@@ -14,7 +14,7 @@ All of the available Lua functions are listed below. Additionally, you may acces
 
 {%
 include callout.html
-type="info"
+type="warning"
 title="Beta"
 content="This Lua function is available in FBOS v14.4.0 though it is subject to change."
 %}
@@ -405,7 +405,7 @@ end
 
 {%
 include callout.html
-type="info"
+type="warning"
 title="Beta"
 content="This Lua function is available in FBOS v14.4.0 though it is subject to change."
 %}
