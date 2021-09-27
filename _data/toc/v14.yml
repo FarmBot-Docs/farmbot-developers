@@ -82,6 +82,8 @@ contents:
           url: send-slack-messages
         - title: Identify Plants
           url: identify-plants
+        - title: Bulk delete all images
+          url: bulk-delete-all-images
   - title: Python
     url: Python
     top: true
