@@ -1,6 +1,6 @@
 ---
 title: "Bulk Delete All Images"
-slug: "identify-plants"
+slug: "bulk-delete-all-images"
 description: "Clear all images from your account using Lua"
 ---
 
