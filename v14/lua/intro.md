@@ -27,6 +27,14 @@ You can also execute Lua by using the **formula** option in a <span class="fb-st
 
 ![move command with formula](_images/move_command_with_formula.png)
 
+# A Note About Long-Running Lua Scripts
+
+Lua, like many scripting languages, has automatic [garbage collection](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)).
+Although the FarmBot Lua runtime does support garbage collection, it will never run the garbage collector automatically. Determining the appropriate time to run garbage collection is the end user's responsibility, which is quite different from most Lua environments.
+
+If you have a long-running Lua script that appears to slow down over time, or you find that FarmBot OS runs out of memory while a script runs, this most likely means that you need to run the garbage collector.
+
+End users can trigger a garbage collector sweep by running `collectgarbage()`. Most users do not need to do this, and this advice only applies to long-running and memory-intensive Lua scripts.
 
 # What's next?
 
