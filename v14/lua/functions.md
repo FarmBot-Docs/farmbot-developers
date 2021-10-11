@@ -386,7 +386,7 @@ send_message("info", "Distance to soil at (10, 29): " .. inspect(my_soil_height)
 include callout.html
 type="bug"
 title="Known bug"
-content="`take_photo` may return errors asyncronously, which may lead developers to believe the operation has succeeded when it actually fails in the background."
+content="`take_photo` returns errors asyncronously, which may lead developers to believe the operation has succeeded when it actually fails in the background. If you require a high level of control over errors or are taking photos beyond the limits that the Web App allows, see `take_photo_raw()`."
 %}
 
 Takes a photo using the device camera and uploads it to the web app. Returns `nil` on success. Returns an error object if capture fails.
@@ -403,19 +403,12 @@ end
 
 # take_photo_raw()
 
-{%
-include callout.html
-type="warning"
-title="Beta"
-content="This Lua function is available in FBOS v14.4.0 though it is subject to change."
-%}
-
-Takes a photo using the device camera and holds it in memory. Useful for further processing the photo for uploading to 3rd party APIs.
+`take_photo_raw()` takes a photo using the device camera and holds it in memory. This functionality is useful when uploading photos to 3rd party APIs. If your usecase requires taking hundreds or thousands of photos per-use, you can use `take_photo_raw()` to upload your images to a third-party image hosting provider that does not impose the same image hosting limits as the Web App.
 
 {%
 include callout.html
 type="info"
-content="`take_photo_raw()` will not upload the photo to the web app."
+content="`take_photo_raw()` does not upload images to the web app. You must manually upload the resulting images to a hosting provider."
 %}
 
 ```lua
