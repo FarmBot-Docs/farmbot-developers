@@ -26,6 +26,10 @@ data = take_photo_raw()
 return base64.encode(data)
 ```
 
+# calibrate_camera()
+
+Performs camera calibration. Calling this function will **reset camera calibration settings**.
+
 # coordinate(x, y, z)
 
 Generate a coordinate for use in location-based functions such as `move_absolute` and `check_position`.
@@ -52,6 +56,10 @@ if check_position(home, 0.5) then
   send_message("info", "FarmBot is at the home position")
 end
 ```
+
+# detect_plants()
+
+Take a photo of the current location. If any vegetation is detected, it will be added to the device's list of weeds.
 
 # emergency_lock()
 
@@ -145,6 +153,16 @@ Returns a string representation of the firmware version on the Farmduino/Arduino
 
 ```lua
 firmware_version()
+```
+
+# garden_size()
+
+Returns a table with an `x` and `y` attribute represent the maximum length of the garden bed as determined by firmware config settings.
+
+```lua
+size = garden_size()
+send_message("info", "Width: " .. size.y)
+send_message("info", "Length: " .. size.x)
 ```
 
 # get_device(property?)
@@ -265,6 +283,12 @@ Converts a Lua variable into stringified JSON.
 result, error = json.encode({ foo="bar", example=123 })
 -- => '{"foo":"bar","example":123}'
 ```
+
+# measure_soil_height()
+
+Use the camera to determine soil depth at the current location.
+Results will be available as point resources in the API.
+Performing this action over a wide area in many locations will improve the accuracy of soil height readings taken via `soil_height(x, y)`.
 
 # move_absolute(x, y, z) / move_absolute(coord)
 
