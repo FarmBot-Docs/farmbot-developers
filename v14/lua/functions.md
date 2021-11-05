@@ -57,9 +57,9 @@ if check_position(home, 0.5) then
 end
 ```
 
-# detect_plants()
+# detect_weeds()
 
-Take a photo of the current location. If any vegetation is detected, it will be added to the device's list of weeds.
+Take a photo of the current location. If any vegetation is detected in the photo, it will be added to the device's list of weeds.
 
 # emergency_lock()
 
