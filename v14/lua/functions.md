@@ -10,6 +10,25 @@ description: "List of available Lua functions in FarmBot OS"
 
 All of the available Lua functions are listed below. Additionally, you may access most of the functions available in the [Lua 5.2 standard library](https://www.lua.org/manual/5.2/). If you have questions about the available functions or would like us to make new features available, please let us know in the [FarmBot Forum](https://forum.farmbot.org/).
 
+# auth_token()
+
+Returns the device's authorization token (string). This value can be used to access API resources without the need to store account passwords in Lua code or ENV vars.
+
+```lua
+-- Fetch all points from API:
+
+resp_json, err = http({
+    method = "GET",
+    url = "https://my.farm.bot/api/points",
+    headers = {
+        Authorization = ("bearer " .. auth_token()),
+        Accept = "application/json"
+    }
+})
+
+points = json.decode(resp_json)
+```
+
 # base64.encode()
 
 {%
