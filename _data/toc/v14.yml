@@ -102,6 +102,8 @@ contents:
         url: weed-detection
       - title: Measure soil height
         url: measure-soil-height
+      - title: Interpolation
+        url: interpolation
   - title: Other Resources
     url: Other-Resources
     top: true
