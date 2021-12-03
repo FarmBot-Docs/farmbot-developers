@@ -58,6 +58,8 @@ contents:
             url: beta-updates
           - title: Sidecar Hardware
             url: sidecar-hardware
+          - title: Simulating a FarmBot
+            url: simulating-a-farmbot
           - title: Frequently Asked Questions
             url: farmbot-os-faq
       - title: Firmware
@@ -78,12 +80,12 @@ contents:
       - title: Examples
         url: examples
         pages:
-        - title: Send Slack Messages
-          url: send-slack-messages
-        - title: Identify Plants
-          url: identify-plants
-        - title: Bulk Delete All Images
-          url: bulk-delete-all-images
+          - title: Send Slack Messages
+            url: send-slack-messages
+          - title: Identify Plants
+            url: identify-plants
+          - title: Bulk Delete All Images
+            url: bulk-delete-all-images
   - title: Python
     url: Python
     top: true
