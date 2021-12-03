@@ -17,7 +17,7 @@ FarmBot v1.2 is the easiest model to simulate because it uses off-the-shelf comp
  * An Arduino Mega and relevant USB power cables (~$17).
  * The [latest FarmBot OS image file](https://my.farm.bot/os)
 
-![An Arduino Mega and a Raspberry Pi 3](arduino_rpi.png)
+![An Arduino Mega and a Raspberry Pi 3](_images/arduino_rpi.png)
 
 # Steps
 
@@ -25,8 +25,8 @@ FarmBot v1.2 is the easiest model to simulate because it uses off-the-shelf comp
 1. Select "v1.2" for the device hardware in the new web app account.
 1. Flash the [latest version of FarmBot OS](https://my.farm.bot/os) to the SD Card.
 1. Insert the SD card into the Raspberry Pi and apply power.
-1. Complete WiFi configuration steps and wait for the device to come online.
+1. [Complete WiFi configuration steps](https://software.farm.bot/docs/configurator) and wait for the device to come online.
 1. (important) Disable encoders from the device settings page. This will allow for smooth on-screen movement in the Web App when simulating a device.
 1. The device is ready for simulation.
 
-![Disabled encoders from the firmware settings page](disable_encoders.png)
+![Disabled encoders from the firmware settings page](_images/disable_encoders.png)
