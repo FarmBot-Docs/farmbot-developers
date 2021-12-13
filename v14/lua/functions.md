@@ -601,7 +601,7 @@ Things to keep in mind:
  * The pin watcher feature exists to support internal functionality of the FarmBot, such as motor load monitoring for vacuum and rotary tools. It is an advanced feature that should only be used as a last resort when more simple solutions cannot be used.
  * The callback is a _forked copy of the running Lua script_. It is not executed in the same script.
  * The callback _does not share memory_ with the calling script. It is completely isolated from its parent. Even though you can access variables with identical names as the parent script, they are _not_ shared. They are duplicate copies.
- * Because the callback is _re-initialized_ every 500 ms. It is not possible to store state in the callback function. Any variales that are modified will be reset upon the next run.
+ * Because the callback is _re-initialized_ every 500 ms. It is not possible to store state in the callback function. Any variables that are modified will be reset upon the next run.
  * The callback is terminated within 500 ms of the parent's termination.
 
 ```lua
