@@ -31,13 +31,6 @@ points = json.decode(resp_json)
 
 # base64.encode()
 
-{%
-include callout.html
-type="warning"
-title="Beta"
-content="This Lua function is available in FBOS v14.4.0 though it is subject to change."
-%}
-
 Performs `base64` encoding on an object such as an image. Useful for uploading images to 3rd party APIs. Can also be used in reverse: `base64.decode()`.
 
 ```lua
@@ -58,6 +51,12 @@ coordinate(1.0, 20, 30)
 -- Returns:
 -- {x = 1.0, y = 20,  z = 30}
 ```
+
+# collectgarbage()
+
+Although most Lua environments will perform [garbage collection](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)) sweeps automatically, FarmBot's implementation does not.
+
+If you are authoring a long running Lua script, such as one that iterates over large loops, it is essential that you call `collectgarbage()` manually. Failing to do so will cause the system to crash when it runs out of memory.
 
 # check_position(coord, tolerance)
 
@@ -309,7 +308,7 @@ Use the camera to determine soil depth at the current location.
 Results will be available as point resources in the API.
 Performing this action over a wide area in many locations will improve the accuracy of soil height readings taken via `soil_height(x, y)`.
 
-# move_absolute(x, y, z) / move_absolute(coord)
+# move_absolute(x, y, z, s?) / move_absolute(coord)
 
 Move to an absolute coordinate position.
 
@@ -318,6 +317,8 @@ move_absolute(1.0, 2, 3.4)
 -- Alternative syntax:
 move_absolute(coordinate(1.0, 20, 30))
 ```
+
+**NOTE:** `move_absolute` can accept an optional fourth argument that sets movement speed as a percentage of max speed.
 
 # new_sensor_reading(params)
 
@@ -340,6 +341,45 @@ while (i < 10) do
     value=(math.random() * 1024)
   })
 end
+```
+
+# photo_grid()
+
+Every FarmBot has a different garden size and camera viewport. The `photo_grid()` helper provides developers with a metadata object about the unique camera setup for the current device. The helper is most useful for operations that perform full-garden photography, such as taking a scan of the garden.
+
+Calling `photo_grid()` will return a table with the following properties:
+
+| Property          | Description |
+|-------------------|-------------|
+| `each`            | An iterator function that is called once per cell (see example below). |
+| `total`           | The number of cells contained in the photo grid for the device. |
+| `x_grid_points`   | The length of the garden scan on the X axis, measured in cells. |
+| `y_grid_points`   | The length of the garden scan on the Y axis, measured in cells. |
+| `x_grid_start_mm` | The X coordinate for the center of the first cell in the grid. |
+| `y_grid_start_mm` | The Y coordinate for the center of the first cell in the grid. |
+| `x_offset_mm`     | The camera's relative X offset from the FarmBot position. |
+| `y_offset_mm`     | The camera's relative Y offset from the FarmBot position. |
+| `x_spacing_mm`    | The number of millimeters between cells on the X axis. |
+| `y_spacing_mm`    | The number of millimeters between cells on the Y axis. |
+| `z`               | The height at which the camera was calibrated. |
+
+**Example:** Perform a full-garden photo scan:
+
+```lua
+local grid = photo_grid()
+
+grid.each(function(cell)
+    if read_status("informational_settings", "locked") then
+        return
+    else
+        collectgarbage()
+        move_absolute({x = cell.x, y = cell.y, z = cell.z})
+        local msg = "Taking photo " .. cell.count .. " of " .. grid.total
+        send_message("info", msg)
+        take_photo()
+    end
+end)
+
 ```
 
 # read_pin(pin, mode?)
@@ -402,15 +442,6 @@ else
 end
 ```
 
-# wait(ms)
-
-Pause execution for a certain number of milliseconds. **Crashes if the value is three minutes or greater.**
-
-```lua
--- wait for 1 second:
-wait(1000)
-```
-
 # soil_height(x, y)
 
 Given an X and Y coordinate, returns a best-effort estimate of the Z axis height of the soil. This function requires at least 3 soil height measurments. When there are less than 3 measurements available, it will return the SOIL HEIGHT setting from the device settings page.
@@ -467,13 +498,6 @@ See documentation for `uart.open()`.
 
 Returns a list of UART devices.
 
-{%
-include callout.html
-type="warning"
-title="Experimental"
-content="UART Lua support is experimental and may not work correctly yet. Please provide us feedback on [the FarmBot forum](https://forum.farmbot.org/) so that we may become aware of reliability issues."
-%}
-
 ```lua
 uart_list = uart.list()
 
@@ -485,13 +509,6 @@ end
 # uart.open(path, baud)
 
 Open a UART device (typically, via USB) for reading and writing. Please note that the UART devices must be connected to the Raspberry Pi, not the Arduino.
-
-{%
-include callout.html
-type="warning"
-title="Experimental"
-content="UART Lua support is experimental and may not work correctly yet. Please provide us feedback on [the FarmBot forum](https://forum.farmbot.org/) so that we may become aware of reliability issues."
-%}
 
 ```lua
 -- device name, baud rate:
@@ -566,6 +583,40 @@ x_pos = variable("parent").x
 send_message("info", x_pos, {"toast"});
 ```
 
+# wait(ms)
+
+Pause execution for a certain number of milliseconds. **Crashes if the value is three minutes or greater.**
+
+```lua
+-- wait for 1 second:
+wait(1000)
+```
+
+# watch_pin(pin, callback)
+
+Fork the current Lua process into a second, parellel Lua script that is initialized every 500 milliseconds for the duration of the parent script's lifetime.
+
+Things to keep in mind:
+
+ * The pin watcher feature exists to support internal functionality of the FarmBot, such as motor load monitoring for vacuum and rotary tools. It is an advanced feature that should only be used as a last resort when more simple solutions cannot be used.
+ * The callback is a _forked copy of the running Lua script_. It is not executed in the same script.
+ * The callback _does not share memory_ with the calling script. It is completely isolated from its parent. Even though you can access variables with identical names as the parent script, they are _not_ shared. They are duplicate copies.
+ * Because the callback is _re-initialized_ every 500 ms. It is not possible to store state in the callback function. Any variales that are modified will be reset upon the next run.
+ * The callback is terminated within 500 ms of the parent's termination.
+
+```lua
+watch_pin(13, function(data)
+  local pin = data.pin
+  local val = data.value
+  local msg = "Pin " .. pin .. " has a value of " .. val
+  send_message("debug", msg, "toast")
+end)
+
+-- Wait 3 seconds so that the watcher
+-- can run a few (~6) times.
+--
+wait(3000)
+```
 # write_pin(pin, mode, value)
 
 Sets a pin to a particular mode and value:
