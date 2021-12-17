@@ -18,13 +18,13 @@ Some third-party applications require the ability to track FarmBot's XYZ positio
 Unfortunately, you cannot track the device position in realtime via Lua or the sequence editor:
 
  * The sequence editor does not have facilities to track position, aside from simple template variables in [SEND MESSAGE](https://software.farm.bot/v14/The-FarmBot-Web-App/sequences/sequence-commands/logic.html#send-message).
- * It is not possible to easily track the position in Lua because the Lua environment does not support concurrent operations. It is possible to read the bot position via [read_status() function](https://developer.farm.bot/v14/Documentation/lua.html#read_status) or [get_position()](https://developer.farm.bot/v14/Documentation/lua.html#get_position), but not in realtime. That is to say, you cannot send commands and read the position at the same time.
+ * It is not possible to easily track the position in Lua because the Lua environment does not support concurrent operations. It is possible to read the bot position via [read_status() function](../functions.md#readstatuspath) or [get_position()](../functions.md#getposition), but not in realtime. That is to say, you cannot send commands and read the position at the same time.
 
 **If you want to track the position of FarmBot in real-time, you must write software that runs off-device using MQTT, FarmBot.JS or FarmBot.py.**
 
 # Solution: Track Position with Raw MQTT
 
-FarmBot uses [MQTT](https://developer.farm.bot/v14/Documentation/web-app/message-broker.html#mqtt) to transmit data about its internal state. This data includes position information. It is re-broadcast every time the position changes. The most basic way to read this information is to use an MQTT client like [MQTTx](https://mqttx.app/) or an MQTT library like [Paho MQTT](https://developer.farm.bot/v14/Python/message-broker-examples.html).
+FarmBot uses [MQTT](../../Documentation/web-app/message-broker.md#mqtt) to transmit data about its internal state. This data includes position information. It is re-broadcast every time the position changes. The most basic way to read this information is to use an MQTT client like [MQTTx](https://mqttx.app/) or an MQTT library like [Paho MQTT](../../Python/message-broker-examples.md).
 
 In this first example, we will attempt to connect to FarmBot directly using an MQTT client.
 
@@ -38,7 +38,7 @@ Disadvantages of raw MQTT:
 
 ### Step 1: Generate a Token via `curl` (or Similar)
 
-The FarmBot MQTT requires authentication to read or write to MQTT topics. Before we can access the device, we must [create an access token](https://developer.farm.bot/v14/Python/web-app-api-examples.html#undefined).
+The FarmBot MQTT requires authentication to read or write to MQTT topics. Before we can access the device, we must [create an access token](../../Python/web-app-api-examples.md#get-your-farmbot-web-app-token).
 
 Let's create a token now, using the [Curl](https://curl.se/) HTTP library:
 
@@ -106,7 +106,7 @@ A screenshot of the MQTT settings as seen in MQTTx are shown below:
 
 ## Step 3: Subscribe to the "Status" Topic
 
-FarmBot will send and receive information through [a variety of MQTT topics](https://developer.farm.bot/v14/Documentation/web-app/message-broker.html#step-3-subscribing-to-topics). The topic we care about for this example is the "status" topic, which broadcasts all information about the device in a large JSON object. The topic name depends on your device ID. If your device id was `device_456`, then you would subscribe to:
+FarmBot will send and receive information through [a variety of MQTT topics](../../Documentation/web-app/message-broker.md#step-3-subscribing-to-topics). The topic we care about for this example is the "status" topic, which broadcasts all information about the device in a large JSON object. The topic name depends on your device ID. If your device id was `device_456`, then you would subscribe to:
 
 ```
 bot/device_456/status

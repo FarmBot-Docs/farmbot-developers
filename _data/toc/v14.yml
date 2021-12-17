@@ -86,6 +86,8 @@ contents:
             url: identify-plants
           - title: Bulk Delete All Images
             url: bulk-delete-all-images
+          - title: Track Movement
+            url: track-movement
   - title: Python
     url: Python
     top: true
