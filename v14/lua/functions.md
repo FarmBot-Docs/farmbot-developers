@@ -454,6 +454,12 @@ send_message("info", "Distance to soil at (10, 29): " .. inspect(my_soil_height)
 -- => "Distance to soil at (10, 29): -409.84"
 ```
 
+# soft_stop()
+
+This is an advanced feature that is intended to be used in conjunction with `watch_pin`.
+
+When called, `soft_stop` will cancel all current and pending movement requests. Unlike `emergency_lock`, it will not lock the device nor will it reset the state of peripherals. Commands (including movement commands) will continue normally a soft stop occurs. This function can be used to pause FarmBot temporarily if a peripheral value changes mid-movement.
+
 # take_photo()
 
 {%
