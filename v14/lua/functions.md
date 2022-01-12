@@ -52,12 +52,6 @@ coordinate(1.0, 20, 30)
 -- {x = 1.0, y = 20,  z = 30}
 ```
 
-# collectgarbage()
-
-Although most Lua environments will perform [garbage collection](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)) sweeps automatically, FarmBot's implementation does not.
-
-If you are authoring a long running Lua script, such as one that iterates over large loops, it is essential that you call `collectgarbage()` manually. Failing to do so will cause the system to crash when it runs out of memory.
-
 # check_position(coord, tolerance)
 
 `check_position(coordinate, tolerance)` returns `true` if the device is within the `tolerance` range of `coordinate`.
@@ -372,7 +366,6 @@ grid.each(function(cell)
     if read_status("informational_settings", "locked") then
         return
     else
-        collectgarbage()
         move_absolute({x = cell.x, y = cell.y, z = cell.z})
         local msg = "Taking photo " .. cell.count .. " of " .. grid.total
         send_message("info", msg)
