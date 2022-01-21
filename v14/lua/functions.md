@@ -442,7 +442,6 @@ grid.each(function(cell)
     if read_status("informational_settings", "locked") then
         return
     else
-        collectgarbage()
         move_absolute({x = cell.x, y = cell.y, z = cell.z})
         local msg = "Taking photo " .. cell.count .. " of " .. grid.total
         send_message("info", msg)
@@ -528,7 +527,7 @@ send_message("info", "Distance to soil at (10, 29): " .. inspect(my_soil_height)
 
 This is an advanced feature that is intended to be used in conjunction with `watch_pin`.
 
-When called, `soft_stop` will cancel all current and pending movement requests. Unlike `emergency_lock`, it will not lock the device nor will it reset the state of peripherals. Commands (including movement commands) will continue normally a soft stop occurs. This function can be used to pause FarmBot temporarily if a peripheral value changes mid-movement.
+When called, `soft_stop` will cancel all current and pending movement requests. Unlike `emergency_lock`, it will not lock the device nor will it reset the state of peripherals. Commands (including movement commands) will continue normally after a soft stop occurs. This function can be used to pause FarmBot temporarily if a peripheral value changes mid-movement.
 
 # take_photo()
 
