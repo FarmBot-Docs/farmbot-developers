@@ -28,7 +28,7 @@ result = api({
     method = "post",
     -- Don't forget the leading "/":
     url = "/api/points",
-    -- `body` is option for GET requests.
+    -- `body` is optional for GET requests.
     body = {
         x = 200,
         y = 200,
@@ -106,7 +106,7 @@ coordinate(1.0, 20, 30)
 
 # cs_eval(celeryscript_ast)
 
-**ADVANCED USERS ONLY.** Allows you to execute arbitrary CeleryScript nodes. Even advanced users should avoid using this function dirrectly.
+**ADVANCED USERS ONLY.** Allows you to execute arbitrary CeleryScript nodes. Even advanced users should avoid using this function directly.
 
 ```lua
 cs_eval({
@@ -128,9 +128,9 @@ cs_eval({
 })
 ```
 
-# current_hour / current_minute / current_month / current_second
+# current_month / current_hour / current_minute / current_second
 
-Returns a number representing the current hour, minute, second, etc..
+Returns a number representing the current month, hour, minute, or second.
 
 # detect_weeds()
 
