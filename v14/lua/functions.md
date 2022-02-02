@@ -7,8 +7,43 @@ description: "List of available Lua functions in FarmBot OS"
 * toc
 {:toc}
 
-
 All of the available Lua functions are listed below. Additionally, you may access most of the functions available in the [Lua 5.2 standard library](https://www.lua.org/manual/5.2/). If you have questions about the available functions or would like us to make new features available, please let us know in the [FarmBot Forum](https://forum.farmbot.org/).
+
+# api(options)
+
+Performs an HTTP request to the FarmBot API, returning `nil` if an error occurs (see logs for details).
+
+This is a limited convenience function that provides an alternative to the `http()` helper. It has a few differences from `http()`:
+
+ * You do not need to run `json.encode` on inputs
+ * You do not need to run `json.decode` on outputs
+ * The only supported request format is JSON
+ * You do not need to pass an `auth_token()` in the header
+ * The base URL is not configurable. `https://my.farm.bot` is the only endpoint supported.
+ * Returns `nil` if there was an error
+ * Errors are sent to the log stream (if any).
+
+```lua
+result = api({
+    method = "post",
+    -- Don't forget the leading "/":
+    url = "/api/points",
+    -- `body` is optional for GET requests.
+    body = {
+        x = 200,
+        y = 200,
+        z = 0,
+        radius = 100,
+        pointer_type = "GenericPointer"
+    }
+})
+
+if result then
+    send_message("debug", "Point creation OK", "toast")
+else
+    send_message("error", "ERROR - See logs for details", "toast")
+end
+```
 
 # auth_token()
 
@@ -42,22 +77,6 @@ return base64.encode(data)
 
 Performs camera calibration. Calling this function will **reset camera calibration settings**.
 
-# coordinate(x, y, z)
-
-Generate a coordinate for use in location-based functions such as `move_absolute` and `check_position`.
-
-```lua
-coordinate(1.0, 20, 30)
--- Returns:
--- {x = 1.0, y = 20,  z = 30}
-```
-
-# collectgarbage()
-
-Although most Lua environments will perform [garbage collection](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)) sweeps automatically, FarmBot's implementation does not.
-
-If you are authoring a long running Lua script, such as one that iterates over large loops, it is essential that you call `collectgarbage()` manually. Failing to do so will cause the system to crash when it runs out of memory.
-
 # check_position(coord, tolerance)
 
 `check_position(coordinate, tolerance)` returns `true` if the device is within the `tolerance` range of `coordinate`.
@@ -74,6 +93,44 @@ if check_position(home, 0.5) then
   send_message("info", "FarmBot is at the home position")
 end
 ```
+
+# coordinate(x, y, z)
+
+Generate a coordinate for use in location-based functions such as `move_absolute` and `check_position`.
+
+```lua
+coordinate(1.0, 20, 30)
+-- Returns:
+-- {x = 1.0, y = 20,  z = 30}
+```
+
+# cs_eval(celeryscript_ast)
+
+**ADVANCED USERS ONLY.** Allows you to execute arbitrary CeleryScript nodes. Even advanced users should avoid using this function directly.
+
+```lua
+cs_eval({
+  kind = "rpc_request",
+  args = {
+    label = "example",
+    priority = 500
+  },
+  body = {
+    {
+      kind = "move_absolute",
+      args = {
+        location = {kind = "coordinate", args = {x = 2, y = 2, z = 2}},
+        offset = {kind = "coordinate", args = {x = 0, y = 0, z = 0}},
+        speed = 100
+      }
+    }
+  }
+})
+```
+
+# current_month / current_hour / current_minute / current_second
+
+Returns a number representing the current month, hour, minute, or second.
 
 # detect_weeds()
 
@@ -195,6 +252,19 @@ get_device()
 get_device("name")
 ```
 
+# get_job_progress / set_job_progress
+
+Creates new jobs in the UI jobs panel. This is useful for long running tasks such a photo grids.
+
+```lua
+set_job_progress("example", {
+  type = "anything",
+  status = "working",
+  percent = 12.3,
+})
+progress = get_job_progress("example")
+send_message("debug", "Job progress: " .. progress.percent, "toast")
+```
 # get_fbos_config(property?)
 
 Fetch FarmBot OS configuration properties. This is the same [FarmBot OS configuration resource found on the API](https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af).
@@ -372,7 +442,6 @@ grid.each(function(cell)
     if read_status("informational_settings", "locked") then
         return
     else
-        collectgarbage()
         move_absolute({x = cell.x, y = cell.y, z = cell.z})
         local msg = "Taking photo " .. cell.count .. " of " .. grid.total
         send_message("info", msg)
@@ -453,6 +522,12 @@ my_soil_height = soil_height(x, y)
 send_message("info", "Distance to soil at (10, 29): " .. inspect(my_soil_height))
 -- => "Distance to soil at (10, 29): -409.84"
 ```
+
+# soft_stop()
+
+This is an advanced feature that is intended to be used in conjunction with `watch_pin`.
+
+When called, `soft_stop` will cancel all current and pending movement requests. Unlike `emergency_lock`, it will not lock the device nor will it reset the state of peripherals. Commands (including movement commands) will continue normally after a soft stop occurs. This function can be used to pause FarmBot temporarily if a peripheral value changes mid-movement.
 
 # take_photo()
 
