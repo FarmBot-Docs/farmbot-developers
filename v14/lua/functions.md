@@ -240,6 +240,19 @@ send_message("info", "Width: " .. size.y)
 send_message("info", "Length: " .. size.x)
 ```
 
+# gcode(command, params)
+
+**ADVANCED USERS ONLY.** This feature is available for extremely specific usecases. Users should avoid using this function where possible.
+
+Calling the function will send raw GCode to the Farmduino. No validations will be applied. The function will block the calling process until a response is received from the firmware.
+
+**A Q param will implicitly be added by FBOS.** Do not explicitly set the `Q` value. It will cause FBOS to crash.
+
+```lua
+-- Send "G00 X1.23 Y4.56 Z7.89" to the Farmduino
+gcode("G00", { X = 1.23, Y = 4.56, Z = 7.89 })
+```
+
 # get_device(property?)
 
 Fetch device properties. This is the same [device resource found on the API](https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af).
@@ -386,6 +399,13 @@ Move to an absolute coordinate position.
 move_absolute(1.0, 2, 3.4)
 -- Alternative syntax:
 move_absolute(coordinate(1.0, 20, 30))
+-- Enable "Safe Z":
+move_absolute({
+  x = 1.0,
+  y = 20,
+  z = 30,
+  safe_z = true
+})
 ```
 
 **NOTE:** `move_absolute` can accept an optional fourth argument that sets movement speed as a percentage of max speed.
