@@ -126,3 +126,5 @@ contents:
         external: true
       - title: Factory Testing Utilities
         url: factory-testing-utilities
+      - title: Example API requests
+        url: api-docs
