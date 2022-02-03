@@ -1,7 +1,7 @@
 ---
-title: "Example API requests"
-slug: "api-docs"
-description: "Example HTTP requests"
+title: "Server administration"
+slug: "server-admin"
+description: "Administrator reference document"
 ---
 
 * toc
