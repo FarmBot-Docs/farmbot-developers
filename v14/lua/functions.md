@@ -255,7 +255,7 @@ gcode("G00", { X = 1.23, Y = 4.56, Z = 7.89 })
 
 # get_device(property?)
 
-Fetch device properties. This is the same [device resource found on the API](https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af).
+Fetch device properties. This is the same [device resource found on the API](../Other-Resources/api-docs.md#get-apidevice).
 
 ```lua
 -- Every property:
@@ -280,7 +280,7 @@ send_message("debug", "Job progress: " .. progress.percent, "toast")
 ```
 # get_fbos_config(property?)
 
-Fetch FarmBot OS configuration properties. This is the same [FarmBot OS configuration resource found on the API](https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af).
+Fetch FarmBot OS configuration properties. This is the same [FarmBot OS configuration resource found on the API](../Other-Resources/api-docs.md#get-apifbos_config).
 
 ```lua
 -- Fetch all properties:
@@ -292,7 +292,7 @@ get_fbos_config("disable_factory_reset")
 
 # get_firmware_config(property?)
 
-Fetch firmware configuration properties. This is the same [firmware configuration resource found on the API](https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af).
+Fetch firmware configuration properties. This is the same [firmware configuration resource found on the API](../Other-Resources/api-docs.md#get-apifirmware_config).
 
 ```lua
 get_firmware_config()
@@ -301,7 +301,7 @@ get_firmware_config("encoder_enabled_z")
 
 # get_position()
 
-Return a table containing the currrent X, Y, Z value of the device.
+Return a table containing the current X, Y, Z value of the device.
 
 ```lua
 position, error = get_position()
@@ -344,7 +344,7 @@ response, error = http({
     Authorization="bearer eyJ....4cw",
     Accept="application/json"
   },
-  -- OPTIONAL. Must be a string. Use included JSON lbrary for
+  -- OPTIONAL. Must be a string. Use included JSON library for
   --           JSON APIs
   body=json.encode({
   })
@@ -533,7 +533,7 @@ end
 
 # soil_height(x, y)
 
-Given an X and Y coordinate, returns a best-effort estimate of the Z axis height of the soil. This function requires at least 3 soil height measurments. When there are less than 3 measurements available, it will return the SOIL HEIGHT setting from the device settings page.
+Given an X and Y coordinate, returns a best-effort estimate of the Z axis height of the soil. This function requires at least 3 soil height measurements. When there are less than 3 measurements available, it will return the SOIL HEIGHT setting from the device settings page.
 
 ```lua
 x = 10
@@ -555,7 +555,7 @@ When called, `soft_stop` will cancel all current and pending movement requests. 
 include callout.html
 type="bug"
 title="Known bug"
-content="`take_photo` returns errors asyncronously, which may lead developers to believe the operation has succeeded when it actually fails in the background. If you require a high level of control over errors or are taking photos beyond the limits that the Web App allows, see `take_photo_raw()`."
+content="`take_photo` returns errors asynchronously, which may lead developers to believe the operation has succeeded when it actually fails in the background. If you require a high level of control over errors or are taking photos beyond the limits that the Web App allows, see `take_photo_raw()`."
 %}
 
 Takes a photo using the device camera and uploads it to the web app. Returns `nil` on success. Returns an error object if capture fails.
@@ -643,7 +643,7 @@ See documentation for `uart.open()`.
 
 # update_device(params)
 
-Update device properties. This is the same [device resource found on the API](https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af).
+Update device properties. This is the same [device resource found on the API](../Other-Resources/api-docs.md#get-apidevice).
 
 ```lua
 update_device({key = "value"})
@@ -652,7 +652,7 @@ update_device({name = "Test Farmbot"})
 
 # update_fbos_config()
 
-Update FarmBot OS configuration properties. This is the same [FarmBot OS configuration resource found on the API](https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af).
+Update FarmBot OS configuration properties. This is the same [FarmBot OS configuration resource found on the API](../Other-Resources/api-docs.md#get-apifbos_config).
 
 ```lua
 update_fbos_config({key = "value"})
@@ -661,7 +661,7 @@ update_fbos_config({disable_factory_reset = true})
 
 # update_firmware_config(params)
 
-Update firmware configuration properties. This is the same [firmware configuration resource found on the API](https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af).
+Update firmware configuration properties. This is the same [firmware configuration resource found on the API](../Other-Resources/api-docs.md#get-apifirmware_config).
 
 ```lua
 update_firmware_config({key = "value"})
@@ -689,7 +689,7 @@ wait(1000)
 
 # watch_pin(pin, callback)
 
-Fork the current Lua process into a second, parellel Lua script that is initialized every 500 milliseconds for the duration of the parent script's lifetime.
+Fork the current Lua process into a second, parallel Lua script that is initialized every 500 milliseconds for the duration of the parent script's lifetime.
 
 Things to keep in mind:
 

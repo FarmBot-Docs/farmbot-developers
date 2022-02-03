@@ -39,7 +39,7 @@ To view examples of CeleryScript, open up a sequence in the sequence editor. In 
 
 To switch between viewing CeleryScript and the normal UI, press the <i class='fa fa-code'></i> button on any step. Updating fields in the normal UI will update the CeleryScript view.
 
-![Toogle CS view](_images/toogle_cs_view.gif)
+![Toggle CS view](_images/toggle_cs_view.gif)
 
 To view the CeleryScript of the entire sequence, press the <i class='fa fa-code'></i> button in the sequence header.
 

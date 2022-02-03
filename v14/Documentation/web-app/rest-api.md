@@ -1,7 +1,7 @@
 ---
 title: "REST API"
 slug: "rest-api"
-description: "[Example API requests](https://gist.github.com/RickCarlino/10db2df375d717e9efdd3c2d9d8932af)"
+description: "[Example API requests](../../Other-Resources/api-docs.md)"
 ---
 
 * toc
@@ -28,7 +28,7 @@ Generally speaking, the REST API does _not_ control FarmBot. Device control is h
 |File Storage Mechanism        |[Google Cloud Storage](https://cloud.google.com/storage/) or filesystem (configurable)
 |Error Monitoring              |[Rollbar](https://rollbar.com) (optional)
 |OS                            |[Ubuntu](https://www.ubuntu.com) (**not** configurable)
-|Continous Integration System  |[Circle CI](https://circleci.com/) (optional)
+|Continuous Integration System |[Circle CI](https://circleci.com/) (optional)
 
 
 

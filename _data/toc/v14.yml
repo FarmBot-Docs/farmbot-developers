@@ -92,6 +92,8 @@ contents:
     url: Python
     top: true
     pages:
+      - title: Python library
+        url: python-library
       - title: Web App API Examples
         url: web-app-api-examples
       - title: Message Broker Examples

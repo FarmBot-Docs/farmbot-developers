@@ -1,7 +1,7 @@
 ---
 title: "Track Movement"
 slug: "track-movement"
-description: "Use the Plant.ID API to identify plants in your garden"
+description: "Various methods for tracking device position"
 ---
 
 * toc
@@ -18,7 +18,7 @@ Some third-party applications require the ability to track FarmBot's XYZ positio
 Unfortunately, you cannot track the device position in realtime via Lua or the sequence editor:
 
  * The sequence editor does not have facilities to track position, aside from simple template variables in [SEND MESSAGE](https://software.farm.bot/v14/The-FarmBot-Web-App/sequences/sequence-commands/logic.html#send-message).
- * It is not possible to easily track the position in Lua because the Lua environment does not support concurrent operations. It is possible to read the bot position via [read_status() function](../functions.md#readstatuspath) or [get_position()](../functions.md#getposition), but not in realtime. That is to say, you cannot send commands and read the position at the same time.
+ * It is not possible to easily track the position in Lua because the Lua environment does not support concurrent operations. It is possible to read the bot position via [read_status() function](../functions.md#read_statuspath) or [get_position()](../functions.md#get_position), but not in realtime. That is to say, you cannot send commands and read the position at the same time.
 
 **If you want to track the position of FarmBot in real-time, you must write software that runs off-device using MQTT, FarmBot.JS or FarmBot.py.**
 
@@ -153,7 +153,7 @@ There are many more useful status properties available, such as `informational_s
 
 # Solution: Track Position with FarmBotJS
 
-Dealing with raw MQTT connections is diffficult for users who are not familiar with the protocol. We have written a Javascript and Python wrapper library. **FarmBotJS is the library that powers the FarmBot Web App.** It is extremely stable and mature. FarmBotJS is a great first choice for developers building new projects in 2022 and beyond.
+Dealing with raw MQTT connections is difficult for users who are not familiar with the protocol. We have written a Javascript and Python wrapper library. **FarmBotJS is the library that powers the FarmBot Web App.** It is extremely stable and mature. FarmBotJS is a great first choice for developers building new projects in 2022 and beyond.
 
 An example written in Javascript is provided below. Please see the [official FarmBotJS documentation](https://github.com/FarmBot/farmbot-js) for more details.
 

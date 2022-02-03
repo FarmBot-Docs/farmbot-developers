@@ -114,7 +114,7 @@ Here is an example token:
 In the token above, we can see the following:
 
  * The device ID is `device_36`. **This is your MQTT server username. You will also need to use this later.**
- * The API token is `eyJ0eX....NGE0`. **Use this as a password when loging into MQTT.**
+ * The API token is `eyJ0eX....NGE0`. **Use this as a password when logging into MQTT.**
  * The MQTT host is found in the `mqtt` property of your token. In this case, the MQTT server host is `clever-octopus.rmq.cloudamqp.com`. Your `mqtt` value may be different and host values *may change without notice*. Always grab this value from the token. **Never hard-code the `mqtt` host directly into application code**- it may change in the future without notice.
 
 ## Step 3: Subscribing to topics
