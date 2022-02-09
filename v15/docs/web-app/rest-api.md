@@ -147,7 +147,7 @@ The `/api/points/` endpoint supports a special `?filter=` [query parameter](http
 
 # Generating an API token
 
-You must pass a `token` string into most HTTP requests under the `Authorization` request header. Here are some ways in which you can get a token. Also see our [web app API examples](../../Python/web-app-api-examples.md).
+You must pass a `token` string into most HTTP requests under the `Authorization` request header. Here are some ways in which you can get a token. Also see our [web app API examples](../../python/web-app-api-examples.md).
 
 
 ```curl
