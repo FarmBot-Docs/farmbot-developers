@@ -1,5 +1,5 @@
 ---
 permalink: /docs/firmware
-page_path: /Documentation/firmware
+page_path: /docs/firmware
 layout: redirect
 ---

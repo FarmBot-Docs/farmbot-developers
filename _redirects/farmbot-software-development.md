@@ -1,5 +1,5 @@
 ---
 permalink: /docs/farmbot-software-development
-page_path: /Documentation/farmbot-software-development
+page_path: /docs/farmbot-software-development
 layout: redirect
 ---

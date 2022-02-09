@@ -1,5 +1,5 @@
 ---
 permalink: /docs/message-broker-examples
-page_path: /Python/message-broker-examples
+page_path: /python/message-broker-examples
 layout: redirect
 ---

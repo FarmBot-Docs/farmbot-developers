@@ -1,5 +1,5 @@
 ---
 permalink: /docs/interpolation
-page_path: /How-it-works/interpolation
+page_path: /other/how-it-works/interpolation
 layout: redirect
 ---
