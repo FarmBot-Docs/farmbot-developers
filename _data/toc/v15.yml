@@ -1,0 +1,123 @@
+version_number: 15
+status: stable
+home: docs/farmbot-software-development
+contents:
+  - title: Documentation
+    url: docs
+    top: true
+    pages:
+      - title: FarmBot Software Development
+        url: farmbot-software-development
+        pages:
+          - title: High Level Overview
+            url: high-level-overview
+          - title: 3rd Party Developer Prizes
+            url: 3rd-party-developer-prizes
+          - title: Frequently Asked Questions
+            url: faq
+          - title: About Our Developer Docs
+            url: about
+      - title: Web App
+        url: web-app
+        pages:
+          - title: Frontend
+            url: frontend
+          - title: REST API
+            url: rest-api
+          - title: Example API requests
+            url: api-docs
+          - title: ENV Vars and GlobalConfigs
+            url: env-vars-and-globalconfigs
+          - title: Running Servers Offline
+            url: running-servers-offline
+          - title: Server Administration
+            url: server-admin
+      - title: Message Broker
+        url: message-broker
+        pages:
+          - title: Subscribing to Resource Updates
+            url: realtime-updates-auto-sync
+      - title: CeleryScript
+        url: celery-script
+        pages:
+          - title: Nodes
+            url: nodes
+          - title: Identifying Success and Failure
+            url: identifying-success-and-failure
+          - title: CeleryScript Glossary
+            url: celeryscript-glossary
+      - title: FarmBot JS
+        url: farmbot-js
+      - title: FarmBot OS
+        url: farmbot-os
+        pages:
+          - title: FarmBot OS Development
+            url: farmbot-os-development
+          - title: Gathering Information at Runtime
+            url: gathering-information-at-runtime
+          - title: Beta Updates
+            url: beta-updates
+          - title: Sidecar Hardware
+            url: sidecar-hardware
+          - title: Simulating a FarmBot
+            url: simulating-a-farmbot
+      - title: Firmware
+        url: firmware
+        pages:
+          - title: Parameters
+            url: parameters
+          - title: Custom Firmware
+            url: custom-firmware
+  - title: Lua
+    url: lua
+    top: true
+    pages:
+      - title: Intro
+        url: intro
+      - title: Functions
+        url: functions
+      - title: Examples
+        url: examples
+        pages:
+          - title: Send Slack Messages
+            url: send-slack-messages
+          - title: Identify Plants
+            url: identify-plants
+          - title: Bulk Delete All Images
+            url: bulk-delete-all-images
+  - title: Python
+    url: python
+    top: true
+    pages:
+      - title: Python Library
+        url: python-library
+      - title: Web App API Examples
+        url: web-app-api-examples
+      - title: Message Broker Examples
+        url: message-broker-examples
+  - title: Other Resources
+    url: other
+    top: true
+    pages:
+      - title: How it works
+        url: how-it-works
+        pages:
+          - title: Point group sorting
+            url: point-group-sorting
+          - title: Weed detection
+            url: weed-detection
+          - title: Measure soil height
+            url: measure-soil-height
+          - title: Interpolation
+            url: interpolation
+      - title: Track Movement
+        url: track-movement
+      - title: OpenFarm
+        url: openfarm
+      - title: Security Vulnerabilities
+        url: responsible-disclosure-of-security-vulnerabilities
+      - title: GitHub
+        url: https://github.com/FarmBot
+        external: true
+      - title: Factory Testing Utilities
+        url: factory-testing-utilities

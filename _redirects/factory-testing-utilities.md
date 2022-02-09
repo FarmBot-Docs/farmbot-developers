@@ -1,5 +1,5 @@
 ---
 permalink: /docs/factory-testing-utilities
-page_path: /Other-Resources/factory-testing-utilities
+page_path: /other/factory-testing-utilities
 layout: redirect
 ---

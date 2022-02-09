@@ -1,5 +1,5 @@
 ---
 permalink: /docs/sidecar-hardware
-page_path: /Documentation/farmbot-os/sidecar-hardware
+page_path: /docs/farmbot-os/sidecar-hardware
 layout: redirect
 ---

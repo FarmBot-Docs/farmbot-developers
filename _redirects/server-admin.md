@@ -1,5 +1,5 @@
 ---
 permalink: /docs/server-admin
-page_path: /Other-Resources/server-admin
+page_path: /docs/web-app/server-admin
 layout: redirect
 ---

@@ -5,7 +5,7 @@ logo: /assets/images/documentation.png
 remote_theme: FarmBot-Docs/farmbot-theme@main
 baseurl: /
 color: '#0c4d8a'
-latest_version_number: 14
+latest_version_number: 15
 plugins:
   - jemoji
   - jekyll-redirect-from

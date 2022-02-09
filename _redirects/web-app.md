@@ -1,5 +1,5 @@
 ---
 permalink: /docs/web-app
-page_path: /Documentation/web-app
+page_path: /docs/web-app
 layout: redirect
 ---

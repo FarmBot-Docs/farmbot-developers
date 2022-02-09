@@ -1,5 +1,5 @@
 ---
 permalink: /docs/farmbot-js
-page_path: /Documentation/farmbot-js
+page_path: /docs/farmbot-js
 layout: redirect
 ---

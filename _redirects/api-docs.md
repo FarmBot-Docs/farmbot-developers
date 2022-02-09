@@ -1,5 +1,5 @@
 ---
 permalink: /docs/api-docs
-page_path: /Other-Resources/api-docs
+page_path: /docs/web-app/api-docs
 layout: redirect
 ---

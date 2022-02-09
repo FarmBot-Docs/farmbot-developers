@@ -1,5 +1,5 @@
 ---
 permalink: /docs/message-broker
-page_path: /Documentation/web-app/message-broker
+page_path: /docs/message-broker
 layout: redirect
 ---
