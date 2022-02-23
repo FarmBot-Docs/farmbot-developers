@@ -9,6 +9,14 @@ description: "Administrator reference document"
 
 The intended audience for this document is employees of FarmBot, Inc. It outlines a number of tasks and features of the FarmBot Web App that are available to server administrators. Administrators of self-hosted servers may also find this document useful.
 
+# Using the Rails console
+
+Enter the following command to start the Rails console.
+
+```
+heroku run rails console --app=farmbot-staging
+```
+
 # Creating customer support tokens
 
 Server admins can create admin tokens to remotely assist users when requested.
@@ -20,9 +28,9 @@ Server admins can create admin tokens to remotely assist users when requested.
 
 # Publishing a featured sequence
 
-Not all sequences can be directly published from a Web App account because of security restrictions. The Web App offers a way for administrators to publish sequences that are not restricted in this way.
+Not all sequences can be directly published from a web app account because of security restrictions. The web app offers a way for administrators to publish sequences that are not restricted in this way.
 
- * Log into the Web App using the account specified by the `AUTHORIZED_PUBLISHER` environment variable.
+ * Log into the web app using the account specified by the `AUTHORIZED_PUBLISHER` environment variable.
  * Create a sequence as usual.
- * Run `rake sequence:publish` on the running server instance.
- * Select the appropriate sequence you wish to publish from the list of available options.
+ * Run `heroku run rake sequence:publish --app=farmbot-staging`.
+ * Enter the sequence ID you wish to publish from the list of available options.

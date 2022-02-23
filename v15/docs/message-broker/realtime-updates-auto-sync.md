@@ -85,3 +85,7 @@ The table below illustrates example MQTT topic subscriptions.
 |`bot/device_789/sync/#`       |Subscribes to _all_ resource updates.
 
 As August 2018, the following resource names are supported: `Alert`, `Device`, `FarmEvent`, `FarmwareEnv`, `Folder`, `FbosConfig`, `FirmwareConfig`, `Image`, `Log`, `Peripheral`, `PinBinding`, `PlantTemplate`, `PointGroup`, `Point`, `Regimen`, `SavedGarden`, `Sensor`, `SensorReading`, `Sequence`, `Tool`, `User`, `WebAppConfig`, `WebcamFeed`, `WizardStepResult`.
+
+# What's next?
+
+ * [Sending Commands](sending-commands.md)

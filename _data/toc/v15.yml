@@ -37,6 +37,8 @@ contents:
         pages:
           - title: Subscribing to Resource Updates
             url: realtime-updates-auto-sync
+          - title: Sending Commands
+            url: sending-commands
       - title: CeleryScript
         url: celery-script
         pages:

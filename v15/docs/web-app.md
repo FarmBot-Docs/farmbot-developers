@@ -17,7 +17,7 @@ The web app is one software package that serves multiple use cases. The main com
 
  * [Frontend](web-app/frontend.md)
  * [REST API](web-app/rest-api.md)
+ * [Example API Requests](web-app/api-docs.md)
  * [Message Broker](../docs/message-broker.md)
- * [Subscribing to Resource Updates](../docs/message-broker/realtime-updates-auto-sync.md)
  * [ENV Vars and GlobalConfigs](web-app/env-vars-and-globalconfigs.md)
  * [Server Administration](web-app/server-admin.md)
