@@ -92,7 +92,7 @@ A screenshot of the MQTT settings as seen in MQTTx are shown below:
 
 ## Step 3: Subscribe to the "Status" Topic
 
-FarmBot will send and receive information through [a variety of MQTT topics](../docs/message-broker.md#step-3-subscribing-to-topics). The topic we care about for this example is the "status" topic, which broadcasts all information about the device in a large JSON object. The topic name depends on your device ID. If your device id was `device_456`, then you would subscribe to:
+FarmBot will send and receive information through [a variety of MQTT topics](../docs/message-broker/sending-commands.md#step-3-subscribing-to-topics). The topic we care about for this example is the "status" topic, which broadcasts all information about the device in a large JSON object. The topic name depends on your device ID. If your device id was `device_456`, then you would subscribe to:
 
 ```
 bot/device_456/status
