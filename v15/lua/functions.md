@@ -294,6 +294,40 @@ if check_position(home, 0.5) then
 end
 ```
 
+## garden_size()
+
+Returns a table with an `x` and `y` attribute represent the maximum length of the garden bed as determined by firmware config settings.
+
+```lua
+size = garden_size()
+send_message("info", "Width: " .. size.y)
+send_message("info", "Length: " .. size.x)
+```
+
+## get_seed_tray_cell(tray, cell)
+
+Calculates the coordinates of a seed tray cell, such as **B3**, based on the cell label and the coordinates of the center of the seed tray. See the [Pick from Seed Tray featured sequence](https://my.farm.bot/app/shared/sequence/32) for an example.
+
+```lua
+tray = variable("Seed Tray")
+cell_label = variable("Seed Tray Cell")
+cell = get_seed_tray_cell(tray, cell_label)
+cell_depth = 5
+
+-- Send message with cell info
+local cell_coordinates = " (" .. cell.x .. ", " .. cell.y .. ", " .. cell.z - cell_depth .. ")"
+send_message("info", "Picking up seed from cell " .. cell_label .. cell_coordinates, "toast")
+
+-- Safe Z move to above the cell
+job("Moving to Seed Tray", 25)
+move_absolute({
+    x = cell.x,
+    y = cell.y,
+    z = cell.z + 25,
+    safe_z = true
+})
+```
+
 ## soil_height(x, y)
 
 Given an X and Y coordinate, returns a best-effort estimate of the Z axis height of the soil. This function requires at least 3 soil height measurements. When there are less than 3 measurements available, it will return the SOIL HEIGHT setting from the device settings page.
@@ -304,16 +338,6 @@ y = 29
 my_soil_height = soil_height(x, y)
 send_message("info", "Distance to soil at (10, 29): " .. inspect(my_soil_height))
 -- => "Distance to soil at (10, 29): -409.84"
-```
-
-## garden_size()
-
-Returns a table with an `x` and `y` attribute represent the maximum length of the garden bed as determined by firmware config settings.
-
-```lua
-size = garden_size()
-send_message("info", "Width: " .. size.y)
-send_message("info", "Length: " .. size.x)
 ```
 
 # E-stop and Unlock
@@ -448,11 +472,15 @@ Take a photo of the current location. If any vegetation is detected in the photo
 Creates a new job in the jobs popup. This is useful for tracking long running tasks such a photo grids.
 
 ```lua
+start_time = os.time() * 1000
+
 set_job_progress("Scan the garden", {
-  type = "scan",
   status = "working",
   percent = 12.3,
+  time = start_time
 })
+
+-- Another string argument, type, can also be added to the job, though this field is no longer used by the FarmBot web app frontend.
 ```
 
 ## get_job_progress()
@@ -547,16 +575,6 @@ find_home()
 
 # Pins
 
-## read_pin(pin, mode?)
-
-`read_pin(pin_num, mode?)` reads a pin when given a pin number and read mode (`"analog"` or `"digital"`). Defaults to `"digital"` if no mode is given:
-
-```lua
-pin23 = read_pin(23) -- Digital is the default mode
-pin24 = read_pin(24, "digital")
-pin25 = read_pin(25, "analog")
-```
-
 ## new_sensor_reading(params)
 
 Plot a sensor reading point on the [sensors panel](https://my.farm.bot/app/designer/sensors). Please note that calling `new_sensor_reading()` does not perform any readings, it only records a value. See also: `read_pin()`
@@ -580,12 +598,29 @@ while (i < 10) do
 end
 ```
 
-## write_pin(pin, mode, value)
+## read_pin(pin, mode?)
 
-Sets a pin to a particular mode and value:
+`read_pin(pin_num, mode?)` reads a pin when given a pin number and read mode (`"analog"` or `"digital"`). Defaults to `"digital"` if no mode is given:
 
 ```lua
-write_pin(13, "analog", 128)
+pin23 = read_pin(23) -- Digital is the default mode
+pin24 = read_pin(24, "digital")
+pin25 = read_pin(25, "analog")
+```
+
+## set_pin_io_mode(pin, mode)
+
+Sets the I/O mode of an Arduino pin. It is slightly similar to the [`pinMode()` function in the Arduino IDE](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/).
+
+**Valid pin modes:** `"input"`, `"input_pullup"`, `"output"`.
+
+```lua
+result, error = set_pin_io_mode(13, "output")
+if error then
+  send_message("error", inspect(error))
+else
+  send_message("info", inspect(result))
+end
 ```
 
 ## watch_pin(pin, callback)
@@ -614,18 +649,21 @@ end)
 wait(3000)
 ```
 
-## set_pin_io_mode(pin, mode)
+## write_pin(pin, mode, value)
 
-Sets the I/O mode of an Arduino pin. It is slightly similar to the [`pinMode()` function in the Arduino IDE](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/).
-
-**Valid pin modes:** `"input"`, `"input_pullup"`, `"output"`.
+Sets a pin to a particular mode and value:
 
 ```lua
-result, error = set_pin_io_mode(13, "output")
-if error then
-  send_message("error", inspect(error))
-else
-  send_message("info", inspect(result))
+write_pin(13, "analog", 128)
+```
+
+## verify_tool()
+
+Checks the UTM’s tool verification pin as well as the **MOUNTED TOOL** field in FarmBot’s state tree to verify if a tool is mounted to the UTM.
+
+```lua
+if not verify_tool() then -- exits sequence if tool verification failed (no tool)
+    return
 end
 ```
 
