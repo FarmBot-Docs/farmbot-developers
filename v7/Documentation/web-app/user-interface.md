@@ -3,9 +3,6 @@ title: "User Interface"
 slug: "user-interface"
 ---
 
-* toc
-{:toc}
-
 
 ![farmbot_ui.png](_images/farmbot_ui.png)
 

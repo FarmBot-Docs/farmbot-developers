@@ -4,9 +4,6 @@ slug: "interpolation"
 description: "How interpolation between measurement values works."
 ---
 
-* toc
-{:toc}
-
 # Setup
 ```javascript
 // Example data

@@ -3,9 +3,6 @@ title: "History of RPCs in FarmBot"
 slug: "history-of-rpcs-in-farmbot"
 ---
 
-* toc
-{:toc}
-
 
 {%
 include callout.html

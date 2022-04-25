@@ -4,9 +4,6 @@ slug: "web-app"
 description: "Setup, customize, and control FarmBot from any device. [GitHub repository](https://github.com/FarmBot/Farmbot-Web-App)."
 ---
 
-* toc
-{:toc}
-
 The web app is one software package that serves multiple use cases. The main components of the web app are:
 
  * The [frontend user interface](web-app/frontend.md)

@@ -3,9 +3,6 @@ title: "REST API (Application Programming Interface)"
 slug: "rest-api"
 ---
 
-* toc
-{:toc}
-
 
 {%
 include callout.html

@@ -3,9 +3,6 @@ title: "Frequently Asked Questions"
 slug: "faq"
 ---
 
-* toc
-{:toc}
-
 # I’m a software developer. Where can I download FarmBot source code?
 
 Like most open source projects, we host our software on [GitHub](https://github.com/farmbot). Here are the most popular source code links:

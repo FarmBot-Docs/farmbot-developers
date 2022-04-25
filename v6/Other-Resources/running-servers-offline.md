@@ -3,9 +3,6 @@ title: "Running Servers Offline"
 slug: "running-servers-offline"
 ---
 
-* toc
-{:toc}
-
 
 {%
 include callout.html

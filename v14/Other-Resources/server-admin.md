@@ -4,9 +4,6 @@ slug: "server-admin"
 description: "Administrator reference document"
 ---
 
-* toc
-{:toc}
-
 # About This Document
 
 The intended audience for this document is employees of FarmBot, Inc. It outlines a number of tasks and features of the FarmBot Web App that are available to server administrators. Administrators of self-hosted servers may also find this document useful.

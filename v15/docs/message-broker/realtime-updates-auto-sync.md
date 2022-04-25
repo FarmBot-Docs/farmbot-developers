@@ -3,9 +3,6 @@ title: "Subscribing to Resource Updates"
 slug: "realtime-updates-auto-sync"
 ---
 
-* toc
-{:toc}
-
 As we learned in the [previous section](../web-app/rest-api.md), resources are downloaded from the API as JSON documents.
 
 HTTP is a [stateless protocol](https://en.wikipedia.org/wiki/Stateless_protocol). This offers a number of benefits to application developers but does come with some drawbacks. Most notably, there is a chance that the data you downloaded will go "stale" when people or devices update the resource after you perform the initial resource download.

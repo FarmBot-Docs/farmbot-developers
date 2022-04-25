@@ -4,9 +4,6 @@ slug: "celery-script"
 description: "Find the latest list of Celery Script nodes [here](https://github.com/FarmBot/farmbot-js/blob/master/dist/corpus.d.ts)"
 ---
 
-* toc
-{:toc}
-
 The FarmBot system has [many moving parts](farmbot-software-development/high-level-overview.md). Data must be exchanged between systems in a way that is predictable and asynchronous. Sometimes, this data is even used for telling the bot what to do in a similar fashion to traditional programming languages. To accomplish this, we use a special [remote procedure call](https://en.wikipedia.org/wiki/Remote_procedure_call) and data interchange format called **CeleryScript**.
 
 CeleryScript nodes are specially formatted JSON documents. FarmBot uses these documents for a variety of storage and communication use cases and also as an internal programming language for sequence scripting. It is a programming language, serialization format, and RPC protocol unified under a single schema known as a **corpus**.

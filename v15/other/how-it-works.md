@@ -4,9 +4,6 @@ slug: "how-it-works"
 description: "How various advanced functions in FarmBot work"
 ---
 
-* toc
-{:toc}
-
 # What's next?
 
  * [Point Group Sorting](how-it-works/point-group-sorting.md)

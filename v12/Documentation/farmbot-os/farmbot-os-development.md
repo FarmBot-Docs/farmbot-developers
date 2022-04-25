@@ -3,9 +3,6 @@ title: "FarmBot OS Development"
 slug: "farmbot-os-development"
 ---
 
-* toc
-{:toc}
-
 Most development will be done in "host" environment. This means that rather than making a change on your computer, then pushing it to the device, we can rapidly develop things from the luxury of our own machine. See this [Nerves getting started guide](https://hexdocs.pm/nerves/getting-started.html) for more information about this. But as a side effect, we will need to be able to configure (at least) two different environment/target combos where:
 
 `environment` is one of:

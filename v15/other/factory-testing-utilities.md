@@ -3,9 +3,6 @@ title: "Factory Testing Utilities"
 slug: "factory-testing-utilities"
 ---
 
-* toc
-{:toc}
-
 Every electronics box is tested at the factory to ensure all of the stepper drivers, peripheral circuits, LEDs, and buttons are functional. We currently have two test `.img` files, one for Genesis electronics and one for Express electronics. Follow the instructions below to conduct a test.
 
 # Setup

@@ -3,9 +3,6 @@ title: "ENV Vars and GlobalConfigs"
 slug: "env-vars-and-globalconfigs"
 ---
 
-* toc
-{:toc}
-
 
 # Why?
 

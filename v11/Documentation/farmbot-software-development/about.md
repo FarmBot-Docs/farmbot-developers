@@ -3,9 +3,6 @@ title: "About Our Developer Docs"
 slug: "about"
 ---
 
-* toc
-{:toc}
-
 In October of 2018, our small team gathered at FarmBot HQ in California to envision what we wanted our 3rd party developer experience to be. Through a post-it note brainstorming exercise, we decided that a great developer experience should be **versatile**, **simple**, have **approachable onboarding**, and be **based in community**. Below are the specific resources and attributes that we think define each of these pillars.
 
 # Versatile

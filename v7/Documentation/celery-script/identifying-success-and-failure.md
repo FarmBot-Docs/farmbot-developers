@@ -3,9 +3,6 @@ title: "Identifying Success and Failure"
 slug: "identifying-success-and-failure"
 ---
 
-* toc
-{:toc}
-
 Imagine writing a software package that sends a single `rpc_request` node once every five minutes. You could easily track the status of your RPC request by simply waiting for the next `rpc_ok`, `rpc_error` node from the device over MQTT.
 
 How would we handle this situation if the software requirements changed? What if, instead of one request every five minutes, we are now required to send 100 requests in a one-minute timeframe? Identifying success or failure is no longer a trivial task. This is especially true for operations that result in partial failure, where only a portion of the requests succeed.

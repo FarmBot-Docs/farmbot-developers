@@ -3,9 +3,6 @@ title: "For IT Security Professionals"
 slug: "for-it-security-professionals"
 ---
 
-* toc
-{:toc}
-
 
 {%
 include callout.html

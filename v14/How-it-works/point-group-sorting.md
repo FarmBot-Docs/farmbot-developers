@@ -4,9 +4,6 @@ slug: "point-group-sorting"
 description: "How point group sorting works."
 ---
 
-* toc
-{:toc}
-
 ![group sort methods](_images/yx_alternating.png)
 
 # Setup

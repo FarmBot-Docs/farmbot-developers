@@ -3,9 +3,6 @@ title: "Nodes"
 slug: "nodes"
 ---
 
-* toc
-{:toc}
-
 With exception to the [REST API](../web-app/rest-api.md) and some other edge cases, all communication that happens between FarmBot users, devices, and systems is wrapped in a **CeleryScript node**.
 
 A node is a specially formatted JSON document. It is a composable building block that can be nested and arranged to create trees of commands, similar to the way an [abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) is used to create programming languages.

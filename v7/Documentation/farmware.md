@@ -4,9 +4,6 @@ slug: "farmware"
 description: "FarmBot OS plug-Ins to expand FarmBot functionality"
 ---
 
-* toc
-{:toc}
-
 
 {%
 include callout.html

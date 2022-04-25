@@ -3,9 +3,6 @@ title: "Web App"
 slug: "web-app"
 ---
 
-* toc
-{:toc}
-
 
 {%
 include callout.html

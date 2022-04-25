@@ -3,9 +3,6 @@ title: "Message Broker"
 slug: "message-broker"
 ---
 
-* toc
-{:toc}
-
 The Message Broker is a sub-component of the Web API. It is a specially configured instance of RabbitMQ. It serves the following functions:
 
  * Passes push notifications between users and devices (discussed below).

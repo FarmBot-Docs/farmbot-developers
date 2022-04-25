@@ -3,9 +3,6 @@ title: "Firmware"
 slug: "firmware"
 ---
 
-* toc
-{:toc}
-
 
 {%
 include callout.html

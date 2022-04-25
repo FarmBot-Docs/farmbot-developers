@@ -3,9 +3,6 @@ title: "Simulating a FarmBot"
 slug: "simulating-a-farmbot"
 ---
 
-* toc
-{:toc}
-
 # Simulating a FarmBot
 
 Some users may wish to simulate a FarmBot without using a real FarmBot. Usually, this is done for the sake of software testing and development. FarmBot currently does not have a simulator, but it is possible to run a FarmBot without any motors attached. This means you can simulate FarmBot operations in software using only a Raspberry Pi, an Arduino, plus a few other supporting components.

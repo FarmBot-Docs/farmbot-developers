@@ -3,9 +3,6 @@ title: "Frontend"
 slug: "frontend"
 ---
 
-* toc
-{:toc}
-
 
 {%
 include callout.html

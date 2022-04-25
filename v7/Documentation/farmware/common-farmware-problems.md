@@ -4,9 +4,6 @@ slug: "common-farmware-problems"
 description: "troubleshooting tips"
 ---
 
-* toc
-{:toc}
-
 
 # "Farmware installation failed"
 

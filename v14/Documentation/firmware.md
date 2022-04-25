@@ -4,9 +4,6 @@ slug: "firmware"
 description: "Executes g-code like commands over a serial line to move the FarmBot and operate its peripherals. [GitHub repository](https://github.com/FarmBot/farmbot-arduino-firmware)."
 ---
 
-* toc
-{:toc}
-
 The **firmware** runs on an Arduino microcontroller and is written in C++. The firmware is usually flashed to the Arduino via FarmBot OS.
 
 {%

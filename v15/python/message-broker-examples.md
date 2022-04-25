@@ -4,9 +4,6 @@ slug: "message-broker-examples"
 description: "Use Python to communicate directly with FarmBot"
 ---
 
-* toc
-{:toc}
-
 These examples use concepts in [CeleryScript](../docs/celery-script.md) and [Message Broker](../docs/message-broker.md).
 
 # Send message

@@ -7,6 +7,3 @@ link_external: true
 redirect_to: http://eepurl.com/dJ4P86
 ---
 
-* toc
-{:toc}
-

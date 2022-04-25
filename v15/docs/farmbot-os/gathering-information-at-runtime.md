@@ -3,9 +3,6 @@ title: "Gathering Information at Runtime"
 slug: "gathering-information-at-runtime"
 ---
 
-* toc
-{:toc}
-
 There are multiple ways to gather information about FarmBot while it is running:
 
 # FTDI cable

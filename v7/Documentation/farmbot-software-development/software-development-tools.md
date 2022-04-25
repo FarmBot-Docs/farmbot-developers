@@ -3,9 +3,6 @@ title: "Software Development Tools Used By FarmBot"
 slug: "software-development-tools"
 ---
 
-* toc
-{:toc}
-
 
 {%
 include callout.html

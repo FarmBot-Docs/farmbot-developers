@@ -3,9 +3,6 @@ title: "Beta Updates"
 slug: "beta-updates"
 ---
 
-* toc
-{:toc}
-
 
 {%
 include callout.html

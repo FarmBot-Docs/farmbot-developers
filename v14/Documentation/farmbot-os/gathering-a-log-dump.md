@@ -3,9 +3,6 @@ title: "Gathering a Log Dump"
 slug: "gathering-a-log-dump"
 ---
 
-* toc
-{:toc}
-
 This feature was removed from FarmBot OS in 2018.
 
 Please visit the [FarmBot Forum](https://forum.farmbot.org/) if you are having trouble booting your device.

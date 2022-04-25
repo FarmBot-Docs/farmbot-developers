@@ -3,9 +3,6 @@ title: "Special API Endpoints"
 slug: "special-api-endpoints"
 ---
 
-* toc
-{:toc}
-
 The REST API is relatively uniform in how it handles resources. There are some exceptions, however.
 
 # Tool slots, points, and plants

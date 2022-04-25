@@ -4,9 +4,6 @@ slug: "python-library"
 description: "Use Python to communicate directly with FarmBot"
 ---
 
-* toc
-{:toc}
-
 FarmBot, Inc. provides a Python wrapper library, `farmbot-py`. You can learn more about the Python version in the [official documentation](https://github.com/FarmBot/farmbot-py).
 
 # What's next?

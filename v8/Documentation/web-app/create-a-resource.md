@@ -3,9 +3,6 @@ title: "Publishing Resource Updates via MQTT"
 slug: "create-a-resource"
 ---
 
-* toc
-{:toc}
-
 # Send an Update
 
 Send an MQTT message in the format of:

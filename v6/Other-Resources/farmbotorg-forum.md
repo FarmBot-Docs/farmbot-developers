@@ -6,6 +6,3 @@ link_url: "http://forum.farmbot.org/"
 link_external: true
 ---
 
-* toc
-{:toc}
-

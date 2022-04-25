@@ -4,9 +4,6 @@ slug: "api-docs"
 description: "Example HTTP requests"
 ---
 
-* toc
-{:toc}
-
 # About This Document
 
 

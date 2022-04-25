@@ -4,9 +4,6 @@ slug: "web-app-api-examples"
 description: "Retrieve and modify data in the FarmBot [Web App](../docs/web-app.md) using Python"
 ---
 
-* toc
-{:toc}
-
 
 # Get your token
 

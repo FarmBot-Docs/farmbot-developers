@@ -3,9 +3,6 @@ title: "Publishing Resource Updates via MQTT"
 slug: "create-a-resource"
 ---
 
-* toc
-{:toc}
-
 
 {%
 include callout.html

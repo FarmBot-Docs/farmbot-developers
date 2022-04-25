@@ -4,9 +4,6 @@ slug: "sidecar-hardware"
 description: "Add additional specialized hardware to your FarmBot"
 ---
 
-* toc
-{:toc}
-
 # Add specialized camera hardware or software
 
 Although FarmBot OS supports plug-and-play USB webcams, it is not possible to install additional camera drivers on FarmBot OS. FarmBot OS only supports plug-and-play cameras, and it's very important to point out that although FarmBot OS is a Linux-powered Raspberry Pi, it is not intended to be used in the same manner as a Desktop machine where end users are free to add and remove the software components running on the machine. This means that FarmBot OS is not capable of directly running specialized cameras intended for scientific or specialized use (most consumer-grade USB webcams are fine, though). FarmBot OS has a read-only filesystem and does not use the same Raspberry Pi Linux distribution that desktop Linux users are used to.

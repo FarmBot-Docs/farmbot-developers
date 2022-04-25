@@ -4,9 +4,6 @@ slug: "high-level-overview"
 description: "How each component of FarmBot software fits together."
 ---
 
-* toc
-{:toc}
-
 
 ![high_level_overview.png](_images/high_level_overview.png)
 

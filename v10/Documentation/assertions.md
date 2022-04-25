@@ -4,9 +4,6 @@ slug: "assertions"
 description: "FarmBot's native automated testing tool"
 ---
 
-* toc
-{:toc}
-
 The **Assertion** command allows FarmBot to test if a condition is true or false for automated testing purposes. For example, you could set up a FarmBot to move back and forth repeatedly along an axis, and check the position after each movement. This type of test is useful for high-cycle hardware testing, and for continuous integration testing of software changes.
 
 ![f8f804e-Assertion.jpeg](_images/Assertion.jpeg)

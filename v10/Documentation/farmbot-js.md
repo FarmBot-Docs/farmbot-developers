@@ -4,9 +4,6 @@ slug: "farmbot-js"
 description: "Library to wrap FarmBot's authentication and RPC instructions. [GitHub repository](https://github.com/FarmBot/farmbot-js)."
 ---
 
-* toc
-{:toc}
-
 # Installation
 
 

@@ -3,9 +3,6 @@ title: "Custom Firmware"
 slug: "custom-firmware"
 ---
 
-* toc
-{:toc}
-
 If you do not want to use the firmware installed by FarmBot OS, you can still install custom firmware using the standard Arduino IDE with the steps below.
 
 1. Download and install the [Arduino IDE](https://www.arduino.cc/en/Main/Software) onto your computer.

@@ -4,9 +4,6 @@ slug: "farmware-hosting-and-workflows"
 description: "Farmware hosting options"
 ---
 
-* toc
-{:toc}
-
 A Farmware generally includes Python code that is run by FarmBot OS. During development, you may first write and run the Python code on your local computer. To run it with FarmBot OS, the code must be hosted on a server from which FarmBot OS can download it.
 
 All of the following methods require a minimum of two files:

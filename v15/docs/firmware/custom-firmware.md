@@ -3,9 +3,6 @@ title: "Custom Firmware"
 slug: "custom-firmware"
 ---
 
-* toc
-{:toc}
-
 If you do not want to use the firmware installed by FarmBot OS, you can still install custom firmware using one of the methods below.
 
 # custom.hex firmware

@@ -4,9 +4,6 @@ slug: "bulk-delete-all-images"
 description: "Clear all images from your account using Lua"
 ---
 
-* toc
-{:toc}
-
 {%
 include callout.html
 type="warning"

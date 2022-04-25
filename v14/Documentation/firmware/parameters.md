@@ -3,9 +3,6 @@ title: "Parameters"
 slug: "parameters"
 ---
 
-* toc
-{:toc}
-
 # Writing parameters
 To write a parameter, send an `F22 P V` command, where `P` is the parameter number and `V` is the parameter value.
 

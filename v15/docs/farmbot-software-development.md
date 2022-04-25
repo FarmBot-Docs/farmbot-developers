@@ -5,9 +5,6 @@ description: "Target audience: **software developers**. For end-users, see [Farm
 redirect_from: /docs/v15/
 ---
 
-* toc
-{:toc}
-
 Welcome to the FarmBot developer documentation hub! Here you'll find technical information related to developing FarmBot's core codebases as well as using our libraries and APIs to develop 3rd party functionality.
 
 # Quick links

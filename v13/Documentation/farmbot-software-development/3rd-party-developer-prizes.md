@@ -4,9 +4,6 @@ slug: "3rd-party-developer-prizes"
 description: "Rewarding open-source contributions"
 ---
 
-* toc
-{:toc}
-
 As an open-source project, we're always looking at ways to onboard, empower, and reward 3rd party developers to improve and expand upon the FarmBot software ecosystem. The project ideas below have been identified as valuable contributions to the FarmBot community either because they:
 
   * Substantially improve the core experience for a large number of users (building features, fixing bugs)

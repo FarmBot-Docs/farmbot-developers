@@ -4,9 +4,6 @@ slug: "farmbot-js"
 description: "Content here is syndicated from the [repository README](https://github.com/FarmBot/farmbot-js/blob/master/README.md)."
 ---
 
-* toc
-{:toc}
-
 # Browser support
 
 Works on any browser that supports:

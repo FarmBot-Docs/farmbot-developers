@@ -3,9 +3,6 @@ title: "CeleryScript Glossary"
 slug: "celeryscript-glossary"
 ---
 
-* toc
-{:toc}
-
 # Primary Node
 Sometimes referred to simply as "node". This is a JSON object with a `kind`, `args` and optional `body` key. It is the basic building block of CeleryScript structures.
 

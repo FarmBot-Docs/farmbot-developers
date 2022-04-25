@@ -4,9 +4,6 @@ slug: "measure-soil-height"
 description: "How soil height measurement works."
 ---
 
-* toc
-{:toc}
-
 
 # Concept
 

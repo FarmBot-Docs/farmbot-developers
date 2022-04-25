@@ -3,9 +3,6 @@ title: "Out-of-Band Responses"
 slug: "out-of-band-responses"
 ---
 
-* toc
-{:toc}
-
 Not every piece of data that FarmBot works with can be transmitted as CeleryScript. When an RPC creates data that is not formatted as CeleryScript, the response is said to be "out of band", meaning that it relays the information through a channel that does not support CeleryScript (typically the [REST API](../web-app/rest-api.md) or status channel on the [Message Broker](../web-app/message-broker.md)).
 
 |                              |                              |

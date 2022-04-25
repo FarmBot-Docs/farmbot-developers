@@ -3,9 +3,6 @@ title: "ENV Vars and GlobalConfigs"
 slug: "env-vars-and-globalconfigs"
 ---
 
-* toc
-{:toc}
-
 
 FarmBot is an Open Source project that can be self hosted by third party developers. The way that FarmBot, inc. configures its servers for public use might not meet the needs of self hosting users. Additionally, there are security implications to configuration management in an Open Source project; We would not want to leak our database password into source control, for example.
 

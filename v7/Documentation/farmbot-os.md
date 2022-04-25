@@ -4,9 +4,6 @@ slug: "farmbot-os"
 description: "[GitHub repository](https://github.com/FarmBot/farmbot_os/)"
 ---
 
-* toc
-{:toc}
-
 
 {%
 include callout.html

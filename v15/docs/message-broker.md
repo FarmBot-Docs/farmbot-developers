@@ -3,9 +3,6 @@ title: "Message Broker"
 slug: "message-broker"
 ---
 
-* toc
-{:toc}
-
 The FarmBot API provides an HTTP based [REST API](../docs/web-app/rest-api.md). HTTP follows a response-request format, which is great when you are explicitly looking for data. However, some interactions do not lend themselves well to a request/response pattern. For example, if FarmBot must perform an emergency stop, we do not want to constantly check the API for such a message. Instead, we wish to receive such messages as soon as they are created and without explicitly asking. Other use cases include remote procedure calls and real-time data syncing.
 
 The **message broker** is a sub-component of the web API which provides another method of communication which satisfies this requirement. It is a specially configured instance of [RabbitMQ](https://www.rabbitmq.com) that serves the following functions:

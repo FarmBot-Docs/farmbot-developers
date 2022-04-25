@@ -3,9 +3,6 @@ title: "CeleryScript"
 slug: "celery-script"
 ---
 
-* toc
-{:toc}
-
 
 # What is CeleryScript?
 

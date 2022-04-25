@@ -3,9 +3,6 @@ title: "Gathering a Log Dump"
 slug: "gathering-a-log-dump"
 ---
 
-* toc
-{:toc}
-
 
 {%
 include callout.html

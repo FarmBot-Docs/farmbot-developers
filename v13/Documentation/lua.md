@@ -4,9 +4,6 @@ slug: "lua"
 description: "List of available Lua functions in FBOS"
 ---
 
-* toc
-{:toc}
-
 The [sequence editor](https://software.farm.bot/docs/sequences) is an easy to use tool for automating FarmBot operations. However, advanced users who are familiar with computer programming concepts may opt for a more advanced interface. For these users, we provide several methods to insert **Lua code fragments** directly into sequences:
 
  * By using the <span class="fb-step fb-lua">Lua</span> command ([learn more](https://software.farm.bot/docs/advanced-sequence-commands)).

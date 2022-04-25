@@ -4,9 +4,6 @@ slug: "weed-detection"
 description: "How weed detection works."
 ---
 
-* toc
-{:toc}
-
 
 If we process a photo of our garden bed without providing any information, we would detect all the plants in the image:
 

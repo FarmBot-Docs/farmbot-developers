@@ -5,9 +5,6 @@ description: "Target audience: **software developers**. For end-users, see [Farm
 redirect_from: /docs/v7/
 ---
 
-* toc
-{:toc}
-
 
 {%
 include callout.html

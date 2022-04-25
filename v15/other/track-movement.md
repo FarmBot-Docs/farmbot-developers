@@ -4,9 +4,6 @@ slug: "track-movement"
 description: "Various methods for tracking device position in realtime"
 ---
 
-* toc
-{:toc}
-
 Some third-party applications require the ability to track FarmBot's XYZ position in realtime. An example of this is seen in the Web App, where the browser quickly redraws the screen to display an animation of device movement.
 
 Unfortunately, you cannot track the device position in realtime via Lua or the sequence editor:

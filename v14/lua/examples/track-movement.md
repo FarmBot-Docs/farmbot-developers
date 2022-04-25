@@ -4,9 +4,6 @@ slug: "track-movement"
 description: "Various methods for tracking device position"
 ---
 
-* toc
-{:toc}
-
 # Tutorial: Tracking Device Position in Realtime
 
 Some third-party applications require the ability to track FarmBot's XYZ position in realtime. An example of this is seen in the Web App, where the browser quickly redraws the screen to display an animation of device movement.

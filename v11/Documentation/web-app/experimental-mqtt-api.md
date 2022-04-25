@@ -3,9 +3,6 @@ title: "Publishing Resources via MQTT, Introduction"
 slug: "experimental-mqtt-api"
 ---
 
-* toc
-{:toc}
-
 
 {%
 include callout.html

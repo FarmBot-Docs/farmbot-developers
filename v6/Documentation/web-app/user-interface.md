@@ -3,9 +3,6 @@ title: "User Interface"
 slug: "user-interface"
 ---
 
-* toc
-{:toc}
-
 
 {%
 include callout.html

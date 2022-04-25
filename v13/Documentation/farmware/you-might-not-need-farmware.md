@@ -3,9 +3,6 @@ title: "You Might Not Need Farmware"
 slug: "you-might-not-need-farmware"
 ---
 
-* toc
-{:toc}
-
 
 {%
 include callout.html

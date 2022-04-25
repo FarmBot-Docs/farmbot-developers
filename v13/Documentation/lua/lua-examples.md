@@ -4,9 +4,6 @@ slug: "lua-examples"
 description: "Advanced FarmBot customization via Lua scripts."
 ---
 
-* toc
-{:toc}
-
 # Example 1: Send Slack chat messages
 
 It is possible for FarmBot to send outbound HTTP requests using [Lua scripting](../lua.md). This feature can be used to create third-party integrations with proprietary software products that offer webhook integrations, such as [Slack](https://slack.com/).

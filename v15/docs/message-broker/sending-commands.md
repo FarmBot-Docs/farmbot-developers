@@ -3,9 +3,6 @@ title: "Sending Commands"
 slug: "sending-commands"
 ---
 
-* toc
-{:toc}
-
 FarmBotJS wraps common MQTT and [CeleryScript](../celery-script.md) operations into a single module. This allows you to focus on controlling FarmBot without needing to understand the underlying protocols of the system.
 
 Not every project is written in Javascript, however, and users occasionally wish to write their own wrapper libraries in a language of choice (Python, Ruby, Java etc...)

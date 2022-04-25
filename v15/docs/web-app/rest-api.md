@@ -4,9 +4,6 @@ slug: "rest-api"
 description: "[Example API requests](../web-app/api-docs.md)"
 ---
 
-* toc
-{:toc}
-
 The **REST API** is an HTTP web server commonly referred to as "The API", "The REST API" or simply "The Server". The REST API handles a number of responsibilities including:
 
  * **Data storage, validation, and security:** Prevents data loss between reflashes by storing it in a centralized database, allows users to edit information when the device is offline, validates data and controls access to data via authentication and authorization mechanisms.

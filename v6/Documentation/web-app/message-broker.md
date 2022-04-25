@@ -3,9 +3,6 @@ title: "Message Broker"
 slug: "message-broker"
 ---
 
-* toc
-{:toc}
-
 # Problem: Push Notifications
 
 The FarmBot API provides an HTTP based [REST API](rest-api.md). HTTP follows a response-request format, which is great when you are explicitly looking for data. REST is a popular format for data storage and retrieval because it follows a stateless request/response cycle.

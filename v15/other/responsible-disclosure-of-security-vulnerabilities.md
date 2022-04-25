@@ -3,9 +3,6 @@ title: "Responsible Disclosure of Security Vulnerabilities"
 slug: "responsible-disclosure-of-security-vulnerabilities"
 ---
 
-* toc
-{:toc}
-
 No technology is ever perfect, and FarmBot believes that working with skilled security researchers and our entire community of users across the globe is crucial in identifying weaknesses in our technology. **If you believe you’ve found a security issue in our product or service we ask that you notify us privately at security@farm.bot as soon as possible so that we may work with you to promptly fix the issue.**
 
 {%

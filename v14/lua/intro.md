@@ -4,9 +4,6 @@ slug: "intro"
 description: "Insert Lua code fragments directly into sequences"
 ---
 
-* toc
-{:toc}
-
 The [sequence editor](https://software.farm.bot/docs/sequences) is an easy to use tool for automating FarmBot operations. However, advanced users who are familiar with computer programming concepts may opt for a more advanced interface. For these users, we provide several methods to insert **Lua code fragments** directly into sequences:
 
 # Lua commands

@@ -4,9 +4,6 @@ slug: "functions"
 description: "List of available Lua functions in FarmBot OS"
 ---
 
-* toc
-{:toc}
-
 All of the available Lua functions are listed below. Additionally, you may access most of the functions available in the [Lua 5.2 standard library](https://www.lua.org/manual/5.2/). If you have questions about the available functions or would like us to make new features available, please let us know in the [FarmBot Forum](https://forum.farmbot.org/).
 
 # api(options)
