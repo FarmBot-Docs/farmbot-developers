@@ -62,31 +62,35 @@ _.sortBy(points, ["body.y", "body.x"]).reverse()
 # X/Y Alternating
 {% include callout.html type="info" content="Not yet available in FarmBot OS." %}
 ```javascript
-var ordered = [];
-_.uniq(points.map(p => p.body.x))
-  .sort()
+_.chain(points)
+  .map(p => p.body.x)
+  .uniq()
+  .sortBy()
   .map((x, index) =>
     index % 2 == 0
       ? _.sortBy(points.filter(p => p.body.x == x), "body.y")
       : _.sortBy(points.filter(p => p.body.x == x), "body.y").reverse())
-  .map(row => row.map(p => ordered.push(p)))
+  .flatten()
+  .value()
 
-// expected example data order: 3 1 4 5 2
+// expected example data order: 3 1 2 5 4
 ```
 
 # Y/X Alternating
 {% include callout.html type="info" content="Not yet available in FarmBot OS." %}
 ```javascript
-var ordered = [];
-_.uniq(points.map(p => p.body.y))
-  .sort()
+_.chain(points)
+  .map(p => p.body.y)
+  .uniq()
+  .sortBy()
   .map((y, index) =>
     index % 2 == 0
       ? _.sortBy(points.filter(p => p.body.y == y), "body.x")
       : _.sortBy(points.filter(p => p.body.y == y), "body.x").reverse())
-  .map(row => row.map(p => ordered.push(p)))
+  .flatten()
+  .value()
 
-// expected example data order: 4 1 3 5 2
+// expected example data order: 4 1 2 5 3
 ```
 
 # Optimized
