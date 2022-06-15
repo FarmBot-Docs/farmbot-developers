@@ -7,6 +7,7 @@ description: "How point group sorting works."
 ![group sort methods](_images/yx_alternating.png)
 
 # Setup
+
 ```javascript
 // Example data
 var points = [
@@ -25,6 +26,7 @@ document.head.appendChild(script);
 ```
 
 # Random
+
 ```javascript
 _.shuffle(points)
 
@@ -32,6 +34,7 @@ _.shuffle(points)
 ```
 
 # X/Y Ascending
+
 ```javascript
 _.sortBy(points, ["body.x", "body.y"])
 
@@ -39,6 +42,7 @@ _.sortBy(points, ["body.x", "body.y"])
 ```
 
 # X/Y Descending
+
 ```javascript
 _.sortBy(points, ["body.x", "body.y"]).reverse()
 
@@ -46,6 +50,7 @@ _.sortBy(points, ["body.x", "body.y"]).reverse()
 ```
 
 # Y/X Ascending
+
 ```javascript
 _.sortBy(points, ["body.y", "body.x"])
 
@@ -53,6 +58,7 @@ _.sortBy(points, ["body.y", "body.x"])
 ```
 
 # Y/X Descending
+
 ```javascript
 _.sortBy(points, ["body.y", "body.x"]).reverse()
 
@@ -60,7 +66,7 @@ _.sortBy(points, ["body.y", "body.x"]).reverse()
 ```
 
 # X/Y Alternating
-{% include callout.html type="info" content="Not yet available in FarmBot OS." %}
+
 ```javascript
 _.chain(points)
   .map(p => p.body.x)
@@ -77,7 +83,7 @@ _.chain(points)
 ```
 
 # Y/X Alternating
-{% include callout.html type="info" content="Not yet available in FarmBot OS." %}
+
 ```javascript
 _.chain(points)
   .map(p => p.body.y)
@@ -94,7 +100,7 @@ _.chain(points)
 ```
 
 # Optimized
-{% include callout.html type="info" content="Not yet available in FarmBot OS." %}
+
 Nearest neighbor algorithm:
 
 ```javascript

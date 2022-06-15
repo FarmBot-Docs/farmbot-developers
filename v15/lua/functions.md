@@ -325,6 +325,27 @@ move_absolute({
 })
 ```
 
+## group(id)
+
+Given a group ID, returns a table of current group member IDs, sorted by the group's **SORT BY** method.
+
+```lua
+group_members = group(1234)
+for i,member in ipairs(group_members) do
+    plant = api({
+        method = "get",
+        url = "/api/points/" .. member
+    })
+    move_absolute(plant.x, plant.y, 0)
+end
+```
+
+{%
+include callout.html
+type="info"
+content="Find a group's ID by navigating to the group in the web app and copying the number at the end of the URL."
+%}
+
 ## soil_height(x, y)
 
 Given an X and Y coordinate, returns a best-effort estimate of the Z axis height of the soil. This function requires at least 3 soil height measurements. When there are less than 3 measurements available, it will return the SOIL HEIGHT setting from the device settings page.
@@ -336,6 +357,27 @@ my_soil_height = soil_height(x, y)
 send_message("info", "Distance to soil at (10, 29): " .. inspect(my_soil_height))
 -- => "Distance to soil at (10, 29): -409.84"
 ```
+
+## sort(points, method)
+
+Sorts the given table of points using the chosen sorting method.
+
+```lua
+points = group(1234)
+sorted_points = sort(points, "xy_alternating")
+send_message("info", "Second point ID is: " .. sorted_points[2])
+```
+
+The following sorting methods are available. See [point group sorting](../other/how-it-works/point-group-sorting.md) for additional details.
+
+- `xy_ascending`
+- `yx_ascending`
+- `xy_descending`
+- `yx_descending`
+- `xy_alternating`
+- `yx_alternating`
+- `nn` (Nearest Neighbor)
+- `random`
 
 # E-stop and Unlock
 
