@@ -662,6 +662,14 @@ else
 end
 ```
 
+## toggle_pin(pin)
+
+Toggles the state of the given pin between digital `1` and `0`. If the pin is initially set to an analog value, it will be rounded to the nearest digital value and then toggled.
+
+```lua
+toggle_pin(13)
+```
+
 ## watch_pin(pin, callback)
 
 Fork the current Lua process into a second, parallel Lua script that is initialized every 500 milliseconds for the duration of the parent script's lifetime.
