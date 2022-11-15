@@ -9,7 +9,7 @@ Some third-party applications require the ability to track FarmBot's XYZ positio
 Unfortunately, you cannot track the device position in realtime via Lua or the sequence editor:
 
  * The sequence editor does not have facilities to track position, aside from simple template variables in [SEND MESSAGE](https://software.farm.bot/v15/app/sequences/sequence-commands/logic#send-message).
- * It is not possible to easily track the position in Lua because the Lua environment does not support concurrent operations. It is possible to read the bot position via [read_status() function](../lua/functions.md#read_statuspath) or [get_position()](../lua/functions.md#get_position), but not in realtime. That is to say, you cannot send commands and read the position at the same time.
+ * It is not possible to easily track the position in Lua because the Lua environment does not support concurrent operations. It is possible to read the bot position via [read_status()](../lua/functions/configuration.md#read_statuspath) or [get_position()](../lua/functions/movements.md#get_position), but not in realtime. That is to say, you cannot send commands and read the position at the same time.
 
 Thus, if you want to track the position of FarmBot in realtime, you must write software that runs off-device using [MQTT](#using-mqtt), [FarmBot.JS](#using-farmbotjs) or [FarmBot.py](#using-farmbotpy).
 

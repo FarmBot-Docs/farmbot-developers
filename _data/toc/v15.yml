@@ -78,6 +78,33 @@ contents:
         url: intro
       - title: Functions
         url: functions
+        pages:
+          - title: API
+            url: api
+          - title: Configuration
+            url: configuration
+          - title: Coordinates
+            url: coordinates
+          - title: E-Stop and Unlock
+            url: e-stop-and-unlock
+          - title: Images
+            url: images
+          - title: Jobs
+            url: jobs
+          - title: Messages
+            url: messages
+          - title: Movements
+            url: movements
+          - title: Pins
+            url: pins
+          - title: Time
+            url: time
+          - title: UART
+            url: uart
+          - title: Variables
+            url: variables
+          - title: Advanced
+            url: advanced
       - title: Examples
         url: examples
         pages:
