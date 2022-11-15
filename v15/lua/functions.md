@@ -119,27 +119,6 @@ result, error = json.encode({ foo="bar", example=123 })
 
 Alias for `json.encode`.
 
-## send_message(type, message, channels)
-
-`send_message(type, message, channels?)`
-
-The first required parameter is a log type, which is one of the following string values: `"assertion"`, `"busy"`, `"debug"`, `"error"`, `"fun"`, `"info"`, `"success"`, `"warn"`
-
-The second required parameter is the message, which may be either a string or a number.
-
-The third parameter is optional. It can be a single string or an array of strings. The strings must be one of the following: `"ticker"`, `"toast"`, `"email"`, `"espeak"`
-
-```lua
--- Send a message to the default channel ("ticker"):
-send_message("error", "Hello")
-
--- Send a message to a single channel:
-send_message("success", "You've got mail!", "email")
-
--- Send a message to multiple channels:
-send_message("info", "All systems running.", {"toast", "espeak"})
-```
-
 # Configs
 
 ## env(key, value) / env(key)
@@ -531,6 +510,45 @@ job = get_job_progress("Scan the garden")
 send_message("debug", "Job progress: " .. job.percent, "toast")
 ```
 
+# Messages
+
+## debug(message)
+
+Send a log with type `debug`.
+
+```lua
+debug("This just happened")
+```
+
+## send_message(type, message, channels?)
+
+Send a message to the logs channel and optionally as a toast, email, or as synthesythized spoken word.
+
+- The first required parameter is a log type, which is one of the following string values: `assertion`, `busy`, `debug`, `error`, `fun`, `info`, `success`, `warn`
+- The second required parameter is the message, which may be either a string or a number.
+- The third parameter is optional. It can be a single string or an array of strings. The strings must be one of the following: `ticker`, `toast`, `email`, `espeak`
+
+```lua
+-- Send a message to the default channel ("ticker"):
+send_message("error", "Hello")
+
+-- Send a message to a single channel:
+send_message("success", "You've got mail!", "email")
+
+-- Send a message to multiple channels:
+send_message("info", "All systems running.", {"toast", "espeak"})
+```
+
+## toast(message, type?)
+
+Send a message as a log and a toast notification. Defaults to type `info` if no type is given.
+
+```lua
+toast("This is a toast")
+wait(2000)
+toast("I'll cheers to that", "success")
+```
+
 # Movements
 
 ## get_position()
@@ -563,14 +581,34 @@ go_to_home("all")
 go_to_home()
 ```
 
-## move_absolute(x, y, z, s?) / move_absolute(coord)
+## move{args}
+
+Moves to an absolute or relative coordinate position, where all arguments are optional. When an `x`, `y`, or `z` coordinate is omitted, the current position along that axis will be maintained, allowing for a relative movement. This helper is essentially a character saving version of `move_absolute`.
+
+```lua
+-- Move absolute
+move{x=100, y=200, z=-20}
+
+-- Safe Z move to the new position where the X coordinate stays constant
+move{y=0, z=-20, safe_z=true}
+
+-- Move relative along the X axis
+move{x=0}
+
+-- Move relative along the Y and Z axes
+move{y=100, z=-10}
+
+-- Move relative along the Y axis at 10% speed
+move{y=100, speed=10}
+```
+
+## move_absolute(x, y, z, s?)
 
 Move to an absolute coordinate position.
 
 ```lua
-move_absolute(1.0, 2, 3.4)
--- Alternative syntax:
-move_absolute(coordinate(1.0, 20, 30))
+move_absolute(30.5, 75, -20)
+
 -- Enable "Safe Z":
 move_absolute({
   x = 1.0,
@@ -578,9 +616,15 @@ move_absolute({
   z = 30,
   safe_z = true
 })
-```
 
-**NOTE:** `move_absolute` can accept an optional fourth argument that sets movement speed as a percentage of max speed.
+-- Modify speed as a percentage of max speed:
+move_absolute({
+  x = 0,
+  y = 100,
+  z = 0,
+  speed = 25
+})
+```
 
 ## find_axis_length(axis?)
 
@@ -637,9 +681,25 @@ while (i < 10) do
 end
 ```
 
+## on(pin)
+
+Sets the state of the given pin to digital `1`.
+
+```lua
+on(7)
+```
+
+## off(pin)
+
+Sets the state of the given pin to digital `0`.
+
+```lua
+off(7)
+```
+
 ## read_pin(pin, mode?)
 
-`read_pin(pin_num, mode?)` reads a pin when given a pin number and read mode (`"analog"` or `"digital"`). Defaults to `"digital"` if no mode is given:
+Reads the given pin with the read mode `analog` or `digital`. Defaults to `digital` if no mode is given.
 
 ```lua
 pin23 = read_pin(23) -- Digital is the default mode
@@ -651,7 +711,7 @@ pin25 = read_pin(25, "analog")
 
 Sets the I/O mode of an Arduino pin. It is slightly similar to the [`pinMode()` function in the Arduino IDE](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/).
 
-**Valid pin modes:** `"input"`, `"input_pullup"`, `"output"`.
+**Valid pin modes:** `input`, `input_pullup`, `output`.
 
 ```lua
 result, error = set_pin_io_mode(13, "output")
