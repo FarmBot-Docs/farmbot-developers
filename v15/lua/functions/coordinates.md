@@ -65,6 +65,15 @@ move_absolute({
 })
 ```
 
+# get_xyz()
+
+Returns a table with the current `x`, `y`, and `z` coordinates of the FarmBot.
+
+```lua
+position = get_xyz()
+toast("FarmBot's X coordinate is: " .. position.x)
+```
+
 # group(id)
 
 Given a group ID, returns a table of current group member IDs, sorted by the group's **SORT BY** method.
@@ -85,6 +94,15 @@ include callout.html
 type="info"
 content="Find a group's ID by navigating to the group in the web app and copying the number at the end of the URL."
 %}
+
+# safe_z()
+
+Returns the value of the **[SAFE HEIGHT](https://my.farm.bot/app/designer/settings?highlight=safe_height)** setting. Note that `safe_z()` on it's own does not initiate a movement, and it should not be confused with adding a `safe_z=true` argument to a `move` or `move_absolute` command.
+
+```lua
+-- Move FarmBot's Z-axis to the Safe Height
+move{z=safe_z()}
+```
 
 # soil_height(x, y)
 

@@ -4,21 +4,6 @@ slug: "movements"
 description: "List of movement Lua functions in FarmBot OS"
 ---
 
-# get_position()
-
-Return a table containing the current X, Y, Z value of the device.
-
-```lua
-position, error = get_position()
-
-if error then
-  send_message("error", error, "toast")
-else
-  message = "Y position is " .. position.y
-  send_message("info", message)
-end
-```
-
 # go_to_home(axis?)
 
 Move to the `0` (home) position of a given axis.
