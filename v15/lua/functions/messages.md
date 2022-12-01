@@ -14,7 +14,7 @@ debug("This just happened")
 
 # send_message(type, message, channels?)
 
-Send a message to the logs channel and optionally as a toast, email, or as synthesythized spoken word.
+Send a message to the logs channel and optionally as a toast, email, or as synthesized spoken word.
 
 - The first required parameter is a log type, which is one of the following string values: `assertion`, `busy`, `debug`, `error`, `fun`, `info`, `success`, `warn`
 - The second required parameter is the message, which may be either a string or a number.

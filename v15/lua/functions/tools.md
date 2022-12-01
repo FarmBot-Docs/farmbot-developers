@@ -30,7 +30,7 @@ find_home()
 -- Add a Location variable named "Tool" to the sequence and select the tool you wish to mount.
 tool = variable("Tool")
 
--- Because tools themselves do not have cooridnates, FarmBot will look up which slot the chosen tool has been assigned to and use the slot's coordinates in the mount_tool() function.
+-- Because tools themselves do not have coordinates, FarmBot will look up which slot the chosen tool has been assigned to and use the slot's coordinates in the mount_tool() function.
 mount_tool(tool)
 ```
 
@@ -42,7 +42,7 @@ content="This helper function should only be used with FarmBots that have a univ
 
 # verify_tool()
 
-Checks the UTM’s tool verification pin as well as the **MOUNTED TOOL** field in FarmBot’s state tree to verify if a tool is mounted to the UTM. Note that this functioanlity is built-in to the `mount_tool()` and `dismount_tool()` helpers.
+Checks the UTM’s tool verification pin as well as the **MOUNTED TOOL** field in FarmBot’s state tree to verify if a tool is mounted to the UTM. Note that this functionality is built-in to the `mount_tool()` and `dismount_tool()` helpers.
 
 ```lua
 -- Exit sequence if tool verification fails (no tool)
