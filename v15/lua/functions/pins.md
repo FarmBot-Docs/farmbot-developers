@@ -109,13 +109,3 @@ Sets a pin to a particular mode and value:
 ```lua
 write_pin(13, "analog", 128)
 ```
-
-# verify_tool()
-
-Checks the UTM’s tool verification pin as well as the **MOUNTED TOOL** field in FarmBot’s state tree to verify if a tool is mounted to the UTM.
-
-```lua
-if not verify_tool() then -- exits sequence if tool verification failed (no tool)
-    return
-end
-```

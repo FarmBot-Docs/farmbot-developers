@@ -99,6 +99,8 @@ contents:
             url: pins
           - title: Time
             url: time
+          - title: Tools
+            url: tools
           - title: UART
             url: uart
           - title: Variables

@@ -20,6 +20,7 @@ If you have questions about the available functions or would like us to make new
 * [Movements](functions/movements.md)
 * [Pins](functions/pins.md)
 * [Time](functions/time.md)
+* [Tools](functions/tools.md)
 * [UART](functions/uart.md)
 * [Variables](functions/variables.md)
 * [Advanced](functions/advanced.md)
