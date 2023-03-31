@@ -13,6 +13,7 @@ If you have questions about the available functions or would like us to make new
 * [API](functions/api.md)
 * [Configuration](functions/configuration.md)
 * [Coordinates](functions/coordinates.md)
+* [Curves](functions/curves.md)
 * [E-Stop and Unlock](functions/e-stop-and-unlock.md)
 * [Images](functions/images.md)
 * [Jobs](functions/jobs.md)
