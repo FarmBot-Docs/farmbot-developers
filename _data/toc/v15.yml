@@ -85,6 +85,8 @@ contents:
             url: configuration
           - title: Coordinates
             url: coordinates
+          - title: Curves
+            url: curves
           - title: E-Stop and Unlock
             url: e-stop-and-unlock
           - title: Images
