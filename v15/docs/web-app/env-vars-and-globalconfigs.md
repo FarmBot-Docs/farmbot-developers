@@ -4,24 +4,24 @@ slug: "env-vars-and-globalconfigs"
 ---
 
 
-FarmBot is an Open Source project that can be self hosted by third party developers. The way that FarmBot, inc. configures its servers for public use might not meet the needs of self hosting users. Additionally, there are security implications to configuration management in an Open Source project; We would not want to leak our database password into source control, for example.
+FarmBot is an [open source project](http://licensing.farm.bot/), allowing third party developers to **self host** their own instance of the web app. The way that FarmBot Inc configures its servers for public use might not meet the needs of self hosting users. Additionally, there are security implications to configuration management in an open source project; we would not want to leak our database password into source control, for example.
 
-Farmbot attempts to decouple configuration from code as much as possible, in keeping with the [12 Factor Methodology](https://12factor.net/config):
+FarmBot attempts to decouple configuration from code as much as possible, in keeping with the [12 Factor Methodology](https://12factor.net/config):
 
  > The twelve-factor app stores config in [environment variables](https://en.wikipedia.org/wiki/Environment_variable) (often shortened to env vars or env). Env vars are easy to change between deploys without changing any code; unlike config files, there is little chance of them being checked into the code repo accidentally; and unlike custom config files, or other config mechanisms such as Java System Properties, they are a language- and OS-agnostic standard.
 
-By using ENV vars as the first choice for server configuration, we can:
+By using **ENV vars** as the first choice for server configuration, we can:
 
- * Allow for server customization
- * Safely share the application source code with the public
- * Reap all the other [benefits that the 12 Factor Methodology](https://thenewstack.io/12-factor-app-streamlines-application-development/) provides.
+ * Allow for server customization.
+ * Safely share the application [source code](http://github.farm.bot) with the public.
+ * Reap all the other [12 Factor Methodology benefits](https://thenewstack.io/12-factor-app-streamlines-application-development/).
 
 # Loading ENV vars
 
 For most parts of the app, environment variables are loaded into a `.env` file.
 
- * Information about the `.env` file format can be found [here](https://docs.docker.com/compose/env-file/)
- * Documentation on legal values can be found [here](https://github.com/FarmBot/Farmbot-Web-App/blob/staging/example.env#L7).
+ * Information about the `.env` file format can be found [here](https://docs.docker.com/compose/env-file/).
+ * Documentation on legal values can be found [here](https://github.com/FarmBot/Farmbot-Web-App/blob/staging/example.env).
 
 {%
 include callout.html
@@ -31,11 +31,11 @@ content="The app also exposes a [secondary configuration system](https://github.
 
 ## Examples
 
-FarmBot, Inc. requires validation of user email addresses. Most self hosting users do not want this behavior, however. To allow server admins to choose between verifying emails or not, the application exposes a `ENV["NO_EMAILS"]` variable. When present, this ENV var will disable email verification.
+FarmBot Inc requires validation of user email addresses. Most self hosting users do not want this behavior, however. To allow server admins to choose between verifying emails or not, the application exposes a `ENV["NO_EMAILS"]` variable. When present, this ENV var will disable email verification.
 
 Another example is the `EXTRA_DOMAINS` variable. It can be set to a comma separated list of alternative domain names that a server may control. This allows the same server to be hosted on more than one domain name (`my.farm.bot`, `my.farmbot.io`, etc..).
 
-These examples are for illustrative purposes. The full list of variables is available [here](https://github.com/FarmBot/Farmbot-Web-App/blob/staging/example.env#L7).
+These examples are for illustrative purposes. The full list of variables is available [here](https://github.com/FarmBot/Farmbot-Web-App/blob/staging/example.env).
 
 ## Caveats
 
@@ -43,13 +43,11 @@ ENV vars work for _most_ configuration use cases, but there are some caveats:
 
  * Changing ENV vars requires a server restart. In many cases, this creates an unacceptable downtime period, particularly for servers with high uptime requirements.
  * Environment variables are a server-side concern. When a client loads the FarmBot Web App in their browser, it is not possible to see the server's ENV vars. If this were not the case, it would be possible for users to steal database credentials quite easily.
- * Not all customization happens on the server side ("back end"). There are many use cases that require ENV passing information from the server to the client.
+ * Not all customization happens on the server side; there are many use cases that require ENV information passing from the server to the client.
 
 # Runtime reloading of ENV vars
 
-As stated previously, ENV variables require a process restart to take effect. For some values, a restart is not practical.
-
-For values that must change after the server has started, the FarmBot Web App uses a model (database table) known as `GlobalConfig`. The `GlobalConfig` source code can be found [here](https://github.com/FarmBot/Farmbot-Web-App/blob/staging/app/models/global_config.rb).
+For values that must change without requiring a restart of the server, the FarmBot Web App uses a `GlobalConfig` model (database table). The `GlobalConfig` source code can be found [here](https://github.com/FarmBot/Farmbot-Web-App/blob/staging/app/models/global_config.rb).
 
 Some `GlobalConfig` values (such as `"TOS_URL"`) are bootstraped using ENV vars if no value can be found in the `global_configs` table.
 
@@ -110,7 +108,6 @@ When the Web App loads a web page that needs ENV vars, it injects a a `<script>`
 
 ```html
 <script>
-  // ---SNIP!---
 
   // THIS IS WHERE ENV VARIABLES CROSS OVER
   // From the server to the client:
@@ -121,12 +118,14 @@ When the Web App loads a web page that needs ENV vars, it injects a a `<script>`
   // for the `GlobalConfig` table (but not all ENV
   // vars).
 
-  // ---SNIP!---
-
 </script>
 ```
 
-Please note that the `<%= %>` is [Ruby ERB syntax](https://en.wikipedia.org/wiki/ERuby)
+{%
+include callout.html
+type="info"
+content="The `<%= %>` is [Ruby ERB syntax](https://en.wikipedia.org/wiki/ERuby)."
+%}
 
 The value of `@global_config` is set in `app/controllers/dashboard_controller.rb`:
 
@@ -146,7 +145,7 @@ private
 end
 ```
 
-With these systems in place, we can now add and remove ENV variables from the Rails console via:
+With these systems in place, we can now add and remove ENV variables from the Rails console:
 
 ```ruby
 GlobalConfig.create!(key: "FAVORITE_PLANT", value: "cabbage")

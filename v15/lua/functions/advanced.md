@@ -4,13 +4,18 @@ slug: "advanced"
 description: "List of advanced Lua functions in FarmBot OS"
 ---
 
-# sequence()
+# sequence(id, variables?)
 
-Executes a subsequence with variables.
+Executes a **subsequence** with optional **variables**.
 
 ```lua
--- Execute a subsequence that has a
--- number variable named "time"
+-- Execute a subsequence without variables
+subsequence = variable("Subsequence")
+sequence(subsequence.id)
+```
+
+```lua
+-- Execute a subsequence that has a number variable named "time"
 subsequence = variable("Subsequence")
 sequence(subsequence.id, {
  time = {
@@ -19,9 +24,20 @@ sequence(subsequence.id, {
 })
 ```
 
+```lua
+-- Execute a subsequence that has a text variable named "time in ms"
+subsequence = variable("Subsequence")
+variable = {}
+variable["time in ms"] = {
+  kind = "numeric",
+  args = { number = 1500 }
+}
+sequence(subsequence.id, variable)
+```
+
 # rpc()
 
-Wraps a CeleryScript node into an `rpc_request`.
+Wraps a **CeleryScript node** into an `rpc_request`.
 
 ```lua
 command = {
@@ -43,7 +59,7 @@ content='You can use the **[VIEW CELERYSCRIPT](https://software.farm.bot/docs/se
 
 # cs_eval(celeryscript_ast)
 
-Allows you to execute arbitrary CeleryScript nodes.
+Executes arbitrary **CeleryScript nodes**.
 
 ```lua
 cs_eval({
@@ -65,13 +81,23 @@ cs_eval({
 })
 ```
 
+```lua
+-- Execute a subsequence
+subsequence = variable("Subsequence")
+cs_eval(subsequence)
+```
+
 # gcode(command, params)
 
-Calling the function will send raw G code to the Farmduino. No validations will be applied. The function will block the calling process until a response is received from the firmware.
-
-A `Q` param will implicitly be added by FBOS. Do not explicitly set the `Q` value. It will cause FBOS to crash.
+Sends **raw G code** to the Farmduino. No validations will be applied. The function will block the calling process until a response is received from the firmware.
 
 ```lua
 -- Send "G00 X1.23 Y4.56 Z7.89" to the Farmduino
 gcode("G00", { X = 1.23, Y = 4.56, Z = 7.89 })
 ```
+
+{%
+include callout.html
+type="danger"
+content="A `Q` param will implicitly be added by FarmBot OS. Do not explicitly set the `Q` value; it will cause FBOS to crash."
+%}

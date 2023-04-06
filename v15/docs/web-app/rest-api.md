@@ -4,15 +4,19 @@ slug: "rest-api"
 description: "[Example API requests](../web-app/api-docs.md)"
 ---
 
-The **REST API** is an HTTP web server commonly referred to as "The API", "The REST API" or simply "The Server". The REST API handles a number of responsibilities including:
+The **REST API** is an HTTP web server commonly referred to as "The API", "The REST API" or simply "The server". The REST API handles a number of responsibilities including:
 
- * **Data storage, validation, and security:** Prevents data loss between reflashes by storing it in a centralized database, allows users to edit information when the device is offline, validates data and controls access to data via authentication and authorization mechanisms.
- * **Email delivery:** Sends email notifications (such as password resets and critical errors) to end users. All other messaging is handled by the [Message Broker](../message-broker.md), a distinctly decoupled sub-system of the Web API.
- * **Image uploads and manipulation:** Re-sizes and stores images captured by FarmBot's internal camera.
+ * **Data storage, validation, and security:** Allows users to edit information such as sequences and the garden layout even when the device is offline, prevents data loss between factory resets of FarmBot OS by storing the data in the cloud, validates data and controls access to data via authentication and authorization mechanisms.
+ * **Email delivery:** Sends email notifications such as password resets and critical errors to end users. All other messaging is handled by the [Message Broker](../message-broker.md), a distinctly decoupled sub-system of the Web API.
+ * **Image uploads and manipulation:** Re-sizes and stores images captured by FarmBot's onboard camera.
 
-Generally speaking, the REST API does _not_ control FarmBot. Device control is handled by the [Message Broker](../message-broker.md), [CeleryScript](../celery-script.md) and [FarmBot JS](../farmbot-js.md).
+{%
+include callout.html
+type="info"
+content="Generally speaking, the REST API does _not_ control FarmBot. Device control is handled by the [Message Broker](../message-broker.md), [CeleryScript](../celery-script.md), and [FarmBot JS](../farmbot-js.md)."
+%}
 
-## API specifications
+# Specifications
 
 |                              |                              |
 |------------------------------|------------------------------|
@@ -24,23 +28,53 @@ Generally speaking, the REST API does _not_ control FarmBot. Device control is h
 |Test Framework                |[RSpec](http://rspec.info)
 |File Storage Mechanism        |[Google Cloud Storage](https://cloud.google.com/storage/) or filesystem (configurable)
 |Error Monitoring              |[Rollbar](https://rollbar.com) (optional)
-|OS                            |[Ubuntu](https://www.ubuntu.com) (**not** configurable)
+|Operating System              |[Ubuntu](https://www.ubuntu.com) (**not** configurable)
 |Continuous Integration System |[Circle CI](https://circleci.com/) (optional)
 
 # Resources
 
-**Resources** are JSON documents that can be downloaded from the server and used by devices, humans, and third-party tools to store FarmBot related information. Resources have names like "tool", "plant", "device" and "user".
+**Resources** are JSON documents that can be downloaded from the server and used by FarmBots, humans, and third-party tools to store FarmBot related information. Every resource has a URL, and the [HTTP verb](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) used to access the URL will determine how the server handles the request.
 
-Every resource has a URL, and the [HTTP verb](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) used to access the URL will determine how the server handles the request:
+As of February 2020, the API manages the following resources:
 
-|HTTP verb                     |Action                        |
-|------------------------------|------------------------------|
-|`GET`                         |View resource(s).
-|`PUT`, `PATCH`                |Update or replace a resource.
-|`POST`                        |Create a new resource.
-|`DELETE`                      |Destroy a resource.
+|Resource             |Description                                     |Pagination?|
+|---------------------|------------------------------------------------|-----------|
+|`alerts`             |A single item in the message center. Only useful to site administrators.|Yes
+|`corpus`             |A glossary of all Celery Script node types in JSON format.
+|`device`             |Device account settings.
+|`export_data`        |A dump of all the resources listed above.
+|`farm_events`        |Executes a sequence or regimen based on time. Eg: "Execute this sequence every 6 hours".|Yes
+|`farmware_envs`      |Key/value pairs used for persistent storage.|Yes
+|`fbos_config`        |Configuration for FarmBot OS.
+|`firmware_config`    |Configuration for the Arduino Firmware
+|`folders`            |Organization for sequences.
+|`global_bulletins`   |(advanced) An announcement intended for all users of a server
+|`global_config`      |Configuration for all users of a server.
+|`images`             |Meta data about photos taken by FarmBot.
+|`logs`               |Messages from a device.
+|`peripherals`        |Meta data about output hardware.|Yes
+|`pin_bindings`       |Bind an I/O pin to sequence execution.|Yes
+|`plant_templates`    |A single plant within a saved garden. Not a real plant.|Yes
+|`points`             |Represents a saved point on the garden bed. All point types are included in this resource: Plants, Weeds, Tool Slots, and Generic Points.
+|`point_groups`       |A collection of points based on a criteria or predefined set of points (eg: "All Weeds", "My Basil Plants" etc..)|Yes
+|`public_key`         |(advanced) A public encryption key owned by the API server.
+|`regimens`           |Executes sequences based on an offset from the regimen start date.|Yes
+|`releases`           |FarmBot OS releases.
+|`saved_gardens`      |A pre arranged configuration of plants in a garden.|Yes
+|`sensor_readings`    |A single reading from a sensor, recorded to the API.|Yes
+|`sensors`            |Meta data about input hardware.|Yes
+|`sequences`          |Commands created in the sequence editor.
+|`storage_auth`       |(advanced) A policy object for Google Cloud Storage.
+|`tokens`             |An authorization / authentication secret shared between a user or device and the API.
+|`tools`              |An physical object that is mounted to the gantry or a tool slot (UTM).|Yes
+|`users`              |Device operator data such as registration email.
+|`web_app_config`     |User interface preferences.
+|`webcam_feeds`       |Meta data about an external webcam (stream URL)|Yes
+|`wizard_step_results`|Setup wizard result data.
 
-As an example, if we wished to change the name of our device to "Carrot Overlord", we could perform an HTTP `PUT` to the URL `https://my.farm.bot/api/device/325` with the following request body:
+## Example request
+
+If we wished to change the name of our device to "Carrot Overlord", we could perform an HTTP `PUT` to the URL `https://my.farm.bot/api/device/325` with the following request body:
 
 ```json
 {
@@ -64,83 +98,42 @@ Such a request would generate the following JSON HTTP response:
 }
 ```
 
-# Resource list
+## Pagination
 
-As of February 2020, the API manages the following resources:
+Some API endpoints support **pagination** of `GET` requests to break the results into smaller "pages" of a fixed length. To make a paginated request, append [query strings](https://en.wikipedia.org/wiki/Query_string) for **page size** (eg: `per=10`) and **page number** (eg: `page=3`) to the request.
 
-|Resource             |Description                                     |
-|---------------------|------------------------------------------------|
-|`alerts`             |A single item in the message center. Only useful to site administrators.
-|`corpus`             |A glossary of all Celery Script node types in JSON format.
-|`device`             |Device account settings.
-|`export_data`        |A dump of all the resources listed above.
-|`farm_events`        |Executes a sequence or regimen based on time. Eg: "Execute this sequence every 6 hours".
-|`farmware_envs`      |Key/value pairs used for persistent storage.
-|`fbos_config`        |Configuration for FarmBot OS.
-|`firmware_config`    |Configuration for the Arduino Firmware
-|`folders`            |Organization for sequences.
-|`global_bulletins`   |(advanced)An announcement intended for all users of a server
-|`global_config`      |Configuration for all users of a server.
-|`images`             |Meta data about photos taken by FarmBot.
-|`logs`               |Messages from a device.
-|`peripherals`        |Meta data about output hardware.
-|`pin_bindings`       |Bind an I/O pin to sequence execution.
-|`plant_templates`    |A single plant within a saved garden. Not a real plant.
-|`points`             |Represents a saved point on the garden bed. All point types are included in this resource: Plants, Weeds, Tool Slots, and Generic Points.
-|`point_groups`       |A collection of points based on a criteria or predefined set of points (eg: "All Weeds", "My Basil Plants" etc..)
-|`public_key`         |(advanced) A public encryption key owned by the API server.
-|`regimens`           |Executes sequences based on an offset from the regimen start date.
-|`releases`           |FarmBot OS releases.
-|`saved_gardens`      |A pre arranged configuration of plants in a garden.
-|`sensor_readings`    |A single reading from a sensor, recorded to the API.
-|`sensors`            |Meta data about input hardware.
-|`sequences`          |Commands created in the sequence editor.
-|`storage_auth`       |(advanced) A policy object for Google Cloud Storage.
-|`tokens`             |An authorization / authentication secret shared between a user or device and the API.
-|`tools`              |An physical object that is mounted to the gantry or a tool slot (UTM).
-|`users`              |Device operator data such as registration email.
-|`web_app_config`     |User interface preferences.
-|`webcam_feeds`       |Meta data about an external webcam (stream URL)
-|`wizard_step_results`|Setup wizard result data.
-
-# Pagination
-
-Some endpoints will return so much data that it is desirable to break the results into smaller "pages" of a fixed length.
-
-Some (but not all) API endpoints support pagination of GET requests. For example, if you  wished to only download the third page of `sensor_readings` and you would like to set a page size of 10 items, you could perform the following request:
+For example, to download the third page of `sensor_readings` with a page size of 10 items:
 
 ```
 GET https://my.farm.bot/api/sensor_readings?page=3&per=10
 ```
 
-In the example above, you may notice that the GET request contains a special [query string](https://en.wikipedia.org/wiki/Query_string) for the page size (`&per=10`) and page number (`?page=3`).
-
-The following resources support pagination:
-`alerts`, `farm_events`, `farmware_envs`, `peripherals`, `pin_bindings`, `plant_templates`, `point_groups`, `regimens`, `saved_gardens`, `sensor_readings`, `sensors`, `tools`, `webcam_feeds`.
-
-You may request pagination for other resources by submitting an issue on Github.
-
 # Points endpoint
 
-While the REST API is relatively uniform in how it handles resources, all `plants`, `weeds`, `tool_slots`, and generic `points` fall under the same `/api/points` endpoint. This endpoint also has some additional capabilities that the other endpoints do not.
+While the REST API is relatively uniform in how it handles resources, `plants`, `weeds`, `tool_slots`, and generic `points` fall under the same `/api/points` endpoint. This endpoint also has some additional capabilities that the other endpoints do not.
 
 ## Bulk deletion
 
-Unlike the other API endpoints, the `points` endpoint supports bulk deletion. It is possible to delete many point resources in one request by separating many point IDs with a comma.
+To delete many point resources in one request, separate the point IDs with a comma:
 
 ```
 DELETE https://farm.bot/api/points/1,4,23
 ```
 
+{%
+include callout.html
+type="warning"
+content="When points are deleted, it is still possible to view them for 2 months after the time of deletion. This is useful for tools relating to weeding and historical records.
+"
+%}
+
 ## Filtering
 
-When points are deleted, it is still possible to view them for 2 months after the time of deletion. This is useful for tools relating to weeding and historical records.
-
-The `/api/points/` endpoint supports a special `?filter=` [query parameter](https://en.wikipedia.org/wiki/Query_string). There are three options for this parameter:
+The points endpoint supports a special `?filter=` [query parameter](https://en.wikipedia.org/wiki/Query_string). There are three options for this parameter:
 
   * `?filter=all` returns archived and active points.
   * `?filter=old` only returns archived points.
-  * `?filter=kept` only returns active (not-archived) points. **This is the default behavior for index (`/api/points`) endpoint.**
+  * `?filter=kept` only returns active (not-archived) points. **This is the default behavior for the index endpoint (`/api/points`).**
 
 # Generating an API token
 
@@ -209,4 +202,4 @@ content="The response is provided as JSON for human readability. For your `Autho
 
 # Security
 
-The API uses [JSON Web Tokens](https://jwt.io) for authentication and authorization (see "Frequently Asked Questions" section for token generation instructions). Additionally, it uses [Content Security Policies](https://en.wikipedia.org/wiki/Content_Security_Policy) to prevent unauthorized access by malicious software on client machines.
+The API uses [JSON Web Tokens](https://jwt.io) for authentication and authorization. Additionally, it uses [Content Security Policies](https://en.wikipedia.org/wiki/Content_Security_Policy) to prevent unauthorized access by malicious software on client machines.

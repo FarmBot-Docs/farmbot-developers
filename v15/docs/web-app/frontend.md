@@ -8,14 +8,14 @@ slug: "frontend"
 include callout.html
 type="info"
 title=""
-content="This document is intended for software developers. For end-user documentation, please see the [Web App User Documentation](https://software.farm.bot/docs/the-farmbot-web-app)"
+content="This document is intended for **software developers**. For end-user documentation, please see the [web app user documentation](https://software.farm.bot/docs/the-farmbot-web-app)"
 %}
 
 The FarmBot web app's **frontend user interface** is a [single page application](https://en.wikipedia.org/wiki/Single-page_application) that allows users to control a FarmBot remotely. It supports editing of [sequences](https://software.farm.bot/docs/sequences), [regimens](https://software.farm.bot/docs/regimens), [events](https://software.farm.bot/docs/farm-events), a virtual garden map, and much more.
 
 ![Web App on Different Devices](_images/web_app_on_different_devices.png)
 
-## At a glance
+# Specifications
 
 |                    |   |
 |--------------------|---|

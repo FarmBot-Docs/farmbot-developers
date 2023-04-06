@@ -1,12 +1,15 @@
 ---
 title: "Example API requests"
 slug: "api-docs"
-description: "Example HTTP requests"
 ---
 
-The document that follows is a list of example API requests. It serves as a guide for developers who wish to see the schema and existence of particular API endpoints quickly. The application's test suite generates this document automatically.
+The document that follows is a list of **example API requests**. It serves as a guide for developers who wish to see the schema and existence of particular API endpoints quickly.
 
-Many browsers offer a text search feature (usually via CTRL+F) that allows readers to search the document for relevant keywords.
+{%
+include callout.html
+type="info"
+content="The application's test suite generates this document automatically."
+%}
 
 #  GET /
 
