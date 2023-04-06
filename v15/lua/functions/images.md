@@ -6,30 +6,32 @@ description: "List of image Lua functions in FarmBot OS"
 
 # take_photo()
 
+**Takes a photo** using the device camera and uploads it to the web app. Returns `nil` on success. Returns an error object if capture fails.
+
 {%
 include callout.html
-type="bug"
-title="Known bug"
-content="`take_photo` returns errors asynchronously, which may lead developers to believe the operation has succeeded when it actually fails in the background. If you require a high level of control over errors or are taking photos beyond the limits that the Web App allows, see `take_photo_raw()`."
+type="warning"
+content="`take_photo` returns errors asynchronously, which may lead developers to believe the operation has succeeded when it actually fails in the background. If you require a high level of control over errors or are taking photos beyond the limits that the web app allows, see `take_photo_raw()`."
 %}
 
-Takes a photo using the device camera and uploads it to the web app. Returns `nil` on success. Returns an error object if capture fails.
+```lua
+-- Take a photo:
+take_photo()
+```
 
 ```lua
 error = take_photo()
 
 if error then
-  send_message("error", "Capture failed " .. inspect(error))
+  toast("Take photo failed: " .. inspect(error), "error")
 else
-  send_message("info", "Capture OK")
+  toast("Take photo succeeded", "success")
 end
 ```
 
 # photo_grid()
 
-Every FarmBot has a different garden size and camera viewport. The `photo_grid()` helper provides developers with a metadata object about the unique camera setup for the current device. The helper is most useful for operations that perform full-garden photography, such as taking a scan of the garden.
-
-Calling `photo_grid()` will return a table with the following properties:
+Every FarmBot has a different garden size and camera viewport. `photo_grid()` returns a **metadata object** about the **point grid** required to perform a scan of the full garden. It returns a table with the following properties:
 
 | Property          | Description |
 |-------------------|-------------|
@@ -45,27 +47,22 @@ Calling `photo_grid()` will return a table with the following properties:
 | `y_spacing_mm`    | The number of millimeters between cells on the Y axis. |
 | `z`               | The height at which the camera was calibrated. |
 
-**Example:** Perform a full-garden photo scan:
-
 ```lua
+-- Get the photo grid metadata:
 local grid = photo_grid()
 
+-- Move to each point in the grid and take a photo:
 grid.each(function(cell)
-    if read_status("informational_settings", "locked") then
-        return
-    else
-        move_absolute({x = cell.x, y = cell.y, z = cell.z})
-        local msg = "Taking photo " .. cell.count .. " of " .. grid.total
-        send_message("info", msg)
-        take_photo()
-    end
+    move_absolute({x = cell.x, y = cell.y, z = cell.z})
+    local message = "Taking photo " .. cell.count .. " of " .. grid.total
+    send_message("info", message)
+    take_photo()
 end)
-
 ```
 
 # take_photo_raw()
 
-`take_photo_raw()` takes a photo using the device camera and holds it in memory. This functionality is useful when uploading photos to 3rd party APIs. If your usecase requires taking hundreds or thousands of photos per-use, you can use `take_photo_raw()` to upload your images to a third-party image hosting provider that does not impose the same image hosting limits as the Web App.
+**Takes a photo** using the device camera and **holds it in memory**. This is useful when uploading photos to 3rd party APIs. If your use case requires taking hundreds or thousands of photos per day, you can use `take_photo_raw()` to upload your images to a third-party image hosting provider that does not impose the same image hosting limits as the web app.
 
 {%
 include callout.html
@@ -74,29 +71,84 @@ content="`take_photo_raw()` does not upload images to the web app. You must manu
 %}
 
 ```lua
-data = take_photo_raw()
-return base64.encode(data)
+-- Take a photo and hold it in memory, encoded in base64:
+photo = take_photo_raw()
+encoded_photo = base64.encode(photo)
+
+-- Create the request headers and body:
+headers = {}
+headers["Content-Type"] = "application/json"
+headers["Api-Key"] = 123abc
+body = {
+    images = {encoded_photo},
+    plant_details = {"common_names"}
+}
+
+-- Send the request to the Plant.ID API:
+response, error = http({
+    url = "https://api.plant.id/v2/enqueue_identification",
+    method = "POST",
+    headers = headers,
+    body = json.encode(body)
+})
 ```
 
 # base64.encode()
 
-Performs `base64` encoding on an object such as an image. Useful for uploading images to 3rd party APIs. Can also be used in reverse: `base64.decode()`.
+Performs **base64 encoding** on an object such as an image. Useful for uploading images to 3rd party APIs. Can also be used in reverse: `base64.decode()`.
 
 ```lua
-data = take_photo_raw()
-return base64.encode(data)
+-- Take a photo and hold it in memory:
+photo = take_photo_raw()
+
+-- Encode the photo in base64:
+encoded_photo = base64.encode(photo)
+
+-- Decode the photo from base64:
+decoded_photo = base64.decode(encoded_photo)
 ```
 
 # calibrate_camera()
 
-Performs camera calibration. Calling this function will **reset camera calibration settings**.
+Performs **camera calibration**.
+
+{%
+include callout.html
+type="warning"
+content="Calling this function will reset camera calibration settings."
+%}
+
+```lua
+-- Calibrate the camera:
+calibrate_camera()
+```
 
 # measure_soil_height()
 
-Use the camera to determine soil depth at the current location.
-Results will be available as point resources in the API.
-Performing this action over a wide area in many locations will improve the accuracy of soil height readings taken via `soil_height(x, y)`.
+Use the camera to **determine soil depth at the current location**. Results will be available as point resources in the API. Performing this action over a wide area in many locations will improve the accuracy of `soil_height(x, y)` calculations.
+
+```lua
+-- Measure soil height at the current location:
+measure_soil_height()
+```
+
+```lua
+local grid_spacing = 100
+
+-- Move in a grid pattern and measure soil height at each point:
+for x = 0, garden_size().x, grid_spacing do
+    for y = 0, garden_size().y, grid_spacing do
+        move_absolute(x, y, 0)
+        measure_soil_height()
+    end
+end
+```
 
 # detect_weeds()
 
-Take a photo of the current location. If any vegetation is detected in the photo, it will be added to the device's list of weeds.
+Take a photo and **detect weeds in the image**. If any weeds are detected, weed points will be created in the API.
+
+```lua
+-- Detect weeds:
+detect_weeds()
+```
