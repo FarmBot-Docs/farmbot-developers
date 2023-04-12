@@ -33,19 +33,25 @@ end
 
 Every FarmBot has a different garden size and camera viewport. `photo_grid()` returns a **metadata object** about the **point grid** required to perform a scan of the full garden. It returns a table with the following properties:
 
-| Property          | Description |
-|-------------------|-------------|
-| `each`            | An iterator function that is called once per cell (see example below). |
-| `total`           | The number of cells contained in the photo grid for the device. |
-| `x_grid_points`   | The length of the garden scan on the X axis, measured in cells. |
-| `y_grid_points`   | The length of the garden scan on the Y axis, measured in cells. |
-| `x_grid_start_mm` | The X coordinate for the center of the first cell in the grid. |
-| `y_grid_start_mm` | The Y coordinate for the center of the first cell in the grid. |
-| `x_offset_mm`     | The camera's relative X offset from the FarmBot position. |
-| `y_offset_mm`     | The camera's relative Y offset from the FarmBot position. |
-| `x_spacing_mm`    | The number of millimeters between cells on the X axis. |
-| `y_spacing_mm`    | The number of millimeters between cells on the Y axis. |
-| `z`               | The height at which the camera was calibrated. |
+|Property          |Description |
+|------------------|------------|
+|`each`            |An iterator function that is called once per cell (see example below).
+|`total`           |The number of cells contained in the photo grid for the device.
+|`x_grid_points`   |The length of the garden scan on the X axis, measured in cells.
+|`y_grid_points`   |The length of the garden scan on the Y axis, measured in cells.
+|`x_grid_start_mm` |The X coordinate for the center of the first cell in the grid.
+|`y_grid_start_mm` |The Y coordinate for the center of the first cell in the grid.
+|`x_offset_mm`     |The camera's relative X offset from the FarmBot position.
+|`y_offset_mm`     |The camera's relative Y offset from the FarmBot position.
+|`x_spacing_mm`    |The number of millimeters between cells on the X axis.
+|`y_spacing_mm`    |The number of millimeters between cells on the Y axis.
+|`z`               |The height at which the camera was calibrated.
+
+{%
+include callout.html
+type="info"
+content="`photo_grid()` will automatically space photos such that they have 5mm of overlap to ensure that the entire garden is scanned."
+%}
 
 ```lua
 -- Get the photo grid metadata:
