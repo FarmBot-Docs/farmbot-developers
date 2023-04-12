@@ -4,52 +4,85 @@ slug: "jobs"
 description: "List of jobs Lua functions in FarmBot OS"
 ---
 
-# set_job_progress()
+# set_job(name, params?)
 
-**Creates or updates a job** in the jobs popup. This is useful for tracking long running tasks such as photo grids.
+**Creates or updates a job** in the [jobs popup](https://software.farm.bot/docs/jobs). This is useful for tracking long running tasks such as photo grids.
+
+The `params` argument is an optional table with the following optional fields: `status`, `percent`, and `time`. When a job is first created, it will initialize with a `status` of `Working`, a `percent` of `0`, and a `time` set to the current time, unless explicitly defined otherwise.
+
+Subsequent calls to `set_job()` will only update the provided fields.
 
 ```lua
-start_time = os.time() * 1000
+-- Create a job:
+local job_name = "Scan the garden"
+set_job(job_name)
 
-set_job_progress("Scan the garden", {
-  status = "Working",
-  percent = 50,
-  time = start_time
+wait(2000)
+
+-- Update the job's status and percent:
+set_job(job_name, {
+  status = "Still working...",
+  percent = 50
 })
 
 wait(2000)
 
-set_job_progress("Scan the garden", {
-  status = "Complete",
-  percent = 100,
-  time = start_time
+-- Update just the job's percent:
+set_job(job_name, {
+  percent = 75
 })
+
+wait(2000)
+
+-- Complete the job:
+complete_job(job_name)
 ```
+
+# set_job_progress()
 
 {%
 include callout.html
-type="info"
-content="Another string argument, `type`, can also be added to the job, though this field is no longer used by the FarmBot web app frontend."
+type="warning"
+title="Deprecated"
+content="This is a low-level function that has been superseded by [set_job()](#set_jobname-params)."
 %}
 
-# get_job_progress()
+# get_job(name)
 
 **Gets a job** by name.
 
 ```lua
 -- Get a job:
-job = get_job_progress("Job name")
+job = get_job("Job name")
 ```
 
 ```lua
-start_time = os.time() * 1000
+local job_name = "Scan the garden"
 
-set_job_progress("Scan the garden", {
-  status = "Working",
-  percent = 50,
-  time = start_time
+set_job(job_name, {
+  percent = 50
 })
 
-job = get_job_progress("Scan the garden")
+job = get_job(job_name)
 toast("Job progress: " .. job.percent .. "%")
+
+complete_job(job_name)
+```
+
+# get_job_progress()
+
+{%
+include callout.html
+type="warning"
+title="Deprecated"
+content="This is a low-level function that has been superseded by [get_job()](#get_jobname)."
+%}
+
+# complete_job(name)
+
+**Completes a job** by name, where complete means a `percent` of `100` and a `status` of `Complete`.
+
+```lua
+-- Complete a job:
+complete_job("Job name")
 ```

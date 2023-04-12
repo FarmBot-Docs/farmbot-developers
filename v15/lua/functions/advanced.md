@@ -6,7 +6,7 @@ description: "List of advanced Lua functions in FarmBot OS"
 
 # sequence(id, variables?)
 
-Executes a **subsequence** with optional **variables**.
+**Executes a subsequence** with optional variables.
 
 ```lua
 -- Execute a subsequence without variables
@@ -37,7 +37,7 @@ sequence(subsequence.id, variable)
 
 # rpc()
 
-Wraps a **CeleryScript node** into an `rpc_request`.
+**Wraps a CeleryScript node into an `rpc_request`**.
 
 ```lua
 command = {
@@ -59,7 +59,7 @@ content='You can use the **[VIEW CELERYSCRIPT](https://software.farm.bot/docs/se
 
 # cs_eval(celeryscript_ast)
 
-Executes arbitrary **CeleryScript nodes**.
+**Executes arbitrary CeleryScript nodes**.
 
 ```lua
 cs_eval({
@@ -89,7 +89,7 @@ cs_eval(subsequence)
 
 # gcode(command, params)
 
-Sends **raw G code** to the Farmduino. No validations will be applied. The function will block the calling process until a response is received from the firmware.
+**Sends raw G code to the Farmduino**. No validations will be applied. The function will block the calling process until a response is received from the firmware.
 
 ```lua
 -- Send "G00 X1.23 Y4.56 Z7.89" to the Farmduino
