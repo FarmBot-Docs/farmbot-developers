@@ -15,9 +15,7 @@ In this tutorial, we will demonstrate how it is possible to send messages from F
 
 # Step 1: Generate a webhook URL
 
-Before you begin, you will need to generate an **incoming webhook URL**. Since these instructions may change over time, we recommend referencing the [official Slack webhook documentation](https://api.slack.com/messaging/webhooks) for guidance.
-
-By the end of setup, you will have a URL that can be used to generate messages on Slack by way of an HTTP POST.
+Before you begin, you will need to generate an **incoming webhook URL**. Since these instructions may change over time, we recommend referencing the [official Slack webhook documentation](https://api.slack.com/messaging/webhooks) for guidance. By the end of setup, you will have a URL that can be used to generate messages on Slack by way of an HTTP POST.
 
 {%
 include callout.html
@@ -43,20 +41,27 @@ payload = json.encode({
 
 url = "https://hooks.slack.com/services/CHANGE/THIS/URL"
 
-res, err = http({ url = url, method = 'POST', headers = {}, body = payload })
+result, err = http({
+  url = url,
+  method = 'POST',
+  headers = {},
+  body = payload
+})
 
 if err then
-    send_message("error", "ERROR: " .. inspect(err), {"toast"})
+    toast("Error: " .. inspect(err), "error")
 else
-    send_message("debug", "REQUEST SENT: " .. inspect(res))
+    debug("Request sent: " .. inspect(result))
 end
 ```
 
-Now <span class="fb-button fb-green">SAVE</span> the sequence and wait for it to sync with the FarmBot. You can then test it with the <span class="fb-button fb-orange">RUN</span> button to make sure it functions as expected.
-
 # Step 4: Run the sequence
 
-Once the sequence is coded and saved, you can run it in a variety of ways:
+<span class="fb-button fb-green">SAVE</span> the sequence and wait for it to sync with the FarmBot. You can then test it with the <span class="fb-button fb-orange">RUN</span> button to make sure it functions as expected.
+
+![Screenshot of Slack chat message sent by FarmBot](_images/slack_message.png)
+
+Once the sequence is verified to be working, you can run it in a variety of ways:
 
 * By using the <span class="fb-button fb-orange">RUN</span> button in the [sequence editor](https://software.farm.bot/docs/sequences).
 * By binding the sequence to a physical button on the device via a [pin binding](https://software.farm.bot/docs/pin-bindings).

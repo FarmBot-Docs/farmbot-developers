@@ -4,15 +4,15 @@ slug: "tools"
 description: "List of tool Lua functions in FarmBot OS"
 ---
 
-{%
-include callout.html
-type="info"
-content="The helper functions on this page should only be used with FarmBots that have a universal tool mount and interchangeable tools, such as FarmBot Genesis."
-%}
-
 # dismount_tool()
 
 **Dismounts the currently mounted tool** into it's assigned slot, taking into account the slot's direction.
+
+{%
+include callout.html
+type="info"
+content="This function only applies to FarmBots with interchangeable tools, such as FarmBot Genesis."
+%}
 
 ```lua
 -- Dismount the currently mounted tool
@@ -41,6 +41,12 @@ dispense(200, {tool_name = "Fertigator", pin = 7})
 
 **Mounts the given tool** and pulls it out of its slot, taking into account the slot's direction.
 
+{%
+include callout.html
+type="info"
+content="This function only applies to FarmBots with interchangeable tools, such as FarmBot Genesis."
+%}
+
 ```lua
 -- It is recommended to find home before mounting tools
 -- to ensure accuracy of movements
@@ -63,6 +69,12 @@ mount_tool(tool)
 {%
 include callout.html
 type="info"
+content="This function only applies to FarmBots with interchangeable tools, such as FarmBot Genesis."
+%}
+
+{%
+include callout.html
+type="info"
 content="The `verify_tool()` functionality is built-in to the `mount_tool()` and `dismount_tool()` helpers."
 %}
 
@@ -75,7 +87,19 @@ end
 
 # water(plant)
 
-**Waters the given plant** based on its age and assigned watering curve. The plant must have a status of "Planted".
+**Moves to and waters the given plant** based on its age and assigned watering curve.
+
+{%
+include callout.html
+type="info"
+content="A plant's `age` is calculated from its `planted_at` date and the current date. If a plant's `planted_at` date is not set, try changing the plant's **STATUS** to _Planted_ from the frontend."
+%}
+
+{%
+include callout.html
+type="info"
+content="If using a FarmBot with interchangeable tools, such as FarmBot Genesis, you will need to first mount the watering tool before using the `water()` function."
+%}
 
 ```lua
 -- Get the "Plant" variable from the sequence
