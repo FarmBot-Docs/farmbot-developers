@@ -62,6 +62,26 @@ tool = variable("Tool")
 mount_tool(tool)
 ```
 
+To mount a specific tool without using variables, fetch the tool from the FarmBot API using its ID:
+
+```lua
+-- The ID for the tool you wish to mount
+tool_id = 1
+
+-- Fetch the tool from the API
+tool = api({method = "get", url = "/api/tools/" .. tool_id})
+
+-- Mount the tool
+mount_tool(tool)
+```
+
+Alternatively, simply specify a tool name:
+
+```lua
+-- Mount a tool by name
+mount_tool("My Tool")
+```
+
 # verify_tool()
 
 **Verifies if a tool is mounted to the UTM** by checking the UTM’s tool verification pin as well as the **MOUNTED TOOL** field in FarmBot’s state tree. Returns `true` if a tool is mounted or `false` if no tool is mounted.
