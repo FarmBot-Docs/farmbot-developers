@@ -84,7 +84,7 @@ mount_tool("My Tool")
 
 # verify_tool()
 
-**Verifies if a tool is mounted to the UTM** by checking the UTM’s tool verification pin as well as the **MOUNTED TOOL** field in FarmBot’s state tree. Returns `true` if a tool is mounted or `false` if no tool is mounted.
+**Verifies if a tool is mounted to the UTM** by checking the UTM's tool verification pin as well as the **MOUNTED TOOL** field in FarmBot's state tree. Returns `true` if a tool is mounted or `false` if no tool is mounted.
 
 {%
 include callout.html
