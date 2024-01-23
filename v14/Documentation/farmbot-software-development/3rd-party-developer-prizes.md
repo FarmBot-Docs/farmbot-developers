@@ -24,7 +24,7 @@ Because we think these types of projects are so valuable, we offer prizes to dev
 include callout.html
 type="info"
 title="Working on something big?"
-content="Send an email to developer@farm.bot to let us know what you're working on and why you think it would be a valuable contribution. We're happy to provide developer support as needed."
+content="Send an email to contact@farm.bot to let us know what you're working on and why you think it would be a valuable contribution. We're happy to provide developer support as needed."
 %}
 
 ## Core features and bug fixes
@@ -46,7 +46,7 @@ Software projects that increase the usefulness of the platform are always a welc
  * 3rd party hardware and accompanied software controllers, such as new tools that can attach to the Universal Tool Mount.
 
 # Prizes
-If you've completed a project, send an email to developer@farm.bot to let us know about it! We'll review your work and let you know if we can offer you a prize. Some past prizes to 3rd party contributors have included:
+If you've completed a project, send an email to contact@farm.bot to let us know about it! We'll review your work and let you know if we can offer you a prize. Some past prizes to 3rd party contributors have included:
 
 * FarmBot T-shirts and stickers
 * FarmBot shop gift cards up to $1,000 in value
