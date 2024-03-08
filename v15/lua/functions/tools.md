@@ -25,17 +25,31 @@ find_home()
 
 # dispense(mL, params?)
 
-**Dispenses the given amount of liquid in milliliters**. The `params` argument is optional and can be used to override the default `tool_name` of "Watering Nozzle" and the default `pin` of `8`.
+**Dispenses the given amount of liquid in milliliters**. Defaults to using the "Watering Nozzle" tool, its **WATER FLOW RATE (ML/S)** value, and the solenoid valve operated by pin `8`.
 
 ```lua
--- Dispense 100 mL of water using the default "Watering Nozzle" tool operated by pin 8
+-- Dispense 100 mL of water using default values
 dispense(100)
 ```
 
+The `params` argument is optional and can be used to override the default `tool_name` (and therefore the **WATER FLOW RATE (ML/S)** value) as well as which `pin` to operate.
+
 ```lua
--- Dispense 200 mL of fertilizer using a custom tool named "Fertigator" operated by pin 7
-dispense(200, {tool_name = "Fertigator", pin = 7})
+-- Dispense 200 mL of fertilizer using a custom tool operated by pin 7
+dispense(200, {tool_name = "Custom Watering Nozzle 2", pin = 7})
 ```
+
+```lua
+-- Dispense 300 mL of water with the standard "Watering Nozzle" tool, but using a solenoid valve operated by pin 10
+dispense(300, {pin = 10})
+```
+
+{%
+include callout.html
+type="info"
+content='In order to add a **WATER FLOW RATE (ML/S)** value to a tool, the tool name must contain "Watering Nozzle" in the name.
+![water flow rate](_images/water_flow_rate.png)'
+%}
 
 # mount_tool(tool)
 
@@ -105,7 +119,7 @@ if not verify_tool() then
 end
 ```
 
-# water(plant)
+# water(plant, params?)
 
 **Moves to and waters the given plant** based on its age and assigned watering curve.
 
@@ -127,4 +141,14 @@ plant = variable("Plant")
 
 -- Water the plant based on its age and watering curve
 water(plant)
+```
+
+Under the hood, the `water()` function makes a call to `dispense()`. If provided, the `params` argument will be passed into the `dispense` call to override its default values. See the [dispense() docs](#dispenseml-params) for more information.
+
+```lua
+-- Get the "Plant" variable from the sequence
+plant = variable("Plant")
+
+-- Water the plant based on its age and watering curve, using a solenoid valve operated by pin 10
+water(plant, {pin = 10})
 ```
