@@ -112,6 +112,8 @@ contents:
       - title: Examples
         url: examples
         pages:
+          - title: Water Based on the Weather
+            url: water-based-on-the-weather
           - title: Send Slack Messages
             url: send-slack-messages
           - title: Identify Plants
