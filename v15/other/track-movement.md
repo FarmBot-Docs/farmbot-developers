@@ -21,7 +21,7 @@ In this first example, we will attempt to connect to FarmBot directly using an M
 
 ## Step 1: Generate a Token via `curl` (or Similar)
 
-The FarmBot MQTT requires authentication to read or write to MQTT topics. Before we can access the device, we must [create an access token](../python/web-app-api-examples.md#get-your-farmbot-web-app-token).
+The FarmBot MQTT requires authentication to read or write to MQTT topics. Before we can access the device, we must create an access token.
 
 Let's create a token now, using the [Curl](https://curl.se/) HTTP library:
 
@@ -168,7 +168,7 @@ FarmBot Position: (358, 540.8, 0)
 
 # Using FarmBotPy
 
-FarmBot, Inc. also provides a Python wrapper library. You can learn more about the Python version in the [official documentation](https://github.com/FarmBot/farmbot-py).
+FarmBot, Inc. also provides a Python wrapper library. You can learn more about the Python version on the [Python library page](../python/python-library.md).
 
 ```python
 from farmbot import Farmbot, FarmbotToken
@@ -198,4 +198,11 @@ class MyHandler:
         print("Current position: (%.2f, %.2f, %.2f)" % bot.position())
 
 fb.connect(MyHandler())
+```
+You should see the following output after running the code above:
+
+```
+NEW BOT STATE TREE AVAILABLE:
+{...}
+Current position: (358.00, 540.80, 0.00)
 ```

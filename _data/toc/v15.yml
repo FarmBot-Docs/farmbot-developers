@@ -126,10 +126,12 @@ contents:
     pages:
       - title: Python Library
         url: python-library
-      - title: Web App API Examples
-        url: web-app-api-examples
+      - title: Authorization
+        url: authorization
       - title: Message Broker Examples
         url: message-broker-examples
+      - title: Web App API Examples
+        url: web-app-api-examples
   - title: Other Resources
     url: other
     top: true

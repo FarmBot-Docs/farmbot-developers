@@ -4,13 +4,24 @@ slug: "python-library"
 description: "Use Python to communicate directly with FarmBot"
 ---
 
-FarmBot, Inc. provides a Python wrapper library, `farmbot-py`. You can learn more about the Python version in the [official documentation](https://github.com/FarmBot/farmbot-py).
+FarmBot, Inc. provides a Python wrapper library, [`farmbot-py`](https://github.com/FarmBot/farmbot-py).
 
-# Publishing FarmBot.Py
+{%
+include callout.html
+type="info"
+title="Options available"
+content='When applicable, the following pages provide usage examples of the FarmBot Python library. Examples without usage of the library are also provided.'
+%}
 
-Build instructions are provided in the README.md file of FarmBotPy.
+# Getting started
+
+In a command line terminal, run:
+```bash
+python -m pip install farmbot
+```
+
+This will install the FarmBot Python library into your environment so that it can be used via `from farmbot import Farmbot` as shown in examples.
 
 # What's next?
 
- * [Web App API Examples](../python/web-app-api-examples.md)
- * [Message Broker Examples](../python/message-broker-examples.md)
+ * [Authorization](authorization.md)
