@@ -35,16 +35,19 @@ content="Generally speaking, the REST API does _not_ control FarmBot. Device con
 
 **Resources** are JSON documents that can be downloaded from the server and used by FarmBots, humans, and third-party tools to store FarmBot related information. Every resource has a URL, and the [HTTP verb](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) used to access the URL will determine how the server handles the request.
 
-As of February 2020, the API manages the following resources:
+As of April 2024, the API manages the following resources:
 
 |Resource             |Description                                     |Pagination?|
 |---------------------|------------------------------------------------|-----------|
+|`ai_feedbacks`       |Positive/negative reactions to auto-generation prompt results.
 |`alerts`             |A single item in the message center. Only useful to site administrators.|Yes
 |`corpus`             |A glossary of all Celery Script node types in JSON format.
+|`curves`             |Time-based plant water/height/spread data tables.|Yes
 |`device`             |Device account settings.
 |`export_data`        |A dump of all the resources listed above.
 |`farm_events`        |Executes a sequence or regimen based on time. Eg: "Execute this sequence every 6 hours".|Yes
 |`farmware_envs`      |Key/value pairs used for persistent storage.|Yes
+|`featured_sequences` |Promoted publicly shared sequences available for import.
 |`fbos_config`        |Configuration for FarmBot OS.
 |`firmware_config`    |Configuration for the Arduino Firmware
 |`folders`            |Organization for sequences.
@@ -64,13 +67,15 @@ As of February 2020, the API manages the following resources:
 |`sensor_readings`    |A single reading from a sensor, recorded to the API.|Yes
 |`sensors`            |Meta data about input hardware.|Yes
 |`sequences`          |Commands created in the sequence editor.
+|`sequence_versions`  |Published versions of sequences for sharing.
 |`storage_auth`       |(advanced) A policy object for Google Cloud Storage.
+|`telemetries`        |Historical FarmBot OS status information.
 |`tokens`             |An authorization / authentication secret shared between a user or device and the API.
 |`tools`              |An physical object that is mounted to the gantry or a tool slot (UTM).|Yes
 |`users`              |Device operator data such as registration email.
 |`web_app_config`     |User interface preferences.
 |`webcam_feeds`       |Meta data about an external webcam (stream URL)|Yes
-|`wizard_step_results`|Setup wizard result data.
+|`wizard_step_results`|Setup wizard result data.|Yes
 
 ## Example request
 
