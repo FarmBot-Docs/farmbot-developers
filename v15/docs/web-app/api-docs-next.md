@@ -1256,12 +1256,12 @@ output:
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
-|`message`<br>Log message.|string|📖|||||
-|`type`<br>Log type.|"assertion" \| "busy" \| "debug" \| "error" \| "fun" \| "info" \| "success" \| "warn"|📖|||||
-|`verbosity`<br>Log level.|0-3|📖|||||
-|`x`<br>x coordinate at time of log.|float|📖|||||
-|`y`<br>y coordinate at time of log.|float|📖|||||
-|`z`<br>z coordinate at time of log.|float|📖|||||
+|`message`<br>Log message.|string|📝|||||
+|`type`<br>Log type.|"assertion" \| "busy" \| "debug" \| "error" \| "fun" \| "info" \| "success" \| "warn"|📝|||||
+|`verbosity`<br>Log level.|0-3|📝|||||
+|`x`<br>x coordinate at time of log.|float|📝|||||
+|`y`<br>y coordinate at time of log.|float|📝|||||
+|`z`<br>z coordinate at time of log.|float|📝|||||
 
 # password_resets
 
@@ -1543,26 +1543,54 @@ output:
 
 # points
 
+Used by [plants](https://software.farm.bot/docs/plants), [points](https://software.farm.bot/docs/points), [weeds](https://software.farm.bot/docs/weeds), and [tool slots](https://software.farm.bot/docs/tools), where the field `pointer_type` determines the resource.
+
+Notes:
+* Soft deleted points will be destroyed without warning when the device hits 800 points.
+* New points cannot be created once the device hits 1000 points.
+
 |Method|Description|
 |---|---|
-|`GET` /api/________|Get an array of all ______.|
+|`GET` /api/points|Get an array of all points.|
+|`GET` /api/points/:id|Get a single point by id.|
+|`POST` /api/points|Create a new point.|
+|`PATCH` /api/points/:id|Edit a single point by id.|
+|`DELETE` /api/points/:id|Delete a single point by id.|
 
-|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
-|---|---|:---:|:---:|:---:|:---:|:---:|
-|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
-|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
-|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
-|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`_____`<br>____________.|________|📖|📖|📝|📝|🗑|
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|plant|point|weed|tool slot|
+|---|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|✅|✅|✅|✅|
+|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|✅|✅|✅|✅|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|✅|✅|✅|✅|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|✅|✅|✅|✅|
+|`name`<br>Point name.|string|📖|📖|📝|📝|🗑|✅|✅|✅|✅|
+|`pointer_type`<br>Point type.|"GenericPointer" \| "Plant" \| "ToolSlot" \| "Weed"|📖|📖|📝(required)|📝|🗑|✅|✅|✅|✅|
+|`meta`<br>Additional properties.|object|📖|📖|📝|📝|🗑|✅|✅|✅|✅|
+|`x`<br>x coordinate.|float|📖|📖|📝(required)|📝|🗑|✅|✅|✅|✅|
+|`y`<br>y coordinate.|float|📖|📖|📝(required)|📝|🗑|✅|✅|✅|✅|
+|`z`<br>z coordinate.|float|📖|📖|📝(required)|📝|🗑|✅|✅|✅|✅|
+|`openfarm_slug`<br>Plant type (from OpenFarm).|string|📖|📖|📝|📝|🗑|✅||||
+|`plant_stage`<br>Point status.|"planned" \| "planted" \| "harvested" \| "sprouted" \| "active" \| "removed" \| "pending"|📖|📖|📝|📝|🗑|✅||✅||
+|`planted_at`<br>Date and time planted in garden.|timestamp|📖|📖|📝|📝|🗑|✅||||
+|`discarded_at`<br>Date and time deleted.|timestamp|📖|📖|📝|📝|🗑||✅|✅||
+|`radius`<br>Point radius.|float|📖|📖|📝|📝|🗑|✅|✅|✅||
+|`depth`<br>Plant depth.|integer|📖|📖|📝|📝|🗑|✅||||
+|`water_curve_id`<br>ID of the water curve for the plant.|integer|📖|📖|📝|📝|🗑|✅||||
+|`spread_curve_id`<br>ID of the spread curve for the plant.|integer|📖|📖|📝|📝|🗑|✅||||
+|`height_curve_id`<br>ID of the height curve for the plant.|integer|📖|📖|📝|📝|🗑|✅||||
+|`pullout_direction`<br>Tool slot direction.|0-4|📖|📖|📝|📝|🗑||||✅|
+|`tool_id`<br>ID of the tool in the tool slot.|________|📖|📖|📝|📝|🗑||||✅|
+|`gantry_mounted`<br>Is the tool slot mounted on the gantry?|boolean|📖|📖|📝|📝|🗑||||✅|
+|`filter`<br>Filter points.|"all" \| "old" \| "kept"|📝|||||||||
 
-__GET /api/__
+__GET /api/points__
 ```python
 import json
 import requests
 
 # TOKEN = ...
 
-url = f'https:{TOKEN['token']['unencoded']['iss']}/api/__________'
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/points'
 headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
            'content-type': 'application/json'}
 response = requests.get(url, headers=headers)
@@ -1570,14 +1598,97 @@ print(json.dumps(response.json(), indent=2))
 ```
 output:
 ```json
-{
-  "id": 43,
-  "created_at": "2022-02-02T23:15:36.629Z",
-  "updated_at": "2022-02-02T23:15:36.629Z",
-  "device_id": 447,
-
-}
+[
+  {
+    "id": 50,
+    "created_at": "2022-02-02T23:14:25.964Z",
+    "updated_at": "2022-02-02T23:14:25.964Z",
+    "device_id": 99,
+    "name": "Cabbage 0",
+    "pointer_type": "Plant",
+    "meta": {
+    },
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "openfarm_slug": "cabbage",
+    "plant_stage": "planned",
+    "planted_at": "2022-02-02T23:14:25.964Z",
+    "radius": 50.0,
+    "depth": 0,
+    "water_curve_id": null,
+    "spread_curve_id": null,
+    "height_curve_id": null
+  },
+  {
+    "id": 51,
+    "created_at": "2022-02-02T23:14:25.964Z",
+    "updated_at": "2022-02-02T23:14:25.964Z",
+    "device_id": 99,
+    "name": "Point 0",
+    "pointer_type": "GenericPointer",
+    "meta": {
+      "created_by": "plant-detection"
+    },
+    "x": 1.0,
+    "y": 2.0,
+    "z": 3.0,
+    "radius": 3.0,
+    "discarded_at": null
+  },
+  {
+    "id": 52,
+    "created_at": "2022-02-02T23:14:25.964Z",
+    "updated_at": "2022-02-02T23:14:25.964Z",
+    "device_id": 99,
+    "name": "test weed",
+    "pointer_type": "Weed",
+    "meta": {
+    },
+    "x": 1.0,
+    "y": 2.0,
+    "z": 3.0,
+    "radius": 3.0,
+    "discarded_at": null,
+    "plant_stage": "active"
+  },
+  {
+    "id": 53,
+    "created_at": "2022-02-02T23:14:25.964Z",
+    "updated_at": "2022-02-02T23:14:25.964Z",
+    "device_id": 99,
+    "name": "Slot 0",
+    "pointer_type": "ToolSlot",
+    "meta": {
+    },
+    "x": 4.0,
+    "y": 5.0,
+    "z": 6.0,
+    "tool_id": null,
+    "pullout_direction": 0,
+    "gantry_mounted": false
+  }
+]
 ```
+
+## points/search
+
+|Method|Description|
+|---|---|
+|`GET` /api/points/search|Get a list of filtered points.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`radius`<br>Point size.|float|📝|||||
+|`depth`<br>Plant depth.|integer|📝|||||
+|`name`<br>Point name.|string|📝|||||
+|`pointer_type`<br>Point type.|"GenericPointer" \| "Plant" \| "ToolSlot" \| "Weed"|📝|||||
+|`meta`<br>Additional properties.|object|📝|||||
+|`x`<br>x coordinate.|float|📝|||||
+|`y`<br>y coordinate.|float|📝|||||
+|`z`<br>z coordinate.|float|📝|||||
+|`openfarm_slug`<br>Plant type (from OpenFarm).|string|📝|||||
+|`plant_stage`<br>Point status.|"planned" \| "planted" \| "harvested" \| "sprouted" \| "active" \| "removed" \| "pending"|📝|||||
 
 # public_key
 
