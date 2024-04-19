@@ -730,124 +730,124 @@ Used by [settings](https://software.farm.bot/docs/settings).
 |`device_id`<br>Unique device identifier set by the database.|integer|📖||||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
-|`encoder_enabled_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`encoder_enabled_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`encoder_enabled_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`encoder_invert_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`encoder_invert_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`encoder_invert_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`encoder_missed_steps_decay_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`encoder_missed_steps_decay_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`encoder_missed_steps_decay_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`encoder_missed_steps_max_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`encoder_missed_steps_max_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`encoder_missed_steps_max_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`encoder_scaling_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`encoder_scaling_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`encoder_scaling_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`encoder_type_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`encoder_type_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`encoder_type_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`encoder_use_for_pos_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`encoder_use_for_pos_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`encoder_use_for_pos_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_axis_nr_steps_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_axis_nr_steps_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_axis_nr_steps_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_enable_endpoints_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_enable_endpoints_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_enable_endpoints_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_home_at_boot_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_home_at_boot_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_home_at_boot_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_home_spd_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_home_spd_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_home_spd_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_home_up_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_home_up_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_home_up_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_invert_endpoints_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_invert_endpoints_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_invert_endpoints_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_invert_motor_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_invert_motor_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_invert_motor_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_keep_active_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_keep_active_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_keep_active_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_max_spd_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_max_spd_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_max_spd_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_min_spd_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_min_spd_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_min_spd_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_secondary_motor_invert_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_secondary_motor_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_step_per_mm_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_step_per_mm_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_step_per_mm_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_steps_acc_dec_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_steps_acc_dec_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_steps_acc_dec_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_stop_at_home_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_stop_at_home_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_stop_at_home_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_stop_at_max_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_stop_at_max_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_stop_at_max_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_timeout_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_timeout_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_timeout_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`param_config_ok`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`param_e_stop_on_mov_err`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`param_mov_nr_retry`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`param_test`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`param_use_eeprom`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`param_version`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`pin_guard_1_active_state`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`pin_guard_1_pin_nr`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`pin_guard_1_time_out`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`pin_guard_2_active_state`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`pin_guard_2_pin_nr`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`pin_guard_2_time_out`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`pin_guard_3_active_state`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`pin_guard_3_pin_nr`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`pin_guard_3_time_out`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`pin_guard_4_active_state`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`pin_guard_4_pin_nr`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`pin_guard_4_time_out`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`pin_guard_5_active_state`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`pin_guard_5_pin_nr`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`pin_guard_5_time_out`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_invert_2_endpoints_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_invert_2_endpoints_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_invert_2_endpoints_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_microsteps_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_microsteps_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_microsteps_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_motor_current_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_motor_current_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_motor_current_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_stall_sensitivity_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_stall_sensitivity_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_stall_sensitivity_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_min_spd_z2`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_max_spd_z2`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_steps_acc_dec_z2`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_calibration_retry_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_calibration_retry_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_calibration_retry_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_calibration_deadzone_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_calibration_deadzone_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_calibration_deadzone_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_axis_stealth_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_axis_stealth_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_axis_stealth_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_calibration_retry_total_x`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_calibration_retry_total_y`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`movement_calibration_retry_total_z`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`pin_report_1_pin_nr`<br>Firmware setting.|integer|📖|||📝|🗑|
-|`pin_report_2_pin_nr`<br>Firmware setting.|integer|📖|||📝|🗑|
+|`encoder_enabled_x`<br>Enable encoders or stall detection for the x axis.|integer|📖|||📝|🗑|
+|`encoder_enabled_y`<br>Enable encoders or stall detection for the y axis.|integer|📖|||📝|🗑|
+|`encoder_enabled_z`<br>Enable encoders or stall detection for the z axis.|integer|📖|||📝|🗑|
+|`encoder_invert_x`<br>Invert the encoders on the x axis.|integer|📖|||📝|🗑|
+|`encoder_invert_y`<br>Invert the encoders on the y axis.|integer|📖|||📝|🗑|
+|`encoder_invert_z`<br>Invert the encoders on the z axis.|integer|📖|||📝|🗑|
+|`encoder_missed_steps_decay_x`<br>Reduction to missed step total for every good step for the x axis.|integer|📖|||📝|🗑|
+|`encoder_missed_steps_decay_y`<br>Reduction to missed step total for every good step for the y axis.|integer|📖|||📝|🗑|
+|`encoder_missed_steps_decay_z`<br>Reduction to missed step total for every good step for the z axis.|integer|📖|||📝|🗑|
+|`encoder_missed_steps_max_x`<br>Number of steps before the motor is considered to have stalled for the x axis.|integer|📖|||📝|🗑|
+|`encoder_missed_steps_max_y`<br>Number of steps before the motor is considered to have stalled for the y axis.|integer|📖|||📝|🗑|
+|`encoder_missed_steps_max_z`<br>Number of steps before the motor is considered to have stalled for the z axis.|integer|📖|||📝|🗑|
+|`encoder_scaling_x`<br>10000 * (motor resolution) / (encoder resolution).|integer|📖|||📝|🗑|
+|`encoder_scaling_y`<br>10000 * (motor resolution) / (encoder resolution).|integer|📖|||📝|🗑|
+|`encoder_scaling_z`<br>10000 * (motor resolution) / (encoder resolution).|integer|📖|||📝|🗑|
+|`encoder_type_x`<br>.Unused|integer|📖|||📝|🗑|
+|`encoder_type_y`<br>.Unused|integer|📖|||📝|🗑|
+|`encoder_type_z`<br>.Unused|integer|📖|||📝|🗑|
+|`encoder_use_for_pos_x`<br>.Use the encoders for calculating movements on the x axis.|integer|📖|||📝|🗑|
+|`encoder_use_for_pos_y`<br>.Use the encoders for calculating movements on the y axis.|integer|📖|||📝|🗑|
+|`encoder_use_for_pos_z`<br>.Use the encoders for calculating movements on the z axis.|integer|📖|||📝|🗑|
+|`movement_axis_nr_steps_x`<br>X axis length in steps.|integer|📖|||📝|🗑|
+|`movement_axis_nr_steps_y`<br>Y axis length in steps.|integer|📖|||📝|🗑|
+|`movement_axis_nr_steps_z`<br>Z axis length in steps.|integer|📖|||📝|🗑|
+|`movement_enable_endpoints_x`<br>Enable endstops for the x axis.|integer|📖|||📝|🗑|
+|`movement_enable_endpoints_y`<br>Enable endstops for the y axis.|integer|📖|||📝|🗑|
+|`movement_enable_endpoints_z`<br>Enable endstops for the z axis.|integer|📖|||📝|🗑|
+|`movement_home_at_boot_x`<br>Find home upon startup for the x axis.|integer|📖|||📝|🗑|
+|`movement_home_at_boot_y`<br>Find home upon startup for the y axis.|integer|📖|||📝|🗑|
+|`movement_home_at_boot_z`<br>Find home upon startup for the z axis.|integer|📖|||📝|🗑|
+|`movement_home_spd_x`<br>X axis homing speed in steps per second.|integer|📖|||📝|🗑|
+|`movement_home_spd_y`<br>Y axis homing speed in steps per second.|integer|📖|||📝|🗑|
+|`movement_home_spd_z`<br>Z axis homing speed in steps per second.|integer|📖|||📝|🗑|
+|`movement_home_up_x`<br>Restrict travel to negative coordinate locations for the x axis.|integer|📖|||📝|🗑|
+|`movement_home_up_y`<br>Restrict travel to negative coordinate locations for the y axis.|integer|📖|||📝|🗑|
+|`movement_home_up_z`<br>Restrict travel to negative coordinate locations for the z axis.|integer|📖|||📝|🗑|
+|`movement_invert_endpoints_x`<br>Swap the min and max limit switches for the x axis.|integer|📖|||📝|🗑|
+|`movement_invert_endpoints_y`<br>Swap the min and max limit switches for the y axis.|integer|📖|||📝|🗑|
+|`movement_invert_endpoints_z`<br>Swap the min and max limit switches for the z axis.|integer|📖|||📝|🗑|
+|`movement_invert_motor_x`<br>Invert motor direction for the x axis.|integer|📖|||📝|🗑|
+|`movement_invert_motor_y`<br>Invert motor direction for the y axis.|integer|📖|||📝|🗑|
+|`movement_invert_motor_z`<br>Invert motor direction for the z axis.|integer|📖|||📝|🗑|
+|`movement_keep_active_x`<br>Always power motors on the x axis.|integer|📖|||📝|🗑|
+|`movement_keep_active_y`<br>Always power motors on the y axis.|integer|📖|||📝|🗑|
+|`movement_keep_active_z`<br>Always power motors on the z axis.|integer|📖|||📝|🗑|
+|`movement_max_spd_x`<br>Max speed in steps per second for the x axis.|integer|📖|||📝|🗑|
+|`movement_max_spd_y`<br>Max speed in steps per second for the y axis.|integer|📖|||📝|🗑|
+|`movement_max_spd_z`<br>Max speed in steps per second for the z axis.|integer|📖|||📝|🗑|
+|`movement_min_spd_x`<br>Minimum speed in steps per second for the x axis.|integer|📖|||📝|🗑|
+|`movement_min_spd_y`<br>Minimum speed in steps per second for the y axis.|integer|📖|||📝|🗑|
+|`movement_min_spd_z`<br>Minimum speed in steps per second for the z axis.|integer|📖|||📝|🗑|
+|`movement_secondary_motor_invert_x`<br>Invert the direction of the 2nd x axis motor.|integer|📖|||📝|🗑|
+|`movement_secondary_motor_x`<br>Enable the 2nd x axis motor.|integer|📖|||📝|🗑|
+|`movement_step_per_mm_x`<br>Number of steps per millimeter on the x axis.|integer|📖|||📝|🗑|
+|`movement_step_per_mm_y`<br>Number of steps per millimeter on the y axis.|integer|📖|||📝|🗑|
+|`movement_step_per_mm_z`<br>Number of steps per millimeter on the z axis.|integer|📖|||📝|🗑|
+|`movement_steps_acc_dec_x`<br>Number of steps used to accelerate for the x axis.|integer|📖|||📝|🗑|
+|`movement_steps_acc_dec_y`<br>Number of steps used to accelerate for the y axis.|integer|📖|||📝|🗑|
+|`movement_steps_acc_dec_z`<br>Number of steps used to accelerate for the z axis.|integer|📖|||📝|🗑|
+|`movement_stop_at_home_x`<br>Enable stop at home for the x axis.|integer|📖|||📝|🗑|
+|`movement_stop_at_home_y`<br>Enable stop at home for the y axis.|integer|📖|||📝|🗑|
+|`movement_stop_at_home_z`<br>Enable stop at home for the z axis.|integer|📖|||📝|🗑|
+|`movement_stop_at_max_x`<br>Enable stop at max for the x axis.|integer|📖|||📝|🗑|
+|`movement_stop_at_max_y`<br>Enable stop at max for the y axis.|integer|📖|||📝|🗑|
+|`movement_stop_at_max_z`<br>Enable stop at max for the z axis.|integer|📖|||📝|🗑|
+|`movement_timeout_x`<br>Amount of time to wait for a command to execute before stopping in seconds for the x axis.|integer|📖|||📝|🗑|
+|`movement_timeout_y`<br>Amount of time to wait for a command to execute before stopping in seconds for the y axis.|integer|📖|||📝|🗑|
+|`movement_timeout_z`<br>Amount of time to wait for a command to execute before stopping in seconds for the z axis.|integer|📖|||📝|🗑|
+|`param_config_ok`<br>Unused.|integer|📖|||📝|🗑|
+|`param_e_stop_on_mov_err`<br>E-Stop upon movement error.|integer|📖|||📝|🗑|
+|`param_mov_nr_retry`<br>Number of times to retry a movement.|integer|📖|||📝|🗑|
+|`param_test`<br>Unused.|integer|📖|||📝|🗑|
+|`param_use_eeprom`<br>Unused.|integer|📖|||📝|🗑|
+|`param_version`<br>Unused.|integer|📖|||📝|🗑|
+|`pin_guard_1_active_state`<br>Pin guard 1 active state.|integer|📖|||📝|🗑|
+|`pin_guard_1_pin_nr`<br>Pin guard 1 pin number.|integer|📖|||📝|🗑|
+|`pin_guard_1_time_out`<br>Pin guard 1 number of seconds before turning the pin to the inactive state.|integer|📖|||📝|🗑|
+|`pin_guard_2_active_state`<br>Pin guard 2 active state.|integer|📖|||📝|🗑|
+|`pin_guard_2_pin_nr`<br>Pin guard 2 pin number.|integer|📖|||📝|🗑|
+|`pin_guard_2_time_out`<br>Pin guard 2 number of seconds before turning the pin to the inactive state.|integer|📖|||📝|🗑|
+|`pin_guard_3_active_state`<br>Pin guard 3 active state.|integer|📖|||📝|🗑|
+|`pin_guard_3_pin_nr`<br>Pin guard 3 pin number.|integer|📖|||📝|🗑|
+|`pin_guard_3_time_out`<br>Pin guard 3 number of seconds before turning the pin to the inactive state.|integer|📖|||📝|🗑|
+|`pin_guard_4_active_state`<br>Pin guard 4 active state.|integer|📖|||📝|🗑|
+|`pin_guard_4_pin_nr`<br>Pin guard 4 pin number.|integer|📖|||📝|🗑|
+|`pin_guard_4_time_out`<br>Pin guard 4 number of seconds before turning the pin to the inactive state.|integer|📖|||📝|🗑|
+|`pin_guard_5_active_state`<br>Pin guard 5 active state.|integer|📖|||📝|🗑|
+|`pin_guard_5_pin_nr`<br>Pin guard 5 pin number.|integer|📖|||📝|🗑|
+|`pin_guard_5_time_out`<br>Pin guard 5 number of seconds before turning the pin to the inactive state.|integer|📖|||📝|🗑|
+|`movement_invert_2_endpoints_x`<br>Enable for normally closed (NC), disable for normally open (NO).|integer|📖|||📝|🗑|
+|`movement_invert_2_endpoints_y`<br>Enable for normally closed (NC), disable for normally open (NO).|integer|📖|||📝|🗑|
+|`movement_invert_2_endpoints_z`<br>Enable for normally closed (NC), disable for normally open (NO).|integer|📖|||📝|🗑|
+|`movement_microsteps_x`<br>Number of microsteps per step on the x axis.|integer|📖|||📝|🗑|
+|`movement_microsteps_y`<br>Number of microsteps per step on the y axis.|integer|📖|||📝|🗑|
+|`movement_microsteps_z`<br>Number of microsteps per step on the z axis.|integer|📖|||📝|🗑|
+|`movement_motor_current_x`<br>Motor current on the x axis.|0-1823|📖|||📝|🗑|
+|`movement_motor_current_y`<br>Motor current on the y axis.|0-1823|📖|||📝|🗑|
+|`movement_motor_current_z`<br>Motor current on the z axis.|0-1823|📖|||📝|🗑|
+|`movement_stall_sensitivity_x`<br>Stall sensitivity on the x axis. Lower is more sensitive.|-63-63|📖|||📝|🗑|
+|`movement_stall_sensitivity_y`<br>Stall sensitivity on the y axis. Lower is more sensitive.|-63-63|📖|||📝|🗑|
+|`movement_stall_sensitivity_z`<br>Stall sensitivity on the z axis. Lower is more sensitive.|-63-63|📖|||📝|🗑|
+|`movement_min_spd_z2`<br>Min speed in steps per second for z axis movements towards home.|integer|📖|||📝|🗑|
+|`movement_max_spd_z2`<br>Maximum speed in steps per second for z axis movements towards home.|integer|📖|||📝|🗑|
+|`movement_steps_acc_dec_z2`<br>Number of steps used for acceleration for z axis movements towards home.|integer|📖|||📝|🗑|
+|`movement_calibration_retry_x`<br>Number of times to retry calibration for the x axis.|integer|📖|||📝|🗑|
+|`movement_calibration_retry_y`<br>Number of times to retry calibration for the y axis.|integer|📖|||📝|🗑|
+|`movement_calibration_retry_z`<br>Number of times to retry calibration for the z axis.|integer|📖|||📝|🗑|
+|`movement_calibration_deadzone_x`<br>Distance in steps to group calibration retries for the x axis.|integer|📖|||📝|🗑|
+|`movement_calibration_deadzone_y`<br>Distance in steps to group calibration retries for the y axis.|integer|📖|||📝|🗑|
+|`movement_calibration_deadzone_z`<br>Distance in steps to group calibration retries for the z axis.|integer|📖|||📝|🗑|
+|`movement_axis_stealth_x`<br>Enable quiet mode for the x axis.|integer|📖|||📝|🗑|
+|`movement_axis_stealth_y`<br>Enable quiet mode for the y axis.|integer|📖|||📝|🗑|
+|`movement_axis_stealth_z`<br>Enable quiet mode for the z axis.|integer|📖|||📝|🗑|
+|`movement_calibration_retry_total_x`<br>Total number of times to retry calibration for the x axis.|integer|📖|||📝|🗑|
+|`movement_calibration_retry_total_y`<br>Total number of times to retry calibration for the y axis.|integer|📖|||📝|🗑|
+|`movement_calibration_retry_total_z`<br>Total number of times to retry calibration for the z axis.|integer|📖|||📝|🗑|
+|`pin_report_1_pin_nr`<br>Report values of the pin periodically.|integer|📖|||📝|🗑|
+|`pin_report_2_pin_nr`<br>Report values of the pin periodically.|integer|📖|||📝|🗑|
 
 __GET /api/firmware_config__
 ```python
@@ -2190,7 +2190,7 @@ output:
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
-|`copyright`<br>Copyright holder.|string|||📝|||
+|`copyright`<br>Copyright holder.|string|||📝(required)|||
 
 ## sequences/:id/unpublish
 
@@ -2428,9 +2428,9 @@ Account user information.
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
-|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
-|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
-|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
+|`id`<br>Unique identifier set by the database.|integer|📖||||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
 |`name`<br>User name.|string|📖||📝(required)|📝||
 |`email`<br>Email address.|string|📖||📝(required)|📝||
 |`password`<br>Password.|string|||📝(required)|||
@@ -2504,77 +2504,77 @@ See [settings](https://software.farm.bot/docs/settings).
 |`device_id`<br>Unique device identifier set by the database.|integer|📖||||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
-|`confirm_step_deletion`<br>Config.|boolean|📖|||📝|🗑|
-|`disable_animations`<br>Config.|boolean|📖|||📝|🗑|
-|`disable_i18n`<br>Config.|boolean|📖|||📝|🗑|
-|`display_trail`<br>Config.|boolean|📖|||📝|🗑|
-|`dynamic_map`<br>Config.|boolean|📖|||📝|🗑|
-|`encoder_figure`<br>Config.|boolean|📖|||📝|🗑|
-|`hide_webcam_widget`<br>Config.|boolean|📖|||📝|🗑|
-|`legend_menu_open`<br>Config.|boolean|📖|||📝|🗑|
-|`raw_encoders`<br>Config.|boolean|📖|||📝|🗑|
-|`scaled_encoders`<br>Config.|boolean|📖|||📝|🗑|
-|`show_spread`<br>Config.|boolean|📖|||📝|🗑|
-|`show_farmbot`<br>Config.|boolean|📖|||📝|🗑|
-|`show_plants`<br>Config.|boolean|📖|||📝|🗑|
-|`show_points`<br>Config.|boolean|📖|||📝|🗑|
-|`x_axis_inverted`<br>Config.|boolean|📖|||📝|🗑|
-|`y_axis_inverted`<br>Config.|boolean|📖|||📝|🗑|
-|`z_axis_inverted`<br>Config.|boolean|📖|||📝|🗑|
-|`bot_origin_quadrant`<br>Config.|1-4|📖|||📝|🗑|
-|`zoom_level`<br>Config.|-9-3|📖|||📝|🗑|
-|`success_log`<br>Config.|0-3|📖|||📝|🗑|
-|`busy_log`<br>Config.|0-3|📖|||📝|🗑|
-|`warn_log`<br>Config.|0-3|📖|||📝|🗑|
-|`error_log`<br>Config.|0-3|📖|||📝|🗑|
-|`info_log`<br>Config.|0-3|📖|||📝|🗑|
-|`fun_log`<br>Config.|0-3|📖|||📝|🗑|
-|`debug_log`<br>Config.|0-3|📖|||📝|🗑|
-|`stub_config`<br>Config.|boolean|📖|||📝|🗑|
-|`show_first_party_farmware`<br>Config.|boolean|📖|||📝|🗑|
-|`enable_browser_speak`<br>Config.|boolean|📖|||📝|🗑|
-|`show_images`<br>Config.|boolean|📖|||📝|🗑|
-|`photo_filter_begin`<br>Config.|timestamp \| null|📖|||📝|🗑|
-|`photo_filter_end`<br>Config.|timestamp \| null|📖|||📝|🗑|
-|`discard_unsaved`<br>Config.|boolean|📖|||📝|🗑|
-|`xy_swap`<br>Config.|boolean|📖|||📝|🗑|
-|`home_button_homing`<br>Config.|boolean|📖|||📝|🗑|
-|`show_motor_plot`<br>Config.|boolean|📖|||📝|🗑|
-|`show_historic_points`<br>Config.|boolean|📖|||📝|🗑|
-|`show_sensor_readings`<br>Config.|boolean|📖|||📝|🗑|
-|`show_dev_menu`<br>Config.|boolean|📖|||📝|🗑|
-|`internal_use`<br>Config.|string|📖|||📝|🗑|
-|`time_format_24_hour`<br>Config.|boolean|📖|||📝|🗑|
-|`show_pins`<br>Config.|boolean|📖|||📝|🗑|
-|`disable_emergency_unlock_confirmation`<br>Config.|boolean|📖|||📝|🗑|
-|`map_size_x`<br>Config.|integer|📖|||📝|🗑|
-|`map_size_y`<br>Config.|integer|📖|||📝|🗑|
-|`expand_step_options`<br>Config.|boolean|📖|||📝|🗑|
-|`hide_sensors`<br>Config.|boolean|📖|||📝|🗑|
-|`confirm_plant_deletion`<br>Config.|boolean|📖|||📝|🗑|
-|`confirm_sequence_deletion`<br>Config.|boolean|📖|||📝|🗑|
-|`discard_unsaved_sequences`<br>Config.|boolean|📖|||📝|🗑|
-|`user_interface_read_only_mode`<br>Config.|boolean|📖|||📝|🗑|
-|`assertion_log`<br>Config.|0-3|📖|||📝|🗑|
-|`show_zones`<br>Config.|boolean|📖|||📝|🗑|
-|`show_weeds`<br>Config.|boolean|📖|||📝|🗑|
-|`display_map_missed_steps`<br>Config.|boolean|📖|||📝|🗑|
-|`time_format_seconds`<br>Config.|boolean|📖|||📝|🗑|
-|`crop_images`<br>Config.|boolean|📖|||📝|🗑|
-|`show_camera_view_area`<br>Config.|boolean|📖|||📝|🗑|
-|`view_celery_script`<br>Config.|boolean|📖|||📝|🗑|
-|`highlight_modified_settings`<br>Config.|boolean|📖|||📝|🗑|
-|`show_advanced_settings`<br>Config.|boolean|📖|||📝|🗑|
-|`show_soil_interpolation_map`<br>Config.|boolean|📖|||📝|🗑|
-|`show_moisture_interpolation_map`<br>Config.|boolean|📖|||📝|🗑|
-|`clip_image_layer`<br>Config.|boolean|📖|||📝|🗑|
-|`beep_verbosity`<br>Config.|0-3|📖|||📝|🗑|
-|`landing_page`<br>Config.|boolean|📖|||📝|🗑|
-|`go_button_axes`<br>Config.|"X" \| "XY" \| "XYZ"|📖|||📝|🗑|
-|`show_uncropped_camera_view_area`<br>Config.|boolean|📖|||📝|🗑|
-|`default_plant_depth`<br>Config.|integer|📖|||📝|🗑|
-|`show_missed_step_plot`<br>Config.|boolean|📖|||📝|🗑|
-|`enable_3d_electronics_box_top`<br>Config.|boolean|📖|||📝|🗑|
+|`confirm_step_deletion`<br>Show a confirmation dialog when deleting a sequence step.|boolean|📖|||📝|🗑|
+|`disable_animations`<br>Disable plant animations in the garden map.|boolean|📖|||📝|🗑|
+|`disable_i18n`<br>Set the Web App to English.|boolean|📖|||📝|🗑|
+|`display_trail`<br>Display a virtual trail for FarmBot in the garden map to show movement and watering history while the map is open. Toggling this setting will clear data for the current trail.|boolean|📖|||📝|🗑|
+|`dynamic_map`<br>Change the garden map size based on axis length. A value must be input in AXIS LENGTH and STOP AT MAX must be enabled in `firmware_config`. Overrides MAP SIZE values.|boolean|📖|||📝|🗑|
+|`encoder_figure`<br>Show a virtual farmbot in the garden map at the encoder position as well as motor position.|boolean|📖|||📝|🗑|
+|`hide_webcam_widget`<br>Unused.|boolean|📖|||📝|🗑|
+|`legend_menu_open`<br>Show the garden map legend.|boolean|📖|||📝|🗑|
+|`raw_encoders`<br>Show raw encoder values.|boolean|📖|||📝|🗑|
+|`scaled_encoders`<br>Show scaled encoder values.|boolean|📖|||📝|🗑|
+|`show_spread`<br>Show plant spread in the garden map.|boolean|📖|||📝|🗑|
+|`show_farmbot`<br>Show FarmBot in the garden map.|boolean|📖|||📝|🗑|
+|`show_plants`<br>Show plants in the garden map.|boolean|📖|||📝|🗑|
+|`show_points`<br>Show map points in the garden ma.|boolean|📖|||📝|🗑|
+|`x_axis_inverted`<br>Invert x axis jog buttons.|boolean|📖|||📝|🗑|
+|`y_axis_inverted`<br>Invert y axis jog buttons.|boolean|📖|||📝|🗑|
+|`z_axis_inverted`<br>Invert z axis jog buttons.|boolean|📖|||📝|🗑|
+|`bot_origin_quadrant`<br>Select a map origin by clicking on one of the four quadrants to adjust the garden map to your viewing angle.|1-4|📖|||📝|🗑|
+|`zoom_level`<br>Garden map zoom level.|-9-3|📖|||📝|🗑|
+|`success_log`<br>Success log verbosity setting.|0-3|📖|||📝|🗑|
+|`busy_log`<br>Busy log verbosity setting.|0-3|📖|||📝|🗑|
+|`warn_log`<br>Warning log verbosity setting.|0-3|📖|||📝|🗑|
+|`error_log`<br>Error log verbosity setting.|0-3|📖|||📝|🗑|
+|`info_log`<br>Info log verbosity setting.|0-3|📖|||📝|🗑|
+|`fun_log`<br>Fun log verbosity setting.|0-3|📖|||📝|🗑|
+|`debug_log`<br>Debug log verbosity setting.|0-3|📖|||📝|🗑|
+|`stub_config`<br>Sub config.|boolean|📖|||📝|🗑|
+|`show_first_party_farmware`<br>Unused.|boolean|📖|||📝|🗑|
+|`enable_browser_speak`<br>Have the browser also read aloud log messages on the "Speak" channel that are spoken by FarmBot.|boolean|📖|||📝|🗑|
+|`show_images`<br>Show photos in the garden map.|boolean|📖|||📝|🗑|
+|`photo_filter_begin`<br>Show photos after this date and time.|timestamp \| null|📖|||📝|🗑|
+|`photo_filter_end`<br>Show photos before this date and time.|timestamp \| null|📖|||📝|🗑|
+|`discard_unsaved`<br>Don't ask about saving work before closing browser tab. Warning: may cause loss of data.|boolean|📖|||📝|🗑|
+|`xy_swap`<br>Swap map X and Y axes, making the Y axis horizontal and X axis vertical. This setting will also swap the X and Y jog control buttons in the Move widget.|boolean|📖|||📝|🗑|
+|`home_button_homing`<br>Configure the home button to find home instead of moving to home.|boolean|📖|||📝|🗑|
+|`show_motor_plot`<br>Show motor position graph.|boolean|📖|||📝|🗑|
+|`show_historic_points`<br>Show removed weeds in the garden map.|boolean|📖|||📝|🗑|
+|`show_sensor_readings`<br>Show sensor readings in the garden map.|boolean|📖|||📝|🗑|
+|`show_dev_menu`<br>Unused.|boolean|📖|||📝|🗑|
+|`internal_use`<br>Developer setting storage.|string|📖|||📝|🗑|
+|`time_format_24_hour`<br>Display times using the 24-hour format.|boolean|📖|||📝|🗑|
+|`show_pins`<br>Show raw pin lists in Read Sensor, Control Peripheral, and If Statement steps.|boolean|📖|||📝|🗑|
+|`disable_emergency_unlock_confirmation`<br>Don't confirm when unlocking FarmBot after an emergency stop.|boolean|📖|||📝|🗑|
+|`map_size_x`<br>Custom x map dimension (in millimeters). These values set the size of the garden map unless `dynamic_map` is enabled.|integer|📖|||📝|🗑|
+|`map_size_y`<br>Custom y map dimension (in millimeters). These values set the size of the garden map unless `dynamic_map` is enabled.|integer|📖|||📝|🗑|
+|`expand_step_options`<br>Choose whether advanced step options are open or closed by default.|boolean|📖|||📝|🗑|
+|`hide_sensors`<br>Hide the sensors panel.|boolean|📖|||📝|🗑|
+|`confirm_plant_deletion`<br>Show a confirmation dialog when deleting a plant.|boolean|📖|||📝|🗑|
+|`confirm_sequence_deletion`<br>Show a confirmation dialog when deleting a sequence.|boolean|📖|||📝|🗑|
+|`discard_unsaved_sequences`<br>Don't ask about saving sequence work before closing browser tab. Warning: may cause loss of data.|boolean|📖|||📝|🗑|
+|`user_interface_read_only_mode`<br>Disallow account data changes. This does not prevent Lua or FarmBot OS from changing settings.|boolean|📖|||📝|🗑|
+|`assertion_log`<br>Assertion log verbosity setting.|0-3|📖|||📝|🗑|
+|`show_zones`<br>Show point group location areas in the garden map.|boolean|📖|||📝|🗑|
+|`show_weeds`<br>Show weeds in the garden map.|boolean|📖|||📝|🗑|
+|`display_map_missed_steps`<br>Display high motor load warning indicators in map. Requires `display_trail` and stall detection to be enabled.|boolean|📖|||📝|🗑|
+|`time_format_seconds`<br>Add seconds to time displays.|boolean|📖|||📝|🗑|
+|`crop_images`<br>Crop images displayed in the garden map to remove black borders from image rotation. Crop amount determined by CAMERA ROTATION value.|boolean|📖|||📝|🗑|
+|`show_camera_view_area`<br>Show the camera's field of view in the garden map.|boolean|📖|||📝|🗑|
+|`view_celery_script`<br>View raw data representation of sequence steps.|boolean|📖|||📝|🗑|
+|`highlight_modified_settings`<br>Highlight settings that have been changed from their default values.|boolean|📖|||📝|🗑|
+|`show_advanced_settings`<br>Show advanced settings.|boolean|📖|||📝|🗑|
+|`show_soil_interpolation_map`<br>Show soil height interpolation map in the garden map.|boolean|📖|||📝|🗑|
+|`show_moisture_interpolation_map`<br>Show soil moisture interpolation map in the garden map.|boolean|📖|||📝|🗑|
+|`clip_image_layer`<br>Remove portions of images that extend beyond the garden map boundaries.|boolean|📖|||📝|🗑|
+|`beep_verbosity`<br>Beep upon log message verbosity level.|0-3|📖|||📝|🗑|
+|`landing_page`<br>Panel to show upon loading the app.|string|📖|||📝|🗑|
+|`go_button_axes`<br>Default axes to move when a GO TO LOCATION button is pressed.|"X" \| "Y" \| "Z" \| "XY" \| "XYZ"|📖|||📝|🗑|
+|`show_uncropped_camera_view_area`<br>Show the camera's uncropped and unrotated field of view in the garden map when `clip_image_layer` is enabled.|boolean|📖|||📝|🗑|
+|`default_plant_depth`<br>When adding plants to the map from the web app, set each new plant's depth to this value (in millimeters).|integer|📖|||📝|🗑|
+|`show_missed_step_plot`<br>Show motor load graph.|boolean|📖|||📝|🗑|
+|`enable_3d_electronics_box_top`<br>Show the push buttons in 3D instead of 2D.|boolean|📖|||📝|🗑|
 
 __GET /api/web_app_config__
 ```python
