@@ -721,6 +721,8 @@ Used by [settings](https://software.farm.bot/docs/settings).
 |Method|Description|
 |---|---|
 |`GET` /api/firmware_config|Get the firmware config object.|
+|`PATCH` /api/firmware_config|Edit the firmware configuration object.|
+|`DELETE` /api/firmware_config|Delete the firmware configuration object.|
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
@@ -1572,14 +1574,14 @@ Notes:
 |`openfarm_slug`<br>Plant type (from OpenFarm).|string|📖|📖|📝|📝|🗑|✅||||
 |`plant_stage`<br>Point status.|"planned" \| "planted" \| "harvested" \| "sprouted" \| "active" \| "removed" \| "pending"|📖|📖|📝|📝|🗑|✅||✅||
 |`planted_at`<br>Date and time planted in garden.|timestamp|📖|📖|📝|📝|🗑|✅||||
-|`discarded_at`<br>Date and time deleted.|timestamp|📖|📖|📝|📝|🗑||✅|✅||
+|`discarded_at`<br>Date and time deleted.|timestamp|📖|📖|||🗑||✅|✅||
 |`radius`<br>Point radius.|float|📖|📖|📝|📝|🗑|✅|✅|✅||
 |`depth`<br>Plant depth.|integer|📖|📖|📝|📝|🗑|✅||||
 |`water_curve_id`<br>ID of the water curve for the plant.|integer|📖|📖|📝|📝|🗑|✅||||
 |`spread_curve_id`<br>ID of the spread curve for the plant.|integer|📖|📖|📝|📝|🗑|✅||||
 |`height_curve_id`<br>ID of the height curve for the plant.|integer|📖|📖|📝|📝|🗑|✅||||
 |`pullout_direction`<br>Tool slot direction.|0-4|📖|📖|📝|📝|🗑||||✅|
-|`tool_id`<br>ID of the tool in the tool slot.|________|📖|📖|📝|📝|🗑||||✅|
+|`tool_id`<br>ID of the tool in the tool slot.|integer|📖|📖|📝|📝|🗑||||✅|
 |`gantry_mounted`<br>Is the tool slot mounted on the gantry?|boolean|📖|📖|📝|📝|🗑||||✅|
 |`filter`<br>Filter points.|"all" \| "old" \| "kept"|📝|||||||||
 
@@ -1694,45 +1696,43 @@ output:
 
 |Method|Description|
 |---|---|
-|`GET` /api/________|Get an array of all ______.|
+|`GET` /api/public_key|Get the public key.|
 
-|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
-|---|---|:---:|:---:|:---:|:---:|:---:|
-|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
-|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
-|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
-|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`_____`<br>____________.|________|📖|📖|📝|📝|🗑|
-
-__GET /api/__
+__GET /api/public_key__
 ```python
 import json
 import requests
 
 # TOKEN = ...
 
-url = f'https:{TOKEN['token']['unencoded']['iss']}/api/__________'
-headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
-           'content-type': 'application/json'}
-response = requests.get(url, headers=headers)
-print(json.dumps(response.json(), indent=2))
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/public_key'
+response = requests.get(url)
+print(response.text)
 ```
 output:
-```json
-{
-  "id": 43,
-  "created_at": "2022-02-02T23:15:36.629Z",
-  "updated_at": "2022-02-02T23:15:36.629Z",
-  "device_id": 447,
-
-}
+```
+-----BEGIN PUBLIC KEY-----
+2pVjj0NP5GNGzSqz8OVZUDJceDlsYpY24tUzJEtEzBJdN32zKM7PEkjiSZKqE3Uq
+lWKTxcArHrk/VPVp53dRhP0dza8dluHHlbsC19FmOWjcBRk2d1QUmhfVQMxc+EVE
+Hv5RSjtY40tB5NXRpXmbTOz7yejh2DsagCMTTyR8tQ/HYESXWama4s/MpRcVGHPY
+6rZbv3a67/yqsrxNsqnmG+JrAvKsQd86p7upbo4jEQQ2SatXSuzYCCl8wOL6wkz2
+E+qJNUTbyfTjyegBkUw6PEFnMhSUvzmBsWmy6X12vK9Too8qBhOYzYIPtN4oB9eY
+v4oT7LUFYK5agv2lVG6Z1UvoB16T+moOfba/l1xkgG3xGqI/LYzxIM74h5ppjtkw
+DmhdoWLZ
+-----END PUBLIC KEY-----
 ```
 
 # regimens
 
+See [regimens](https://software.farm.bot/docs/regimens).
+
 |Method|Description|
 |---|---|
-|`GET` /api/________|Get an array of all ______.|
+|`GET` /api/regimens|Get an array of all regimens.|
+|`GET` /api/regimens/:id|Get a single regimen by id.|
+|`POST` /api/regimens|Create a new regimen.|
+|`PATCH` /api/regimens/:id|Edit a single regimen by id.|
+|`DELETE` /api/regimens/:id|Delete a single regimen by id.|
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
@@ -1740,16 +1740,19 @@ output:
 |`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`_____`<br>____________.|________|📖|📖|📝|📝|🗑|
+|`name`<br>Regimen name.|string|📖|📖|📝(required)|📝|🗑|
+|`color`<br>Regimen color.|"blue" \| "green" \| "yellow" \| "orange" \| "purple" \| "pink" \| "gray" \| "red"|📖|📖|📝(required)|📝|🗑|
+|`body`<br>Variable data.|Array|📖|📖|📝|📝|🗑|
+|`regimen_items`<br>Sequence executions scheduled in the regimen.|Array (`time_offset` is in milliseconds)|📖|📖|📝(required)|📝|🗑|
 
-__GET /api/__
+__GET /api/regimens__
 ```python
 import json
 import requests
 
 # TOKEN = ...
 
-url = f'https:{TOKEN['token']['unencoded']['iss']}/api/__________'
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/regimens'
 headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
            'content-type': 'application/json'}
 response = requests.get(url, headers=headers)
@@ -1757,113 +1760,122 @@ print(json.dumps(response.json(), indent=2))
 ```
 output:
 ```json
-{
-  "id": 43,
-  "created_at": "2022-02-02T23:15:36.629Z",
-  "updated_at": "2022-02-02T23:15:36.629Z",
-  "device_id": 447,
-
-}
+[
+  {
+    "id": 15,
+    "created_at": "2022-02-02T23:15:50.695Z",
+    "updated_at": "2022-02-02T23:15:50.766Z",
+    "name": "specs",
+    "color": "red",
+    "device_id": 234,
+    "body": [
+      {
+        "kind": "parameter_application",
+        "args": {
+          "label": "parent",
+          "data_value": {
+            "kind": "coordinate",
+            "args": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            }
+          }
+        }
+      }
+    ],
+    "regimen_items": [
+      {
+        "id": 6,
+        "created_at": "2022-02-02T23:15:50.695Z",
+        "updated_at": "2022-02-02T23:15:50.766Z",
+        "regimen_id": 15,
+        "sequence_id": 70,
+        "time_offset": 100
+      }
+    ]
+  }
+]
 ```
 
 # releases
 
+Used by the [FarmBot OS download page](https://os.farm.bot) and FarmBot OS OTA updates.
+
 |Method|Description|
 |---|---|
-|`GET` /api/________|Get an array of all ______.|
+|`GET` /api/releases|Get a release.|
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
-|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
-|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
-|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
-|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`_____`<br>____________.|________|📖|📖|📝|📝|🗑|
+|`id`<br>Unique identifier set by the database.|integer|📖|||||
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|||||
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|||||
+|`image_url`<br>URL of FarmBot OS release .fw file.|string|📖|||||
+|`version`<br>FarmBot OS release version.|string|📖|||||
+|`platform`<br>FarmBot OS computer model.|"rpi" \| "rpi3" \| "rpi4"|📝(required) 📖|||||
+|`channel`<br>Release channel.|"stable" \| "beta" \| "alpha"|📝(required) 📖|||||
+|`dot_img_url`<br>URL of FarmBot OS release .img file.|string|📖|||||
 
-__GET /api/__
+__GET /api/releases__
 ```python
 import json
 import requests
 
 # TOKEN = ...
 
-url = f'https:{TOKEN['token']['unencoded']['iss']}/api/__________'
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/releases'
 headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
            'content-type': 'application/json'}
-response = requests.get(url, headers=headers)
-print(json.dumps(response.json(), indent=2))
-```
-output:
-```json
-{
-  "id": 43,
-  "created_at": "2022-02-02T23:15:36.629Z",
-  "updated_at": "2022-02-02T23:15:36.629Z",
-  "device_id": 447,
-
+payload = {
+    'channel': 'stable',
+    'platform': 'rpi3',
 }
-```
-
-# rmq
-
-|Method|Description|
-|---|---|
-|`GET` /api/________|Get an array of all ______.|
-
-|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
-|---|---|:---:|:---:|:---:|:---:|:---:|
-|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
-|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
-|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
-|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`_____`<br>____________.|________|📖|📖|📝|📝|🗑|
-
-__GET /api/__
-```python
-import json
-import requests
-
-# TOKEN = ...
-
-url = f'https:{TOKEN['token']['unencoded']['iss']}/api/__________'
-headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
-           'content-type': 'application/json'}
-response = requests.get(url, headers=headers)
+response = requests.get(url, headers=headers, json=payload)
 print(json.dumps(response.json(), indent=2))
 ```
 output:
 ```json
 {
-  "id": 43,
-  "created_at": "2022-02-02T23:15:36.629Z",
-  "updated_at": "2022-02-02T23:15:36.629Z",
-  "device_id": 447,
-
+  "id": 2,
+  "created_at": "2022-02-02T23:14:27.277Z",
+  "updated_at": "2022-02-02T23:14:27.277Z",
+  "image_url": "gopher://localhost:3000/b",
+  "version": "1.2.3-rc7",
+  "platform": "rpi3",
+  "channel": "stable",
+  "dot_img_url": null
 }
 ```
 
 # saved_gardens
 
+Used by [gardens](https://software.farm.bot/docs/gardens).
+
 |Method|Description|
 |---|---|
-|`GET` /api/________|Get an array of all ______.|
+|`GET` /api/saved_gardens|Get an array of all saved gardens.|
+|`POST` /api/saved_gardens|Create a new saved garden.|
+|`PATCH` /api/saved_gardens/:id|Edit a single saved garden by id.|
+|`DELETE` /api/saved_gardens/:id|Delete a single saved garden by id.|
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
-|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
-|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
-|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
-|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`_____`<br>____________.|________|📖|📖|📝|📝|🗑|
+|`id`<br>Unique identifier set by the database.|integer|📖||||🗑|
+|`device_id`<br>Unique device identifier set by the database.|integer|📖||||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
+|`name`<br>Saved garden name.|string|📖||📝(required)|📝|🗑|
+|`notes`<br>Notes.|string|📖||📝|📝|🗑|
 
-__GET /api/__
+__GET /api/saved_gardens__
 ```python
 import json
 import requests
 
 # TOKEN = ...
 
-url = f'https:{TOKEN['token']['unencoded']['iss']}/api/__________'
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/saved_gardens'
 headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
            'content-type': 'application/json'}
 response = requests.get(url, headers=headers)
@@ -1871,37 +1883,61 @@ print(json.dumps(response.json(), indent=2))
 ```
 output:
 ```json
-{
-  "id": 43,
-  "created_at": "2022-02-02T23:15:36.629Z",
-  "updated_at": "2022-02-02T23:15:36.629Z",
-  "device_id": 447,
-
-}
+[
+  {
+    "id": 32,
+    "name": "Garden 0",
+    "device_id": 384,
+    "created_at": "2022-02-02T23:15:33.978Z",
+    "updated_at": "2022-02-02T23:15:33.978Z",
+    "notes": "notes"
+  }
+]
 ```
+
+## saved_gardens/:id/apply
+
+|Method|Description|
+|---|---|
+|`POST` /api/saved_gardens/:id/apply|Apply a saved garden, destroying existing plants.|
+|`PATCH` /api/saved_gardens/:id/apply|Apply a saved garden. Errors if plants exist.|
+
+## saved_gardens/snapshot
+
+|Method|Description|
+|---|---|
+|`POST` /api/saved_gardens/snapshot|Copy the current garden to a new saved garden.|
 
 # sensor_readings
 
 |Method|Description|
 |---|---|
-|`GET` /api/________|Get an array of all ______.|
+|`GET` /api/sensor_readings|Get an array of all sensor readings.|
+|`GET` /api/sensor_readings/:id|Get a single sensor reading by id.|
+|`POST` /api/sensor_readings|Create a new sensor reading.|
+|`DELETE` /api/sensor_readings/:id|Delete a single sensor reading by id.|
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
 |`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
-|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`_____`<br>____________.|________|📖|📖|📝|📝|🗑|
+|`mode`<br>Sensor pin read mode, `0` for digital, `1` for analog.|0 \| 1|📖|📖|📝||🗑|
+|`pin`<br>Sensor pin number.|0-69|📖|📖|📝(required)||🗑|
+|`value`<br>Sensor value.|0-1023|📖|📖|📝(required)||🗑|
+|`x`<br>x coordinate.|float|📖|📖|📝(required)||🗑|
+|`y`<br>y coordinate.|float|📖|📖|📝(required)||🗑|
+|`z`<br>z coordinate.|float|📖|📖|📝(required)||🗑|
+|`read_at`<br>Date and time of sensor reading.|timestamp|📖|📖|📝||🗑|
 
-__GET /api/__
+__GET /api/sensor_readings__
 ```python
 import json
 import requests
 
 # TOKEN = ...
 
-url = f'https:{TOKEN['token']['unencoded']['iss']}/api/__________'
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/sensor_readings'
 headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
            'content-type': 'application/json'}
 response = requests.get(url, headers=headers)
@@ -1909,37 +1945,51 @@ print(json.dumps(response.json(), indent=2))
 ```
 output:
 ```json
-{
-  "id": 43,
-  "created_at": "2022-02-02T23:15:36.629Z",
-  "updated_at": "2022-02-02T23:15:36.629Z",
-  "device_id": 447,
-
-}
+[
+  {
+    "id": 1,
+    "created_at": "2022-02-02T23:14:15.819Z",
+    "updated_at": "2022-02-02T23:14:15.819Z",
+    "mode": 1,
+    "pin": 66,
+    "value": 80,
+    "x": 281.0,
+    "y": 205.0,
+    "z": 76.0,
+    "read_at": "2022-02-02T23:14:15.819Z"
+  }
+]
 ```
 
 # sensors
 
+See [sensors](https://software.farm.bot/docs/sensors).
+
 |Method|Description|
 |---|---|
-|`GET` /api/________|Get an array of all ______.|
+|`GET` /api/sensors|Get an array of all sensors.|
+|`GET` /api/sensors/:id|Get a single sensor by id.|
+|`POST` /api/sensors|Create a new sensor.|
+|`PATCH` /api/sensors/:id|Edit a single sensor by id.|
+|`DELETE` /api/sensors/:id|Delete a single sensor by id.|
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
 |`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
-|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`_____`<br>____________.|________|📖|📖|📝|📝|🗑|
+|`mode`<br>Sensor pin read mode, `0` for digital, `1` for analog.|0 \| 1|📖|📖|📝(required)|📝|🗑|
+|`pin`<br>Sensor pin number.|0-69|📖|📖|📝(required)|📝|🗑|
+|`label`<br>Sensor name.|string|📖|📖|📝(required)|📝|🗑|
 
-__GET /api/__
+__GET /api/sensors__
 ```python
 import json
 import requests
 
 # TOKEN = ...
 
-url = f'https:{TOKEN['token']['unencoded']['iss']}/api/__________'
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/sensors'
 headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
            'content-type': 'application/json'}
 response = requests.get(url, headers=headers)
@@ -1947,37 +1997,46 @@ print(json.dumps(response.json(), indent=2))
 ```
 output:
 ```json
-{
-  "id": 43,
-  "created_at": "2022-02-02T23:15:36.629Z",
-  "updated_at": "2022-02-02T23:15:36.629Z",
-  "device_id": 447,
-
-}
+[
+  {
+    "id": 4,
+    "created_at": "2022-02-02T23:14:40.839Z",
+    "updated_at": "2022-02-02T23:14:40.839Z",
+    "pin": 3,
+    "label": "My Sensor",
+    "mode": 1
+  }
+]
 ```
 
 # sequence_versions
 
+Sequence versions are created when a sequence is published for sharing. Also see [featured sequences](#featured_sequences).
+
 |Method|Description|
 |---|---|
-|`GET` /api/________|Get an array of all ______.|
+|`GET` /api/sequence_versions/:id|Get a sequence version.|
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
-|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
-|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
-|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
-|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`_____`<br>____________.|________|📖|📖|📝|📝|🗑|
+|`id`<br>Unique identifier set by the database.|integer||📖||||
+|`created_at`<br>Date and time of creation set by the database.|timestamp||📖||||
+|`description`<br>Sequence description.|string||📖||||
+|`copyright`<br>Copyright holder.|string||📖||||
+|`name`<br>Sequence name.|string||📖||||
+|`color`<br>Sequence color.|"blue" \| "green" \| "yellow" \| "orange" \| "purple" \| "pink" \| "gray" \| "red"||📖||||
+|`kind`<br>"sequence".|"sequence"||📖||||
+|`args`<br>Scope declaration.|Object||📖||||
+|`body`<br>Sequence steps.|Array||📖||||
 
-__GET /api/__
+__GET /api/sequence_versions/8__
 ```python
 import json
 import requests
 
 # TOKEN = ...
 
-url = f'https:{TOKEN['token']['unencoded']['iss']}/api/__________'
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/sequence_versions/8'
 headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
            'content-type': 'application/json'}
 response = requests.get(url, headers=headers)
@@ -1986,36 +2045,71 @@ print(json.dumps(response.json(), indent=2))
 output:
 ```json
 {
-  "id": 43,
-  "created_at": "2022-02-02T23:15:36.629Z",
-  "updated_at": "2022-02-02T23:15:36.629Z",
-  "device_id": 447,
-
+  "id": 8,
+  "created_at": "2022-02-02T23:14:33.054Z",
+  "description": "An SV with comments",
+  "copyright": "FarmBot, Inc. 2021",
+  "name": "Operative multimedia success",
+  "kind": "sequence",
+  "args": {
+    "version": 20180209,
+    "locals": {
+      "kind": "scope_declaration",
+      "args": {
+      }
+    }
+  },
+  "body": [
+    {
+      "comment": "This is a comment",
+      "kind": "send_message",
+      "args": {
+        "message": "Hello, world!",
+        "message_type": "warn"
+      }
+    }
+  ]
 }
 ```
 
 # sequences
 
+See [sequences](https://software.farm.bot/docs/sequences).
+
 |Method|Description|
 |---|---|
-|`GET` /api/________|Get an array of all ______.|
+|`GET` /api/sequences|Get an array of all sequences.|
+|`GET` /api/sequences/:id|Get a single sequence by id.|
+|`POST` /api/sequences|Create a new sequence.|
+|`PATCH` /api/sequences/:id|Edit a single sequence by id.|
+|`DELETE` /api/sequences/:id|Delete a single sequence by id.|
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
 |`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
-|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`_____`<br>____________.|________|📖|📖|📝|📝|🗑|
+|`args`<br>Scope declaration.|Object|📖|📖|📝|📝(required)|🗑|
+|`color`<br>Sequence color.|"blue" \| "green" \| "yellow" \| "orange" \| "purple" \| "pink" \| "gray" \| "red"|📖|📖|📝|📝|🗑|
+|`folder_id`<br>ID of the parent folder.|integer|📖|📖|📝|📝|🗑|
+|`forked`<br>Local changes to a shared sequence.|boolean|📖|📖|📝|📝|🗑|
+|`name`<br>Sequence name.|string|📖|📖|📝(required)|📝(required)|🗑|
+|`pinned`<br>Add the sequence to the pinned sequence list.|boolean|📖|📖|📝|📝|🗑|
+|`copyright`<br>Copyright holder.|string|📖|📖|📝|📝|🗑|
+|`description`<br>Sequence description (markdown).|string|📖|📖|📝|📝|🗑|
+|`sequence_versions`<br>A list of published versions of the sequence.|integer[]|📖|📖|📝|📝|🗑|
+|`sequence_version_id`<br>ID of the sequence version the sequence was imported from.|integer|📖|📖|📝|📝|🗑|
+|`kind`<br>"sequence"|"sequence"|📖|📖|📝|📝|🗑|
+|`body`<br>Sequence steps.|Array|📖|📖|📝(required)|📝(required)|🗑|
 
-__GET /api/__
+__GET /api/sequences__
 ```python
 import json
 import requests
 
 # TOKEN = ...
 
-url = f'https:{TOKEN['token']['unencoded']['iss']}/api/__________'
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/sequences'
 headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
            'content-type': 'application/json'}
 response = requests.get(url, headers=headers)
@@ -2023,37 +2117,103 @@ print(json.dumps(response.json(), indent=2))
 ```
 output:
 ```json
-{
-  "id": 43,
-  "created_at": "2022-02-02T23:15:36.629Z",
-  "updated_at": "2022-02-02T23:15:36.629Z",
-  "device_id": 447,
+[
+  {
+    "id": 36,
+    "created_at": "2022-02-02T23:14:31.607Z",
+    "updated_at": "2022-02-02T23:14:31.645Z",
+    "args": {
+      "version": 20180209,
+      "locals": {
+        "kind": "scope_declaration",
+        "args": {
+        },
+        "body": [
+          {
+            "kind": "parameter_declaration",
+            "args": {
+              "label": "parent",
+              "default_value": {
+                "kind": "coordinate",
+                "args": {
+                  "x": 9,
+                  "y": 9,
+                  "z": 9
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "color": "green",
+    "folder_id": null,
+    "forked": false,
+    "name": "My Sequence",
+    "pinned": false,
+    "copyright": null,
+    "description": null,
+    "sequence_versions": [
 
-}
+    ],
+    "sequence_version_id": null,
+    "kind": "sequence",
+    "body": [
+      {
+        "kind": "execute",
+        "args": {
+          "sequence_id": 23
+        }
+      }
+    ]
+  }
+]
 ```
+
+## sequences/:id/upgrade/:sequence_version_id
+
+|Method|Description|
+|---|---|
+|`POST` /api/sequences/:id/upgrade/:sequence_version_id|Upgrade a sequence that already uses a sequence version.|
+
+## sequences/:sequence_version_id/install
+
+|Method|Description|
+|---|---|
+|`POST` /api/sequences/:sequence_version_id/install|Install someone else's sequence.|
+
+## sequences/:id/publish
+
+|Method|Description|
+|---|---|
+|`POST` /api/sequences/:id/publish|Share your sequence with other people.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`copyright`<br>Copyright holder.|string|||📝|||
+
+## sequences/:id/unpublish
+
+|Method|Description|
+|---|---|
+|`POST` /api/sequences/:id/unpublish|Unlist your sequence.|
 
 # storage_auth
 
+Used for [photos](https://software.farm.bot/docs/photos).
+
 |Method|Description|
 |---|---|
-|`GET` /api/________|Get an array of all ______.|
+|`GET` /api/storage_auth|Get the image storage policy object.|
 
-|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
-|---|---|:---:|:---:|:---:|:---:|:---:|
-|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
-|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
-|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
-|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`_____`<br>____________.|________|📖|📖|📝|📝|🗑|
-
-__GET /api/__
+__GET /api/storage_auth__
 ```python
 import json
 import requests
 
 # TOKEN = ...
 
-url = f'https:{TOKEN['token']['unencoded']['iss']}/api/__________'
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/storage_auth'
 headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
            'content-type': 'application/json'}
 response = requests.get(url, headers=headers)
@@ -2062,36 +2222,56 @@ print(json.dumps(response.json(), indent=2))
 output:
 ```json
 {
-  "id": 43,
-  "created_at": "2022-02-02T23:15:36.629Z",
-  "updated_at": "2022-02-02T23:15:36.629Z",
-  "device_id": 447,
-
+  "verb": "POST",
+  "url": "//storage.googleapis.com/YOU_MUST_CONFIG_GOOGLE_CLOUD_STORAGE/",
+  "form_data": {
+    "key": "temp1/517227e6-4d91-43c1-a0f2-69dd4dbf612c.jpg",
+    "acl": "public-read",
+    "Content-Type": "image/jpeg",
+    "policy": "GCS NOT SETUP!",
+    "signature": "GCS NOT SETUP!",
+    "GoogleAccessId": "GCS NOT SETUP!",
+    "file": "REPLACE_THIS_WITH_A_BINARY_JPEG_FILE"
+  },
+  "instructions": "Send a 'form-data' request to the URL provided. Then POST the resulting URL as an 'attachment_url' (json) to api/images/."
 }
 ```
 
 # telemetries
 
+Used by [the history tab of the connectivity pop-up](https://software.farm.bot/docs/connectivity).
+
 |Method|Description|
 |---|---|
-|`GET` /api/________|Get an array of all ______.|
+|`GET` /api/telemetries|Get an array of all telemetries.|
+|`POST` /api/telemetries|Create a new telemetry.|
+|`DELETE` /api/telemetries/:id|Delete a single telemetry by id.|
+|`DELETE` /api/telemetries/all|Delete all telemetries.|
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
-|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
-|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
-|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
-|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`_____`<br>____________.|________|📖|📖|📝|📝|🗑|
+|`id`<br>Unique identifier set by the database.|integer|📖||||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
+|`target`<br>FarmBot OS computer model.|"rpi" \| "rpi3" \| "rpi4"|📖||📝(required)||🗑|
+|`soc_temp`<br>CPU temperature.|integer|📖||📝||🗑|
+|`throttled`<br>RPi throttle state.|"0x#####"|📖||📝||🗑|
+|`wifi_level_percent`<br>WiFi signal strength percent.|0-100|📖||📝||🗑|
+|`uptime`<br>Time in seconds since boot.|integer|📖||📝||🗑|
+|`memory_usage`<br>Memory usage in MB.|integer|📖||📝||🗑|
+|`disk_usage`<br>Disk usage in percent.|0-100|📖||📝||🗑|
+|`cpu_usage`<br>CPU usage in percent.|0-100|📖||📝||🗑|
+|`fbos_version`<br>FarmBot OS semver version string.|string|📖||📝||🗑|
+|`firmware_hardware`<br>Firmware installed on the Farmduino or microcontroller.|"arduino" \| "farmduino" \| "farmduino_k14" \| "farmduino_k15" \| "farmduino_k16" \| "farmduino_k17" \| "express_k10" \| "express_k11" \| "express_k12"|📖||📝||🗑|
 
-__GET /api/__
+__GET /api/telemetries__
 ```python
 import json
 import requests
 
 # TOKEN = ...
 
-url = f'https:{TOKEN['token']['unencoded']['iss']}/api/__________'
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/telemetries'
 headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
            'content-type': 'application/json'}
 response = requests.get(url, headers=headers)
@@ -2099,37 +2279,70 @@ print(json.dumps(response.json(), indent=2))
 ```
 output:
 ```json
-{
-  "id": 43,
-  "created_at": "2022-02-02T23:15:36.629Z",
-  "updated_at": "2022-02-02T23:15:36.629Z",
-  "device_id": 447,
-
-}
+[
+  {
+    "id": 9,
+    "created_at": 1712360174,
+    "updated_at": "2024-04-05T23:36:14.413Z",
+    "soc_temp": 62,
+    "throttled": "0x0",
+    "wifi_level_percent": 54,
+    "uptime": 832,
+    "memory_usage": 22,
+    "disk_usage": 4,
+    "cpu_usage": 61,
+    "target": "rpi",
+    "fbos_version": "17.0.0",
+    "firmware_hardware": null
+  }
+]
 ```
 
 # tokens
 
+Used for user authentication. Also see [authorization](../../python/authorization.md).
+
 |Method|Description|
 |---|---|
-|`GET` /api/________|Get an array of all ______.|
+|`GET` /api/tokens|Use your token to refresh your token, except for the expiration.|
+|`POST` /api/tokens|Provide your account login to request a new token.|
+|`DELETE` /api/tokens|Delete your token.|
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
-|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
-|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
-|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
-|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`_____`<br>____________.|________|📖|📖|📝|📝|🗑|
+|`token`<br>Token.|Object. (see below)|📖||📝||🗑|
+|`user`<br>User.|Object. (see [users](#users))|||📝||🗑|
 
-__GET /api/__
+__Token__
+
+|Field|Type|
+|---|---|
+|`unencoded`<br>Unencoded token information.|Object. (see below)|
+|`encoded`<br>Encoded token to use in request header.|string|
+
+__Unencoded Token__
+
+|Field|Type|
+|---|---|
+|`aud`<br>Audience.|string|
+|`sub`<br>User ID.|integer|
+|`iat`<br>Created at timestamp.|integer|
+|`jti`<br>JTI.|string|
+|`iss`<br>API address.|string|
+|`exp`<br>Expiration.|integer|
+|`mqtt`<br>MQTT URL.|string|
+|`bot`<br>Device ID string (username).|string|
+|`vhost`<br>vhost.|string|
+|`mqtt_ws`<br>MQTT WS URL.|string|
+
+__GET /api/tokens__
 ```python
 import json
 import requests
 
 # TOKEN = ...
 
-url = f'https:{TOKEN['token']['unencoded']['iss']}/api/__________'
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/tokens'
 headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
            'content-type': 'application/json'}
 response = requests.get(url, headers=headers)
@@ -2138,36 +2351,53 @@ print(json.dumps(response.json(), indent=2))
 output:
 ```json
 {
-  "id": 43,
-  "created_at": "2022-02-02T23:15:36.629Z",
-  "updated_at": "2022-02-02T23:15:36.629Z",
-  "device_id": 447,
-
+  "token": {
+    "unencoded": {
+      "aud": "unknown",
+      "sub": 134,
+      "iat": 1643843680,
+      "jti": "22deacf3-cb7c-4b42-9727-24d4d964a9d2",
+      "iss": "//192.168.1.112:3000",
+      "exp": 1649027679,
+      "mqtt": "blooper.io",
+      "bot": "device_214",
+      "vhost": "/",
+      "mqtt_ws": "ws://blooper.io:3002/ws"
+    },
+    "encoded": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ1bmtub3duIiwic3ViIjoxMzQsImlhdCI6MTY0Mzg0MzY4MCwianRpIjoiMjJkZWFjZjMtY2I3Yy00YjQyLTk3MjctMjRkNG"
+  }
 }
 ```
 
 # tools
 
+Used for [tools](https://software.farm.bot/docs/tools).
+
 |Method|Description|
 |---|---|
-|`GET` /api/________|Get an array of all ______.|
+|`GET` /api/tools|Get an array of all tools.|
+|`GET` /api/tools/:id|Get a single tool by id.|
+|`POST` /api/tools|Create a new tool.|
+|`PATCH` /api/tools/:id|Edit a single tool by id.|
+|`DELETE` /api/tools/:id|Delete a single tool by id.|
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
 |`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
-|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`_____`<br>____________.|________|📖|📖|📝|📝|🗑|
+|`name`<br>Tool name.|string|📖|📖|📝(required)|📝|🗑|
+|`status`<br>Tool status.|"active" \| "inactive"|📖|📖|||🗑|
+|`flow_rate_ml_per_s`<br>Watering nozzle flow rate in mL per second.|integer|📖|📖|📝|📝|🗑|
 
-__GET /api/__
+__GET /api/tools__
 ```python
 import json
 import requests
 
 # TOKEN = ...
 
-url = f'https:{TOKEN['token']['unencoded']['iss']}/api/__________'
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/tools'
 headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
            'content-type': 'application/json'}
 response = requests.get(url, headers=headers)
@@ -2176,36 +2406,48 @@ print(json.dumps(response.json(), indent=2))
 output:
 ```json
 {
-  "id": 43,
-  "created_at": "2022-02-02T23:15:36.629Z",
-  "updated_at": "2022-02-02T23:15:36.629Z",
-  "device_id": 447,
-
+  "id": 42,
+  "created_at": "2022-02-02T23:14:39.322Z",
+  "updated_at": "2022-02-02T23:14:39.322Z",
+  "name": "Watering Nozzle",
+  "status": "active",
+  "flow_rate_ml_per_s": 0
 }
 ```
 
 # users
 
+Account user information.
+
 |Method|Description|
 |---|---|
-|`GET` /api/________|Get an array of all ______.|
+|`GET` /api/users|Get an array including the user object.|
+|`POST` /api/users|Create a new user.|
+|`PATCH` /api/users|Edit the user object.|
+|`DELETE` /api/users|Delete the user object.|
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
 |`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
-|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`_____`<br>____________.|________|📖|📖|📝|📝|🗑|
+|`name`<br>User name.|string|📖||📝(required)|📝||
+|`email`<br>Email address.|string|📖||📝(required)|📝||
+|`password`<br>Password.|string|||📝(required)|||
+|`password_confirmation`<br>Password.|string|||📝(required)|||
+|`new_password`<br>Password.|string|||||📝|
+|`new_password_confirmation`<br>Password.|string|||||📝|
+|`agree_to_terms`<br>Agreed to terms?.|boolean|||📝|||
+|`language`<br>User language (used for [auto-generation](#ai)).|string|📖||📝|📝|🗑|
 
-__GET /api/__
+__GET /api/users__
 ```python
 import json
 import requests
 
 # TOKEN = ...
 
-url = f'https:{TOKEN['token']['unencoded']['iss']}/api/__________'
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/users'
 headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
            'content-type': 'application/json'}
 response = requests.get(url, headers=headers)
@@ -2213,37 +2455,135 @@ print(json.dumps(response.json(), indent=2))
 ```
 output:
 ```json
-{
-  "id": 43,
-  "created_at": "2022-02-02T23:15:36.629Z",
-  "updated_at": "2022-02-02T23:15:36.629Z",
-  "device_id": 447,
-
-}
+[
+  {
+    "id": 234,
+    "created_at": "2022-02-02T23:14:56.988Z",
+    "updated_at": "2022-02-02T23:14:56.988Z",
+    "name": "Susana Bogan",
+    "email": "suzy@hirthe.name",
+  "language": "English"
+  }
+]
 ```
+
+## users/control_certificate
+
+|Method|Description|
+|---|---|
+|`POST` /api/users/control_certificate|Generate a control certificate.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`email`<br>Email address.|string|||📝(required)|||
+|`password`<br>Password.|string|||📝(required)|||
+
+## users/resend_verification
+
+|Method|Description|
+|---|---|
+|`POST` /api/users/resend_verification|Resend the account verification email.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`email`<br>Email address.|string|||📝(required)|||
 
 # web_app_config
 
+See [settings](https://software.farm.bot/docs/settings).
+
 |Method|Description|
 |---|---|
-|`GET` /api/________|Get an array of all ______.|
+|`GET` /api/web_app_config|Get the web app config object.|
+|`PATCH` /api/web_app_config|Edit the web app configuration object.|
+|`DELETE` /api/web_app_config|Delete the web app configuration object.|
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
-|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
-|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
-|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
-|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`_____`<br>____________.|________|📖|📖|📝|📝|🗑|
+|`id`<br>Unique identifier set by the database.|integer|📖||||🗑|
+|`device_id`<br>Unique device identifier set by the database.|integer|📖||||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
+|`confirm_step_deletion`<br>Config.|boolean|📖|||📝|🗑|
+|`disable_animations`<br>Config.|boolean|📖|||📝|🗑|
+|`disable_i18n`<br>Config.|boolean|📖|||📝|🗑|
+|`display_trail`<br>Config.|boolean|📖|||📝|🗑|
+|`dynamic_map`<br>Config.|boolean|📖|||📝|🗑|
+|`encoder_figure`<br>Config.|boolean|📖|||📝|🗑|
+|`hide_webcam_widget`<br>Config.|boolean|📖|||📝|🗑|
+|`legend_menu_open`<br>Config.|boolean|📖|||📝|🗑|
+|`raw_encoders`<br>Config.|boolean|📖|||📝|🗑|
+|`scaled_encoders`<br>Config.|boolean|📖|||📝|🗑|
+|`show_spread`<br>Config.|boolean|📖|||📝|🗑|
+|`show_farmbot`<br>Config.|boolean|📖|||📝|🗑|
+|`show_plants`<br>Config.|boolean|📖|||📝|🗑|
+|`show_points`<br>Config.|boolean|📖|||📝|🗑|
+|`x_axis_inverted`<br>Config.|boolean|📖|||📝|🗑|
+|`y_axis_inverted`<br>Config.|boolean|📖|||📝|🗑|
+|`z_axis_inverted`<br>Config.|boolean|📖|||📝|🗑|
+|`bot_origin_quadrant`<br>Config.|1-4|📖|||📝|🗑|
+|`zoom_level`<br>Config.|-9-3|📖|||📝|🗑|
+|`success_log`<br>Config.|0-3|📖|||📝|🗑|
+|`busy_log`<br>Config.|0-3|📖|||📝|🗑|
+|`warn_log`<br>Config.|0-3|📖|||📝|🗑|
+|`error_log`<br>Config.|0-3|📖|||📝|🗑|
+|`info_log`<br>Config.|0-3|📖|||📝|🗑|
+|`fun_log`<br>Config.|0-3|📖|||📝|🗑|
+|`debug_log`<br>Config.|0-3|📖|||📝|🗑|
+|`stub_config`<br>Config.|boolean|📖|||📝|🗑|
+|`show_first_party_farmware`<br>Config.|boolean|📖|||📝|🗑|
+|`enable_browser_speak`<br>Config.|boolean|📖|||📝|🗑|
+|`show_images`<br>Config.|boolean|📖|||📝|🗑|
+|`photo_filter_begin`<br>Config.|timestamp \| null|📖|||📝|🗑|
+|`photo_filter_end`<br>Config.|timestamp \| null|📖|||📝|🗑|
+|`discard_unsaved`<br>Config.|boolean|📖|||📝|🗑|
+|`xy_swap`<br>Config.|boolean|📖|||📝|🗑|
+|`home_button_homing`<br>Config.|boolean|📖|||📝|🗑|
+|`show_motor_plot`<br>Config.|boolean|📖|||📝|🗑|
+|`show_historic_points`<br>Config.|boolean|📖|||📝|🗑|
+|`show_sensor_readings`<br>Config.|boolean|📖|||📝|🗑|
+|`show_dev_menu`<br>Config.|boolean|📖|||📝|🗑|
+|`internal_use`<br>Config.|string|📖|||📝|🗑|
+|`time_format_24_hour`<br>Config.|boolean|📖|||📝|🗑|
+|`show_pins`<br>Config.|boolean|📖|||📝|🗑|
+|`disable_emergency_unlock_confirmation`<br>Config.|boolean|📖|||📝|🗑|
+|`map_size_x`<br>Config.|integer|📖|||📝|🗑|
+|`map_size_y`<br>Config.|integer|📖|||📝|🗑|
+|`expand_step_options`<br>Config.|boolean|📖|||📝|🗑|
+|`hide_sensors`<br>Config.|boolean|📖|||📝|🗑|
+|`confirm_plant_deletion`<br>Config.|boolean|📖|||📝|🗑|
+|`confirm_sequence_deletion`<br>Config.|boolean|📖|||📝|🗑|
+|`discard_unsaved_sequences`<br>Config.|boolean|📖|||📝|🗑|
+|`user_interface_read_only_mode`<br>Config.|boolean|📖|||📝|🗑|
+|`assertion_log`<br>Config.|0-3|📖|||📝|🗑|
+|`show_zones`<br>Config.|boolean|📖|||📝|🗑|
+|`show_weeds`<br>Config.|boolean|📖|||📝|🗑|
+|`display_map_missed_steps`<br>Config.|boolean|📖|||📝|🗑|
+|`time_format_seconds`<br>Config.|boolean|📖|||📝|🗑|
+|`crop_images`<br>Config.|boolean|📖|||📝|🗑|
+|`show_camera_view_area`<br>Config.|boolean|📖|||📝|🗑|
+|`view_celery_script`<br>Config.|boolean|📖|||📝|🗑|
+|`highlight_modified_settings`<br>Config.|boolean|📖|||📝|🗑|
+|`show_advanced_settings`<br>Config.|boolean|📖|||📝|🗑|
+|`show_soil_interpolation_map`<br>Config.|boolean|📖|||📝|🗑|
+|`show_moisture_interpolation_map`<br>Config.|boolean|📖|||📝|🗑|
+|`clip_image_layer`<br>Config.|boolean|📖|||📝|🗑|
+|`beep_verbosity`<br>Config.|0-3|📖|||📝|🗑|
+|`landing_page`<br>Config.|boolean|📖|||📝|🗑|
+|`go_button_axes`<br>Config.|"X" \| "XY" \| "XYZ"|📖|||📝|🗑|
+|`show_uncropped_camera_view_area`<br>Config.|boolean|📖|||📝|🗑|
+|`default_plant_depth`<br>Config.|integer|📖|||📝|🗑|
+|`show_missed_step_plot`<br>Config.|boolean|📖|||📝|🗑|
+|`enable_3d_electronics_box_top`<br>Config.|boolean|📖|||📝|🗑|
 
-__GET /api/__
+__GET /api/web_app_config__
 ```python
 import json
 import requests
 
 # TOKEN = ...
 
-url = f'https:{TOKEN['token']['unencoded']['iss']}/api/__________'
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/web_app_config'
 headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
            'content-type': 'application/json'}
 response = requests.get(url, headers=headers)
@@ -2252,36 +2592,112 @@ print(json.dumps(response.json(), indent=2))
 output:
 ```json
 {
-  "id": 43,
-  "created_at": "2022-02-02T23:15:36.629Z",
-  "updated_at": "2022-02-02T23:15:36.629Z",
-  "device_id": 447,
-
+  "id": 2,
+  "created_at": "2022-02-02T23:14:24.408Z",
+  "updated_at": "2022-02-02T23:14:24.426Z",
+  "device_id": 86,
+  "confirm_step_deletion": false,
+  "disable_animations": false,
+  "disable_i18n": false,
+  "display_trail": true,
+  "dynamic_map": false,
+  "encoder_figure": false,
+  "hide_webcam_widget": false,
+  "legend_menu_open": true,
+  "raw_encoders": false,
+  "scaled_encoders": false,
+  "show_spread": true,
+  "show_farmbot": true,
+  "show_plants": true,
+  "show_points": true,
+  "x_axis_inverted": false,
+  "y_axis_inverted": false,
+  "z_axis_inverted": false,
+  "bot_origin_quadrant": 2,
+  "zoom_level": -2,
+  "success_log": 1,
+  "busy_log": 1,
+  "warn_log": 1,
+  "error_log": 1,
+  "info_log": 1,
+  "fun_log": 1,
+  "debug_log": 1,
+  "stub_config": false,
+  "show_first_party_farmware": false,
+  "enable_browser_speak": false,
+  "show_images": true,
+  "photo_filter_begin": null,
+  "photo_filter_end": null,
+  "discard_unsaved": false,
+  "xy_swap": false,
+  "home_button_homing": true,
+  "show_motor_plot": false,
+  "show_historic_points": false,
+  "show_sensor_readings": false,
+  "show_dev_menu": false,
+  "internal_use": null,
+  "time_format_24_hour": false,
+  "show_pins": false,
+  "disable_emergency_unlock_confirmation": true,
+  "map_size_x": 2900,
+  "map_size_y": 1400,
+  "expand_step_options": false,
+  "hide_sensors": false,
+  "confirm_plant_deletion": true,
+  "confirm_sequence_deletion": true,
+  "discard_unsaved_sequences": false,
+  "user_interface_read_only_mode": false,
+  "assertion_log": 1,
+  "show_zones": false,
+  "show_weeds": true,
+  "display_map_missed_steps": false,
+  "time_format_seconds": false,
+  "crop_images": true,
+  "show_camera_view_area": true,
+  "view_celery_script": false,
+  "highlight_modified_settings": true,
+  "show_advanced_settings": false,
+  "show_soil_interpolation_map": false,
+  "show_moisture_interpolation_map": false,
+  "clip_image_layer": true,
+  "beep_verbosity": 0,
+  "landing_page": "plants",
+  "go_button_axes": "XY",
+  "show_uncropped_camera_view_area": false,
+  "default_plant_depth": 5,
+  "show_missed_step_plot": false,
+  "enable_3d_electronics_box_top": true
 }
 ```
 
 # webcam_feeds
 
+See [webcam feeds](https://software.farm.bot/docs/webcam-feeds).
+
 |Method|Description|
 |---|---|
-|`GET` /api/________|Get an array of all ______.|
+|`GET` /api/webcam_feeds|Get an array of all webcam feeds.|
+|`GET` /api/webcam_feeds/:id|Get a single webcam feed by id.|
+|`POST` /api/webcam_feeds|Create a new webcam feed.|
+|`PATCH` /api/webcam_feeds/:id|Edit a single webcam feed by id.|
+|`DELETE` /api/webcam_feeds/:id|Delete a single webcam feed by id.|
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
 |`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
-|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`_____`<br>____________.|________|📖|📖|📝|📝|🗑|
+|`name`<br>Webcam feed label.|string|📖|📖|📝(required)|📝|🗑|
+|`url`<br>Webcam feed URL.|string|📖|📖|📝(required)|📝|🗑|
 
-__GET /api/__
+__GET /api/webcam_feeds__
 ```python
 import json
 import requests
 
 # TOKEN = ...
 
-url = f'https:{TOKEN['token']['unencoded']['iss']}/api/__________'
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/webcam_feeds'
 headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
            'content-type': 'application/json'}
 response = requests.get(url, headers=headers)
@@ -2289,37 +2705,45 @@ print(json.dumps(response.json(), indent=2))
 ```
 output:
 ```json
-{
-  "id": 43,
-  "created_at": "2022-02-02T23:15:36.629Z",
-  "updated_at": "2022-02-02T23:15:36.629Z",
-  "device_id": 447,
-
-}
+[
+  {
+    "id": 14,
+    "created_at": "2022-02-02T23:14:53.317Z",
+    "updated_at": "2022-02-02T23:14:53.317Z",
+    "url": "0",
+    "name": "feed 0"
+  }
+]
 ```
 
 # wizard_step_results
 
+Used by [setup wizard](https://my.farm.bot/app/designer/setup).
+
 |Method|Description|
 |---|---|
-|`GET` /api/________|Get an array of all ______.|
+|`GET` /api/wizard_step_results|Get an array of all wizard step results.|
+|`POST` /api/wizard_step_results|Create a new wizard step result.|
+|`PATCH` /api/wizard_step_results/:id|Edit a single wizard step result by id.|
+|`DELETE` /api/wizard_step_results/:id|Delete a single wizard step result by id.|
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
-|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
-|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
-|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
-|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`_____`<br>____________.|________|📖|📖|📝|📝|🗑|
+|`id`<br>Unique identifier set by the database.|integer|📖||||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
+|`answer`<br>Wizard step success?|boolean|📖||📝|📝|🗑|
+|`outcome`<br>Error message.|string|📖||📝|📝|🗑|
+|`slug`<br>Wizard step UUID.|string|📖||📝|📝|🗑|
 
-__GET /api/__
+__GET /api/wizard_step_results__
 ```python
 import json
 import requests
 
 # TOKEN = ...
 
-url = f'https:{TOKEN['token']['unencoded']['iss']}/api/__________'
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/wizard_step_results'
 headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
            'content-type': 'application/json'}
 response = requests.get(url, headers=headers)
@@ -2327,11 +2751,14 @@ print(json.dumps(response.json(), indent=2))
 ```
 output:
 ```json
-{
-  "id": 43,
-  "created_at": "2022-02-02T23:15:36.629Z",
-  "updated_at": "2022-02-02T23:15:36.629Z",
-  "device_id": 447,
-
-}
+[
+  {
+    "id": 5,
+    "created_at": "2022-02-02T23:15:34.279Z",
+    "updated_at": "2022-02-02T23:15:34.279Z",
+    "answer": false,
+    "outcome": "error",
+    "slug": "intro"
+  }
+]
 ```
