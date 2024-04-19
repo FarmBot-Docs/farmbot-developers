@@ -39,52 +39,52 @@ As of April 2024, the API manages the following resources:
 
 |Resource                                                |Description                                     |Pagination?|
 |--------------------------------------------------------|------------------------------------------------|-----------|
-|[`ai_feedbacks`](api-docs-next.md#ai_feedbacks)              |Positive/negative reactions to auto-generation prompt results.
-|[`alerts`](api-docs-next.md#alerts)                          |A single item in the message center. Only useful to site administrators.|Yes
-|[`curves`](api-docs-next.md#curves)                          |Time-based plant water/height/spread data tables.|Yes
-|[`device`](api-docs-next.md#device)                          |Device account settings.
-|[`farm_events`](api-docs-next.md#farm_events)                |Executes a sequence or regimen based on time. Eg: "Execute this sequence every 6 hours".|Yes
-|[`farmware_envs`](api-docs-next.md#farmware_envs)            |Key/value pairs used for persistent storage.|Yes
-|[`fbos_config`](api-docs-next.md#fbos_config)                |Configuration for FarmBot OS.
-|[`firmware_config`](api-docs-next.md#firmware_config)        |Configuration for the Arduino Firmware
-|[`folders`](api-docs-next.md#folders)                        |Organization for sequences.
-|[`global_bulletins`](api-docs-next.md#global_bulletins)      |(advanced) An announcement intended for all users of a server
-|[`images`](api-docs-next.md#images)                          |Meta data about photos taken by FarmBot.
-|[`logs`](api-docs-next.md#logs)                              |Messages from a device.
-|[`peripherals`](api-docs-next.md#peripherals)                |Meta data about output hardware.|Yes
-|[`pin_bindings`](api-docs-next.md#pin_bindings)              |Bind an I/O pin to sequence execution.|Yes
-|[`plant_templates`](api-docs-next.md#plant_templates)        |A single plant within a saved garden. Not a real plant.|Yes
-|[`points`](api-docs-next.md#points)                          |Represents a saved point on the garden bed. All point types are included in this resource: Plants, Weeds, Tool Slots, and Generic Points.
-|[`point_groups`](api-docs-next.md#point_groups)              |A collection of points based on a criteria or predefined set of points (eg: "All Weeds", "My Basil Plants" etc..)|Yes
-|[`regimens`](api-docs-next.md#regimens)                      |Executes sequences based on an offset from the regimen start date.|Yes
-|[`saved_gardens`](api-docs-next.md#saved_gardens)            |A pre arranged configuration of plants in a garden.|Yes
-|[`sensor_readings`](api-docs-next.md#sensor_readings)        |A single reading from a sensor, recorded to the API.|Yes
-|[`sensors`](api-docs-next.md#sensors)                        |Meta data about input hardware.|Yes
-|[`sequence_versions`](api-docs-next.md#sequence_versions)    |Published versions of sequences for sharing.
-|[`sequences`](api-docs-next.md#sequences)                    |Commands created in the sequence editor.
-|[`telemetries`](api-docs-next.md#telemetries)                |Historical FarmBot OS status information.
-|[`tokens`](api-docs-next.md#tokens)                          |An authorization / authentication secret shared between a user or device and the API.
-|[`tools`](api-docs-next.md#tools)                            |An physical object that is mounted to the gantry or a tool slot (UTM).|Yes
-|[`users`](api-docs-next.md#users)                            |Device operator data such as registration email.
-|[`web_app_config`](api-docs-next.md#web_app_config)          |User interface preferences.
-|[`webcam_feeds`](api-docs-next.md#webcam_feeds)              |Meta data about an external webcam (stream URL)|Yes
-|[`wizard_step_results`](api-docs-next.md#wizard_step_results)|Setup wizard result data.|Yes
+|[`ai_feedbacks`](api-docs.md#ai_feedbacks)              |Positive/negative reactions to auto-generation prompt results.
+|[`alerts`](api-docs.md#alerts)                          |A single item in the message center. Only useful to site administrators.|Yes
+|[`curves`](api-docs.md#curves)                          |Time-based plant water/height/spread data tables.|Yes
+|[`device`](api-docs.md#device)                          |Device account settings.
+|[`farm_events`](api-docs.md#farm_events)                |Executes a sequence or regimen based on time. Eg: "Execute this sequence every 6 hours".|Yes
+|[`farmware_envs`](api-docs.md#farmware_envs)            |Key/value pairs used for persistent storage.|Yes
+|[`fbos_config`](api-docs.md#fbos_config)                |Configuration for FarmBot OS.
+|[`firmware_config`](api-docs.md#firmware_config)        |Configuration for the Arduino Firmware
+|[`folders`](api-docs.md#folders)                        |Organization for sequences.
+|[`global_bulletins`](api-docs.md#global_bulletins)      |(advanced) An announcement intended for all users of a server
+|[`images`](api-docs.md#images)                          |Meta data about photos taken by FarmBot.
+|[`logs`](api-docs.md#logs)                              |Messages from a device.
+|[`peripherals`](api-docs.md#peripherals)                |Meta data about output hardware.|Yes
+|[`pin_bindings`](api-docs.md#pin_bindings)              |Bind an I/O pin to sequence execution.|Yes
+|[`plant_templates`](api-docs.md#plant_templates)        |A single plant within a saved garden. Not a real plant.|Yes
+|[`points`](api-docs.md#points)                          |Represents a saved point on the garden bed. All point types are included in this resource: Plants, Weeds, Tool Slots, and Generic Points.
+|[`point_groups`](api-docs.md#point_groups)              |A collection of points based on a criteria or predefined set of points (eg: "All Weeds", "My Basil Plants" etc..)|Yes
+|[`regimens`](api-docs.md#regimens)                      |Executes sequences based on an offset from the regimen start date.|Yes
+|[`saved_gardens`](api-docs.md#saved_gardens)            |A pre arranged configuration of plants in a garden.|Yes
+|[`sensor_readings`](api-docs.md#sensor_readings)        |A single reading from a sensor, recorded to the API.|Yes
+|[`sensors`](api-docs.md#sensors)                        |Meta data about input hardware.|Yes
+|[`sequence_versions`](api-docs.md#sequence_versions)    |Published versions of sequences for sharing.
+|[`sequences`](api-docs.md#sequences)                    |Commands created in the sequence editor.
+|[`telemetries`](api-docs.md#telemetries)                |Historical FarmBot OS status information.
+|[`tokens`](api-docs.md#tokens)                          |An authorization / authentication secret shared between a user or device and the API.
+|[`tools`](api-docs.md#tools)                            |An physical object that is mounted to the gantry or a tool slot (UTM).|Yes
+|[`users`](api-docs.md#users)                            |Device operator data such as registration email.
+|[`web_app_config`](api-docs.md#web_app_config)          |User interface preferences.
+|[`webcam_feeds`](api-docs.md#webcam_feeds)              |Meta data about an external webcam (stream URL)|Yes
+|[`wizard_step_results`](api-docs.md#wizard_step_results)|Setup wizard result data.|Yes
 
 ## Other endpoints
 
 |Endpoint                                                |Description                                     |
 |--------------------------------------------------------|------------------------------------------------|
-|[`ai`](api-docs-next.md#ai)                                  |Make auto-generation requests.
-|[`corpus`](api-docs-next.md#corpus)                          |A glossary of all Celery Script node types in JSON format.
-|[`demo_account`](api-docs-next.md#demo_account)              |Create a demo account.
-|[`export_data`](api-docs-next.md#export_data)                |A dump of all the resources listed above.
-|[`featured_sequences`](api-docs-next.md#featured_sequences)  |Promoted publicly shared sequences available for import.
-|[`feedback`](api-docs-next.md#feedback)                      |Submit feedback.
-|[`global_config`](api-docs-next.md#global_config)            |Configuration for all users of a server.
-|[`password_resets`](api-docs-next.md#password_resets)        |Request password reset.
-|[`public_key`](api-docs-next.md#public_key)                  |(advanced) A public encryption key owned by the API server.
-|[`releases`](api-docs-next.md#releases)                      |FarmBot OS releases.
-|[`storage_auth`](api-docs-next.md#storage_auth)              |(advanced) A policy object for Google Cloud Storage.
+|[`ai`](api-docs.md#ai)                                  |Make auto-generation requests.
+|[`corpus`](api-docs.md#corpus)                          |A glossary of all Celery Script node types in JSON format.
+|[`demo_account`](api-docs.md#demo_account)              |Create a demo account.
+|[`export_data`](api-docs.md#export_data)                |A dump of all the resources listed above.
+|[`featured_sequences`](api-docs.md#featured_sequences)  |Promoted publicly shared sequences available for import.
+|[`feedback`](api-docs.md#feedback)                      |Submit feedback.
+|[`global_config`](api-docs.md#global_config)            |Configuration for all users of a server.
+|[`password_resets`](api-docs.md#password_resets)        |Request password reset.
+|[`public_key`](api-docs.md#public_key)                  |(advanced) A public encryption key owned by the API server.
+|[`releases`](api-docs.md#releases)                      |FarmBot OS releases.
+|[`storage_auth`](api-docs.md#storage_auth)              |(advanced) A policy object for Google Cloud Storage.
 
 ## Example request
 

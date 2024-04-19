@@ -3,30 +3,150 @@ title: "Example API requests"
 slug: "api-docs"
 ---
 
-The document that follows is a list of **example API requests**. It serves as a guide for developers who wish to see the schema and existence of particular API endpoints quickly.
+The document that follows is a list of **example API requests**. It serves as a guide for developers who wish to see the schema and existence of particular API endpoints quickly. For a list of resources, see the [quick reference table](rest-api.md#resources).
 
 {%
 include callout.html
 type="info"
-content="The application's test suite generates this document automatically."
+title="Authorization required"
+content='To get the authorization token required in these examples (`TOKEN`), see [Authorization](../../python/authorization.md).'
 %}
 
-#  GET /
+{%
+include callout.html
+type="warning"
+title="Making requests"
+content="Making requests other than GET to the API will permanently alter the data in your account. Be especially careful making DELETE requests and POST requests to singular resources, like the /device endpoint, as the API will destroy data that cannot be recovered. Altering data through the API may cause account instability."
+%}
 
-**Response**
+{%
+include callout.html
+type="success"
+title="Tip"
+content='If you are unsure about how data should look, create a resource in the Web App and then perform a GET request to inspect the data.'
+%}
 
+# ai
+
+Used for [sequence name and description generation](https://software.farm.bot/v15/app/sequences/building-a-sequence.html#step-6-use-ai-to-write-the-sequence-name-and-description) and [Lua code generation](https://software.farm.bot/v15/app/sequences/sequence-commands/advanced#ai-lua-generation).
+
+|Method|Description|
+|---|---|
+|`POST` /api/ai|Submit an auto-generation request.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`prompt`<br>Instructions for model to follow.|string|||📝|||
+|`context_key`<br>Type of generation request.|"title" \| "color" \| "description" \| "lua"|||📝|||
+|`sequence_id`<br>For sequence "title", "color", and "description" auto-generation requests, the ID of the sequence to summarize.|integer \| null|||📝|||
+
+__POST /api/ai__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/ai'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+payload = {
+    'prompt': 'write code',
+    'context_key': 'lua',
+    'sequence_id': None,
+}
+response = requests.post(url, headers=headers, json=payload, stream=True)
+for line in response.iter_lines():
+    print(line.decode('utf-8'))
 ```
-Empty Response
+output:
+````
+```lua
+-- Move FarmBot to the home position for all axes
+go_to_home("all")
+```
+````
+
+# ai_feedbacks
+
+Used for [Lua code generation](https://software.farm.bot/v15/app/sequences/sequence-commands/advanced#ai-lua-generation).
+
+|Method|Description|
+|---|---|
+|`POST` /api/ai_feedbacks|Submit auto-generation feedback.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer||||||
+|`created_at`<br>Date and time of creation set by the database.|timestamp||||||
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp||||||
+|`prompt`<br>A copy of the instructions for the auto-generation request.|string|||📝|||
+|`reaction`<br>The feedback for the outcome of the prompt.|"good" \| "bad"|||📝|||
+
+__POST /api/ai_feedbacks__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/ai_feedbacks'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+payload = {
+    'prompt': 'write code',
+    'reaction': 'good',
+}
+response = requests.post(url, headers=headers, json=payload)
+print(json.dumps(response.json(), indent=2))
+```
+output:
+```json
+{
+  "id": 1,
+  "created_at": "2024-04-10T17:53:37.120Z",
+  "updated_at": "2024-04-10T17:53:37.120Z",
+  "prompt": "write code",
+  "reaction": "good"
+}
 ```
 
-#  GET /api/alerts
+# alerts
 
-**Response**
+Used by the [message center](https://software.farm.bot/docs/message-center).
 
+|Method|Description|
+|---|---|
+|`GET` /api/alerts|Get an array of all alerts.|
+|`DELETE` /api/alerts/:id|Delete a single alert by id.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖||||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
+|`problem_tag`<br>Type of alert.|"api.seed_data.missing" \| "api.documentation.unread" \| "api.tour.not_taken" \| "api.user.not_welcomed" \| "api.bulletin.unread" \| "api.demo_account.in_use"|📖||||🗑|
+|`slug`<br>Defaults to random UUID.|string|📖||||🗑|
+|`priority`<br>Importance for sorting.|integer|📖||||🗑|
+
+__GET /api/alerts__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/alerts'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
+output:
+```json
 [
   {
-    "id": 25,
+    "id": 1,
     "created_at": 1643843681,
     "updated_at": "2022-02-02T23:14:41.694Z",
     "priority": 100,
@@ -36,81 +156,207 @@ Empty Response
 ]
 ```
 
-#  GET /api/alerts/26
+__DELETE /api/alerts/1__
+```python
+import json
+import requests
 
-**Response**
+# TOKEN = ...
 
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/alerts/1'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.delete(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
+output:
+```json
 {
-  "id": 26,
+  "id": 1,
   "created_at": 1643843681,
-  "updated_at": "2022-02-02T23:14:41.733Z",
+  "updated_at": "2022-02-02T23:14:41.694Z",
   "priority": 100,
   "problem_tag": "api.seed_data.missing",
-  "slug": "12f3517b-08d2-4745-a505-a3958045cdff"
+  "slug": "fc07c4d5-aba0-4782-8c71-e443f88430e9"
 }
 ```
 
-#  GET /api/corpus
+# corpus
 
-**Response**
+|Method|Description|
+|---|---|
+|`GET` /api/corpus|Get the corpus object.|
 
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|*corpus*<br>Celery Script corpus.|object|📖|||||
+
+__GET /api/corpus__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/corpus'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
+output:
+```json
 {
   "version": 20180209,
   "enums": [
     {
-      "name": "ALLOWED_AXIS",
-      "allowed_values": [
-        "x",
-        "y",
-        "z",
-        "all"
-      ]
-    },
-    {
-      "name": "ALLOWED_SPECIAL_VALUE",
-      "allowed_values": [
-        "current_location",
-        "safe_height",
-        "soil_height"
-      ]
-    },
-    {
-      "name": "ALLOWED_CHANNEL_NAMES",
-      "allowed_values": [
-        "ticker",
-        "toast",
-        "email",
-        "espeak"
-      ]
-    },
-    {
-      "name"
+...
 ```
 
-#  POST /api/demo_account
+# curves
 
-**Request**
+See [curves](https://software.farm.bot/docs/curves).
 
+|Method|Description|
+|---|---|
+|`GET` /api/curves|Get an array of all curves.|
+|`GET` /api/curves/:id|Get a single curve by id.|
+|`POST` /api/curves|Create a new curve.|
+|`PATCH` /api/curves/:id|Edit a single curve by id.|
+|`DELETE` /api/curves/:id|Delete a single curve by id.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
+|`name`<br>Curve name.|string|📖|📖|📝(required)|📝|🗑|
+|`type`<br>Curve type.|"water" \| "spread" \| "height"|📖|📖|📝(required)|📝|🗑|
+|`data`<br>Curve data.|{[day: string]: value: integer}|📖|📖|📝(required)|📝|🗑|
+
+__POST /api/curves__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/curves'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+payload = {
+    'name': 'Curve 1',
+    'type': 'water',
+    'data': {
+        '1': 1,
+        '100': 100
+    }
+}
+response = requests.post(url, headers=headers, json=payload)
+print(json.dumps(response.json(), indent=2))
 ```
+output:
+```json
 {
-  "secret": "gg0v7olg0mantxj9"
+  "id": 1,
+  "created_at": "2024-04-10T18:10:42.429Z",
+  "updated_at": "2024-04-10T18:10:42.429Z",
+  "name": "Curve 1",
+  "type": "water",
+  "data": {
+    "1": 1,
+    "100": 100
+  }
 }
 ```
 
-**Response**
+# demo_account
 
-```
-{
+Used for [demo.farm.bot](http://demo.farm.bot).
+
+|Method|Description|
+|---|---|
+|`POST` /api/demo_account|Create a new demo account.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`secret`<br>Password.|string|||📝|||
+|`product_line`<br>FarmBot model.|"express_1.0" \| "express_1.1" \| "express_1.2" \| "express_xl_1.0" \| "express_xl_1.1" \| "express_xl_1.2" \| "genesis_1.2" \| "genesis_1.3" \| "genesis_1.4" \| "genesis_1.5" \| "genesis_1.6" \| "genesis_1.7" \| "genesis_xl_1.4" \| "genesis_xl_1.5" \| "genesis_xl_1.6" \| "genesis_xl_1.7" \| "none"|||📝|||
+
+__POST /api/demo_account__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/demo_account'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+payload = {
+    'secret': 'password',
+    'product_line': 'genesis_1.7',
 }
+response = requests.post(url, headers=headers, json=payload)
+print(json.dumps(response.json(), indent=2))
+```
+output:
+```json
+{}
 ```
 
-#  GET /api/device
+# device
 
-**Response**
+See [FarmBot settings](https://software.farm.bot/docs/farmbot-settings).
 
+|Method|Description|
+|---|---|
+|`GET` /api/device|Get the device object.|
+|`POST` /api/device|Create a new device.|
+|`PATCH` /api/device|Edit the device object.|
+|`DELETE` /api/device|Delete the device object.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖||||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
+|`fb_order_number`<br>Order number.|string \| null|📖|||📝|🗑|
+|`fbos_version`<br>FarmBot OS version.|string|📖||||🗑|
+|`indoor`<br>Is your FarmBot indoors?|boolean|📖||📝|📝|🗑|
+|`last_saw_api`<br>Datetime of last API visit.|timestamp|📖||||🗑|
+|`lat`<br>Latitude.|float|📖||📝|📝|🗑|
+|`lng`<br>Longitude.|float|📖||📝|📝|🗑|
+|`mounted_tool_id`<br>The ID of the tool currently attached to the UTM.|integer|📖|||📝|🗑|
+|`name`<br>FarmBot name.|string|📖||📝|📝|🗑|
+|`ota_hour`<br>Over-the-air update local time.|0-23 \| null|📖|||📝|🗑|
+|`ota_hour_utc`<br>Over-the-air update UTC time.|0-23 \| null|📖||||🗑|
+|`rpi`<br>FarmBot computer model.|"3" \| "4" \| "01" \| "02"|📖||📝|📝|🗑|
+|`serial_number`<br>FarmBot serial number.|string|📖||||🗑|
+|`setup_completed_at`<br>Datetime device setup completed.|timestamp|📖|||📝|🗑|
+|`throttled_at`<br>Datetime device throttle begin.|timestamp|📖||||🗑|
+|`throttled_until`<br>Datetime device throttle end.|timestamp|📖||||🗑|
+|`timezone`<br>Timezone.|string|📖||📝|📝|🗑|
+|`max_log_age_in_days`<br>Logs deleted after __ days.|integer|📖||||🗑|
+|`max_sequence_count`<br>Maximum number of allowed sequences.|integer|📖||||🗑|
+|`max_sequence_length`<br>Maximum allowed sequence length.|integer|📖||||🗑|
+|`tz_offset_hrs`<br>Hours offset from UTC.|integer|📖||||🗑|
+
+__GET /api/device__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/device'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
+output:
+```json
 {
   "id": 29,
   "created_at": "2022-02-02T23:14:15.261Z",
@@ -125,461 +371,66 @@ Empty Response
   "name": "Okra",
   "ota_hour_utc": 6,
   "ota_hour": 3,
+  "rpi": null,
   "serial_number": "0827898855f3f79e81037a4f3a119b00",
   "setup_completed_at": null,
   "throttled_at": null,
   "throttled_until": null,
   "timezone": "W-SU",
+  "max_log_age_in_days": 0,
+  "max_sequence_count": 0,
+  "max_sequence_length": 0,
   "tz_offset_hrs": 3
 }
 ```
+## device/reset
 
-#  DELETE /api/device
+|Method|Description|
+|---|---|
+|`POST` /api/device/reset|Reset the device.|
 
-**Response**
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`password`<br>Account password.|string|||📝(required)|||
 
+## device/seed
+
+|Method|Description|
+|---|---|
+|`POST` /api/device/seed|Seed the device with standard resources.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`product_line`<br>FarmBot model.|"express_1.0" \| "express_1.1" \| "express_1.2" \| "express_xl_1.0" \| "express_xl_1.1" \| "express_xl_1.2" \| "genesis_1.2" \| "genesis_1.3" \| "genesis_1.4" \| "genesis_1.5" \| "genesis_1.6" \| "genesis_1.7" \| "genesis_xl_1.4" \| "genesis_xl_1.5" \| "genesis_xl_1.6" \| "genesis_xl_1.7" \| "none"|||📝(required)|||
+|`demo`<br>Seed a demo account.|boolean|||📝|||
+
+## device/sync
+
+|Method|Description|
+|---|---|
+|`GET` /api/device/sync|Get the sync object.|
+
+# export_data
+
+|Method|Description|
+|---|---|
+|`POST` /api/export_data|Request account data export.|
+
+__POST /api/export_data__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/export_data'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.post(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-Empty Response
-```
-
-#  GET /api/device
-
-**Response**
-
-```
-{
-  "id": 421,
-  "created_at": "2022-02-02T23:15:35.803Z",
-  "updated_at": "2022-02-02T23:15:35.803Z",
-  "fb_order_number": null,
-  "fbos_version": "17.0.0",
-  "indoor": false,
-  "last_saw_api": null,
-  "lat": null,
-  "lng": null,
-  "mounted_tool_id": null,
-  "name": "Fresh Chillies",
-  "ota_hour_utc": 14,
-  "ota_hour": 3,
-  "serial_number": "41a2f640c051c4c2f49201c535bc3029",
-  "setup_completed_at": null,
-  "throttled_at": null,
-  "throttled_until": null,
-  "timezone": "Pacific/Ponape",
-  "tz_o
-```
-
-#  POST /api/device
-
-**Request**
-
-```
-{
-  "user_id": 341,
-  "name": "Squash"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 496,
-  "created_at": "2022-02-02T23:15:39.800Z",
-  "updated_at": "2022-02-02T23:15:39.800Z",
-  "fb_order_number": null,
-  "fbos_version": null,
-  "indoor": false,
-  "last_saw_api": null,
-  "lat": null,
-  "lng": null,
-  "mounted_tool_id": null,
-  "name": "Squash",
-  "ota_hour_utc": null,
-  "ota_hour": null,
-  "serial_number": null,
-  "setup_completed_at": null,
-  "throttled_at": null,
-  "throttled_until": null,
-  "timezone": null,
-  "tz_offset_hrs": 0
-}
-```
-
-#  POST /api/device
-
-**Request**
-
-```
-{
-  "user_id": 343
-}
-```
-
-**Response**
-
-```
-{
-  "id": 499,
-  "created_at": "2022-02-02T23:15:39.888Z",
-  "updated_at": "2022-02-02T23:15:39.888Z",
-  "fb_order_number": null,
-  "fbos_version": null,
-  "indoor": false,
-  "last_saw_api": null,
-  "lat": null,
-  "lng": null,
-  "mounted_tool_id": null,
-  "name": "FarmBot",
-  "ota_hour_utc": null,
-  "ota_hour": null,
-  "serial_number": null,
-  "setup_completed_at": null,
-  "throttled_at": null,
-  "throttled_until": null,
-  "timezone": null,
-  "tz_offset_hrs": 0
-}
-```
-
-#  PUT /api/device
-
-**Request**
-
-```
-{
-  "id": 575,
-  "mounted_tool_id": 0
-}
-```
-
-**Response**
-
-```
-{
-  "id": 575,
-  "created_at": "2022-02-02T23:15:49.276Z",
-  "updated_at": "2022-02-02T23:15:49.316Z",
-  "fb_order_number": null,
-  "fbos_version": "17.0.0",
-  "indoor": false,
-  "last_saw_api": null,
-  "lat": null,
-  "lng": null,
-  "mounted_tool_id": null,
-  "name": "Kale",
-  "ota_hour_utc": 8,
-  "ota_hour": 3,
-  "serial_number": "a9b50d2969ed7da70781590364137a34",
-  "setup_completed_at": null,
-  "throttled_at": null,
-  "throttled_until": null,
-  "timezone": "Asia/Qyzylorda",
-  "tz_offset_hrs":
-```
-
-#  PUT /api/device
-
-**Request**
-
-```
-{
-  "id": 579,
-  "name": "Wendell Oberbrunner"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 579,
-  "created_at": "2022-02-02T23:15:49.431Z",
-  "updated_at": "2022-02-02T23:15:49.456Z",
-  "fb_order_number": null,
-  "fbos_version": "17.0.0",
-  "indoor": false,
-  "last_saw_api": null,
-  "lat": null,
-  "lng": null,
-  "mounted_tool_id": null,
-  "name": "Wendell Oberbrunner",
-  "ota_hour_utc": 7,
-  "ota_hour": 3,
-  "serial_number": "de6263b28eea01928ef7048bb3d92494",
-  "setup_completed_at": null,
-  "throttled_at": null,
-  "throttled_until": null,
-  "timezone": "Etc/GMT-4",
-  "tz_of
-```
-
-#  PUT /api/device
-
-**Request**
-
-```
-{
-  "id": 580,
-  "ota_hour": null
-}
-```
-
-**Response**
-
-```
-{
-  "id": 580,
-  "created_at": "2022-02-02T23:15:49.478Z",
-  "updated_at": "2022-02-02T23:15:49.502Z",
-  "fb_order_number": null,
-  "fbos_version": "17.0.0",
-  "indoor": false,
-  "last_saw_api": null,
-  "lat": null,
-  "lng": null,
-  "mounted_tool_id": null,
-  "name": "Cabbage",
-  "ota_hour_utc": null,
-  "ota_hour": null,
-  "serial_number": "66f882edb5ced6c4f1a967fa60471296",
-  "setup_completed_at": null,
-  "throttled_at": null,
-  "throttled_until": null,
-  "timezone": "Mexico/BajaSur",
-  "tz_off
-```
-
-#  PUT /api/device
-
-**Request**
-
-```
-{
-  "id": 581,
-  "mounted_tool_id": 145
-}
-```
-
-**Response**
-
-```
-{
-  "id": 581,
-  "created_at": "2022-02-02T23:15:49.526Z",
-  "updated_at": "2022-02-02T23:15:49.558Z",
-  "fb_order_number": null,
-  "fbos_version": "17.0.0",
-  "indoor": false,
-  "last_saw_api": null,
-  "lat": null,
-  "lng": null,
-  "mounted_tool_id": 145,
-  "name": "Potatoes",
-  "ota_hour_utc": 20,
-  "ota_hour": 3,
-  "serial_number": "972dea96d634d21c475571d213016bb6",
-  "setup_completed_at": null,
-  "throttled_at": null,
-  "throttled_until": null,
-  "timezone": "America/Boise",
-  "tz_offset_hr
-```
-
-#  PUT /api/device
-
-**Request**
-
-```
-{
-  "id": 582,
-  "timezone": "America/North_Dakota/Beulah"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 582,
-  "created_at": "2022-02-02T23:15:49.576Z",
-  "updated_at": "2022-02-02T23:15:49.599Z",
-  "fb_order_number": null,
-  "fbos_version": "17.0.0",
-  "indoor": false,
-  "last_saw_api": null,
-  "lat": null,
-  "lng": null,
-  "mounted_tool_id": null,
-  "name": "Pumpkin",
-  "ota_hour_utc": 21,
-  "ota_hour": 3,
-  "serial_number": "2bedb4073e6052bd98f4e10a3c7036a8",
-  "setup_completed_at": null,
-  "throttled_at": null,
-  "throttled_until": null,
-  "timezone": "America/North_Dakota/Beulah",
-
-```
-
-#  PUT /api/device
-
-**Request**
-
-```
-{
-  "id": 583,
-  "ota_hour": 12
-}
-```
-
-**Response**
-
-```
-{
-  "id": 583,
-  "created_at": "2022-02-02T23:15:49.618Z",
-  "updated_at": "2022-02-02T23:15:49.641Z",
-  "fb_order_number": null,
-  "fbos_version": "17.0.0",
-  "indoor": false,
-  "last_saw_api": null,
-  "lat": null,
-  "lng": null,
-  "mounted_tool_id": null,
-  "name": "Capers",
-  "ota_hour_utc": 15,
-  "ota_hour": 12,
-  "serial_number": "089ef3e448130b18e2eb048b593c64be",
-  "setup_completed_at": null,
-  "throttled_at": null,
-  "throttled_until": null,
-  "timezone": "Asia/Aden",
-  "tz_offset_hrs":
-```
-
-#  POST /api/device/reset
-
-**Request**
-
-```
-{
-  "password": "password456"
-}
-```
-
-**Response**
-
-```
-{
-  "ok": "OK"
-}
-```
-
-#  POST /api/device/seed
-
-**Request**
-
-```
-{
-  "product_line": "express_1.0"
-}
-```
-
-**Response**
-
-```
-{
-  "done": "Loading resources now."
-}
-```
-
-#  POST /api/device/seed
-
-**Request**
-
-```
-{
-  "product_line": "none"
-}
-```
-
-**Response**
-
-```
-{
-  "done": "Loading resources now."
-}
-```
-
-#  POST /api/device/seed
-
-**Request**
-
-```
-{
-  "product_line": "demo_account"
-}
-```
-
-**Response**
-
-```
-{
-  "done": "Loading resources now."
-}
-```
-
-#  GET /api/device/sync
-
-**Response**
-
-```
-{
-  "devices": [
-    [
-      556,
-      "2022-02-02T23:15:47.130Z"
-    ]
-  ],
-  "farm_events": [
-    [
-      34,
-      "2022-02-02T23:15:46.945Z"
-    ]
-  ],
-  "farmware_envs": [
-    [
-      318,
-      "2022-02-02T23:15:46.955Z"
-    ]
-  ],
-  "farmware_installations": [
-    [
-      20,
-      "2022-02-02T23:15:46.965Z"
-    ]
-  ],
-  "peripherals": [
-    [
-      75,
-      "2022-02-02T23:15:46.980Z"
-    ]
-  ],
-  "pin_bindings": [
-    [
-      36,
-      "2022-02-02T23:15:46.988Z"
-    ]
-  ],
-  "points":
-```
-
-#  POST /api/export_data
-
-**Response**
-
-```
+output:
+```json
 {
   "export_created_at": "2022-02-02T23:14:25.688+00:00",
   "server_url": "//192.168.1.112:3000",
@@ -592,215 +443,49 @@ Empty Response
     "created_at": "2022-02-02T23:14:25.664Z",
     "updated_at": "2022-02-02T23:14:25.664Z",
     "fb_order_number": null,
-    "fbos_version": "17.0.0",
-    "indoor": false,
-    "last_saw_api": null,
-    "lat": null,
-    "lng": null,
-    "mounted_tool_id": null,
-    "name": "Swiss Chard",
-    "ota_hour_utc": 22,
-    "o
+...
 ```
 
-#  POST /api/export_data
+# farm_events
 
-**Response**
+See [events](https://software.farm.bot/docs/events).
 
+|Method|Description|
+|---|---|
+|`GET` /api/farm_events|Get an array of all farm events.|
+|`GET` /api/farm_events/:id|Get a single farm event by id.|
+|`POST` /api/farm_events|Create a new farm event.|
+|`PATCH` /api/farm_events/:id|Edit a single farm event by id.|
+|`DELETE` /api/farm_events/:id|Delete a single farm event by id.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
+|`start_time`<br>Date and time to begin the farm event.|timestamp|📖|📖|📝|📝|🗑|
+|`end_time`<br>Date and time to end the farm event.|timestamp|📖|📖|📝|📝|🗑|
+|`repeat`<br>Number of times to repeat the farm event.|integer|📖|📖|📝(required)|📝|🗑|
+|`time_unit`<br>Time period for repeat.|"never" \| "minutely" \| "hourly" \| "daily" \| "weekly" \| "monthly" \| "yearly"|📖|📖|📝(required)|📝|🗑|
+|`executable_id`<br>The ID of the sequence or regimen to execute.|integer|📖|📖|📝|📝|🗑|
+|`executable_type`<br>The type of resource to execute.|"Sequence" \| "Regimen"|📖|📖|📝|📝|🗑|
+|`body`<br>Variable data.|Array|📖|📖|📝|📝|🗑|
+
+__GET /api/farm_events__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/farm_events'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-null
-```
-
-#  POST /api/farm_events
-
-**Notes:** This is how you could create a FarmEvent that fires every 4 days.
-
-**Request**
-
-```
-{
-  "executable_id": 101,
-  "executable_type": "Sequence",
-  "start_time": "2022-02-02T23:15:46.627+00:00",
-  "end_time": "2022-03-04T23:14:46.627+00:00",
-  "repeat": 4,
-  "time_unit": "daily"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 18,
-  "created_at": "2022-02-02T23:14:46.637Z",
-  "updated_at": "2022-02-02T23:14:46.640Z",
-  "start_time": "2022-02-02T23:15:46.627Z",
-  "end_time": "2022-03-04T23:14:46.627Z",
-  "repeat": 4,
-  "time_unit": "daily",
-  "executable_id": 101,
-  "executable_type": "Sequence",
-  "body": [
-
-  ]
-}
-```
-
-#  POST /api/farm_events
-
-**Request**
-
-```
-{
-  "start_time": "2022-02-03T00:14:12.982+00:00",
-  "next_time": "2017-06-05T18:33:04.342Z",
-  "time_unit": "never",
-  "executable_id": 8,
-  "executable_type": "Regimen",
-  "end_time": "2017-06-05T18:34:00.000Z",
-  "repeat": 1,
-  "body": [
-    {
-      "kind": "parameter_application",
-      "args": {
-        "label": "wow",
-        "data_value": {
-          "kind": "tool",
-          "args": {
-            "tool_id": 44
-          }
-        }
-      }
-    }
-  ]
-}
-```
-
-**Response**
-
-```
-{
-  "id": 20,
-  "created_at": "2022-02-02T23:14:46.744Z",
-  "updated_at": "2022-02-02T23:14:46.808Z",
-  "start_time": "2022-02-03T00:14:12.982Z",
-  "end_time": "2022-02-03T00:15:12.982Z",
-  "repeat": 1,
-  "time_unit": "never",
-  "executable_id": 8,
-  "executable_type": "Regimen",
-  "body": [
-    {
-      "kind": "parameter_application",
-      "args": {
-        "label": "wow",
-        "data_value": {
-          "kind": "tool",
-          "args": {
-            "tool_id": 44
-          }
-        }
-
-```
-
-# (NOT OK) POST /api/farm_events
-
-**Notes:** This is how you could create a FarmEvent that fires every 4 minutes.
-
-**Request**
-
-```
-{
-  "executable_id": 102,
-  "executable_type": "Sequence",
-  "start_time": "2022-02-02T23:15:46.922+00:00",
-  "end_time": "2029-02-17T18:19:20.000Z",
-  "repeat": 4,
-  "time_unit": "minutely"
-}
-```
-
-**Response**
-
-```
-{
-  "occurrences": "Farm events can't have more than 500 occurrences (925846 occurrences detected)."
-}
-```
-
-#  POST /api/farm_events
-
-**Request**
-
-```
-{
-  "end_time": "2022-02-02T23:14:47.059+00:00",
-  "time_unit": "never",
-  "executable_id": 103,
-  "executable_type": "Sequence",
-  "repeat": 1
-}
-```
-
-**Response**
-
-```
-{
-  "id": 21,
-  "created_at": "2022-02-02T23:14:47.066Z",
-  "updated_at": "2022-02-02T23:14:47.069Z",
-  "start_time": "2022-02-02T23:14:06.931Z",
-  "end_time": "2022-02-02T23:15:06.931Z",
-  "repeat": 1,
-  "time_unit": "never",
-  "executable_id": 103,
-  "executable_type": "Sequence",
-  "body": [
-
-  ]
-}
-```
-
-#  POST /api/farm_events
-
-**Request**
-
-```
-{
-  "start_time": "2022-01-19T23:14:47.187+00:00",
-  "time_unit": "never",
-  "executable_id": 11,
-  "executable_type": "Regimen",
-  "end_time": "2017-06-05T18:34:00.000Z",
-  "repeat": 1
-}
-```
-
-**Response**
-
-```
-{
-  "id": 22,
-  "created_at": "2022-02-02T23:14:47.195Z",
-  "updated_at": "2022-02-02T23:14:47.198Z",
-  "start_time": "2022-01-19T23:14:47.187Z",
-  "end_time": "2022-01-19T23:15:47.187Z",
-  "repeat": 1,
-  "time_unit": "never",
-  "executable_id": 11,
-  "executable_type": "Regimen",
-  "body": [
-
-  ]
-}
-```
-
-#  GET /api/farm_events
-
-**Response**
-
-```
+output:
+```json
 [
   {
     "id": 24,
@@ -813,493 +498,120 @@ null
     "executable_id": 13,
     "executable_type": "Regimen",
     "body": [
-
-    ]
-  }
-]
-```
-
-#  GET /api/farm_events
-
-**Response**
-
-```
-[
-  {
-    "id": 35,
-    "created_at": "2022-02-02T23:15:47.370Z",
-    "updated_at": "2022-02-02T23:15:47.370Z",
-    "start_time": "2022-01-29T00:00:00.000Z",
-    "end_time": "2024-02-02T23:15:47.312Z",
-    "repeat": 10,
-    "time_unit": "hourly",
-    "executable_id": 251,
-    "executable_type": "Sequence",
-    "body": [
-
-    ]
-  },
-  {
-    "id": 36,
-    "created_at": "2022-02-02T23:15:47.436Z",
-    "updated_at": "2022-02-02T23:15:47.436Z",
-    "start_time": "2022-01-28T00:00:00.000Z",
-    "end_t
-```
-
-#  GET /api/farm_events
-
-**Response**
-
-```
-[
-
-]
-```
-
-#  PATCH /api/farm_events/11
-
-**Request**
-
-```
-{
-  "body": null
-}
-```
-
-**Response**
-
-```
-{
-  "id": 11,
-  "created_at": "2022-02-02T23:14:43.985Z",
-  "updated_at": "2022-02-02T23:14:44.052Z",
-  "start_time": "2022-01-29T00:00:00.000Z",
-  "end_time": "2022-02-04T00:01:00.000Z",
-  "repeat": 5,
-  "time_unit": "weekly",
-  "executable_id": 94,
-  "executable_type": "Sequence",
-  "body": [
-    {
-      "kind": "parameter_application",
-      "args": {
-        "label": "foo",
-        "data_value": {
-          "kind": "coordinate",
-          "args": {
-            "x": 0,
-            "y": 0,
-
-```
-
-#  PATCH /api/farm_events/12
-
-**Request**
-
-```
-{
-  "id": 12,
-  "repeat": 1,
-  "time_unit": "never"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 12,
-  "created_at": "2022-02-02T23:14:44.177Z",
-  "updated_at": "2022-02-02T23:14:44.196Z",
-  "start_time": "2022-01-29T00:00:00.000Z",
-  "end_time": "2022-01-29T00:01:00.000Z",
-  "repeat": 1,
-  "time_unit": "never",
-  "executable_id": 95,
-  "executable_type": "Sequence",
-  "body": [
-
-  ]
-}
-```
-
-#  PATCH /api/farm_events/13
-
-**Request**
-
-```
-{
-  "body": [
-    {
-      "kind": "parameter_application",
-      "args": {
-        "label": "bar",
-        "data_value": {
-          "kind": "coordinate",
-          "args": {
-            "x": 1,
-            "y": 2,
-            "z": 3
+      {
+        "kind": "parameter_application",
+        "args": {
+          "label": "variable",
+          "data_value": {
+            "kind": "tool",
+            "args": {
+              "tool_id": 235
+            }
           }
         }
       }
-    }
-  ]
-}
-```
-
-**Response**
-
-```
-{
-  "id": 13,
-  "created_at": "2022-02-02T23:14:44.280Z",
-  "updated_at": "2022-02-02T23:14:44.351Z",
-  "start_time": "2022-01-30T00:00:00.000Z",
-  "end_time": "2022-02-04T00:01:00.000Z",
-  "repeat": 10,
-  "time_unit": "weekly",
-  "executable_id": 96,
-  "executable_type": "Sequence",
-  "body": [
-    {
-      "kind": "parameter_application",
-      "args": {
-        "label": "bar",
-        "data_value": {
-          "kind": "coordinate",
-          "args": {
-            "x": 1,
-            "y": 2,
-
-```
-
-#  DELETE /api/farm_events/31
-
-**Response**
-
-```
-Empty Response
-```
-
-#  GET /api/farm_events/6
-
-**Response**
-
-```
-{
-  "id": 6,
-  "created_at": "2022-02-02T23:14:41.866Z",
-  "updated_at": "2022-02-02T23:14:41.866Z",
-  "start_time": "2022-01-28T00:00:00.000Z",
-  "end_time": "2024-02-02T23:14:41.801Z",
-  "repeat": 10,
-  "time_unit": "daily",
-  "executable_id": 86,
-  "executable_type": "Sequence",
-  "body": [
-
-  ]
-}
-```
-
-#  PATCH /api/farm_events/8
-
-**Request**
-
-```
-{
-  "id": 8,
-  "farm_event": {
-    "repeat": 66
+    ]
   }
-}
+]
 ```
+# farmware_envs
 
-**Response**
+See [custom settings](https://software.farm.bot/docs/custom-settings).
 
+|Method|Description|
+|---|---|
+|`GET` /api/farmware_envs|Get an array of all envs.|
+|`GET` /api/farmware_envs/:id|Get a single env by id.|
+|`POST` /api/farmware_envs|Create a new env.|
+|`PATCH` /api/farmware_envs/:id|Edit a single env by id.|
+|`DELETE` /api/farmware_envs/:id|Delete a single env by id.|
+|`DELETE` /api/farmware_envs/all|Delete all envs.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
+|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
+|`key`<br>Environment variable label.|string|📖|📖|📝(required)|📝|🗑|
+|`value`<br>Environment variable value.|string|📖|📖|📝(required)|📝|🗑|
+
+__GET /api/farmware_envs__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/farmware_envs'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-{
-  "id": 8,
-  "created_at": "2022-02-02T23:14:43.591Z",
-  "updated_at": "2022-02-02T23:14:43.610Z",
-  "start_time": "2022-01-29T00:00:00.000Z",
-  "end_time": "2022-02-07T00:01:00.000Z",
-  "repeat": 7,
-  "time_unit": "weekly",
-  "executable_id": 91,
-  "executable_type": "Sequence",
-  "body": [
-
-  ]
-}
-```
-
-#  PATCH /api/farm_events/9
-
-**Request**
-
-```
-{
-  "body": [
-
-  ]
-}
-```
-
-**Response**
-
-```
-{
-  "id": 9,
-  "created_at": "2022-02-02T23:14:43.696Z",
-  "updated_at": "2022-02-02T23:14:43.809Z",
-  "start_time": "2022-01-28T00:00:00.000Z",
-  "end_time": "2022-02-07T00:01:00.000Z",
-  "repeat": 7,
-  "time_unit": "hourly",
-  "executable_id": 92,
-  "executable_type": "Sequence",
-  "body": [
-
-  ]
-}
-```
-
-#  POST /api/farmware_envs
-
-**Request**
-
-```
-{
-  "key": "Coffee Emoji",
-  "value": "☕"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 9,
-  "device_id": 293,
-  "key": "Coffee Emoji",
-  "value": "☕",
-  "created_at": "2022-02-02T23:14:50.566Z",
-  "updated_at": "2022-02-02T23:14:50.566Z"
-}
-```
-
-#  POST /api/farmware_envs
-
-**Request**
-
-```
-{
-  "key": "compund_data",
-  "value": {
-    "x": "y",
-    "z": 300
-  }
-}
-```
-
-**Response**
-
-```
-{
-  "id": 10,
-  "device_id": 294,
-  "key": "compund_data",
-  "value": {
-    "x": "y",
-    "z": 300
-  },
-  "created_at": "2022-02-02T23:14:50.610Z",
-  "updated_at": "2022-02-02T23:14:50.610Z"
-}
-```
-
-#  GET /api/farmware_envs
-
-**Response**
-
-```
+output:
+```json
 [
   {
     "id": 11,
     "device_id": 295,
-    "key": "Stun Sporeda56",
-    "value": "Wrap",
+    "key": "camera",
+    "value": "USB",
     "created_at": "2022-02-02T23:14:50.641Z",
     "updated_at": "2022-02-02T23:14:50.641Z"
-  },
-  {
-    "id": 12,
-    "device_id": 295,
-    "key": "Supersonic0959",
-    "value": "Flash",
-    "created_at": "2022-02-02T23:14:50.650Z",
-    "updated_at": "2022-02-02T23:14:50.650Z"
-  },
-  {
-    "id": 13,
-    "device_id": 295,
-    "key": "Guillotineee35",
-    "value": "Poison Gas",
-    "created_at": "2022-02-02
+  }
+]
 ```
 
-#  DELETE /api/farmware_envs/316
+# fbos_config
 
-**Response**
+See [FarmBot settings](https://software.farm.bot/docs/farmbot-settings).
 
+|Method|Description|
+|---|---|
+|`GET` /api/fbos_config|Get the FarmBot OS configuration object.|
+|`PATCH` /api/fbos_config|Edit the FarmBot OS configuration object.|
+|`DELETE` /api/fbos_config|Delete the FarmBot OS configuration object.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖||||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
+|`device_id`<br>Unique device identifier set by the database.|integer|📖||||🗑|
+|`disable_factory_reset`<br>Unused.|boolean|📖|||📝|🗑|
+|`firmware_input_log`<br>Unused.|boolean|📖|||📝|🗑|
+|`firmware_output_log`<br>Unused.|boolean|📖|||📝|🗑|
+|`sequence_body_log`<br>Send a log message for each sequence step executed.|boolean|📖|||📝|🗑|
+|`sequence_complete_log`<br>Send a log message upon the end of sequence execution.|boolean|📖|||📝|🗑|
+|`sequence_init_log`<br>Send a log message upon the start of sequence execution.|boolean|📖|||📝|🗑|
+|`network_not_found_timer`<br>Unused.|integer|📖|||📝|🗑|
+|`firmware_hardware`<br>Firmware installed on the Farmduino or microcontroller.|"arduino" \| "farmduino" \| "farmduino_k14" \| "farmduino_k15" \| "farmduino_k16" \| "farmduino_k17" \| "express_k10" \| "express_k11" \| "express_k12"|📖|||📝|🗑|
+|`os_auto_update`<br>Automatically download and install FarmBot OS over-the-air (OTA) updates.|boolean|📖|||📝|🗑|
+|`arduino_debug_messages`<br>Unused.|boolean|📖|||📝|🗑|
+|`firmware_path`<br>FarmBot OS system path to the microcontroller.|"ttyUSB0" \| "ttyACM0" \| "ttyAMA0" \| string|📖|||📝|🗑|
+|`firmware_debug_log`<br>Unused.|boolean|📖|||📝|🗑|
+|`update_channel`<br>FarmBot OS OTA update channel.|"stable" \| "beta" \| "alpha"|📖|||📝|🗑|
+|`boot_sequence_id`<br>ID of sequence to run upon boot-up.|integer|📖|||📝|🗑|
+|`safe_height`<br>Z axis coordinate (millimeters) to which the z axis should be retracted during Safe Z moves.|integer|📖|||📝|🗑|
+|`soil_height`<br>Z axis coordinate (millimeters) of soil level. This value will only be used if there are no soil height measurements available.|integer|📖|||📝|🗑|
+|`gantry_height`<br>The distance in millimeters between the bottom of FarmBot's tool head and the bottom of the gantry main beam when the Z-axis is fully raised.|integer|📖|||📝|🗑|
+
+__GET /api/fbos_config__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/fbos_config'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-Empty Response
-```
-
-#  GET /api/farmware_envs/317
-
-**Response**
-
-```
-{
-  "id": 317,
-  "device_id": 298,
-  "key": "Fire Blast559f",
-  "value": "Fury Attack",
-  "created_at": "2022-02-02T23:14:53.281Z",
-  "updated_at": "2022-02-02T23:14:53.281Z"
-}
-```
-
-#  PUT /api/farmware_envs/8
-
-**Request**
-
-```
-{
-  "key": "20e8ytiligA",
-  "value": "eralG"
-}
-```
-
-**Response**
-
-```
-{
-  "device_id": 292,
-  "key": "20e8ytiligA",
-  "value": "eralG",
-  "id": 8,
-  "created_at": "2022-02-02T23:14:50.511Z",
-  "updated_at": "2022-02-02T23:14:50.528Z"
-}
-```
-
-#  DELETE /api/farmware_envs/all
-
-**Response**
-
-```
-Empty Response
-```
-
-#  GET /api/farmware_installations
-
-**Response**
-
-```
-[
-  {
-    "id": 2,
-    "created_at": "2022-02-02T23:14:17.940Z",
-    "updated_at": "2022-02-02T23:14:17.940Z",
-    "url": "http://auer.co/angel/manifest.json",
-    "package": null,
-    "package_error": null
-  },
-  {
-    "id": 3,
-    "created_at": "2022-02-02T23:14:17.951Z",
-    "updated_at": "2022-02-02T23:14:17.951Z",
-    "url": "http://mcclure-hessel.co/theron/manifest.json",
-    "package": null,
-    "package_error": null
-  },
-  {
-    "id": 4,
-    "created_at": "2022-02-02T23:14:17.960Z",
-
-```
-
-#  POST /api/farmware_installations
-
-**Request**
-
-```
-{
-  "url": "http://boyle-mosciski.io/dewitt/manifest.json"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 5,
-  "created_at": "2022-02-02T23:14:18.055Z",
-  "updated_at": "2022-02-02T23:14:18.055Z",
-  "url": "http://boyle-mosciski.io/dewitt/manifest.json",
-  "package": null,
-  "package_error": null
-}
-```
-
-#  POST /api/farmware_installations/1/refresh
-
-**Response**
-
-```
-{
-  "id": 1,
-  "created_at": "2022-02-02T23:14:17.880Z",
-  "updated_at": "2022-02-02T23:14:17.880Z",
-  "url": "http://abbott.com/kendra/manifest.json",
-  "package": null,
-  "package_error": null
-}
-```
-
-#  DELETE /api/farmware_installations/6
-
-**Response**
-
-```
-Empty Response
-```
-
-#  GET /api/farmware_installations/7
-
-**Response**
-
-```
-{
-  "id": 7,
-  "created_at": "2022-02-02T23:14:18.170Z",
-  "updated_at": "2022-02-02T23:14:18.170Z",
-  "url": "http://quitzon-fay.co/octavio/manifest.json",
-  "package": null,
-  "package_error": null
-}
-```
-
-#  GET /api/fbos_config
-
-**Response**
-
-```
+output:
+```json
 {
   "id": 43,
   "created_at": "2022-02-02T23:15:36.629Z",
@@ -1317,229 +629,249 @@ Empty Response
   "arduino_debug_messages": false,
   "firmware_path": null,
   "firmware_debug_log": false,
-  "upda
-```
-
-#  DELETE /api/fbos_config
-
-**Response**
-
-```
-Empty Response
-```
-
-#  PUT /api/fbos_config
-
-**Request**
-
-```
-{
-  "device_id": 99
+  "update_channel": "stable",
+  "boot_sequence_id": null,
+  "safe_height": 0,
+  "soil_height": 0,
+  "gantry_height": 0
 }
 ```
 
-**Response**
+# featured_sequences
 
+See featured sequences [list](https://my.farm.bot/featured) and [docs](https://software.farm.bot/docs/featured-sequences).
+
+|Method|Description|
+|---|---|
+|`GET` /api/featured_sequences|Get an array of all featured sequences.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖|||||
+|`path`<br>Relative link to shared sequence page in the app.|string|📖|||||
+|`name`<br>Sequence name.|string|📖|||||
+|`description`<br>Sequence description.|string|📖|||||
+|`color`<br>Sequence color.|string|📖|||||
+
+__GET /api/featured_sequences__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/featured_sequences'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-{
-  "id": 46,
-  "created_at": "2022-02-02T23:15:36.708Z",
-  "updated_at": "2022-02-02T23:15:36.708Z",
-  "device_id": 449,
-  "disable_factory_reset": true,
-  "firmware_input_log": false,
-  "firmware_output_log": false,
-  "sequence_body_log": false,
-  "sequence_complete_log": false,
-  "sequence_init_log": false,
-  "network_not_found_timer": null,
-  "firmware_hardware": null,
-  "os_auto_update": true,
-  "arduino_debug_messages": false,
-  "firmware_path": null,
-  "firmware_debug_log": false,
-  "upda
-```
-
-#  PUT /api/fbos_config
-
-**Request**
-
-```
-{
-  "firmware_path": "null"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 47,
-  "created_at": "2022-02-02T23:15:36.747Z",
-  "updated_at": "2022-02-02T23:15:36.759Z",
-  "device_id": 450,
-  "disable_factory_reset": true,
-  "firmware_input_log": false,
-  "firmware_output_log": false,
-  "sequence_body_log": false,
-  "sequence_complete_log": false,
-  "sequence_init_log": false,
-  "network_not_found_timer": null,
-  "firmware_hardware": null,
-  "os_auto_update": true,
-  "arduino_debug_messages": false,
-  "firmware_path": "null",
-  "firmware_debug_log": false,
-  "up
-```
-
-#  PUT /api/fbos_config
-
-**Request**
-
-```
-{
-  "blah_blah_blah": true
-}
-```
-
-**Response**
-
-```
-{
-  "id": 48,
-  "created_at": "2022-02-02T23:15:36.794Z",
-  "updated_at": "2022-02-02T23:15:36.794Z",
-  "device_id": 451,
-  "disable_factory_reset": true,
-  "firmware_input_log": false,
-  "firmware_output_log": false,
-  "sequence_body_log": false,
-  "sequence_complete_log": false,
-  "sequence_init_log": false,
-  "network_not_found_timer": null,
-  "firmware_hardware": null,
-  "os_auto_update": true,
-  "arduino_debug_messages": false,
-  "firmware_path": null,
-  "firmware_debug_log": false,
-  "upda
-```
-
-#  PUT /api/fbos_config
-
-**Request**
-
-```
-{
-  "disable_factory_reset": false
-}
-```
-
-**Response**
-
-```
-{
-  "id": 50,
-  "created_at": "2022-02-02T23:15:36.866Z",
-  "updated_at": "2022-02-02T23:15:36.878Z",
-  "device_id": 453,
-  "disable_factory_reset": true,
-  "firmware_input_log": false,
-  "firmware_output_log": false,
-  "sequence_body_log": false,
-  "sequence_complete_log": false,
-  "sequence_init_log": false,
-  "network_not_found_timer": null,
-  "firmware_hardware": null,
-  "os_auto_update": true,
-  "arduino_debug_messages": false,
-  "firmware_path": null,
-  "firmware_debug_log": false,
-  "upda
-```
-
-#  PUT /api/fbos_config
-
-**Request**
-
-```
-{
-  "updated_at": "2022-01-31T23:15:36.914Z",
-  "network_not_found_timer": 20
-}
-```
-
-**Response**
-
-```
-{
-  "id": 51,
-  "created_at": "2022-02-02T23:15:36.910Z",
-  "updated_at": "2022-01-31T23:15:36.914Z",
-  "device_id": 454,
-  "disable_factory_reset": true,
-  "firmware_input_log": false,
-  "firmware_output_log": false,
-  "sequence_body_log": false,
-  "sequence_complete_log": false,
-  "sequence_init_log": false,
-  "network_not_found_timer": 20,
-  "firmware_hardware": null,
-  "os_auto_update": true,
-  "arduino_debug_messages": false,
-  "firmware_path": null,
-  "firmware_debug_log": false,
-  "update
-```
-
-#  GET /api/featured_sequences
-
-**Response**
-
-```
+output:
+```json
 [
   {
     "id": 15,
     "path": "/app/shared/sequence/15",
     "name": "Down-sized intangible moratorium",
-    "description": "foo,bar,baz"
+    "description": "foo,bar,baz",
+    "color": "red"
   }
 ]
 ```
 
-#  POST /api/feedback
+# feedback
 
-**Request**
+Used by [help](https://software.farm.bot/docs/help) and the [setup wizard](https://my.farm.bot/app/designer/setup).
 
-```
-{
-  "message": "Example message",
-  "slug": "Example slug"
+|Method|Description|
+|---|---|
+|`POST` /api/feedback|Submit feedback.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`message`<br>Feedback content.|string|||📝|||
+|`slug`<br>Source of feedback.|string|||📝|||
+
+__POST /api/feedback__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/feedback'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+payload = {
+    'message': 'feedback',
+    'slug': 'intro',
 }
+response = requests.post(url, headers=headers, json=payload)
+print(json.dumps(response.json(), indent=2))
+```
+output:
+```json
+{}
 ```
 
-**Response**
+# firmware_config
 
+Used by [settings](https://software.farm.bot/docs/settings).
+
+|Method|Description|
+|---|---|
+|`GET` /api/firmware_config|Get the firmware config object.|
+|`PATCH` /api/firmware_config|Edit the firmware configuration object.|
+|`DELETE` /api/firmware_config|Delete the firmware configuration object.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖||||🗑|
+|`device_id`<br>Unique device identifier set by the database.|integer|📖||||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
+|`encoder_enabled_x`<br>Enable encoders or stall detection for the x axis.|integer|📖|||📝|🗑|
+|`encoder_enabled_y`<br>Enable encoders or stall detection for the y axis.|integer|📖|||📝|🗑|
+|`encoder_enabled_z`<br>Enable encoders or stall detection for the z axis.|integer|📖|||📝|🗑|
+|`encoder_invert_x`<br>Invert the encoders on the x axis.|integer|📖|||📝|🗑|
+|`encoder_invert_y`<br>Invert the encoders on the y axis.|integer|📖|||📝|🗑|
+|`encoder_invert_z`<br>Invert the encoders on the z axis.|integer|📖|||📝|🗑|
+|`encoder_missed_steps_decay_x`<br>Reduction to missed step total for every good step for the x axis.|integer|📖|||📝|🗑|
+|`encoder_missed_steps_decay_y`<br>Reduction to missed step total for every good step for the y axis.|integer|📖|||📝|🗑|
+|`encoder_missed_steps_decay_z`<br>Reduction to missed step total for every good step for the z axis.|integer|📖|||📝|🗑|
+|`encoder_missed_steps_max_x`<br>Number of steps before the motor is considered to have stalled for the x axis.|integer|📖|||📝|🗑|
+|`encoder_missed_steps_max_y`<br>Number of steps before the motor is considered to have stalled for the y axis.|integer|📖|||📝|🗑|
+|`encoder_missed_steps_max_z`<br>Number of steps before the motor is considered to have stalled for the z axis.|integer|📖|||📝|🗑|
+|`encoder_scaling_x`<br>10000 * (motor resolution) / (encoder resolution).|integer|📖|||📝|🗑|
+|`encoder_scaling_y`<br>10000 * (motor resolution) / (encoder resolution).|integer|📖|||📝|🗑|
+|`encoder_scaling_z`<br>10000 * (motor resolution) / (encoder resolution).|integer|📖|||📝|🗑|
+|`encoder_type_x`<br>.Unused|integer|📖|||📝|🗑|
+|`encoder_type_y`<br>.Unused|integer|📖|||📝|🗑|
+|`encoder_type_z`<br>.Unused|integer|📖|||📝|🗑|
+|`encoder_use_for_pos_x`<br>.Use the encoders for calculating movements on the x axis.|integer|📖|||📝|🗑|
+|`encoder_use_for_pos_y`<br>.Use the encoders for calculating movements on the y axis.|integer|📖|||📝|🗑|
+|`encoder_use_for_pos_z`<br>.Use the encoders for calculating movements on the z axis.|integer|📖|||📝|🗑|
+|`movement_axis_nr_steps_x`<br>X axis length in steps.|integer|📖|||📝|🗑|
+|`movement_axis_nr_steps_y`<br>Y axis length in steps.|integer|📖|||📝|🗑|
+|`movement_axis_nr_steps_z`<br>Z axis length in steps.|integer|📖|||📝|🗑|
+|`movement_enable_endpoints_x`<br>Enable endstops for the x axis.|integer|📖|||📝|🗑|
+|`movement_enable_endpoints_y`<br>Enable endstops for the y axis.|integer|📖|||📝|🗑|
+|`movement_enable_endpoints_z`<br>Enable endstops for the z axis.|integer|📖|||📝|🗑|
+|`movement_home_at_boot_x`<br>Find home upon startup for the x axis.|integer|📖|||📝|🗑|
+|`movement_home_at_boot_y`<br>Find home upon startup for the y axis.|integer|📖|||📝|🗑|
+|`movement_home_at_boot_z`<br>Find home upon startup for the z axis.|integer|📖|||📝|🗑|
+|`movement_home_spd_x`<br>X axis homing speed in steps per second.|integer|📖|||📝|🗑|
+|`movement_home_spd_y`<br>Y axis homing speed in steps per second.|integer|📖|||📝|🗑|
+|`movement_home_spd_z`<br>Z axis homing speed in steps per second.|integer|📖|||📝|🗑|
+|`movement_home_up_x`<br>Restrict travel to negative coordinate locations for the x axis.|integer|📖|||📝|🗑|
+|`movement_home_up_y`<br>Restrict travel to negative coordinate locations for the y axis.|integer|📖|||📝|🗑|
+|`movement_home_up_z`<br>Restrict travel to negative coordinate locations for the z axis.|integer|📖|||📝|🗑|
+|`movement_invert_endpoints_x`<br>Swap the min and max limit switches for the x axis.|integer|📖|||📝|🗑|
+|`movement_invert_endpoints_y`<br>Swap the min and max limit switches for the y axis.|integer|📖|||📝|🗑|
+|`movement_invert_endpoints_z`<br>Swap the min and max limit switches for the z axis.|integer|📖|||📝|🗑|
+|`movement_invert_motor_x`<br>Invert motor direction for the x axis.|integer|📖|||📝|🗑|
+|`movement_invert_motor_y`<br>Invert motor direction for the y axis.|integer|📖|||📝|🗑|
+|`movement_invert_motor_z`<br>Invert motor direction for the z axis.|integer|📖|||📝|🗑|
+|`movement_keep_active_x`<br>Always power motors on the x axis.|integer|📖|||📝|🗑|
+|`movement_keep_active_y`<br>Always power motors on the y axis.|integer|📖|||📝|🗑|
+|`movement_keep_active_z`<br>Always power motors on the z axis.|integer|📖|||📝|🗑|
+|`movement_max_spd_x`<br>Max speed in steps per second for the x axis.|integer|📖|||📝|🗑|
+|`movement_max_spd_y`<br>Max speed in steps per second for the y axis.|integer|📖|||📝|🗑|
+|`movement_max_spd_z`<br>Max speed in steps per second for the z axis.|integer|📖|||📝|🗑|
+|`movement_min_spd_x`<br>Minimum speed in steps per second for the x axis.|integer|📖|||📝|🗑|
+|`movement_min_spd_y`<br>Minimum speed in steps per second for the y axis.|integer|📖|||📝|🗑|
+|`movement_min_spd_z`<br>Minimum speed in steps per second for the z axis.|integer|📖|||📝|🗑|
+|`movement_secondary_motor_invert_x`<br>Invert the direction of the 2nd x axis motor.|integer|📖|||📝|🗑|
+|`movement_secondary_motor_x`<br>Enable the 2nd x axis motor.|integer|📖|||📝|🗑|
+|`movement_step_per_mm_x`<br>Number of steps per millimeter on the x axis.|integer|📖|||📝|🗑|
+|`movement_step_per_mm_y`<br>Number of steps per millimeter on the y axis.|integer|📖|||📝|🗑|
+|`movement_step_per_mm_z`<br>Number of steps per millimeter on the z axis.|integer|📖|||📝|🗑|
+|`movement_steps_acc_dec_x`<br>Number of steps used to accelerate for the x axis.|integer|📖|||📝|🗑|
+|`movement_steps_acc_dec_y`<br>Number of steps used to accelerate for the y axis.|integer|📖|||📝|🗑|
+|`movement_steps_acc_dec_z`<br>Number of steps used to accelerate for the z axis.|integer|📖|||📝|🗑|
+|`movement_stop_at_home_x`<br>Enable stop at home for the x axis.|integer|📖|||📝|🗑|
+|`movement_stop_at_home_y`<br>Enable stop at home for the y axis.|integer|📖|||📝|🗑|
+|`movement_stop_at_home_z`<br>Enable stop at home for the z axis.|integer|📖|||📝|🗑|
+|`movement_stop_at_max_x`<br>Enable stop at max for the x axis.|integer|📖|||📝|🗑|
+|`movement_stop_at_max_y`<br>Enable stop at max for the y axis.|integer|📖|||📝|🗑|
+|`movement_stop_at_max_z`<br>Enable stop at max for the z axis.|integer|📖|||📝|🗑|
+|`movement_timeout_x`<br>Amount of time to wait for a command to execute before stopping in seconds for the x axis.|integer|📖|||📝|🗑|
+|`movement_timeout_y`<br>Amount of time to wait for a command to execute before stopping in seconds for the y axis.|integer|📖|||📝|🗑|
+|`movement_timeout_z`<br>Amount of time to wait for a command to execute before stopping in seconds for the z axis.|integer|📖|||📝|🗑|
+|`param_config_ok`<br>Unused.|integer|📖|||📝|🗑|
+|`param_e_stop_on_mov_err`<br>E-Stop upon movement error.|integer|📖|||📝|🗑|
+|`param_mov_nr_retry`<br>Number of times to retry a movement.|integer|📖|||📝|🗑|
+|`param_test`<br>Unused.|integer|📖|||📝|🗑|
+|`param_use_eeprom`<br>Unused.|integer|📖|||📝|🗑|
+|`param_version`<br>Unused.|integer|📖|||📝|🗑|
+|`pin_guard_1_active_state`<br>Pin guard 1 active state.|integer|📖|||📝|🗑|
+|`pin_guard_1_pin_nr`<br>Pin guard 1 pin number.|integer|📖|||📝|🗑|
+|`pin_guard_1_time_out`<br>Pin guard 1 number of seconds before turning the pin to the inactive state.|integer|📖|||📝|🗑|
+|`pin_guard_2_active_state`<br>Pin guard 2 active state.|integer|📖|||📝|🗑|
+|`pin_guard_2_pin_nr`<br>Pin guard 2 pin number.|integer|📖|||📝|🗑|
+|`pin_guard_2_time_out`<br>Pin guard 2 number of seconds before turning the pin to the inactive state.|integer|📖|||📝|🗑|
+|`pin_guard_3_active_state`<br>Pin guard 3 active state.|integer|📖|||📝|🗑|
+|`pin_guard_3_pin_nr`<br>Pin guard 3 pin number.|integer|📖|||📝|🗑|
+|`pin_guard_3_time_out`<br>Pin guard 3 number of seconds before turning the pin to the inactive state.|integer|📖|||📝|🗑|
+|`pin_guard_4_active_state`<br>Pin guard 4 active state.|integer|📖|||📝|🗑|
+|`pin_guard_4_pin_nr`<br>Pin guard 4 pin number.|integer|📖|||📝|🗑|
+|`pin_guard_4_time_out`<br>Pin guard 4 number of seconds before turning the pin to the inactive state.|integer|📖|||📝|🗑|
+|`pin_guard_5_active_state`<br>Pin guard 5 active state.|integer|📖|||📝|🗑|
+|`pin_guard_5_pin_nr`<br>Pin guard 5 pin number.|integer|📖|||📝|🗑|
+|`pin_guard_5_time_out`<br>Pin guard 5 number of seconds before turning the pin to the inactive state.|integer|📖|||📝|🗑|
+|`movement_invert_2_endpoints_x`<br>Enable for normally closed (NC), disable for normally open (NO).|integer|📖|||📝|🗑|
+|`movement_invert_2_endpoints_y`<br>Enable for normally closed (NC), disable for normally open (NO).|integer|📖|||📝|🗑|
+|`movement_invert_2_endpoints_z`<br>Enable for normally closed (NC), disable for normally open (NO).|integer|📖|||📝|🗑|
+|`movement_microsteps_x`<br>Number of microsteps per step on the x axis.|integer|📖|||📝|🗑|
+|`movement_microsteps_y`<br>Number of microsteps per step on the y axis.|integer|📖|||📝|🗑|
+|`movement_microsteps_z`<br>Number of microsteps per step on the z axis.|integer|📖|||📝|🗑|
+|`movement_motor_current_x`<br>Motor current on the x axis.|0-1823|📖|||📝|🗑|
+|`movement_motor_current_y`<br>Motor current on the y axis.|0-1823|📖|||📝|🗑|
+|`movement_motor_current_z`<br>Motor current on the z axis.|0-1823|📖|||📝|🗑|
+|`movement_stall_sensitivity_x`<br>Stall sensitivity on the x axis. Lower is more sensitive.|-63-63|📖|||📝|🗑|
+|`movement_stall_sensitivity_y`<br>Stall sensitivity on the y axis. Lower is more sensitive.|-63-63|📖|||📝|🗑|
+|`movement_stall_sensitivity_z`<br>Stall sensitivity on the z axis. Lower is more sensitive.|-63-63|📖|||📝|🗑|
+|`movement_min_spd_z2`<br>Min speed in steps per second for z axis movements towards home.|integer|📖|||📝|🗑|
+|`movement_max_spd_z2`<br>Maximum speed in steps per second for z axis movements towards home.|integer|📖|||📝|🗑|
+|`movement_steps_acc_dec_z2`<br>Number of steps used for acceleration for z axis movements towards home.|integer|📖|||📝|🗑|
+|`movement_calibration_retry_x`<br>Number of times to retry calibration for the x axis.|integer|📖|||📝|🗑|
+|`movement_calibration_retry_y`<br>Number of times to retry calibration for the y axis.|integer|📖|||📝|🗑|
+|`movement_calibration_retry_z`<br>Number of times to retry calibration for the z axis.|integer|📖|||📝|🗑|
+|`movement_calibration_deadzone_x`<br>Distance in steps to group calibration retries for the x axis.|integer|📖|||📝|🗑|
+|`movement_calibration_deadzone_y`<br>Distance in steps to group calibration retries for the y axis.|integer|📖|||📝|🗑|
+|`movement_calibration_deadzone_z`<br>Distance in steps to group calibration retries for the z axis.|integer|📖|||📝|🗑|
+|`movement_axis_stealth_x`<br>Enable quiet mode for the x axis.|integer|📖|||📝|🗑|
+|`movement_axis_stealth_y`<br>Enable quiet mode for the y axis.|integer|📖|||📝|🗑|
+|`movement_axis_stealth_z`<br>Enable quiet mode for the z axis.|integer|📖|||📝|🗑|
+|`movement_calibration_retry_total_x`<br>Total number of times to retry calibration for the x axis.|integer|📖|||📝|🗑|
+|`movement_calibration_retry_total_y`<br>Total number of times to retry calibration for the y axis.|integer|📖|||📝|🗑|
+|`movement_calibration_retry_total_z`<br>Total number of times to retry calibration for the z axis.|integer|📖|||📝|🗑|
+|`pin_report_1_pin_nr`<br>Report values of the pin periodically.|integer|📖|||📝|🗑|
+|`pin_report_2_pin_nr`<br>Report values of the pin periodically.|integer|📖|||📝|🗑|
+
+__GET /api/firmware_config__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/firmware_config'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-{
-}
-```
-
-#  GET /api/firmware_config
-
-**Response**
-
-```
+output:
+```json
 {
   "id": 7,
   "created_at": "2022-02-02T23:14:50.199Z",
   "updated_at": "2022-02-02T23:14:50.199Z",
   "device_id": 287,
-  "encoder_enabled_x": 0,
-  "encoder_enabled_y": 0,
-  "encoder_enabled_z": 0,
+  "encoder_enabled_x": 1,
+  "encoder_enabled_y": 1,
+  "encoder_enabled_z": 1,
   "encoder_invert_x": 0,
   "encoder_invert_y": 0,
   "encoder_invert_z": 0,
@@ -1549,152 +881,151 @@ Empty Response
   "encoder_missed_steps_max_x": 5,
   "encoder_missed_steps_max_y": 5,
   "encoder_missed_steps_max_z": 5,
-  "encoder
-```
-
-#  DELETE /api/firmware_config
-
-**Response**
-
-```
-Empty Response
-```
-
-#  PUT /api/firmware_config
-
-**Request**
-
-```
-{
-  "device_id": 99
+  "encoder_scaling_x": 5556,
+  "encoder_scaling_y": 5556,
+  "encoder_scaling_z": 5556,
+  "encoder_type_x": 0,
+  "encoder_type_y": 0,
+  "encoder_type_z": 0,
+  "encoder_use_for_pos_x": 0,
+  "encoder_use_for_pos_y": 0,
+  "encoder_use_for_pos_z": 0,
+  "movement_axis_nr_steps_x": 0,
+  "movement_axis_nr_steps_y": 0,
+  "movement_axis_nr_steps_z": 0,
+  "movement_enable_endpoints_x": 0,
+  "movement_enable_endpoints_y": 0,
+  "movement_enable_endpoints_z": 0,
+  "movement_home_at_boot_x": 0,
+  "movement_home_at_boot_y": 0,
+  "movement_home_at_boot_z": 0,
+  "movement_home_spd_x": 400,
+  "movement_home_spd_y": 400,
+  "movement_home_spd_z": 400,
+  "movement_home_up_x": 0,
+  "movement_home_up_y": 0,
+  "movement_home_up_z": 1,
+  "movement_invert_endpoints_x": 0,
+  "movement_invert_endpoints_y": 0,
+  "movement_invert_endpoints_z": 0,
+  "movement_invert_motor_x": 0,
+  "movement_invert_motor_y": 0,
+  "movement_invert_motor_z": 0,
+  "movement_keep_active_x": 0,
+  "movement_keep_active_y": 0,
+  "movement_keep_active_z": 1,
+  "movement_max_spd_x": 400,
+  "movement_max_spd_y": 400,
+  "movement_max_spd_z": 400,
+  "movement_min_spd_x": 50,
+  "movement_min_spd_y": 50,
+  "movement_min_spd_z": 50,
+  "movement_secondary_motor_invert_x": 1,
+  "movement_secondary_motor_x": 1,
+  "movement_step_per_mm_x": 5.0,
+  "movement_step_per_mm_y": 5.0,
+  "movement_step_per_mm_z": 25.0,
+  "movement_steps_acc_dec_x": 300,
+  "movement_steps_acc_dec_y": 300,
+  "movement_steps_acc_dec_z": 300,
+  "movement_stop_at_home_x": 1,
+  "movement_stop_at_home_y": 1,
+  "movement_stop_at_home_z": 1,
+  "movement_stop_at_max_x": 1,
+  "movement_stop_at_max_y": 1,
+  "movement_stop_at_max_z": 1,
+  "movement_timeout_x": 180,
+  "movement_timeout_y": 180,
+  "movement_timeout_z": 180,
+  "param_config_ok": 0,
+  "param_e_stop_on_mov_err": 0,
+  "param_mov_nr_retry": 3,
+  "param_test": 0,
+  "param_use_eeprom": 1,
+  "param_version": 1,
+  "pin_guard_1_active_state": 1,
+  "pin_guard_1_pin_nr": 0,
+  "pin_guard_1_time_out": 60,
+  "pin_guard_2_active_state": 1,
+  "pin_guard_2_pin_nr": 0,
+  "pin_guard_2_time_out": 60,
+  "pin_guard_3_active_state": 1,
+  "pin_guard_3_pin_nr": 0,
+  "pin_guard_3_time_out": 60,
+  "pin_guard_4_active_state": 1,
+  "pin_guard_4_pin_nr": 0,
+  "pin_guard_4_time_out": 60,
+  "pin_guard_5_active_state": 1,
+  "pin_guard_5_pin_nr": 0,
+  "pin_guard_5_time_out": 60,
+  "movement_invert_2_endpoints_x": 0,
+  "movement_invert_2_endpoints_y": 0,
+  "movement_invert_2_endpoints_z": 0,
+  "movement_microsteps_x": 1,
+  "movement_microsteps_y": 1,
+  "movement_microsteps_z": 1,
+  "movement_motor_current_x": 1823,
+  "movement_motor_current_y": 1823,
+  "movement_motor_current_z": 1823,
+  "movement_stall_sensitivity_x": 63,
+  "movement_stall_sensitivity_y": 63,
+  "movement_stall_sensitivity_z": 63,
+  "movement_min_spd_z2": 50,
+  "movement_max_spd_z2": 400,
+  "movement_steps_acc_dec_z2": 300,
+  "movement_calibration_retry_x": 1,
+  "movement_calibration_retry_y": 1,
+  "movement_calibration_retry_z": 1,
+  "movement_calibration_deadzone_x": 50,
+  "movement_calibration_deadzone_y": 50,
+  "movement_calibration_deadzone_z": 250,
+  "movement_axis_stealth_x": 1,
+  "movement_axis_stealth_y": 1,
+  "movement_axis_stealth_z": 1,
+  "movement_calibration_retry_total_x": 10,
+  "movement_calibration_retry_total_y": 10,
+  "movement_calibration_retry_total_z": 10,
+  "pin_report_1_pin_nr": 0,
+  "pin_report_2_pin_nr": 0
 }
 ```
 
-**Response**
+# folders
 
+Used by [sequences](https://software.farm.bot/docs/sequences).
+
+|Method|Description|
+|---|---|
+|`GET` /api/folders|Get an array of all folders.|
+|`GET` /api/folders/:id|Get a single folder by id.|
+|`POST` /api/folders|Create a new folder.|
+|`PATCH` /api/folders/:id|Edit a single folder by id.|
+|`DELETE` /api/folders/:id|Delete a single folder by id.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
+|`parent_id`<br>ID of the parent folder, if any.|integer \| null|📖|📖|📝|📝(required)|🗑|
+|`name`<br>Folder name.|string|📖|📖|📝(required)|📝|🗑|
+|`color`<br>Folder color.|string|📖|📖|📝(required)|📝|🗑|
+
+__GET /api/folders__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/folders'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-{
-  "id": 10,
-  "created_at": "2022-02-02T23:14:50.311Z",
-  "updated_at": "2022-02-02T23:14:50.311Z",
-  "device_id": 289,
-  "encoder_enabled_x": 0,
-  "encoder_enabled_y": 0,
-  "encoder_enabled_z": 0,
-  "encoder_invert_x": 0,
-  "encoder_invert_y": 0,
-  "encoder_invert_z": 0,
-  "encoder_missed_steps_decay_x": 5,
-  "encoder_missed_steps_decay_y": 5,
-  "encoder_missed_steps_decay_z": 5,
-  "encoder_missed_steps_max_x": 5,
-  "encoder_missed_steps_max_y": 5,
-  "encoder_missed_steps_max_z": 5,
-  "encode
-```
-
-#  PUT /api/firmware_config
-
-**Request**
-
-```
-{
-  "pin_guard_5_time_out": 23,
-  "firmware_debug_log": true,
-  "firmware_input_log": true,
-  "firmware_output_log": true
-}
-```
-
-**Response**
-
-```
-{
-  "id": 11,
-  "created_at": "2022-02-02T23:14:50.360Z",
-  "updated_at": "2022-02-02T23:14:50.377Z",
-  "device_id": 290,
-  "encoder_enabled_x": 0,
-  "encoder_enabled_y": 0,
-  "encoder_enabled_z": 0,
-  "encoder_invert_x": 0,
-  "encoder_invert_y": 0,
-  "encoder_invert_z": 0,
-  "encoder_missed_steps_decay_x": 5,
-  "encoder_missed_steps_decay_y": 5,
-  "encoder_missed_steps_decay_z": 5,
-  "encoder_missed_steps_max_x": 5,
-  "encoder_missed_steps_max_y": 5,
-  "encoder_missed_steps_max_z": 5,
-  "encode
-```
-
-#  GET /api/first_party_farmwares
-
-**Response**
-
-```
-[
-  {
-    "id": 1,
-    "created_at": "2019-08-14 18:33:08.428306",
-    "updated_at": "2019-08-14 18:33:08.428306",
-    "url": "https://raw.githubusercontent.com/FarmBot-Labs/farmware_manifests/main/packages/take-photo/manifest_v2.json",
-    "package": "take-photo",
-    "package_error": null
-  },
-  {
-    "id": 2,
-    "created_at": "2019-08-14 18:33:08.428306",
-    "updated_at": "2019-08-14 18:33:08.428306",
-    "url": "https://raw.githubusercontent.com/FarmBot-Labs/farmware_manifests/main/package
-```
-
-#  GET /api/first_party_farmwares/2
-
-**Response**
-
-```
-{
-  "id": 2,
-  "created_at": "2019-08-14 18:33:08.428306",
-  "updated_at": "2019-08-14 18:33:08.428306",
-  "url": "https://raw.githubusercontent.com/FarmBot-Labs/farmware_manifests/main/packages/camera-calibration/manifest_v2.json",
-  "package": "camera-calibration",
-  "package_error": null
-}
-```
-
-#  POST /api/folders
-
-**Request**
-
-```
-{
-  "parent_id": 14,
-  "color": "blue",
-  "name": "child"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 15,
-  "created_at": "2022-02-02T23:15:35.556Z",
-  "updated_at": "2022-02-02T23:15:35.556Z",
-  "parent_id": 14,
-  "color": "blue",
-  "name": "child"
-}
-```
-
-#  GET /api/folders
-
-**Response**
-
-```
+output:
+```json
 [
   {
     "id": 18,
@@ -1707,59 +1038,41 @@ Empty Response
 ]
 ```
 
-#  PATCH /api/folders/10
+# global_bulletins
 
-**Request**
+Used by the [message center](https://software.farm.bot/docs/message-center). To create a bulletin, see [posting to the message center](server-admin.md#posting-to-the-message-center).
 
+|Method|Description|
+|---|---|
+|`GET` /api/global_bulletins/:slug|Get a single bulletin by slug.|
+
+|Field|Type|`GET`|`GET/:slug`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer||📖||||
+|`created_at`<br>Date and time of creation set by the database.|timestamp||📖||||
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp||📖||||
+|`href`<br>Link.|string||📖||||
+|`href_label`<br>Label for link button.|string||📖||||
+|`slug`<br>UUID.|string||📖||||
+|`title`<br>Bulletin title.|string||📖||||
+|`type`<br>Bulletin type.|"info" \| "success" \| "warn"||📖||||
+|`content`<br>Bulletin content.|string||📖||||
+
+__GET /api/global_bulletins/:slug__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/global_bulletins/Okra'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-{
-  "name": "C",
-  "color": "red",
-  "parent_id": null
-}
-```
-
-**Response**
-
-```
-{
-  "id": 10,
-  "created_at": "2022-02-02T23:15:35.130Z",
-  "updated_at": "2022-02-02T23:15:35.142Z",
-  "parent_id": null,
-  "color": "red",
-  "name": "C"
-}
-```
-
-#  GET /api/folders/11
-
-**Response**
-
-```
-{
-  "id": 11,
-  "created_at": "2022-02-02T23:15:35.171Z",
-  "updated_at": "2022-02-02T23:15:35.171Z",
-  "parent_id": null,
-  "color": "red",
-  "name": "parent"
-}
-```
-
-#  DELETE /api/folders/12
-
-**Response**
-
-```
-Empty Response
-```
-
-#  GET /api/global_bulletins/Okra
-
-**Response**
-
-```
+output:
+```json
 {
   "id": 1,
   "created_at": "2022-02-02T23:15:35.750Z",
@@ -1773,62 +1086,88 @@ Empty Response
 }
 ```
 
-#  GET /api/global_config
+# global_config
 
-**Response**
+|Method|Description|
+|---|---|
+|`GET` /api/global_config|Get the global config object.|
 
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`FBOS_END_OF_LIFE_VERSION`<br>FarmBot OS version to give end-of-life warning.|string|📖|||||
+|`MINIMUM_FBOS_VERSION`<br>Oldest FarmBot OS version allowed to connect.|string|📖|||||
+|`TOS_URL`<br>Terms of service URL.|string|📖|||||
+|`PRIV_URL`<br>Privacy policy URL.|string|📖|||||
+|`NODE_ENV`<br>Node environment.|"development" \| "production" \| "test"|📖|||||
+|`LONG_REVISION`<br>Hash of the current Web App GitHub commit.|string|📖|||||
+|`SHORT_REVISION`<br>First 8 characters of the current Web App GitHub commit hash.|string|📖|||||
+|`MQTT_WS`<br>MQTT websocket URL.|string|📖|||||
+|*any*<br>Any config set by the server.|string|📖|||||
+
+__GET /api/global_config__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/global_config'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
+output:
+```json
 {
-  "PING": "92c1b9a825243770bef23b9600cffb2d"
+  "FBOS_END_OF_LIFE_VERSION": "14.6.0",
+  "MINIMUM_FBOS_VERSION": "14.6.0",
+  "TOS_URL": "",
+  "PRIV_URL": "",
+  "NODE_ENV": "production",
+  "LONG_REVISION": "c4d419354435be1938a45294666ff8eb5bc61b27",
+  "SHORT_REVISION": "c4d41935",
+  "MQTT_WS": "wss://abc-def.rmq.cloudamqp.com:443/ws/mqtt",
+  "SOME_OTHER_CONFIG": "value"
 }
 ```
 
-#  GET /api/global_config
+# images
 
-**Response**
+Used for [photos](https://software.farm.bot/docs/photos).
 
+|Method|Description|
+|---|---|
+|`GET` /api/images|Get an array of all images.|
+|`GET` /api/images/:id|Get a single image by id.|
+|`POST` /api/images|Create a new image.|
+|`DELETE` /api/images/:id|Delete a single image by id.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
+|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
+|`attachment_processed_at`<br>Date and time when image was processed.|timestamp|📖|📖|📝||🗑|
+|`attachment_url`<br>Image URL.|string|📖|📖|📝(required)||🗑|
+|`meta`<br>Image info.|{name: string, x: float, y: float, z: float}|📖|📖|📝||🗑|
+
+__GET /api/images__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/images'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-{
-  "PING": "92c1b9a825243770bef23b9600cffb2d"
-}
-```
-
-#  POST /api/images
-
-**Request**
-
-```
-{
-  "attachment_url": "https://cdn.shopify.com/s/files/1/2040/0289/files/FarmBot.io_Trimmed_Logo_Gray_on_Transparent_1_434x200.png?v=1525220371",
-  "meta": {
-    "x": 1,
-    "z": 3
-  }
-}
-```
-
-**Response**
-
-```
-{
-  "id": 6,
-  "created_at": "2022-02-02T23:15:47.821Z",
-  "updated_at": "2022-02-02T23:15:47.821Z",
-  "device_id": 567,
-  "attachment_processed_at": null,
-  "attachment_url": "http://192.168.1.112:3000/placeholder_farmbot.jpg?text=Processing...",
-  "meta": {
-    "x": 1.0,
-    "z": 3.0
-  }
-}
-```
-
-#  GET /api/images
-
-**Response**
-
-```
+output:
+```json
 [
   {
     "id": 10,
@@ -1846,39 +1185,49 @@ Empty Response
 ]
 ```
 
-#  DELETE /api/images/7
+# logs
 
-**Response**
+Used for [logs](https://software.farm.bot/docs/jobs-and-logs).
 
+|Method|Description|
+|---|---|
+|`GET` /api/logs|Get an array of all logs.|
+|`POST` /api/logs|Create a new log.|
+|`DELETE` /api/logs/:id|Delete a single log by id.|
+|`DELETE` /api/logs/all|Delete all logs.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖||||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
+|`channels`<br>Array of transmission channels.|("ticker" \| "toast" \| "email" \| "espeak")[]|📖||📝||🗑|
+|`message`<br>Log message.|string|📖||📝(required)||🗑|
+|`meta`<br>Unused.|null|📖||📝||🗑|
+|`major_version`<br>FarmBot OS major version.|string|📖||📝||🗑|
+|`minor_version`<br>FarmBot OS minor version.|string|📖||📝||🗑|
+|`patch_version`<br>FarmBot OS patch version.|string|📖||📝||🗑|
+|`type`<br>Log type.|"assertion" \| "busy" \| "debug" \| "error" \| "fun" \| "info" \| "success" \| "warn"|📖||📝||🗑|
+|`verbosity`<br>Log level.|0-3|📖||📝||🗑|
+|`x`<br>x coordinate at time of log.|float|📖||📝||🗑|
+|`y`<br>y coordinate at time of log.|float|📖||📝||🗑|
+|`z`<br>z coordinate at time of log.|float|📖||📝||🗑|
+
+__GET /api/logs__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/logs'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-Empty Response
-```
-
-#  GET /api/images/8
-
-**Response**
-
-```
-{
-  "id": 8,
-  "created_at": "2022-02-02T23:15:48.486Z",
-  "updated_at": "2022-02-02T23:15:48.486Z",
-  "device_id": 569,
-  "attachment_processed_at": null,
-  "attachment_url": "http://192.168.1.112:3000/placeholder_farmbot.jpg?text=Processing...",
-  "meta": {
-    "x": 1,
-    "y": 2,
-    "z": 3
-  }
-}
-```
-
-#  GET /api/logs
-
-**Response**
-
-```
+output:
+```json
 [
   {
     "id": 13,
@@ -1897,411 +1246,85 @@ Empty Response
     "x": -458.0,
     "y": -12.0,
     "z": 765.0
-  },
-  {
-    "id": 14,
-    "created_at": 1643842974,
-    "updated_at": "2022-02-02T23:14:54.428Z",
-    "channels": [
-      "toast"
-
-```
-
-#  GET /api/logs
-
-**Response**
-
-```
-[
-  {
-    "id": 183,
-    "created_at": 1643843695,
-    "updated_at": "2022-02-02T23:14:55.587Z",
-    "channels": [
-
-    ],
-    "message": null,
-    "meta": null,
-    "major_version": null,
-    "minor_version": null,
-    "patch_version": null,
-    "type": "info",
-    "verbosity": 1,
-    "x": null,
-    "y": null,
-    "z": null
-  },
-  {
-    "id": 182,
-    "created_at": 1643843695,
-    "updated_at": "2022-02-02T23:14:55.583Z",
-    "channels": [
-
-    ],
-    "message": null,
-    "meta": null,
-    "maj
-```
-
-#  POST /api/logs
-
-**Request**
-
-```
-{
-  "message": "HELLO"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 189,
-  "created_at": 1643843695,
-  "updated_at": "2022-02-02T23:14:55.682Z",
-  "channels": [
-
-  ],
-  "message": "HELLO",
-  "meta": null,
-  "major_version": null,
-  "minor_version": null,
-  "patch_version": null,
-  "type": "info",
-  "verbosity": 1,
-  "x": null,
-  "y": null,
-  "z": null
-}
-```
-
-#  POST /api/logs
-
-**Request**
-
-```
-{
-  "channels": [
-
-  ],
-  "major_version": 8,
-  "message": "HELLO",
-  "minor_version": 4,
-  "patch_version": 0,
-  "type": "success",
-  "verbosity": 1,
-  "x": 0,
-  "y": 0,
-  "z": 0
-}
-```
-
-**Response**
-
-```
-{
-  "id": 195,
-  "created_at": 1643843695,
-  "updated_at": "2022-02-02T23:14:55.759Z",
-  "channels": [
-
-  ],
-  "message": "HELLO",
-  "meta": null,
-  "major_version": 8,
-  "minor_version": 4,
-  "patch_version": 0,
-  "type": "success",
-  "verbosity": 1,
-  "x": 0.0,
-  "y": 0.0,
-  "z": 0.0
-}
-```
-
-#  POST /api/logs
-
-**Request**
-
-```
-{
-  "created_at": 1643709415,
-  "meta": {
-    "x": 1,
-    "y": 2,
-    "z": 3,
-    "type": "info"
-  },
-  "channels": [
-    "toast"
-  ],
-  "message": "Hello, world!"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 201,
-  "created_at": 1643709415,
-  "updated_at": "2022-02-02T23:14:55.833Z",
-  "channels": [
-    "toast"
-  ],
-  "message": "Hello, world!",
-  "meta": null,
-  "major_version": null,
-  "minor_version": null,
-  "patch_version": null,
-  "type": "info",
-  "verbosity": 1,
-  "x": null,
-  "y": null,
-  "z": null
-}
-```
-
-#  POST /api/logs
-
-**Request**
-
-```
-{
-  "meta": {
-    "x": 1,
-    "y": 2,
-    "z": 3,
-    "type": "info"
-  },
-  "channels": [
-    "fatal_email"
-  ],
-  "message": "KABOOOOMM - SYSTEM ERROR!"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 223,
-  "created_at": 1643843696,
-  "updated_at": "2022-02-02T23:14:56.461Z",
-  "channels": [
-    "fatal_email"
-  ],
-  "message": "KABOOOOMM - SYSTEM ERROR!",
-  "meta": null,
-  "major_version": null,
-  "minor_version": null,
-  "patch_version": null,
-  "type": "info",
-  "verbosity": 1,
-  "x": null,
-  "y": null,
-  "z": null
-}
-```
-
-#  POST /api/logs
-
-**Request**
-
-```
-{
-  "channels": [
-
-  ],
-  "major_version": 8,
-  "message": "HELLO",
-  "minor_version": 4,
-  "patch_version": 0,
-  "type": "assertion",
-  "verbosity": 1,
-  "x": 0,
-  "y": 0,
-  "z": 0
-}
-```
-
-**Response**
-
-```
-{
-  "id": 229,
-  "created_at": 1643843696,
-  "updated_at": "2022-02-02T23:14:56.557Z",
-  "channels": [
-
-  ],
-  "message": "HELLO",
-  "meta": null,
-  "major_version": 8,
-  "minor_version": 4,
-  "patch_version": 0,
-  "type": "assertion",
-  "verbosity": 1,
-  "x": 0.0,
-  "y": 0.0,
-  "z": 0.0
-}
-```
-
-#  DELETE /api/logs/123
-
-**Notes:** WARNING: All logs will be deleted upon request, regardless of the specific log id provided.
-
-**Response**
-
-```
-Empty Response
-```
-
-#  DELETE /api/logs/all
-
-**Response**
-
-```
-Empty Response
-```
-
-#  GET /api/logs/search
-
-**Request**
-
-```
-{
-  "x": "-10"
-}
-```
-
-**Response**
-
-```
-[
-  {
-    "id": 23,
-    "created_at": 1643842434,
-    "updated_at": "2022-02-02T23:14:54.546Z",
-    "channels": [
-      "toast"
-    ],
-    "message": "This is -10.0",
-    "meta": null,
-    "major_version": null,
-    "minor_version": null,
-    "patch_version": null,
-    "type": "busy",
-    "verbosity": 1,
-    "x": -10.0,
-    "y": 704.0,
-    "z": 100.0
   }
 ]
 ```
 
-#  GET /api/logs/search
+## logs/search
 
-**Response**
+|Method|Description|
+|---|---|
+|`GET` /api/logs/search|Get a list of filtered logs.|
 
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`message`<br>Log message.|string|📝|||||
+|`type`<br>Log type.|"assertion" \| "busy" \| "debug" \| "error" \| "fun" \| "info" \| "success" \| "warn"|📝|||||
+|`verbosity`<br>Log level.|0-3|📝|||||
+|`x`<br>x coordinate at time of log.|float|📝|||||
+|`y`<br>y coordinate at time of log.|float|📝|||||
+|`z`<br>z coordinate at time of log.|float|📝|||||
+
+# password_resets
+
+## request
+
+|Method|Description|
+|---|---|
+|`POST` /api/password_resets|Request a password reset.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`email`<br>Account email address.|string|||📝(required)|||
+
+## change
+
+|Method|Description|
+|---|---|
+|`PATCH` /api/password_resets|Change the account password.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`password`<br>New account password.|string||||📝(required)||
+|`password_confirmation`<br>New account password.|string||||📝(required)||
+|`id`<br>Token.|string||||📝(required)||
+
+# peripherals
+
+Used by [peripherals](https://software.farm.bot/docs/peripherals).
+
+|Method|Description|
+|---|---|
+|`GET` /api/peripherals|Get an array of all peripherals.|
+|`GET` /api/peripherals/:id|Get a single peripheral by id.|
+|`POST` /api/peripherals|Create a new peripheral.|
+|`PATCH` /api/peripherals/:id|Edit a single peripheral by id.|
+|`DELETE` /api/peripherals/:id|Delete a single peripheral by id.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
+|`pin`<br>Pin number.|integer|📖|📖|📝(required)|📝|🗑|
+|`label`<br>Peripheral name.|string|📖|📖|📝(required)|📝|🗑|
+|`mode`<br>Pin mode.|0-1|📖|📖||📝|🗑|
+
+__GET /api/peripherals__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/peripherals'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-[
-  {
-    "id": 32,
-    "created_at": 1643841894,
-    "updated_at": "2022-02-02T23:14:54.660Z",
-    "channels": [
-      "toast"
-    ],
-    "message": "deliver virtual experiences",
-    "meta": null,
-    "major_version": null,
-    "minor_version": null,
-    "patch_version": null,
-    "type": "success",
-    "verbosity": 1,
-    "x": -484.0,
-    "y": 89.0,
-    "z": 371.0
-  },
-  {
-    "id": 33,
-    "created_at": 1643841834,
-    "updated_at": "2022-02-02T23:14:54.666Z",
-    "channels": [
-      "toast"
-```
-
-#  GET /api/logs/search
-
-**Response**
-
-```
-[
-
-]
-```
-
-#  PUT /api/password_resets
-
-**Request**
-
-```
-{
-  "password": "xpassword123",
-  "password_confirmation": "xpassword123",
-  "fbos_version": {
-    "version": "999.9.9",
-    "segments": null
-  },
-  "id": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJyYXVsLnRyZXV0ZWxAaG93ZS1tb3Jpc3NldHRlLmNvIiwiaWF0IjoxNjQzODQzNzQ1LCJqdGkiOiIyMWVjY2E5YS1iZDY5LTQ3NTEtOTZiMC1mMzJkMThhZGY4NTIiLCJpc3MiOiIvLzE5Mi4xNjguMS4xMTI6MzAwMCIsImV4cCI6MTY0MzkzMDE0NSwiYXVkIjoiUEFTU1dPUkRfUkVTRVRFUiJ9.FmLusmeBVNZp71zeW0d6eeLefLP26RVucJnGplnTDtytOvvZmm18bDZVwTmU8KXnCOSQaZM7Vv
-```
-
-**Response**
-
-```
-{
-  "token": {
-    "unencoded": {
-      "aud": "unknown",
-      "sub": 382,
-      "iat": 1643843745,
-      "jti": "affdcfef-889b-4aa0-a2fc-268654c065fa",
-      "iss": "//192.168.1.112:3000",
-      "exp": 1649027745,
-      "mqtt": "blooper.io",
-      "bot": "device_541",
-      "vhost": "/",
-      "mqtt_ws": "ws://blooper.io:3002/ws"
-    },
-    "encoded": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ1bmtub3duIiwic3ViIjozODIsImlhdCI6MTY0Mzg0Mzc0NSwianRpIjoiYWZmZGNmZWYtODg5Yi00YWEwLWEyZmMtMjY4Nj
-```
-
-#  POST /api/password_resets
-
-**Request**
-
-```
-{
-  "email": "tad@gislason-wiza.org"
-}
-```
-
-**Response**
-
-```
-{
-  "status": "Check your email!"
-}
-```
-
-#  GET /api/peripherals
-
-**Response**
-
-```
+output:
+```json
 [
   {
     "id": 1,
@@ -2322,95 +1345,51 @@ Empty Response
 ]
 ```
 
-#  POST /api/peripherals
+# pin_bindings
 
-**Request**
+Used by [push buttons](https://software.farm.bot/docs/peripherals).
 
+|Method|Description|
+|---|---|
+|`GET` /api/pin_bindings|Get an array of all pin bindings.|
+|`GET` /api/pin_bindings/:id|Get a single pin binding by id.|
+|`POST` /api/pin_bindings|Create a new pin binding.|
+|`PATCH` /api/pin_bindings/:id|Edit a single pin binding by id.|
+|`DELETE` /api/pin_bindings/:id|Delete a single pin binding by id.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
+|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
+|`sequence_id`<br>ID of sequence to execute.|integer \| null|📖|📖|📝|📝|🗑|
+|`special_action`<br>Action to perform.|"emergency_lock" \| "emergency_unlock" \| "power_off" \| "read_status" \| "reboot" \| "sync" \| "take_photo" \| null|📖|📖|📝|📝|🗑|
+|`pin_num`<br>Button pin number.|integer|📖|📖|📝(required)|📝|🗑|
+|`binding_type`<br>"standard": execute a sequence, "special": perform an action.|"standard" \| "special"|📖|📖||||
+
+__GET /api/pin_bindings__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/pin_bindings'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-{
-  "pin": 13,
-  "label": "LED"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 74,
-  "created_at": "2022-02-02T23:15:45.427Z",
-  "updated_at": "2022-02-02T23:15:45.427Z",
-  "pin": 13,
-  "label": "LED",
-  "mode": 0
-}
-```
-
-#  GET /api/peripherals/12
-
-**Response**
-
-```
-{
-  "id": 12,
-  "created_at": "2022-02-02T23:14:44.699Z",
-  "updated_at": "2022-02-02T23:14:44.699Z",
-  "pin": 6,
-  "label": "MyString",
-  "mode": 0
-}
-```
-
-#  PATCH /api/peripherals/77
-
-**Request**
-
-```
-{
-  "pin": 9
-}
-```
-
-**Response**
-
-```
-{
-  "id": 77,
-  "created_at": "2022-02-02T23:15:47.259Z",
-  "updated_at": "2022-02-02T23:15:47.278Z",
-  "pin": 9,
-  "label": "MyString",
-  "mode": 0
-}
-```
-
-#  DELETE /api/peripherals/9
-
-**Response**
-
-```
-{
-  "id": 9,
-  "created_at": "2022-02-02T23:14:38.975Z",
-  "updated_at": "2022-02-02T23:14:38.975Z",
-  "pin": 3,
-  "label": "wow",
-  "mode": 0
-}
-```
-
-#  GET /api/pin_bindings
-
-**Response**
-
-```
+output:
+```json
 [
   {
     "id": 46,
     "created_at": "2022-02-02T23:15:50.154Z",
     "updated_at": "2022-02-02T23:15:50.154Z",
     "device_id": 589,
-    "sequence_id": null,
+    "sequence_id": 1,
     "special_action": null,
     "pin_num": 16,
     "binding_type": "standard"
@@ -2421,97 +1400,53 @@ Empty Response
     "updated_at": "2022-02-02T23:15:50.169Z",
     "device_id": 589,
     "sequence_id": null,
-    "special_action": null,
+    "special_action": "sync",
     "pin_num": 1,
-    "binding_type": "standard"
-  },
-  {
-    "id": 48,
-
+    "binding_type": "special"
+  }
+]
 ```
 
-#  POST /api/pin_bindings
+# plant_templates
 
-**Request**
+Used by [gardens](https://software.farm.bot/docs/gardens).
 
+|Method|Description|
+|---|---|
+|`GET` /api/plant_templates|Get an array of all plant templates.|
+|`POST` /api/plant_templates|Create a new plant template.|
+|`PATCH` /api/plant_templates/:id|Edit a single plant template by id.|
+|`DELETE` /api/plant_templates/:id|Delete a single plant template by id.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
+|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
+|`saved_garden_id`<br>ID of the saved garden to which the plant belongs.|integer|📖||📝(required)|📝|🗑|
+|`radius`<br>Size of the plant.|float|📖||📝|📝|🗑|
+|`x`<br>x coordinate.|float|📖||📝(required)|📝|🗑|
+|`y`<br>y coordinate.|float|📖||📝(required)|📝|🗑|
+|`z`<br>z coordinate.|float|📖||📝|📝|🗑|
+|`name`<br>Plant name.|string|📖||📝|📝|🗑|
+|`openfarm_slug`<br>Plant type (from OpenFarm).|string|📖||📝|📝|🗑|
+
+__GET /api/plant_templates__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/plant_templates'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-{
-  "pin_num": 4,
-  "sequence_id": 262
-}
-```
-
-**Response**
-
-```
-{
-  "id": 52,
-  "created_at": "2022-02-02T23:15:50.403Z",
-  "updated_at": "2022-02-02T23:15:50.403Z",
-  "device_id": 591,
-  "sequence_id": 262,
-  "special_action": null,
-  "pin_num": 4,
-  "binding_type": "standard"
-}
-```
-
-#  GET /api/pin_bindings/37
-
-**Response**
-
-```
-{
-  "id": 37,
-  "created_at": "2022-02-02T23:15:49.783Z",
-  "updated_at": "2022-02-02T23:15:49.783Z",
-  "device_id": 585,
-  "sequence_id": null,
-  "special_action": null,
-  "pin_num": 5,
-  "binding_type": "standard"
-}
-```
-
-#  DELETE /api/pin_bindings/40
-
-**Response**
-
-```
-Empty Response
-```
-
-#  PUT /api/pin_bindings/49
-
-**Request**
-
-```
-{
-  "pin_num": 0,
-  "sequence_id": 261
-}
-```
-
-**Response**
-
-```
-{
-  "id": 49,
-  "created_at": "2022-02-02T23:15:50.276Z",
-  "updated_at": "2022-02-02T23:15:50.310Z",
-  "device_id": 590,
-  "sequence_id": 261,
-  "special_action": null,
-  "pin_num": 0,
-  "binding_type": "standard"
-}
-```
-
-#  GET /api/plant_templates
-
-**Response**
-
-```
+output:
+```json
 [
   {
     "id": 7,
@@ -2525,253 +1460,47 @@ Empty Response
     "openfarm_slug": "lettuce",
     "created_at": "2022-02-02T23:14:34.382Z",
     "updated_at": "2022-02-02T23:14:34.382Z"
-  },
-  {
-    "id": 8,
-    "saved_garden_id": 8,
-    "device_id": 160,
-    "radius": 1.5,
-    "x": 548.0,
-    "y": 324.0,
-    "z": 234.0,
-    "name": "untitled",
-    "openfarm_slug": "lettuce",
-    "created_at": "2022-02-
-```
-
-#  POST /api/plant_templates
-
-**Request**
-
-```
-{
-  "name": "Fresh Chillies",
-  "saved_garden_id": 10,
-  "x": 1,
-  "y": 2,
-  "z": 3,
-  "openfarm_slug": "tomato",
-  "radius": 32
-}
-```
-
-**Response**
-
-```
-{
-  "id": 10,
-  "saved_garden_id": 10,
-  "device_id": 161,
-  "radius": 32.0,
-  "x": 1.0,
-  "y": 2.0,
-  "z": 3.0,
-  "name": "Fresh Chillies",
-  "openfarm_slug": "tomato",
-  "created_at": "2022-02-02T23:14:34.469Z",
-  "updated_at": "2022-02-02T23:14:34.469Z"
-}
-```
-
-#  PUT /api/plant_templates/1
-
-**Request**
-
-```
-{
-  "name": "Green Pepper",
-  "x": 9,
-  "y": 10,
-  "z": 11,
-  "openfarm_slug": "melon",
-  "radius": 32
-}
-```
-
-**Response**
-
-```
-{
-  "device_id": 158,
-  "radius": 32.0,
-  "x": 9.0,
-  "y": 10.0,
-  "z": 11.0,
-  "name": "Green Pepper",
-  "openfarm_slug": "melon",
-  "id": 1,
-  "saved_garden_id": 1,
-  "created_at": "2022-02-02T23:14:34.213Z",
-  "updated_at": "2022-02-02T23:14:34.256Z"
-}
-```
-
-#  DELETE /api/plant_templates/11
-
-**Response**
-
-```
-Empty Response
-```
-
-#  PUT /api/plant_templates/4
-
-**Request**
-
-```
-{
-  "saved_garden_id": 5
-}
-```
-
-**Response**
-
-```
-{
-  "device_id": 159,
-  "saved_garden_id": 5,
-  "id": 4,
-  "radius": 1.5,
-  "x": 326.0,
-  "y": 415.0,
-  "z": 530.0,
-  "name": "untitled",
-  "openfarm_slug": "lettuce",
-  "created_at": "2022-02-02T23:14:34.298Z",
-  "updated_at": "2022-02-02T23:14:34.346Z"
-}
-```
-
-#  POST /api/point_groups
-
-**Request**
-
-```
-{
-  "name": "this is a group",
-  "point_ids": [
-    7,
-    8,
-    9
-  ]
-}
-```
-
-**Response**
-
-```
-{
-  "id": 3,
-  "created_at": "2022-02-02T23:14:14.893Z",
-  "updated_at": "2022-02-02T23:14:14.893Z",
-  "name": "this is a group",
-  "point_ids": [
-    7,
-    8,
-    9
-  ],
-  "sort_type": "xy_ascending",
-  "criteria": {
-    "day": {
-      "op": "<",
-      "days_ago": 0
-    },
-    "string_eq": {
-    },
-    "number_eq": {
-    },
-    "number_lt": {
-    },
-    "number_gt": {
-    }
   }
-}
+]
 ```
 
-#  POST /api/point_groups
+# point_groups
 
-**Request**
+Used by [groups](https://software.farm.bot/docs/groups).
 
+|Method|Description|
+|---|---|
+|`GET` /api/point_groups|Get an array of all point groups.|
+|`GET` /api/point_groups/:id|Get a single point group by id.|
+|`POST` /api/point_groups|Create a new point group.|
+|`PATCH` /api/point_groups/:id|Edit a single point group by id.|
+|`DELETE` /api/point_groups/:id|Delete a single point group by id.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
+|`name`<br>Group name.|string|📖|📖|📝(required)|📝|🗑|
+|`point_ids`<br>Array of manually included point IDs.|integer[]|📖|📖|📝(required)|📝|🗑|
+|`sort_type`<br>Sort type. See [point group sorting](../../other/how-it-works/point-group-sorting.md).|"xy_ascending" \| "xy_descending" \| "yx_ascending" \| "yx_descending" \| "xy_alternating" \| "yx_alternating" \| "nn" \| "random"|📖|📖|📝|📝|🗑|
+|`criteria`<br>Point group criteria for automatic point inclusion.|See below and [groups](https://software.farm.bot/docs/groups).|📖|📖|📝|📝|🗑|
+
+__GET /api/point_groups__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/point_groups'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-{
-  "name": "Criteria group",
-  "point_ids": [
-    10,
-    11,
-    12
-  ],
-  "criteria": {
-    "string_eq": {
-      "openfarm_slug": [
-        "carrot"
-      ]
-    },
-    "number_eq": {
-      "z": [
-        24,
-        25,
-        26
-      ]
-    },
-    "number_lt": {
-      "x": 4,
-      "y": 4
-    },
-    "number_gt": {
-      "x": 1,
-      "y": 1
-    },
-    "day": {
-      "op": "<",
-      "days_ago": 0
-    }
-  }
-}
-```
-
-**Response**
-
-```
-{
-  "id": 4,
-  "created_at": "2022-02-02T23:14:14.995Z",
-  "updated_at": "2022-02-02T23:14:14.995Z",
-  "name": "Criteria group",
-  "point_ids": [
-    10,
-    11,
-    12
-  ],
-  "sort_type": "xy_ascending",
-  "criteria": {
-    "day": {
-      "op": "<",
-      "days_ago": 0
-    },
-    "string_eq": {
-      "openfarm_slug": [
-        "carrot"
-      ]
-    },
-    "number_eq": {
-      "z": [
-        24,
-        25,
-        26
-      ]
-    },
-    "number_lt": {
-      "x": 4,
-      "y": 4
-    },
-    "number
-```
-
-#  GET /api/point_groups
-
-**Response**
-
-```
+output:
+```json
 [
   {
     "id": 15,
@@ -2790,220 +1519,87 @@ Empty Response
         "days_ago": 0
       },
       "string_eq": {
+        "openfarm_slug": [
+          "carrot"
+        ]
       },
       "number_eq": {
+        "z": [
+          24,
+          25,
+          26
+        ]
       },
       "number_lt": {
+        "x": 4,
+        "y": 4
       },
       "number_gt": {
+        "x": 1,
+        "y": 1
       }
     }
-  },
-  {
-    "id": 16,
-    "created_at": "2022-02-02T23:14:32.593Z"
-```
-
-#  PUT /api/point_groups/1
-
-**Request**
-
-```
-{
-  "name": "new name",
-  "point_ids": [
-    4,
-    5,
-    6,
-    2,
-    3
-  ]
-}
-```
-
-**Response**
-
-```
-{
-  "id": 1,
-  "created_at": "2022-02-02T23:14:14.262Z",
-  "updated_at": "2022-02-02T23:14:14.384Z",
-  "name": "new name",
-  "point_ids": [
-    2,
-    3,
-    4,
-    5,
-    6
-  ],
-  "sort_type": "xy_ascending",
-  "criteria": {
-    "day": {
-      "op": "<",
-      "days_ago": 0
-    },
-    "string_eq": {
-    },
-    "number_eq": {
-    },
-    "number_lt": {
-    },
-    "number_gt": {
-    }
   }
-}
+]
 ```
 
-#  PUT /api/point_groups/2
+# points
 
-**Request**
+Used by [plants](https://software.farm.bot/docs/plants), [points](https://software.farm.bot/docs/points), [weeds](https://software.farm.bot/docs/weeds), and [tool slots](https://software.farm.bot/docs/tools), where the field `pointer_type` determines the resource.
 
+Notes:
+* Soft deleted points will be destroyed without warning when the device hits 800 points.
+* New points cannot be created once the device hits 1000 points.
+
+|Method|Description|
+|---|---|
+|`GET` /api/points|Get an array of all points.|
+|`GET` /api/points/:id|Get a single point by id.|
+|`POST` /api/points|Create a new point.|
+|`PATCH` /api/points/:id|Edit a single point by id.|
+|`DELETE` /api/points/:id|Delete a single point by id.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|plant|point|weed|tool slot|
+|---|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|✅|✅|✅|✅|
+|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|✅|✅|✅|✅|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|✅|✅|✅|✅|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|✅|✅|✅|✅|
+|`name`<br>Point name.|string|📖|📖|📝|📝|🗑|✅|✅|✅|✅|
+|`pointer_type`<br>Point type.|"GenericPointer" \| "Plant" \| "ToolSlot" \| "Weed"|📖|📖|📝(required)|📝|🗑|✅|✅|✅|✅|
+|`meta`<br>Additional properties.|object|📖|📖|📝|📝|🗑|✅|✅|✅|✅|
+|`x`<br>x coordinate.|float|📖|📖|📝(required)|📝|🗑|✅|✅|✅|✅|
+|`y`<br>y coordinate.|float|📖|📖|📝(required)|📝|🗑|✅|✅|✅|✅|
+|`z`<br>z coordinate.|float|📖|📖|📝(required)|📝|🗑|✅|✅|✅|✅|
+|`openfarm_slug`<br>Plant type (from OpenFarm).|string|📖|📖|📝|📝|🗑|✅||||
+|`plant_stage`<br>Point status.|"planned" \| "planted" \| "harvested" \| "sprouted" \| "active" \| "removed" \| "pending"|📖|📖|📝|📝|🗑|✅||✅||
+|`planted_at`<br>Date and time planted in garden.|timestamp|📖|📖|📝|📝|🗑|✅||||
+|`discarded_at`<br>Date and time deleted.|timestamp|📖|📖|||🗑||✅|✅||
+|`radius`<br>Point radius.|float|📖|📖|📝|📝|🗑|✅|✅|✅||
+|`depth`<br>Plant depth.|integer|📖|📖|📝|📝|🗑|✅||||
+|`water_curve_id`<br>ID of the water curve for the plant.|integer|📖|📖|📝|📝|🗑|✅||||
+|`spread_curve_id`<br>ID of the spread curve for the plant.|integer|📖|📖|📝|📝|🗑|✅||||
+|`height_curve_id`<br>ID of the height curve for the plant.|integer|📖|📖|📝|📝|🗑|✅||||
+|`pullout_direction`<br>Tool slot direction.|0-4|📖|📖|📝|📝|🗑||||✅|
+|`tool_id`<br>ID of the tool in the tool slot.|integer|📖|📖|📝|📝|🗑||||✅|
+|`gantry_mounted`<br>Is the tool slot mounted on the gantry?|boolean|📖|📖|📝|📝|🗑||||✅|
+|`filter`<br>Filter points.|"all" \| "old" \| "kept"|📝|||||||||
+
+__GET /api/points__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/points'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-{
-  "point_ids": [
-
-  ],
-  "criteria": {
-    "string_eq": {
-      "name": [
-        "carrot"
-      ]
-    },
-    "number_eq": {
-      "x": [
-        42,
-        52,
-        62
-      ]
-    },
-    "number_lt": {
-      "y": 8
-    },
-    "number_gt": {
-      "z": 2
-    },
-    "day": {
-      "op": ">",
-      "days_ago": 10
-    }
-  }
-}
-```
-
-**Response**
-
-```
-{
-  "id": 2,
-  "created_at": "2022-02-02T23:14:14.434Z",
-  "updated_at": "2022-02-02T23:14:14.469Z",
-  "name": "XYZ",
-  "point_ids": [
-
-  ],
-  "sort_type": "xy_ascending",
-  "criteria": {
-    "day": {
-      "op": ">",
-      "days_ago": 10
-    },
-    "string_eq": {
-      "name": [
-        "carrot"
-      ]
-    },
-    "number_eq": {
-      "x": [
-        42,
-        52,
-        62
-      ]
-    },
-    "number_lt": {
-      "y": 8
-    },
-    "number_gt": {
-      "z": 2
-    }
-  }
-}
-```
-
-#  DELETE /api/point_groups/25
-
-**Response**
-
-```
-Empty Response
-```
-
-#  GET /api/point_groups/74
-
-**Response**
-
-```
-{
-  "id": 74,
-  "created_at": "2022-02-02T23:15:38.537Z",
-  "updated_at": "2022-02-02T23:15:38.537Z",
-  "name": "PointGroups#show test",
-  "point_ids": [
-
-  ],
-  "sort_type": "xy_ascending",
-  "criteria": {
-    "day": {
-      "op": "<",
-      "days_ago": 0
-    },
-    "string_eq": {
-    },
-    "number_eq": {
-    },
-    "number_lt": {
-    },
-    "number_gt": {
-    }
-  }
-}
-```
-
-#  GET /api/point_groups/75
-
-**Response**
-
-```
-{
-  "id": 75,
-  "created_at": "2022-02-02T23:15:38.576Z",
-  "updated_at": "2022-02-02T23:15:38.576Z",
-  "name": "x",
-  "point_ids": [
-
-  ],
-  "sort_type": "xy_ascending",
-  "criteria": {
-    "day": {
-      "op": "<",
-      "days_ago": 0
-    },
-    "string_eq": {
-    },
-    "number_eq": {
-    },
-    "number_lt": {
-    },
-    "number_gt": {
-    }
-  }
-}
-```
-
-#  GET /api/points
-
-**Response**
-
-```
+output:
+```json
 [
   {
     "id": 50,
@@ -3020,151 +1616,56 @@ Empty Response
     "openfarm_slug": "cabbage",
     "plant_stage": "planned",
     "planted_at": "2022-02-02T23:14:25.964Z",
-    "radius": 50.0
+    "radius": 50.0,
+    "depth": 0,
+    "water_curve_id": null,
+    "spread_curve_id": null,
+    "height_curve_id": null
   },
   {
     "id": 51,
-    "created_at": "2022-02-02T23:14:25.971Z",
-    "updated_at": "2022-02-02T23:14:25.971Z",
-    "device_id
-```
-
-#  GET /api/points
-
-**Notes:** If you want to see previously deleted points, add `?filter=old` to the end of the URL.
-
-**Request**
-
-```
-{
-  "filter": "old"
-}
-```
-
-**Response**
-
-```
-[
-  {
-    "id": 53,
-    "created_at": "2022-02-02T23:14:26.040Z",
-    "updated_at": "2022-02-02T23:14:26.040Z",
-    "device_id": 100,
-    "name": "old",
-    "pointer_type": "Plant",
-    "meta": {
-    },
-    "x": 5,
-    "y": 5,
-    "z": 5,
-    "openfarm_slug": "cabbage",
-    "plant_stage": "planned",
-    "planted_at": "2022-02-02T23:14:26.040Z",
-    "radius": 50.0
-  }
-]
-```
-
-#  GET /api/points
-
-**Notes:** If you want to see previously deleted points, add `?filter=old` to the end of the URL.
-
-**Response**
-
-```
-[
-  {
-    "id": 57,
-    "created_at": "2022-02-02T23:14:26.150Z",
-    "updated_at": "2022-02-02T23:14:26.150Z",
-    "device_id": 102,
-    "name": "new",
-    "pointer_type": "Plant",
-    "meta": {
-    },
-    "x": 5,
-    "y": 5,
-    "z": 5,
-    "openfarm_slug": "cabbage",
-    "plant_stage": "planned",
-    "planted_at": "2022-02-02T23:14:26.150Z",
-    "radius": 50.0
-  }
-]
-```
-
-#  GET /api/points
-
-**Response**
-
-```
-[
-  {
-    "id": 58,
-    "created_at": "2022-02-02T23:14:26.216Z",
-    "updated_at": "2022-02-02T23:14:26.216Z",
-    "device_id": 103,
-    "name": "untitled",
+    "created_at": "2022-02-02T23:14:25.964Z",
+    "updated_at": "2022-02-02T23:14:25.964Z",
+    "device_id": 99,
+    "name": "Point 0",
     "pointer_type": "GenericPointer",
     "meta": {
+      "created_by": "plant-detection"
     },
-    "x": 7.0,
-    "y": 289.0,
-    "z": 88.0,
-    "radius": 1.5,
-    "discarded_at": null
-  }
-]
-```
-
-#  GET /api/points
-
-**Response**
-
-```
-[
-  {
-    "id": 59,
-    "created_at": "2022-02-02T23:14:26.275Z",
-    "updated_at": "2022-02-02T23:14:26.275Z",
-    "device_id": 104,
-    "name": "untitled",
-    "pointer_type": "GenericPointer",
-    "meta": {
-    },
-    "x": 375.0,
-    "y": 59.0,
-    "z": 332.0,
-    "radius": 1.5,
+    "x": 1.0,
+    "y": 2.0,
+    "z": 3.0,
+    "radius": 3.0,
     "discarded_at": null
   },
   {
-    "id": 60,
-    "created_at": "2022-02-02T23:14:26.282Z",
-    "updated_at": "2022-02-02T23:14:26.282Z",
-    "device_id": 104,
-    "name": "untitled",
-    "pointer_type": "GenericPoi
-```
-
-#  GET /api/points
-
-**Response**
-
-```
-[
+    "id": 52,
+    "created_at": "2022-02-02T23:14:25.964Z",
+    "updated_at": "2022-02-02T23:14:25.964Z",
+    "device_id": 99,
+    "name": "test weed",
+    "pointer_type": "Weed",
+    "meta": {
+    },
+    "x": 1.0,
+    "y": 2.0,
+    "z": 3.0,
+    "radius": 3.0,
+    "discarded_at": null,
+    "plant_stage": "active"
+  },
   {
-    "id": 62,
-    "created_at": "2022-02-02T23:14:26.397Z",
-    "updated_at": "2022-02-02T23:14:26.397Z",
-    "device_id": 105,
-    "name": "My TS",
+    "id": 53,
+    "created_at": "2022-02-02T23:14:25.964Z",
+    "updated_at": "2022-02-02T23:14:25.964Z",
+    "device_id": 99,
+    "name": "Slot 0",
     "pointer_type": "ToolSlot",
     "meta": {
     },
-    "x": 0.0,
-    "y": 0.0,
-    "z": 0.0,
+    "x": 4.0,
+    "y": 5.0,
+    "z": 6.0,
     "tool_id": null,
     "pullout_direction": 0,
     "gantry_mounted": false
@@ -3172,1126 +1673,169 @@ Empty Response
 ]
 ```
 
-#  GET /api/points
+## points/search
 
-**Notes:** If you want to see previously deleted points alongside your active points, add `?filter=all` to the end of the URL.
+|Method|Description|
+|---|---|
+|`GET` /api/points/search|Get a list of filtered points.|
 
-**Request**
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`radius`<br>Point size.|float|📝|||||
+|`depth`<br>Plant depth.|integer|📝|||||
+|`name`<br>Point name.|string|📝|||||
+|`pointer_type`<br>Point type.|"GenericPointer" \| "Plant" \| "ToolSlot" \| "Weed"|📝|||||
+|`meta`<br>Additional properties.|object|📝|||||
+|`x`<br>x coordinate.|float|📝|||||
+|`y`<br>y coordinate.|float|📝|||||
+|`z`<br>z coordinate.|float|📝|||||
+|`openfarm_slug`<br>Plant type (from OpenFarm).|string|📝|||||
+|`plant_stage`<br>Point status.|"planned" \| "planted" \| "harvested" \| "sprouted" \| "active" \| "removed" \| "pending"|📝|||||
 
+# public_key
+
+|Method|Description|
+|---|---|
+|`GET` /api/public_key|Get the public key.|
+
+__GET /api/public_key__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/public_key'
+response = requests.get(url)
+print(response.text)
 ```
-{
-  "filter": "all"
-}
+output:
+```
+-----BEGIN PUBLIC KEY-----
+2pVjj0NP5GNGzSqz8OVZUDJceDlsYpY24tUzJEtEzBJdN32zKM7PEkjiSZKqE3Uq
+lWKTxcArHrk/VPVp53dRhP0dza8dluHHlbsC19FmOWjcBRk2d1QUmhfVQMxc+EVE
+Hv5RSjtY40tB5NXRpXmbTOz7yejh2DsagCMTTyR8tQ/HYESXWama4s/MpRcVGHPY
+6rZbv3a67/yqsrxNsqnmG+JrAvKsQd86p7upbo4jEQQ2SatXSuzYCCl8wOL6wkz2
+E+qJNUTbyfTjyegBkUw6PEFnMhSUvzmBsWmy6X12vK9Too8qBhOYzYIPtN4oB9eY
+v4oT7LUFYK5agv2lVG6Z1UvoB16T+moOfba/l1xkgG3xGqI/LYzxIM74h5ppjtkw
+DmhdoWLZ
+-----END PUBLIC KEY-----
 ```
 
-**Response**
+# regimens
 
+See [regimens](https://software.farm.bot/docs/regimens).
+
+|Method|Description|
+|---|---|
+|`GET` /api/regimens|Get an array of all regimens.|
+|`GET` /api/regimens/:id|Get a single regimen by id.|
+|`POST` /api/regimens|Create a new regimen.|
+|`PATCH` /api/regimens/:id|Edit a single regimen by id.|
+|`DELETE` /api/regimens/:id|Delete a single regimen by id.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
+|`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
+|`name`<br>Regimen name.|string|📖|📖|📝(required)|📝|🗑|
+|`color`<br>Regimen color.|"blue" \| "green" \| "yellow" \| "orange" \| "purple" \| "pink" \| "gray" \| "red"|📖|📖|📝(required)|📝|🗑|
+|`body`<br>Variable data.|Array|📖|📖|📝|📝|🗑|
+|`regimen_items`<br>Sequence executions scheduled in the regimen.|Array (`time_offset` is in milliseconds)|📖|📖|📝(required)|📝|🗑|
+
+__GET /api/regimens__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/regimens'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
+output:
+```json
 [
   {
-    "id": 63,
-    "created_at": "2022-02-02T23:14:26.451Z",
-    "updated_at": "2022-02-02T23:14:26.451Z",
-    "device_id": 106,
-    "name": "old",
-    "pointer_type": "Plant",
-    "meta": {
-    },
-    "x": 5,
-    "y": 5,
-    "z": 5,
-    "openfarm_slug": "cabbage",
-    "plant_stage": "planned",
-    "planted_at": "2022-02-02T23:14:26.451Z",
-    "radius": 50.0
-  },
-  {
-    "id": 64,
-    "created_at": "2022-02-02T23:14:26.457Z",
-    "updated_at": "2022-02-02T23:14:26.457Z",
-    "device_id": 10
-```
-
-#  POST /api/points
-
-**Request**
-
-```
-{
-  "pointer_type": "ToolSlot",
-  "name": "foo",
-  "x": 0,
-  "y": 0,
-  "z": 0
-}
-```
-
-**Response**
-
-```
-{
-  "id": 194,
-  "created_at": "2022-02-02T23:15:32.544Z",
-  "updated_at": "2022-02-02T23:15:32.544Z",
-  "device_id": 365,
-  "name": "foo",
-  "pointer_type": "ToolSlot",
-  "meta": {
-  },
-  "x": 0.0,
-  "y": 0.0,
-  "z": 0.0,
-  "tool_id": null,
-  "pullout_direction": 0,
-  "gantry_mounted": false
-}
-```
-
-#  POST /api/points
-
-**Request**
-
-```
-{
-  "x": 1,
-  "y": 2,
-  "z": 3,
-  "radius": 3,
-  "name": "test weed",
-  "pointer_type": "Weed",
-  "meta": {
-    "foo": "BAR"
-  }
-}
-```
-
-**Response**
-
-```
-{
-  "id": 195,
-  "created_at": "2022-02-02T23:15:32.585Z",
-  "updated_at": "2022-02-02T23:15:32.585Z",
-  "device_id": 366,
-  "name": "test weed",
-  "pointer_type": "Weed",
-  "meta": {
-    "foo": "BAR"
-  },
-  "x": 1.0,
-  "y": 2.0,
-  "z": 3.0,
-  "radius": 3.0,
-  "discarded_at": null,
-  "plant_stage": "active"
-}
-```
-
-# (NOT OK) POST /api/points
-
-**Notes:** This is what happens when you post bad JSON
-
-**Response**
-
-```
-{
-  "error": "This is a JSON API. Please use a _valid_ JSON object or array. Validate JSON objects at https://jsonlint.com/"
-}
-```
-
-#  POST /api/points
-
-**Request**
-
-```
-{
-  "x": 1,
-  "y": 2,
-  "z": 3,
-  "radius": 3,
-  "name": "YOLO",
-  "pointer_type": "GenericPointer",
-  "meta": {
-    "foo": "BAR"
-  }
-}
-```
-
-**Response**
-
-```
-{
-  "id": 196,
-  "created_at": "2022-02-02T23:15:32.671Z",
-  "updated_at": "2022-02-02T23:15:32.671Z",
-  "device_id": 368,
-  "name": "YOLO",
-  "pointer_type": "GenericPointer",
-  "meta": {
-    "foo": "BAR"
-  },
-  "x": 1.0,
-  "y": 2.0,
-  "z": 3.0,
-  "radius": 3.0,
-  "discarded_at": null
-}
-```
-
-#  POST /api/points
-
-**Request**
-
-```
-{
-  "pointer_type": "ToolSlot",
-  "name": "foo",
-  "x": 0,
-  "y": 0,
-  "z": 0,
-  "pullout_direction": 1
-}
-```
-
-**Response**
-
-```
-{
-  "id": 197,
-  "created_at": "2022-02-02T23:15:32.718Z",
-  "updated_at": "2022-02-02T23:15:32.718Z",
-  "device_id": 369,
-  "name": "foo",
-  "pointer_type": "ToolSlot",
-  "meta": {
-  },
-  "x": 0.0,
-  "y": 0.0,
-  "z": 0.0,
-  "tool_id": null,
-  "pullout_direction": 1,
-  "gantry_mounted": false
-}
-```
-
-#  POST /api/points
-
-**Request**
-
-```
-{
-  "name": "Fooo",
-  "x": 4,
-  "y": 5,
-  "z": 6,
-  "pointer_type": "ToolSlot"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 198,
-  "created_at": "2022-02-02T23:15:32.791Z",
-  "updated_at": "2022-02-02T23:15:32.791Z",
-  "device_id": 371,
-  "name": "Fooo",
-  "pointer_type": "ToolSlot",
-  "meta": {
-  },
-  "x": 4.0,
-  "y": 5.0,
-  "z": 6.0,
-  "tool_id": null,
-  "pullout_direction": 0,
-  "gantry_mounted": false
-}
-```
-
-#  POST /api/points
-
-**Request**
-
-```
-{
-  "x": 23,
-  "y": 45,
-  "pointer_type": "Weed"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 199,
-  "created_at": "2022-02-02T23:15:32.829Z",
-  "updated_at": "2022-02-02T23:15:32.829Z",
-  "device_id": 372,
-  "name": "untitled",
-  "pointer_type": "Weed",
-  "meta": {
-  },
-  "x": 23.0,
-  "y": 45.0,
-  "z": 0.0,
-  "radius": 25.0,
-  "discarded_at": null,
-  "plant_stage": "active"
-}
-```
-
-#  POST /api/points
-
-**Request**
-
-```
-{
-  "x": 23,
-  "y": 45,
-  "name": "Put me in a salad",
-  "pointer_type": "Plant",
-  "openfarm_slug": "mung-bean",
-  "planted_at": "\"2022-02-01T23:15:32.859+00:00\"",
-  "plant_stage": "sprouted"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 200,
-  "created_at": "2022-02-01T23:15:32.859Z",
-  "updated_at": "2022-02-02T23:15:32.868Z",
-  "device_id": 373,
-  "name": "Put me in a salad",
-  "pointer_type": "Plant",
-  "meta": {
-  },
-  "x": 23,
-  "y": 45,
-  "z": 0,
-  "openfarm_slug": "mung-bean",
-  "plant_stage": "sprouted",
-  "planted_at": "2022-02-01T23:15:32.859Z",
-  "radius": 25.0
-}
-```
-
-#  PUT /api/points/233
-
-**Request**
-
-```
-{
-  "x": 99,
-  "y": 87,
-  "z": 33,
-  "radius": 55,
-  "meta": {
-    "foo": "BAR"
-  }
-}
-```
-
-**Response**
-
-```
-{
-  "id": 233,
-  "created_at": "2022-02-02T23:15:45.141Z",
-  "updated_at": "2022-02-02T23:15:45.169Z",
-  "device_id": 534,
-  "name": "untitled",
-  "pointer_type": "GenericPointer",
-  "meta": {
-    "foo": "BAR"
-  },
-  "x": 99.0,
-  "y": 87.0,
-  "z": 33.0,
-  "radius": 55.0,
-  "discarded_at": null
-}
-```
-
-#  PUT /api/points/235
-
-**Request**
-
-```
-{
-  "id": 235,
-  "x": 23,
-  "y": 45,
-  "name": "My Lettuce",
-  "openfarm_slug": "limestone-lettuce"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 235,
-  "created_at": "2022-02-02T23:15:45.211Z",
-  "updated_at": "2022-02-02T23:15:45.229Z",
-  "device_id": 535,
-  "name": "My Lettuce",
-  "pointer_type": "Plant",
-  "meta": {
-  },
-  "x": 23,
-  "y": 45,
-  "z": 0,
-  "openfarm_slug": "limestone-lettuce",
-  "plant_stage": "planned",
-  "planted_at": "2022-02-02T23:15:45.211Z",
-  "radius": 1.0
-}
-```
-
-#  PUT /api/points/239
-
-**Request**
-
-```
-{
-  "pullout_direction": 1
-}
-```
-
-**Response**
-
-```
-{
-  "id": 239,
-  "created_at": "2022-02-02T23:15:45.327Z",
-  "updated_at": "2022-02-02T23:15:45.342Z",
-  "device_id": 537,
-  "name": "untitled",
-  "pointer_type": "ToolSlot",
-  "meta": {
-  },
-  "x": 0.0,
-  "y": 0.0,
-  "z": 0.0,
-  "tool_id": null,
-  "pullout_direction": 1,
-  "gantry_mounted": false
-}
-```
-
-#  DELETE /api/points/245
-
-**Response**
-
-```
-[
-  {
-    "id": 245,
-    "created_at": "2022-02-02T23:15:48.571Z",
-    "updated_at": "2022-02-02T23:15:48.571Z",
-    "device_id": 571,
-    "name": "untitled",
-    "pointer_type": "GenericPointer",
-    "meta": {
-    },
-    "x": 4.0,
-    "y": 94.0,
-    "z": 365.0,
-    "radius": 1.5,
-    "discarded_at": null
-  }
-]
-```
-
-#  DELETE /api/points/249,250,251,252,253,254
-
-**Response**
-
-```
-[
-  {
-    "id": 249,
-    "created_at": "2022-02-02T23:15:48.856Z",
-    "updated_at": "2022-02-02T23:15:48.856Z",
-    "device_id": 572,
-    "name": "untitled",
-    "pointer_type": "GenericPointer",
-    "meta": {
-    },
-    "x": 512.0,
-    "y": 527.0,
-    "z": 200.0,
-    "radius": 1.5,
-    "discarded_at": null
-  },
-  {
-    "id": 250,
-    "created_at": "2022-02-02T23:15:48.863Z",
-    "updated_at": "2022-02-02T23:15:48.863Z",
-    "device_id": 572,
-    "name": "untitled",
-    "pointer_type": "Generic
-```
-
-#  DELETE /api/points/257
-
-**Response**
-
-```
-[
-  {
-    "id": 257,
-    "created_at": "2022-02-02T23:15:49.197Z",
-    "updated_at": "2022-02-02T23:15:49.197Z",
-    "device_id": 573,
-    "name": "untitled",
-    "pointer_type": "Plant",
-    "meta": {
-    },
-    "x": 10,
-    "y": 20,
-    "z": 30,
-    "openfarm_slug": "lettuce",
-    "plant_stage": "planned",
-    "planted_at": "2022-02-02T23:15:49.197Z",
-    "radius": 1.0
-  }
-]
-```
-
-#  GET /api/points/98
-
-**Response**
-
-```
-{
-  "id": 98,
-  "created_at": "2022-02-02T23:14:41.606Z",
-  "updated_at": "2022-02-02T23:14:41.606Z",
-  "device_id": 233,
-  "name": "untitled",
-  "pointer_type": "ToolSlot",
-  "meta": {
-  },
-  "x": 0.0,
-  "y": 0.0,
-  "z": 0.0,
-  "tool_id": null,
-  "pullout_direction": 0,
-  "gantry_mounted": false
-}
-```
-
-#  GET /api/points/99
-
-**Response**
-
-```
-{
-  "id": 99,
-  "created_at": "2022-02-02T23:14:41.646Z",
-  "updated_at": "2022-02-02T23:14:41.654Z",
-  "device_id": 234,
-  "name": "untitled",
-  "pointer_type": "GenericPointer",
-  "meta": {
-  },
-  "x": 532.0,
-  "y": 147.0,
-  "z": 422.0,
-  "radius": 1.5,
-  "discarded_at": "2022-02-02T23:14:41.653Z"
-}
-```
-
-#  POST /api/points/search
-
-**Request**
-
-```
-{
-  "created_by": "plant-detection"
-}
-```
-
-**Response**
-
-```
-[
-
-]
-```
-
-#  POST /api/points/search
-
-**Request**
-
-```
-{
-  "pointer_type": "Plant"
-}
-```
-
-**Response**
-
-```
-[
-  {
-    "id": 219,
-    "created_at": "2022-02-02T23:15:37.101Z",
-    "updated_at": "2022-02-02T23:15:37.101Z",
-    "device_id": 463,
-    "name": "untitled",
-    "pointer_type": "Plant",
-    "meta": {
-    },
-    "x": 276,
-    "y": 148,
-    "z": 302,
-    "openfarm_slug": "lettuce",
-    "plant_stage": "planned",
-    "planted_at": "2022-02-02T23:15:37.101Z",
-    "radius": 1.5
-  }
-]
-```
-
-#  POST /api/points/search
-
-**Request**
-
-```
-{
-  "meta": {
-    "foo1": 1
-  }
-}
-```
-
-**Response**
-
-```
-[
-  {
-    "id": 221,
-    "created_at": "2022-02-02T23:15:37.144Z",
-    "updated_at": "2022-02-02T23:15:37.144Z",
-    "device_id": 465,
-    "name": "untitled",
-    "pointer_type": "GenericPointer",
-    "meta": {
-      "foo1": "1"
-    },
-    "x": 154.0,
-    "y": 135.0,
-    "z": 172.0,
-    "radius": 1.5,
-    "discarded_at": null
-  }
-]
-```
-
-#  POST /api/points/search
-
-**Request**
-
-```
-{
-  "x": 23
-}
-```
-
-**Response**
-
-```
-[
-  {
-    "id": 223,
-    "created_at": "2022-02-02T23:15:37.211Z",
-    "updated_at": "2022-02-02T23:15:37.211Z",
-    "device_id": 466,
-    "name": "untitled",
-    "pointer_type": "GenericPointer",
-    "meta": {
-    },
-    "x": 23.0,
-    "y": 135.0,
-    "z": 255.0,
-    "radius": 1.5,
-    "discarded_at": null
-  }
-]
-```
-
-#  POST /api/points/search
-
-**Request**
-
-```
-{
-  "openfarm_slug": "tomato"
-}
-```
-
-**Response**
-
-```
-[
-  {
-    "id": 225,
-    "created_at": "2022-02-02T23:15:37.258Z",
-    "updated_at": "2022-02-02T23:15:37.258Z",
-    "device_id": 467,
-    "name": "untitled",
-    "pointer_type": "Plant",
-    "meta": {
-    },
-    "x": 325,
-    "y": 213,
-    "z": 420,
-    "openfarm_slug": "tomato",
-    "plant_stage": "planned",
-    "planted_at": "2022-02-02T23:15:37.258Z",
-    "radius": 1.5
-  }
-]
-```
-
-#  POST /api/points/search
-
-**Request**
-
-```
-{
-  "plant_stage": "harvested"
-}
-```
-
-**Response**
-
-```
-[
-  {
-    "id": 228,
-    "created_at": "2022-02-02T23:15:37.306Z",
-    "updated_at": "2022-02-02T23:15:37.306Z",
-    "device_id": 468,
-    "name": "untitled",
-    "pointer_type": "Plant",
-    "meta": {
-    },
-    "x": 458,
-    "y": 410,
-    "z": 549,
-    "openfarm_slug": "lettuce",
-    "plant_stage": "harvested",
-    "planted_at": "2022-02-02T23:15:37.306Z",
-    "radius": 1.5
-  }
-]
-```
-
-#  POST /api/points/search
-
-**Request**
-
-```
-{
-  "meta": {
-    "created_by": "plant-detection"
-  }
-}
-```
-
-**Response**
-
-```
-[
-  {
-    "id": 229,
-    "created_at": "2022-02-02T23:15:37.359Z",
-    "updated_at": "2022-02-02T23:15:37.359Z",
-    "device_id": 469,
-    "name": "untitled",
-    "pointer_type": "GenericPointer",
-    "meta": {
-      "created_by": "plant-detection"
-    },
-    "x": 83.0,
-    "y": 47.0,
-    "z": 101.0,
-    "radius": 1.5,
-    "discarded_at": null
-  },
-  {
-    "id": 230,
-    "created_at": "2022-02-02T23:15:37.366Z",
-    "updated_at": "2022-02-02T23:15:37.366Z",
-    "device_id": 469,
-    "name": "unt
-```
-
-#  GET /api/public_key
-
-**Response**
-
-```
-Empty Response
-```
-
-#  GET /api/regimens
-
-**Response**
-
-```
-[
-  {
-    "id": 1,
-    "created_at": "2022-02-02T23:14:14.521Z",
-    "updated_at": "2022-02-02T23:14:14.521Z",
-    "name": "f7430daddadd182f2384d60fea4d259a",
-    "color": null,
-    "device_id": 9,
+    "id": 15,
+    "created_at": "2022-02-02T23:15:50.695Z",
+    "updated_at": "2022-02-02T23:15:50.766Z",
+    "name": "specs",
+    "color": "red",
+    "device_id": 234,
     "body": [
-
+      {
+        "kind": "parameter_application",
+        "args": {
+          "label": "parent",
+          "data_value": {
+            "kind": "coordinate",
+            "args": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            }
+          }
+        }
+      }
     ],
     "regimen_items": [
-
+      {
+        "id": 6,
+        "created_at": "2022-02-02T23:15:50.695Z",
+        "updated_at": "2022-02-02T23:15:50.766Z",
+        "regimen_id": 15,
+        "sequence_id": 70,
+        "time_offset": 100
+      }
     ]
   }
 ]
 ```
 
-#  GET /api/regimens
+# releases
 
-**Response**
+Used by the [FarmBot OS download page](https://os.farm.bot) and FarmBot OS OTA updates.
 
-```
-[
+|Method|Description|
+|---|---|
+|`GET` /api/releases|Get a release.|
 
-]
-```
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖|||||
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|||||
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|||||
+|`image_url`<br>URL of FarmBot OS release .fw file.|string|📖|||||
+|`version`<br>FarmBot OS release version.|string|📖|||||
+|`platform`<br>FarmBot OS computer model.|"rpi" \| "rpi3" \| "rpi4"|📝(required) 📖|||||
+|`channel`<br>Release channel.|"stable" \| "beta" \| "alpha"|📝(required) 📖|||||
+|`dot_img_url`<br>URL of FarmBot OS release .img file.|string|📖|||||
 
-#  POST /api/regimens
+__GET /api/releases__
+```python
+import json
+import requests
 
-**Request**
+# TOKEN = ...
 
-```
-{
-  "device": {
-    "id": 595,
-    "name": "Snowpea sprouts",
-    "max_log_count": 1000,
-    "max_images_count": 450,
-    "timezone": "America/Sitka",
-    "last_saw_api": null,
-    "fbos_version": "17.0.0",
-    "throttled_until": null,
-    "throttled_at": null,
-    "mounted_tool_id": null,
-    "created_at": "2022-02-02T23:15:50.583Z",
-    "updated_at": "2022-02-02T23:15:50.583Z",
-    "serial_number": "2fded985e7666d47ce4b2d8b4b09a011",
-    "mqtt_rate_limit_email_sent_at": null,
-    "ota_hour": 3
-```
-
-**Response**
-
-```
-{
-  "id": 31,
-  "created_at": "2022-02-02T23:15:50.695Z",
-  "updated_at": "2022-02-02T23:15:50.766Z",
-  "name": "specs",
-  "color": "red",
-  "device_id": 594,
-  "body": [
-    {
-      "kind": "parameter_declaration",
-      "args": {
-        "label": "parent",
-        "default_value": {
-          "kind": "coordinate",
-          "args": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          }
-        }
-      }
-    }
-  ],
-  "regimen_items": [
-    {
-      "id": 13,
-      "created_at":
-```
-
-#  POST /api/regimens
-
-**Request**
-
-```
-{
-  "device": {
-    "id": 600,
-    "name": "Raspberry",
-    "max_log_count": 1000,
-    "max_images_count": 450,
-    "timezone": "America/Santa_Isabel",
-    "last_saw_api": null,
-    "fbos_version": "17.0.0",
-    "throttled_until": null,
-    "throttled_at": null,
-    "mounted_tool_id": null,
-    "created_at": "2022-02-02T23:15:51.067Z",
-    "updated_at": "2022-02-02T23:15:51.067Z",
-    "serial_number": "d7b521e7d2eede5654192d34936849de",
-    "mqtt_rate_limit_email_sent_at": null,
-    "ota_hour":
-```
-
-**Response**
-
-```
-{
-  "id": 33,
-  "created_at": "2022-02-02T23:15:51.180Z",
-  "updated_at": "2022-02-02T23:15:51.239Z",
-  "name": "specs",
-  "color": "red",
-  "device_id": 599,
-  "body": [
-    {
-      "kind": "parameter_application",
-      "args": {
-        "label": "parent",
-        "data_value": {
-          "kind": "coordinate",
-          "args": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          }
-        }
-      }
-    }
-  ],
-  "regimen_items": [
-    {
-      "id": 15,
-      "created_at": "2
-```
-
-#  POST /api/regimens
-
-**Request**
-
-```
-{
-  "name": "Arbok Flareon Nidoran",
-  "color": "pink",
-  "regimen_items": [
-    {
-      "time_offset": 123,
-      "sequence_id": 268
-    }
-  ]
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/releases'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+payload = {
+    'channel': 'stable',
+    'platform': 'rpi3',
 }
+response = requests.get(url, headers=headers, json=payload)
+print(json.dumps(response.json(), indent=2))
 ```
-
-**Response**
-
-```
-{
-  "id": 34,
-  "created_at": "2022-02-02T23:15:51.370Z",
-  "updated_at": "2022-02-02T23:15:51.374Z",
-  "name": "Arbok Flareon Nidoran",
-  "color": "pink",
-  "device_id": 601,
-  "body": [
-
-  ],
-  "regimen_items": [
-    {
-      "id": 16,
-      "created_at": "2022-02-02T23:15:51.372Z",
-      "updated_at": "2022-02-02T23:15:51.372Z",
-      "regimen_id": 34,
-      "sequence_id": 268,
-      "time_offset": 123
-    }
-  ]
-}
-```
-
-#  DELETE /api/regimens/15
-
-**Response**
-
-```
-Empty Response
-```
-
-#  PUT /api/regimens/22
-
-**Request**
-
-```
-{
-  "id": 22,
-  "name": "something new",
-  "color": "blue",
-  "body": [
-    {
-      "kind": "parameter_application",
-      "args": {
-        "label": "parent",
-        "data_value": {
-          "kind": "tool",
-          "args": {
-            "tool_id": 130
-          }
-        }
-      }
-    }
-  ],
-  "regimen_items": [
-    {
-      "time_offset": 950700000,
-      "sequence_id": 218
-    }
-  ]
-}
-```
-
-**Response**
-
-```
-{
-  "id": 22,
-  "created_at": "2022-02-02T23:15:37.914Z",
-  "updated_at": "2022-02-02T23:15:38.133Z",
-  "name": "something new",
-  "color": "blue",
-  "device_id": 476,
-  "body": [
-    {
-      "kind": "parameter_application",
-      "args": {
-        "label": "parent",
-        "data_value": {
-          "kind": "tool",
-          "args": {
-            "tool_id": 130
-          }
-        }
-      }
-    }
-  ],
-  "regimen_items": [
-    {
-      "id": 6,
-      "created_at": "2022-02-02T23:15:38.126Z",
-
-```
-
-#  PUT /api/regimens/24
-
-**Request**
-
-```
-{
-  "id": 24,
-  "name": "something new",
-  "color": "blue",
-  "regimen_items": [
-    {
-      "time_offset": 1555500000,
-      "sequence_id": 220
-    },
-    {
-      "time_offset": 864300000,
-      "sequence_id": 220
-    },
-    {
-      "time_offset": 950700000,
-      "sequence_id": 220
-    }
-  ]
-}
-```
-
-**Response**
-
-```
-{
-  "id": 24,
-  "created_at": "2022-02-02T23:15:38.292Z",
-  "updated_at": "2022-02-02T23:15:38.379Z",
-  "name": "something new",
-  "color": "blue",
-  "device_id": 478,
-  "body": [
-
-  ],
-  "regimen_items": [
-    {
-      "id": 7,
-      "created_at": "2022-02-02T23:15:38.368Z",
-      "updated_at": "2022-02-02T23:15:38.368Z",
-      "regimen_id": 24,
-      "sequence_id": 220,
-      "time_offset": 1555500000
-    },
-    {
-      "id": 8,
-      "created_at": "2022-02-02T23:15:38.370Z",
-      "updated_at"
-```
-
-#  GET /api/regimens/3
-
-**Response**
-
-```
-{
-  "id": 3,
-  "created_at": "2022-02-02T23:14:24.710Z",
-  "updated_at": "2022-02-02T23:14:24.710Z",
-  "name": "895f4ec4c89acf4268429b0e75534acc",
-  "color": null,
-  "device_id": 91,
-  "body": [
-
-  ],
-  "regimen_items": [
-
-  ]
-}
-```
-
-#  GET /api/releases
-
-**Request**
-
-```
-{
-  "channel": "stable",
-  "platform": "rpi3"
-}
-```
-
-**Response**
-
-```
+output:
+```json
 {
   "id": 2,
   "created_at": "2022-02-02T23:14:27.277Z",
@@ -4304,305 +1848,110 @@ Empty Response
 }
 ```
 
-#  POST /api/rmq/resource
+# saved_gardens
 
-**Request**
+Used by [gardens](https://software.farm.bot/docs/gardens).
 
+|Method|Description|
+|---|---|
+|`GET` /api/saved_gardens|Get an array of all saved gardens.|
+|`POST` /api/saved_gardens|Create a new saved garden.|
+|`PATCH` /api/saved_gardens/:id|Edit a single saved garden by id.|
+|`DELETE` /api/saved_gardens/:id|Delete a single saved garden by id.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖||||🗑|
+|`device_id`<br>Unique device identifier set by the database.|integer|📖||||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
+|`name`<br>Saved garden name.|string|📖||📝(required)|📝|🗑|
+|`notes`<br>Notes.|string|📖||📝|📝|🗑|
+
+__GET /api/saved_gardens__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/saved_gardens'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-{
-  "password": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ1bmtub3duIiwic3ViIjozNzAsImlhdCI6MTY0Mzg0Mzc0NCwianRpIjoiOWI4NGJiMWUtMmIwZC00ZjdkLWIwMjctMjI5ZDE0MDVjNzBmIiwiaXNzIjoiLy8xOTIuMTY4LjEuMTEyOjMwMDAiLCJleHAiOjE2NDkwMjc3NDQsIm1xdHQiOiJibG9vcGVyLmlvIiwiYm90IjoiZGV2aWNlXzUyOSIsInZob3N0IjoiLyIsIm1xdHRfd3MiOiJ3czovL2Jsb29wZXIuaW86MzAwMi93cyJ9.V34sM5eeZV1xxg5YKcNHQNxaby3pCpk7OYpPJF_SJxqxznM50-iXB0j8hr5AccylA9ALAT6rUnNkmAjpnG2VGULVeDL5TvFQZ6niy-ZF7rVt_0UpBF7g8uawoc1xtieLbJDMEES-KlpTPTObKCiVy
-```
-
-**Response**
-
-```
-Empty Response
-```
-
-
-
-#  POST /api/rmq/topic
-
-**Request**
-
-```
-{
-  "password": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ1bmtub3duIiwic3ViIjozNjEsImlhdCI6MTY0Mzg0Mzc0MSwianRpIjoiM2Q0Y2UxNTMtZjM5Zi00ZTY3LWI2NmMtYjNhOWFkODEyMWExIiwiaXNzIjoiLy8xOTIuMTY4LjEuMTEyOjMwMDAiLCJleHAiOjE2NDkwMjc3NDEsIm1xdHQiOiJibG9vcGVyLmlvIiwiYm90IjoiZGV2aWNlXzUyMCIsInZob3N0IjoiLyIsIm1xdHRfd3MiOiJ3czovL2Jsb29wZXIuaW86MzAwMi93cyJ9.qli_fjLcxEmSAC46e7BZsTddFhaQdPkoYvuOdqnQrKvwYxbg4Vowo9euGW3oGvyn4-xXJShfmkPSR-swbILcYm3QGBxHmpzUaM3KgzHOw8_59JDNS8WeSZ-KmsbAYPzE-IdV00l3rF8smfhSzBNS0
-```
-
-**Response**
-
-```
-Empty Response
-```
-
-
-
-
-
-#  POST /api/rmq/topic
-
-**Request**
-
-```
-{
-  "password": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ1bmtub3duIiwic3ViIjozNjQsImlhdCI6MTY0Mzg0Mzc0MiwianRpIjoiOWFhMjdjYzEtOWRmNC00MDE0LTgzNTktNGJiYjMxODViMGYwIiwiaXNzIjoiLy8xOTIuMTY4LjEuMTEyOjMwMDAiLCJleHAiOjE2NDkwMjc3NDIsIm1xdHQiOiJibG9vcGVyLmlvIiwiYm90IjoiZGV2aWNlXzUyMyIsInZob3N0IjoiLyIsIm1xdHRfd3MiOiJ3czovL2Jsb29wZXIuaW86MzAwMi93cyJ9.AMrhB-cDNVDyjrq1h5l9qU2Fpfh57AKlAxgDx_bzJYyQnEoSZLNWyit5o4Ztlk4sNTkfLE2H0y-KeyCXnqJzMDUvOr2QjYjjPpRbR6aad_1FN1DhK9V0b-hk4nmP8NpQy9jtG9h5Vnm6tooznRVV7
-```
-
-**Response**
-
-```
-Empty Response
-```
-
-
-
-
-
-#  POST /api/rmq/topic
-
-**Request**
-
-```
-{
-  "password": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ1bmtub3duIiwic3ViIjozNjYsImlhdCI6MTY0Mzg0Mzc0MywianRpIjoiZmY0MDQ2ZDQtZDM2MC00NGM0LTkwYjYtNjc1MjdkMGRkYzFlIiwiaXNzIjoiLy8xOTIuMTY4LjEuMTEyOjMwMDAiLCJleHAiOjE2NDkwMjc3NDMsIm1xdHQiOiJibG9vcGVyLmlvIiwiYm90IjoiZGV2aWNlXzUyNSIsInZob3N0IjoiLyIsIm1xdHRfd3MiOiJ3czovL2Jsb29wZXIuaW86MzAwMi93cyJ9.A-_bcpwLnTTH-d-HdldeyJnXNM1W6SNaoodEa4Lv2bvx6XcxCVs_kunCTsIcx_hanItpIm9aNOplQ_acfD3_sRm39ey2sMQtVl_1AjOHdYOKp6oWMTttCMj2S4oJqzlz2ModXDHar-ESrSpMvm6uM
-```
-
-**Response**
-
-```
-Empty Response
-```
-
-
-
-
-
-#  POST /api/rmq/topic
-
-**Request**
-
-```
-{
-  "permission": "read",
-  "routing_key": "demos.d3f91ygdrajxn8jk",
-  "username": "farmbot_demo"
-}
-```
-
-**Response**
-
-```
-Empty Response
-```
-
-
-
-
-
-
-
-
-
-#  POST /api/rmq/user
-
-**Request**
-
-```
-{
-  "password": "37161cedcd8d5d63",
-  "username": "admin"
-}
-```
-
-**Response**
-
-```
-Empty Response
-```
-
-#  POST /api/rmq/user
-
-**Request**
-
-```
-{
-  "password": "6pVmq37G0Urb5CBE",
-  "username": "farmbot_demo"
-}
-```
-
-**Response**
-
-```
-Empty Response
-```
-
-#  POST /api/rmq/user
-
-**Request**
-
-```
-{
-  "password": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ1bmtub3duIiwic3ViIjozNjksImlhdCI6MTY0Mzg0Mzc0NCwianRpIjoiNjA1NmIxZGQtNTZiMy00OTcyLTlkNjgtZGI0YjJiZDBiYTZiIiwiaXNzIjoiLy8xOTIuMTY4LjEuMTEyOjMwMDAiLCJleHAiOjE2NDkwMjc3NDQsIm1xdHQiOiJibG9vcGVyLmlvIiwiYm90IjoiZGV2aWNlXzUyOCIsInZob3N0IjoiLyIsIm1xdHRfd3MiOiJ3czovL2Jsb29wZXIuaW86MzAwMi93cyJ9.wAIrB0yd_2eOOxXs9cDRcpdBzESPBK1UOzeifU3cZ-bIGA4T1JsSWLFkbe7NJ9qVpWsDwGJIDO3TUGA6_MSvdnJywsWYKZe8DWdYYvZHAoNiTd_POY3uc95Zhb9DJrJPvLU4Wo9CPVTEdcW0CYptK
-```
-
-**Response**
-
-```
-Empty Response
-```
-
-#  POST /api/rmq/user
-
-**Request**
-
-```
-{
-  "password": "37161cedcd8d5d63",
-  "username": "admin"
-}
-```
-
-**Response**
-
-```
-Empty Response
-```
-
-#  POST /api/rmq/vhost
-
-**Request**
-
-```
-{
-  "password": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ1bmtub3duIiwic3ViIjozNjAsImlhdCI6MTY0Mzg0Mzc0MSwianRpIjoiNzU3Njg1ODMtOGM5ZS00OGUzLTg4YTUtNDJhMjM0MWYyZDk1IiwiaXNzIjoiLy8xOTIuMTY4LjEuMTEyOjMwMDAiLCJleHAiOjE2NDkwMjc3NDEsIm1xdHQiOiJibG9vcGVyLmlvIiwiYm90IjoiZGV2aWNlXzUxOSIsInZob3N0IjoiLyIsIm1xdHRfd3MiOiJ3czovL2Jsb29wZXIuaW86MzAwMi93cyJ9.XI_zV7NQ4LZoijautvBa1TPu55IoDv3ry5LDyCtcKZdJYKl3s00ewq_d2MJGUMIeR0lSfFrslcy-VJ2F27NCfflL6NioFiyHt01f4sySv8KSuXsqhA-7Sc8AkNsCkHvlSlZK0kVXhBcxiU7199i4f
-```
-
-**Response**
-
-```
-Empty Response
-```
-
-#  POST /api/saved_gardens
-
-**Request**
-
-```
-{
-  "name": "Kale"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 31,
-  "name": "Kale",
-  "device_id": 383,
-  "created_at": "2022-02-02T23:15:33.949Z",
-  "updated_at": "2022-02-02T23:15:33.949Z"
-}
-```
-
-#  GET /api/saved_gardens
-
-**Response**
-
-```
+output:
+```json
 [
   {
     "id": 32,
-    "name": "Andromeda",
+    "name": "Garden 0",
     "device_id": 384,
     "created_at": "2022-02-02T23:15:33.978Z",
-    "updated_at": "2022-02-02T23:15:33.978Z"
-  },
-  {
-    "id": 33,
-    "name": "Medea",
-    "device_id": 384,
-    "created_at": "2022-02-02T23:15:33.983Z",
-    "updated_at": "2022-02-02T23:15:33.983Z"
-  },
-  {
-    "id": 34,
-    "name": "Arachne",
-    "device_id": 384,
-    "created_at": "2022-02-02T23:15:33.989Z",
-    "updated_at": "2022-02-02T23:15:33.989Z"
+    "updated_at": "2022-02-02T23:15:33.978Z",
+    "notes": "notes"
   }
 ]
 ```
 
-#  POST /api/saved_gardens/24/apply
+## saved_gardens/:id/apply
 
-**Response**
+|Method|Description|
+|---|---|
+|`POST` /api/saved_gardens/:id/apply|Apply a saved garden, destroying existing plants.|
+|`PATCH` /api/saved_gardens/:id/apply|Apply a saved garden. Errors if plants exist.|
 
+## saved_gardens/snapshot
+
+|Method|Description|
+|---|---|
+|`POST` /api/saved_gardens/snapshot|Copy the current garden to a new saved garden.|
+
+# sensor_readings
+
+|Method|Description|
+|---|---|
+|`GET` /api/sensor_readings|Get an array of all sensor readings.|
+|`GET` /api/sensor_readings/:id|Get a single sensor reading by id.|
+|`POST` /api/sensor_readings|Create a new sensor reading.|
+|`DELETE` /api/sensor_readings/:id|Delete a single sensor reading by id.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
+|`mode`<br>Sensor pin read mode, `0` for digital, `1` for analog.|0 \| 1|📖|📖|📝||🗑|
+|`pin`<br>Sensor pin number.|0-69|📖|📖|📝(required)||🗑|
+|`value`<br>Sensor value.|0-1023|📖|📖|📝(required)||🗑|
+|`x`<br>x coordinate.|float|📖|📖|📝(required)||🗑|
+|`y`<br>y coordinate.|float|📖|📖|📝(required)||🗑|
+|`z`<br>z coordinate.|float|📖|📖|📝(required)||🗑|
+|`read_at`<br>Date and time of sensor reading.|timestamp|📖|📖|📝||🗑|
+
+__GET /api/sensor_readings__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/sensor_readings'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-Empty Response
-```
-
-#  PATCH /api/saved_gardens/25/apply
-
-**Response**
-
-```
-Empty Response
-```
-
-#  DELETE /api/saved_gardens/28
-
-**Response**
-
-```
-Empty Response
-```
-
-#  PUT /api/saved_gardens/35
-
-**Request**
-
-```
-{
-  "name": "Onion"
-}
-```
-
-**Response**
-
-```
-{
-  "device_id": 385,
-  "name": "Onion",
-  "id": 35,
-  "created_at": "2022-02-02T23:15:34.023Z",
-  "updated_at": "2022-02-02T23:15:34.047Z"
-}
-```
-
-#  POST /api/saved_gardens/snapshot
-
-**Response**
-
-```
-Empty Response
-```
-
-#  GET /api/sensor_readings
-
-**Response**
-
-```
+output:
+```json
 [
   {
     "id": 1,
     "created_at": "2022-02-02T23:14:15.819Z",
     "updated_at": "2022-02-02T23:14:15.819Z",
-    "mode": 0,
-    "pin": 166,
+    "mode": 1,
+    "pin": 66,
     "value": 80,
     "x": 281.0,
     "y": 205.0,
@@ -4612,277 +1961,89 @@ Empty Response
 ]
 ```
 
-#  GET /api/sensor_readings
+# sensors
 
-**Request**
+See [sensors](https://software.farm.bot/docs/sensors).
 
+|Method|Description|
+|---|---|
+|`GET` /api/sensors|Get an array of all sensors.|
+|`GET` /api/sensors/:id|Get a single sensor by id.|
+|`POST` /api/sensors|Create a new sensor.|
+|`PATCH` /api/sensors/:id|Edit a single sensor by id.|
+|`DELETE` /api/sensors/:id|Delete a single sensor by id.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
+|`mode`<br>Sensor pin read mode, `0` for digital, `1` for analog.|0 \| 1|📖|📖|📝(required)|📝|🗑|
+|`pin`<br>Sensor pin number.|0-69|📖|📖|📝(required)|📝|🗑|
+|`label`<br>Sensor name.|string|📖|📖|📝(required)|📝|🗑|
+
+__GET /api/sensors__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/sensors'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-{
-  "page": "2",
-  "per": "5"
-}
-```
-
-**Response**
-
-```
-[
-  {
-    "id": 26,
-    "created_at": "2022-02-02T23:14:16.035Z",
-    "updated_at": "2022-02-02T23:14:16.035Z",
-    "mode": 0,
-    "pin": 416,
-    "value": 33,
-    "x": 268.0,
-    "y": 112.0,
-    "z": 208.0,
-    "read_at": "2022-02-02T23:14:16.035Z"
-  },
-  {
-    "id": 25,
-    "created_at": "2022-02-02T23:14:16.027Z",
-    "updated_at": "2022-02-02T23:14:16.027Z",
-    "mode": 0,
-    "pin": 153,
-    "value": 200,
-    "x": 67.0,
-    "y": 229.0,
-    "z": 467.0,
-    "read_at": "2022-02-02T23:14:16.027
-```
-
-#  POST /api/sensor_readings
-
-**Request**
-
-```
-{
-  "pin": 13,
-  "value": 128,
-  "x": null,
-  "y": 1,
-  "z": 2,
-  "mode": 1,
-  "read_at": "2022-02-02T18:14:16.115+00:00"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 32,
-  "created_at": "2022-02-02T23:14:16.124Z",
-  "updated_at": "2022-02-02T23:14:16.124Z",
-  "mode": 1,
-  "pin": 13,
-  "value": 128,
-  "x": null,
-  "y": 1.0,
-  "z": 2.0,
-  "read_at": "2022-02-02T18:14:16.115Z"
-}
-```
-
-#  POST /api/sensor_readings
-
-**Request**
-
-```
-{
-  "pin": 13,
-  "value": 128,
-  "x": null,
-  "y": 1,
-  "z": 2,
-  "mode": 1
-}
-```
-
-**Response**
-
-```
-{
-  "id": 33,
-  "created_at": "2022-02-02T23:14:16.167Z",
-  "updated_at": "2022-02-02T23:14:16.167Z",
-  "mode": 1,
-  "pin": 13,
-  "value": 128,
-  "x": null,
-  "y": 1.0,
-  "z": 2.0,
-  "read_at": "2022-02-02T23:14:16.166Z"
-}
-```
-
-#  GET /api/sensor_readings
-
-**Response**
-
-```
-[
-  {
-    "id": 35,
-    "created_at": "2022-02-02T23:14:16.455Z",
-    "updated_at": "2022-02-02T23:14:16.456Z",
-    "mode": 0,
-    "pin": 387,
-    "value": 662,
-    "x": 305.0,
-    "y": 220.0,
-    "z": 57.0,
-    "read_at": "2022-02-02T23:14:16.455Z"
-  },
-  {
-    "id": 36,
-    "created_at": "2022-02-02T23:13:16.463Z",
-    "updated_at": "2022-02-02T23:14:16.464Z",
-    "mode": 0,
-    "pin": 33,
-    "value": 503,
-    "x": 311.0,
-    "y": 426.0,
-    "z": 47.0,
-    "read_at": "2022-02-02T23:13:16.463Z
-```
-
-#  DELETE /api/sensor_readings/34
-
-**Response**
-
-```
-Empty Response
-```
-
-#  GET /api/sensor_readings/45
-
-**Response**
-
-```
-{
-  "id": 45,
-  "created_at": "2022-02-02T23:14:16.615Z",
-  "updated_at": "2022-02-02T23:14:16.615Z",
-  "mode": 0,
-  "pin": 416,
-  "value": 918,
-  "x": 154.0,
-  "y": 428.0,
-  "z": 462.0,
-  "read_at": "2022-02-02T23:14:16.615Z"
-}
-```
-
-#  GET /api/sensors
-
-**Response**
-
-```
+output:
+```json
 [
   {
     "id": 4,
     "created_at": "2022-02-02T23:14:40.839Z",
     "updated_at": "2022-02-02T23:14:40.839Z",
     "pin": 3,
-    "label": "MyString",
-    "mode": 1
-  },
-  {
-    "id": 5,
-    "created_at": "2022-02-02T23:14:40.847Z",
-    "updated_at": "2022-02-02T23:14:40.847Z",
-    "pin": 4,
-    "label": "MyString",
+    "label": "My Sensor",
     "mode": 1
   }
 ]
 ```
 
-#  POST /api/sensors
+# sequence_versions
 
-**Request**
+Sequence versions are created when a sequence is published for sharing. Also see [featured sequences](#featured_sequences).
 
+|Method|Description|
+|---|---|
+|`GET` /api/sequence_versions/:id|Get a sequence version.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer||📖||||
+|`created_at`<br>Date and time of creation set by the database.|timestamp||📖||||
+|`description`<br>Sequence description.|string||📖||||
+|`copyright`<br>Copyright holder.|string||📖||||
+|`name`<br>Sequence name.|string||📖||||
+|`color`<br>Sequence color.|"blue" \| "green" \| "yellow" \| "orange" \| "purple" \| "pink" \| "gray" \| "red"||📖||||
+|`kind`<br>"sequence".|"sequence"||📖||||
+|`args`<br>Scope declaration.|Object||📖||||
+|`body`<br>Sequence steps.|Array||📖||||
+
+__GET /api/sequence_versions/8__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/sequence_versions/8'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-{
-  "pin": 13,
-  "label": "LED",
-  "mode": 0
-}
-```
-
-**Response**
-
-```
-{
-  "id": 7,
-  "created_at": "2022-02-02T23:14:40.954Z",
-  "updated_at": "2022-02-02T23:14:40.954Z",
-  "pin": 13,
-  "label": "LED",
-  "mode": 0
-}
-```
-
-#  DELETE /api/sensors/3
-
-**Response**
-
-```
-{
-  "id": 3,
-  "created_at": "2022-02-02T23:14:40.787Z",
-  "updated_at": "2022-02-02T23:14:40.787Z",
-  "pin": 2,
-  "label": "The old label",
-  "mode": 1
-}
-```
-
-#  PUT /api/sensors/6
-
-**Request**
-
-```
-{
-  "label": "The new label"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 6,
-  "created_at": "2022-02-02T23:14:40.897Z",
-  "updated_at": "2022-02-02T23:14:40.914Z",
-  "pin": 5,
-  "label": "The new label",
-  "mode": 1
-}
-```
-
-#  GET /api/sensors/8
-
-**Response**
-
-```
-{
-  "id": 8,
-  "created_at": "2022-02-02T23:14:40.997Z",
-  "updated_at": "2022-02-02T23:14:40.997Z",
-  "pin": 6,
-  "label": "MyString",
-  "mode": 1
-}
-```
-
-#  GET /api/sequence_versions/8
-
-**Response**
-
-```
+output:
+```json
 {
   "id": 8,
   "created_at": "2022-02-02T23:14:33.054Z",
@@ -4906,14 +2067,56 @@ Empty Response
         "message": "Hello, world!",
         "message_type": "warn"
       }
-
+    }
+  ]
+}
 ```
 
-#  GET /api/sequences
+# sequences
 
-**Response**
+See [sequences](https://software.farm.bot/docs/sequences).
 
+|Method|Description|
+|---|---|
+|`GET` /api/sequences|Get an array of all sequences.|
+|`GET` /api/sequences/:id|Get a single sequence by id.|
+|`POST` /api/sequences|Create a new sequence.|
+|`PATCH` /api/sequences/:id|Edit a single sequence by id.|
+|`DELETE` /api/sequences/:id|Delete a single sequence by id.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
+|`args`<br>Scope declaration.|Object|📖|📖|📝|📝(required)|🗑|
+|`color`<br>Sequence color.|"blue" \| "green" \| "yellow" \| "orange" \| "purple" \| "pink" \| "gray" \| "red"|📖|📖|📝|📝|🗑|
+|`folder_id`<br>ID of the parent folder.|integer|📖|📖|📝|📝|🗑|
+|`forked`<br>Local changes to a shared sequence.|boolean|📖|📖|📝|📝|🗑|
+|`name`<br>Sequence name.|string|📖|📖|📝(required)|📝(required)|🗑|
+|`pinned`<br>Add the sequence to the pinned sequence list.|boolean|📖|📖|📝|📝|🗑|
+|`copyright`<br>Copyright holder.|string|📖|📖|📝|📝|🗑|
+|`description`<br>Sequence description (markdown).|string|📖|📖|📝|📝|🗑|
+|`sequence_versions`<br>A list of published versions of the sequence.|integer[]|📖|📖|📝|📝|🗑|
+|`sequence_version_id`<br>ID of the sequence version the sequence was imported from.|integer|📖|📖|📝|📝|🗑|
+|`kind`<br>"sequence"|"sequence"|📖|📖|📝|📝|🗑|
+|`body`<br>Sequence steps.|Array|📖|📖|📝(required)|📝(required)|🗑|
+
+__GET /api/sequences__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/sequences'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
+output:
+```json
 [
   {
     "id": 36,
@@ -4921,593 +2124,6 @@ Empty Response
     "updated_at": "2022-02-02T23:14:31.645Z",
     "args": {
       "version": 20180209,
-      "locals": {
-        "kind": "scope_declaration",
-        "args": {
-        }
-      }
-    },
-    "color": "orange",
-    "folder_id": null,
-    "forked": false,
-    "name": "Versatile national portal",
-    "pinned": false,
-    "copyright": null,
-    "description": null,
-    "sequence_versions": [
-
-    ],
-    "sequence_version_id": null,
-
-```
-
-#  POST /api/sequences
-
-**Request**
-
-```
-{
-  "name": "Scare Birds",
-  "body": [
-
-  ],
-  "args": {
-    "foo": "BAR"
-  }
-}
-```
-
-**Response**
-
-```
-{
-  "id": 270,
-  "created_at": "2022-02-02T23:15:51.569Z",
-  "updated_at": "2022-02-02T23:15:51.569Z",
-  "args": {
-    "version": 20180209,
-    "locals": {
-      "kind": "scope_declaration",
-      "args": {
-      }
-    }
-  },
-  "color": "gray",
-  "folder_id": null,
-  "forked": false,
-  "name": "Scare Birds",
-  "pinned": false,
-  "copyright": null,
-  "description": null,
-  "sequence_versions": [
-
-  ],
-  "sequence_version_id": null,
-  "kind": "sequence",
-  "body": [
-
-  ]
-}
-```
-
-#  POST /api/sequences
-
-**Request**
-
-```
-{
-  "name": "Scare Birds",
-  "body": [
-    {
-      "kind": "move_absolute",
-      "args": {
-        "location": {
-          "kind": "coordinate",
-          "args": {
-            "x": 1,
-            "y": 2,
-            "z": 3
-          }
-        },
-        "offset": {
-          "kind": "coordinate",
-          "args": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          }
-        },
-        "speed": 4
-      },
-      "uuid": "b5c45abb-1d70-464d-925f-bc0366f57bf9"
-    },
-    {
-
-```
-
-**Response**
-
-```
-{
-  "id": 273,
-  "created_at": "2022-02-02T23:15:51.782Z",
-  "updated_at": "2022-02-02T23:15:51.782Z",
-  "args": {
-    "version": 20180209,
-    "locals": {
-      "kind": "scope_declaration",
-      "args": {
-      }
-    }
-  },
-  "color": "gray",
-  "folder_id": null,
-  "forked": false,
-  "name": "Scare Birds",
-  "pinned": false,
-  "copyright": null,
-  "description": null,
-  "sequence_versions": [
-
-  ],
-  "sequence_version_id": null,
-  "kind": "sequence",
-  "body": [
-    {
-      "kind": "move_absol
-```
-
-#  POST /api/sequences
-
-**Request**
-
-```
-{
-  "name": "Scare Birds",
-  "args": {
-    "locals": {
-      "kind": "scope_declaration",
-      "args": {
-      },
-      "body": [
-        {
-          "kind": "parameter_declaration",
-          "args": {
-            "label": "parent",
-            "default_value": {
-              "kind": "coordinate",
-              "args": {
-                "x": 0,
-                "y": 0,
-                "z": 0
-              }
-            }
-          }
-        },
-        {
-          "kind": "variable_declaration"
-```
-
-**Response**
-
-```
-{
-  "id": 275,
-  "created_at": "2022-02-02T23:15:52.200Z",
-  "updated_at": "2022-02-02T23:15:52.200Z",
-  "args": {
-    "version": 20180209,
-    "locals": {
-      "kind": "scope_declaration",
-      "args": {
-      },
-      "body": [
-        {
-          "kind": "parameter_declaration",
-          "args": {
-            "label": "parent",
-            "default_value": {
-              "kind": "coordinate",
-              "args": {
-                "x": 0,
-                "y": 0,
-                "z": 0
-
-```
-
-#  POST /api/sequences
-
-**Request**
-
-```
-{
-  "name": "Scare Birds",
-  "body": [
-
-  ]
-}
-```
-
-**Response**
-
-```
-{
-  "id": 276,
-  "created_at": "2022-02-02T23:15:52.500Z",
-  "updated_at": "2022-02-02T23:15:52.500Z",
-  "args": {
-    "version": 20180209,
-    "locals": {
-      "kind": "scope_declaration",
-      "args": {
-      }
-    }
-  },
-  "color": "gray",
-  "folder_id": null,
-  "forked": false,
-  "name": "Scare Birds",
-  "pinned": false,
-  "copyright": null,
-  "description": null,
-  "sequence_versions": [
-
-  ],
-  "sequence_version_id": null,
-  "kind": "sequence",
-  "body": [
-
-  ]
-}
-```
-
-#  POST /api/sequences
-
-**Request**
-
-```
-{
-  "name": "Scare Birds",
-  "body": [
-    {
-      "kind": "move_absolute",
-      "args": {
-        "location": {
-          "kind": "point",
-          "args": {
-            "pointer_type": "GenericPointer",
-            "pointer_id": 259
-          }
-        },
-        "offset": {
-          "kind": "coordinate",
-          "args": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          }
-        },
-        "speed": 100
-      }
-    }
-  ]
-}
-```
-
-**Response**
-
-```
-{
-  "id": 278,
-  "created_at": "2022-02-02T23:15:59.761Z",
-  "updated_at": "2022-02-02T23:15:59.761Z",
-  "args": {
-    "version": 20180209,
-    "locals": {
-      "kind": "scope_declaration",
-      "args": {
-      }
-    }
-  },
-  "color": "gray",
-  "folder_id": null,
-  "forked": false,
-  "name": "Scare Birds",
-  "pinned": false,
-  "copyright": null,
-  "description": null,
-  "sequence_versions": [
-
-  ],
-  "sequence_version_id": null,
-  "kind": "sequence",
-  "body": [
-    {
-      "kind": "move_absol
-```
-
-#  POST /api/sequences
-
-**Request**
-
-```
-{
-  "name": "Scare Birds",
-  "body": [
-    {
-      "kind": "move_absolute",
-      "args": {
-        "location": {
-          "kind": "coordinate",
-          "args": {
-            "x": 1,
-            "y": 2,
-            "z": 3
-          }
-        },
-        "offset": {
-          "kind": "coordinate",
-          "args": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          }
-        },
-        "speed": 4
-      }
-    },
-    {
-      "kind": "move_absolute",
-      "args": {
-        "lo
-```
-
-**Response**
-
-```
-{
-  "id": 281,
-  "created_at": "2022-02-02T23:16:00.055Z",
-  "updated_at": "2022-02-02T23:16:00.055Z",
-  "args": {
-    "version": 20180209,
-    "locals": {
-      "kind": "scope_declaration",
-      "args": {
-      }
-    }
-  },
-  "color": "gray",
-  "folder_id": null,
-  "forked": false,
-  "name": "Scare Birds",
-  "pinned": false,
-  "copyright": null,
-  "description": null,
-  "sequence_versions": [
-
-  ],
-  "sequence_version_id": null,
-  "kind": "sequence",
-  "body": [
-    {
-      "kind": "move_absol
-```
-
-#  POST /api/sequences
-
-**Request**
-
-```
-{
-  "name": "v. important sequence",
-  "body": [
-
-  ],
-  "pinned": true
-}
-```
-
-**Response**
-
-```
-{
-  "id": 283,
-  "created_at": "2022-02-02T23:16:00.482Z",
-  "updated_at": "2022-02-02T23:16:00.482Z",
-  "args": {
-    "version": 20180209,
-    "locals": {
-      "kind": "scope_declaration",
-      "args": {
-      }
-    }
-  },
-  "color": "gray",
-  "folder_id": null,
-  "forked": false,
-  "name": "v. important sequence",
-  "pinned": true,
-  "copyright": null,
-  "description": null,
-  "sequence_versions": [
-
-  ],
-  "sequence_version_id": null,
-  "kind": "sequence",
-  "body": [
-
-  ]
-}
-```
-
-#  POST /api/sequences
-
-**Request**
-
-```
-{
-  "args": {
-    "locals": {
-      "kind": "scope_declaration",
-      "args": {
-      },
-      "body": [
-        {
-          "kind": "variable_declaration",
-          "args": {
-            "label": "parent",
-            "data_value": {
-              "kind": "coordinate",
-              "args": {
-                "x": 50,
-                "y": 50,
-                "z": 50
-              }
-            }
-          }
-        }
-      ]
-    }
-  },
-  "color": "gray",
-  "name": "MOVE V3 QA",
-  "kind": "sequ
-```
-
-**Response**
-
-```
-{
-  "id": 284,
-  "created_at": "2022-02-02T23:16:00.594Z",
-  "updated_at": "2022-02-02T23:16:00.594Z",
-  "args": {
-    "version": 20180209,
-    "locals": {
-      "kind": "scope_declaration",
-      "args": {
-      },
-      "body": [
-        {
-          "kind": "variable_declaration",
-          "args": {
-            "label": "parent",
-            "data_value": {
-              "kind": "coordinate",
-              "args": {
-                "x": 50,
-                "y": 50,
-                "z": 50
-
-```
-
-#  POST /api/sequences/1/unpublish
-
-**Response**
-
-```
-{
-  "published": false,
-  "id": 1,
-  "cached_author_email": "lanny@keebler.com",
-  "author_device_id": 30,
-  "author_sequence_id": 1,
-  "created_at": "2022-02-02T23:14:15.498Z",
-  "updated_at": "2022-02-02T23:14:15.709Z"
-}
-```
-
-#  POST /api/sequences/19/publish
-
-**Request**
-
-```
-{
-  "copyright": "FarmBot, Inc. 2021"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 6,
-  "cached_author_email": "charmain@kulas.info",
-  "author_device_id": 81,
-  "author_sequence_id": 19,
-  "published": true,
-  "created_at": "2022-02-02T23:14:22.706Z",
-  "updated_at": "2022-02-02T23:14:22.706Z"
-}
-```
-
-#  POST /api/sequences/217/upgrade/16
-
-**Request**
-
-```
-{
-  "sequence_version_id": "16"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 217,
-  "created_at": "2022-02-02T23:15:37.558Z",
-  "updated_at": "2022-02-02T23:15:37.558Z",
-  "args": {
-    "version": 20180209,
-    "locals": {
-      "kind": "scope_declaration",
-      "args": {
-      }
-    }
-  },
-  "color": "gray",
-  "folder_id": null,
-  "forked": false,
-  "name": "Grass-roots didactic system engine",
-  "pinned": false,
-  "copyright": "Farmbot, Inc 2021",
-  "description": null,
-  "sequence_versions": [
-    16
-  ],
-  "sequence_version_id": 16,
-  "kind": "sequence"
-}
-```
-
-#  DELETE /api/sequences/230
-
-**Response**
-
-```
-Empty Response
-```
-
-#  DELETE /api/sequences/232
-
-**Response**
-
-```
-Empty Response
-```
-
-#  PATCH /api/sequences/30
-
-**Request**
-
-```
-{
-  "id": 30,
-  "sequence": {
-    "name": "no",
-    "args": {
       "locals": {
         "kind": "scope_declaration",
         "args": {
@@ -5526,167 +2142,85 @@ Empty Response
                 }
               }
             }
-
-```
-
-**Response**
-
-```
-{
-  "id": 30,
-  "created_at": "2022-02-02T23:14:28.115Z",
-  "updated_at": "2022-02-02T23:14:28.265Z",
-  "args": {
-    "version": 20180209,
-    "locals": {
-      "kind": "scope_declaration",
-      "args": {
-      },
-      "body": [
-        {
-          "kind": "parameter_declaration",
-          "args": {
-            "label": "parent",
-            "default_value": {
-              "kind": "coordinate",
-              "args": {
-                "x": 9,
-                "y": 9,
-                "z": 9
-
-```
-
-#  PATCH /api/sequences/31
-
-**Request**
-
-```
-{
-  "sequence": {
-    "name": "pinned",
-    "pinned": true,
-    "args": {
+          }
+        ]
+      }
     },
-    "body": [
+    "color": "green",
+    "folder_id": null,
+    "forked": false,
+    "name": "My Sequence",
+    "pinned": false,
+    "copyright": null,
+    "description": null,
+    "sequence_versions": [
 
+    ],
+    "sequence_version_id": null,
+    "kind": "sequence",
+    "body": [
+      {
+        "kind": "execute",
+        "args": {
+          "sequence_id": 23
+        }
+      }
     ]
   }
-}
+]
 ```
 
-**Response**
+## sequences/:id/upgrade/:sequence_version_id
 
+|Method|Description|
+|---|---|
+|`POST` /api/sequences/:id/upgrade/:sequence_version_id|Upgrade a sequence that already uses a sequence version.|
+
+## sequences/:sequence_version_id/install
+
+|Method|Description|
+|---|---|
+|`POST` /api/sequences/:sequence_version_id/install|Install someone else's sequence.|
+
+## sequences/:id/publish
+
+|Method|Description|
+|---|---|
+|`POST` /api/sequences/:id/publish|Share your sequence with other people.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`copyright`<br>Copyright holder.|string|||📝(required)|||
+
+## sequences/:id/unpublish
+
+|Method|Description|
+|---|---|
+|`POST` /api/sequences/:id/unpublish|Unlist your sequence.|
+
+# storage_auth
+
+Used for [photos](https://software.farm.bot/docs/photos).
+
+|Method|Description|
+|---|---|
+|`GET` /api/storage_auth|Get the image storage policy object.|
+
+__GET /api/storage_auth__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/storage_auth'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-{
-  "id": 31,
-  "created_at": "2022-02-02T23:14:28.334Z",
-  "updated_at": "2022-02-02T23:14:28.456Z",
-  "args": {
-    "version": 20180209,
-    "locals": {
-      "kind": "scope_declaration",
-      "args": {
-      }
-    }
-  },
-  "color": "gray",
-  "folder_id": null,
-  "forked": false,
-  "name": "pinned",
-  "pinned": true,
-  "copyright": null,
-  "description": null,
-  "sequence_versions": [
-
-  ],
-  "sequence_version_id": null,
-  "kind": "sequence",
-  "body": [
-
-  ]
-}
-```
-
-#  GET /api/sequences/85
-
-**Response**
-
-```
-{
-  "id": 85,
-  "created_at": "2022-02-02T23:14:41.485Z",
-  "updated_at": "2022-02-02T23:14:41.526Z",
-  "args": {
-    "version": 20180209,
-    "locals": {
-      "kind": "scope_declaration",
-      "args": {
-      }
-    }
-  },
-  "color": "gray",
-  "folder_id": null,
-  "forked": false,
-  "name": "Enterprise-wide 6th generation access",
-  "pinned": false,
-  "copyright": null,
-  "description": null,
-  "sequence_versions": [
-
-  ],
-  "sequence_version_id": null,
-  "kind": "sequence",
-  "body": [
-
-  ]
-}
-```
-
-#  POST /api/sequences/9/install
-
-**Request**
-
-```
-{
-  "sequence_version_id": "9"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 41,
-  "created_at": "2022-02-02T23:14:33.394Z",
-  "updated_at": "2022-02-02T23:14:33.399Z",
-  "args": {
-    "version": 20180209,
-    "locals": {
-      "kind": "scope_declaration",
-      "args": {
-      }
-    }
-  },
-  "color": "purple",
-  "folder_id": null,
-  "forked": false,
-  "name": "Organic zero tolerance open system",
-  "pinned": false,
-  "copyright": "FarmBot, Inc. 2021",
-  "description": null,
-  "sequence_versions": [
-    9
-  ],
-  "sequence_version_id": 9,
-  "kind": "sequence"
-}
-```
-
-#  GET /api/storage_auth
-
-**Response**
-
-```
+output:
+```json
 {
   "verb": "POST",
   "url": "//storage.googleapis.com/YOU_MUST_CONFIG_GOOGLE_CLOUD_STORAGE/",
@@ -5699,35 +2233,123 @@ Empty Response
     "GoogleAccessId": "GCS NOT SETUP!",
     "file": "REPLACE_THIS_WITH_A_BINARY_JPEG_FILE"
   },
-  "instructions": "Send a 'from-data' request to the URL provided.Then POST the resulting URL as an 'att
-```
-
-#  GET /api/storage_auth
-
-**Response**
-
-```
-{
-  "verb": "POST",
-  "url": "//192.168.1.112:3000/direct_upload/",
-  "form_data": {
-    "key": "temp/6978bff3-b849-4a5d-b0db-f1ba5811960e.jpg",
-    "acl": "public-read",
-    "Content-Type": "image/jpeg",
-    "policy": "N/A",
-    "signature": "N/A",
-    "GoogleAccessId": "N/A",
-    "file": "REPLACE_THIS_WITH_A_BINARY_JPEG_FILE"
-  },
-  "instructions": "Send a 'from-data' request to the URL provided.Then POST the resulting URL as an 'attachment_url' (json) to api/images/."
+  "instructions": "Send a 'form-data' request to the URL provided. Then POST the resulting URL as an 'attachment_url' (json) to api/images/."
 }
 ```
 
-#  GET /api/tokens
+# telemetries
 
-**Response**
+Used by [the history tab of the connectivity pop-up](https://software.farm.bot/docs/connectivity).
 
+|Method|Description|
+|---|---|
+|`GET` /api/telemetries|Get an array of all telemetries.|
+|`POST` /api/telemetries|Create a new telemetry.|
+|`DELETE` /api/telemetries/:id|Delete a single telemetry by id.|
+|`DELETE` /api/telemetries/all|Delete all telemetries.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖||||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
+|`target`<br>FarmBot OS computer model.|"rpi" \| "rpi3" \| "rpi4"|📖||📝(required)||🗑|
+|`soc_temp`<br>CPU temperature.|integer|📖||📝||🗑|
+|`throttled`<br>RPi throttle state.|"0x#####"|📖||📝||🗑|
+|`wifi_level_percent`<br>WiFi signal strength percent.|0-100|📖||📝||🗑|
+|`uptime`<br>Time in seconds since boot.|integer|📖||📝||🗑|
+|`memory_usage`<br>Memory usage in MB.|integer|📖||📝||🗑|
+|`disk_usage`<br>Disk usage in percent.|0-100|📖||📝||🗑|
+|`cpu_usage`<br>CPU usage in percent.|0-100|📖||📝||🗑|
+|`fbos_version`<br>FarmBot OS semver version string.|string|📖||📝||🗑|
+|`firmware_hardware`<br>Firmware installed on the Farmduino or microcontroller.|"arduino" \| "farmduino" \| "farmduino_k14" \| "farmduino_k15" \| "farmduino_k16" \| "farmduino_k17" \| "express_k10" \| "express_k11" \| "express_k12"|📖||📝||🗑|
+
+__GET /api/telemetries__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/telemetries'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
+output:
+```json
+[
+  {
+    "id": 9,
+    "created_at": 1712360174,
+    "updated_at": "2024-04-05T23:36:14.413Z",
+    "soc_temp": 62,
+    "throttled": "0x0",
+    "wifi_level_percent": 54,
+    "uptime": 832,
+    "memory_usage": 22,
+    "disk_usage": 4,
+    "cpu_usage": 61,
+    "target": "rpi",
+    "fbos_version": "17.0.0",
+    "firmware_hardware": null
+  }
+]
+```
+
+# tokens
+
+Used for user authentication. Also see [authorization](../../python/authorization.md).
+
+|Method|Description|
+|---|---|
+|`GET` /api/tokens|Use your token to refresh your token, except for the expiration.|
+|`POST` /api/tokens|Provide your account login to request a new token.|
+|`DELETE` /api/tokens|Delete your token.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`token`<br>Token.|Object. (see below)|📖||📝||🗑|
+|`user`<br>User.|Object. (see [users](#users))|||📝||🗑|
+
+__Token__
+
+|Field|Type|
+|---|---|
+|`unencoded`<br>Unencoded token information.|Object. (see below)|
+|`encoded`<br>Encoded token to use in request header.|string|
+
+__Unencoded Token__
+
+|Field|Type|
+|---|---|
+|`aud`<br>Audience.|string|
+|`sub`<br>User ID.|integer|
+|`iat`<br>Created at timestamp.|integer|
+|`jti`<br>JTI.|string|
+|`iss`<br>API address.|string|
+|`exp`<br>Expiration.|integer|
+|`mqtt`<br>MQTT URL.|string|
+|`bot`<br>Device ID string (username).|string|
+|`vhost`<br>vhost.|string|
+|`mqtt_ws`<br>MQTT WS URL.|string|
+
+__GET /api/tokens__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/tokens'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
+```
+output:
+```json
 {
   "token": {
     "unencoded": {
@@ -5742,344 +2364,233 @@ Empty Response
       "vhost": "/",
       "mqtt_ws": "ws://blooper.io:3002/ws"
     },
-    "encoded": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ1bmtub3duIiwic3ViIjoxMzQsImlhdCI6MTY0Mzg0MzY4MCwianRpIjoiMjJkZWFjZjMtY2I3Yy00YjQyLTk3MjctMjRkNG
-```
-
-#  GET /api/tokens
-
-**Response**
-
-```
-{
-  "token": {
-    "unencoded": {
-      "aud": "unknown",
-      "sub": 135,
-      "iat": 1643843680,
-      "jti": "12436d09-0cdc-4c80-b625-c244552dc98a",
-      "iss": "//192.168.1.112:3000",
-      "exp": 1649027680,
-      "mqtt": "blooper.io",
-      "bot": "device_215",
-      "vhost": "/",
-      "mqtt_ws": "ws://blooper.io:3002/ws"
-    },
-    "encoded": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ1bmtub3duIiwic3ViIjoxMzUsImlhdCI6MTY0Mzg0MzY4MCwianRpIjoiMTI0MzZkMDktMGNkYy00YzgwLWI2MjUtYzI0ND
-```
-
-#  GET /api/tokens
-
-**Response**
-
-```
-{
-  "token": {
-    "unencoded": {
-      "aud": "unknown",
-      "sub": 136,
-      "iat": 1643843680,
-      "jti": "5853a785-3787-4d51-bba5-0650389d1bfe",
-      "iss": "//192.168.1.112:3000",
-      "exp": 1649027680,
-      "mqtt": "blooper.io",
-      "bot": "device_216",
-      "vhost": "/",
-      "mqtt_ws": "ws://blooper.io:3002/ws"
-    },
-    "encoded": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ1bmtub3duIiwic3ViIjoxMzYsImlhdCI6MTY0Mzg0MzY4MCwianRpIjoiNTg1M2E3ODUtMzc4Ny00ZDUxLWJiYTUtMDY1MD
-```
-
-#  POST /api/tokens
-
-**Request**
-
-```
-{
-  "user": {
-    "email": "saul@mckenzie.com",
-    "password": "password"
+    "encoded": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ1bmtub3duIiwic3ViIjoxMzQsImlhdCI6MTY0Mzg0MzY4MCwianRpIjoiMjJkZWFjZjMtY2I3Yy00YjQyLTk3MjctMjRkNG"
   }
 }
 ```
 
-**Response**
+# tools
 
+Used for [tools](https://software.farm.bot/docs/tools).
+
+|Method|Description|
+|---|---|
+|`GET` /api/tools|Get an array of all tools.|
+|`GET` /api/tools/:id|Get a single tool by id.|
+|`POST` /api/tools|Create a new tool.|
+|`PATCH` /api/tools/:id|Edit a single tool by id.|
+|`DELETE` /api/tools/:id|Delete a single tool by id.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
+|`name`<br>Tool name.|string|📖|📖|📝(required)|📝|🗑|
+|`status`<br>Tool status.|"active" \| "inactive"|📖|📖|||🗑|
+|`flow_rate_ml_per_s`<br>Watering nozzle flow rate in mL per second.|integer|📖|📖|📝|📝|🗑|
+
+__GET /api/tools__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/tools'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-{
-  "token": {
-    "unencoded": {
-      "aud": "unknown",
-      "sub": 297,
-      "iat": 1643843735,
-      "jti": "15190aaa-73b6-4fdf-b6b7-f421fa7450a8",
-      "iss": "//192.168.1.112:3000",
-      "exp": 1649027735,
-      "mqtt": "blooper.io",
-      "bot": "device_422",
-      "vhost": "/",
-      "mqtt_ws": "ws://blooper.io:3002/ws"
-    },
-    "encoded": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ1bmtub3duIiwic3ViIjoyOTcsImlhdCI6MTY0Mzg0MzczNSwianRpIjoiMTUxOTBhYWEtNzNiNi00ZmRmLWI2YjctZjQyMW
-```
-
-#  POST /api/tools
-
-**Request**
-
-```
-{
-  "tool_slot_id": 97,
-  "name": "wow"
-}
-```
-
-**Response**
-
-```
+output:
+```json
 {
   "id": 42,
   "created_at": "2022-02-02T23:14:39.322Z",
   "updated_at": "2022-02-02T23:14:39.322Z",
-  "name": "wow",
-  "status": "inactive"
+  "name": "Watering Nozzle",
+  "status": "active",
+  "flow_rate_ml_per_s": 0
 }
 ```
 
-#  GET /api/tools
+# users
 
-**Response**
+Account user information.
 
+|Method|Description|
+|---|---|
+|`GET` /api/users|Get an array including the user object.|
+|`POST` /api/users|Create a new user.|
+|`PATCH` /api/users|Edit the user object.|
+|`DELETE` /api/users|Delete the user object.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖||||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
+|`name`<br>User name.|string|📖||📝(required)|📝||
+|`email`<br>Email address.|string|📖||📝(required)|📝||
+|`password`<br>Password.|string|||📝(required)|||
+|`password_confirmation`<br>Password.|string|||📝(required)|||
+|`new_password`<br>Password.|string|||||📝|
+|`new_password_confirmation`<br>Password.|string|||||📝|
+|`agree_to_terms`<br>Agreed to terms?.|boolean|||📝|||
+|`language`<br>User language (used for [auto-generation](#ai)).|string|📖||📝|📝|🗑|
+
+__GET /api/users__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/users'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-[
-  {
-    "id": 129,
-    "created_at": "2022-02-02T23:15:37.737Z",
-    "updated_at": "2022-02-02T23:15:37.737Z",
-    "name": "PoliwhirlVileplume",
-    "status": "active"
-  }
-]
-```
-
-#  GET /api/tools/12
-
-**Response**
-
-```
-{
-  "id": 12,
-  "created_at": "2022-02-02T23:14:27.477Z",
-  "updated_at": "2022-02-02T23:14:27.477Z",
-  "name": "NinetalesPrimeape",
-  "status": "active"
-}
-```
-
-#  DELETE /api/tools/20
-
-**Response**
-
-```
-{
-  "id": 20,
-  "created_at": "2022-02-02T23:14:32.240Z",
-  "updated_at": "2022-02-02T23:14:32.240Z",
-  "name": "WeepinbellMuk",
-  "status": "inactive"
-}
-```
-
-#  DELETE /api/tools/22
-
-**Response**
-
-```
-{
-  "id": 22,
-  "created_at": "2022-02-02T23:14:32.348Z",
-  "updated_at": "2022-02-02T23:14:32.348Z",
-  "name": "GyaradosTangela",
-  "status": "inactive"
-}
-```
-
-#  PUT /api/tools/46
-
-**Request**
-
-```
-{
-  "name": "Hi!"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 46,
-  "created_at": "2022-02-02T23:14:48.343Z",
-  "updated_at": "2022-02-02T23:14:48.363Z",
-  "name": "Hi!",
-  "status": "active"
-}
-```
-
-#  PATCH /api/users
-
-**Request**
-
-```
-{
-  "email": "rick@rick.com",
-  "name": "Ricky McRickerson",
-  "format": "json"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 228,
-  "created_at": "2022-02-02T23:14:56.685Z",
-  "updated_at": "2022-02-02T23:14:56.722Z",
-  "name": "Ricky McRickerson",
-  "email": "magda@bogisich-hackett.org"
-}
-```
-
-#  DELETE /api/users
-
-**Request**
-
-```
-{
-  "password": "SeYgNi5A0"
-}
-```
-
-**Response**
-
-```
-{
-  "id": null,
-  "priority": 0,
-  "attempts": 0,
-  "handler": "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/object:User\n  concise_attributes:\n  - !ruby/object:ActiveModel::Attribute::FromDatabase\n    name: id\n    value_before_type_cast: 231\n  - !ruby/object:ActiveModel::Attribute::FromDatabase\n    name: device_id\n    value_before_type_cast: 324\n  - !ruby/object:ActiveModel::Attribute::FromDatabase\n    name: name\n    value_before_type_cast: Earl Huels\n  - !ruby/object:Ac
-```
-
-#  PATCH /api/users
-
-**Request**
-
-```
-{
-  "password": "Ge3OiFcX1cVd25",
-  "new_password": "123456789",
-  "new_password_confirmation": "123456789",
-  "format": "json"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 232,
-  "created_at": "2022-02-02T23:14:56.893Z",
-  "updated_at": "2022-02-02T23:14:56.931Z",
-  "name": "Napoleon Klocko",
-  "email": "ed_berge@brakus-graham.net"
-}
-```
-
-#  GET /api/users
-
-**Response**
-
-```
+output:
+```json
 [
   {
     "id": 234,
     "created_at": "2022-02-02T23:14:56.988Z",
     "updated_at": "2022-02-02T23:14:56.988Z",
     "name": "Susana Bogan",
-    "email": "suzy@hirthe.name"
+    "email": "suzy@hirthe.name",
+  "language": "English"
   }
 ]
 ```
 
-#  POST /api/users
+## users/control_certificate
 
-**Request**
+|Method|Description|
+|---|---|
+|`POST` /api/users/control_certificate|Generate a control certificate.|
 
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`email`<br>Email address.|string|||📝(required)|||
+|`password`<br>Password.|string|||📝(required)|||
+
+## users/resend_verification
+
+|Method|Description|
+|---|---|
+|`POST` /api/users/resend_verification|Resend the account verification email.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`email`<br>Email address.|string|||📝(required)|||
+
+# web_app_config
+
+See [settings](https://software.farm.bot/docs/settings).
+
+|Method|Description|
+|---|---|
+|`GET` /api/web_app_config|Get the web app config object.|
+|`PATCH` /api/web_app_config|Edit the web app configuration object.|
+|`DELETE` /api/web_app_config|Delete the web app configuration object.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖||||🗑|
+|`device_id`<br>Unique device identifier set by the database.|integer|📖||||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
+|`confirm_step_deletion`<br>Show a confirmation dialog when deleting a sequence step.|boolean|📖|||📝|🗑|
+|`disable_animations`<br>Disable plant animations in the garden map.|boolean|📖|||📝|🗑|
+|`disable_i18n`<br>Set the Web App to English.|boolean|📖|||📝|🗑|
+|`display_trail`<br>Display a virtual trail for FarmBot in the garden map to show movement and watering history while the map is open. Toggling this setting will clear data for the current trail.|boolean|📖|||📝|🗑|
+|`dynamic_map`<br>Change the garden map size based on axis length. A value must be input in AXIS LENGTH and STOP AT MAX must be enabled in `firmware_config`. Overrides MAP SIZE values.|boolean|📖|||📝|🗑|
+|`encoder_figure`<br>Show a virtual farmbot in the garden map at the encoder position as well as motor position.|boolean|📖|||📝|🗑|
+|`hide_webcam_widget`<br>Unused.|boolean|📖|||📝|🗑|
+|`legend_menu_open`<br>Show the garden map legend.|boolean|📖|||📝|🗑|
+|`raw_encoders`<br>Show raw encoder values.|boolean|📖|||📝|🗑|
+|`scaled_encoders`<br>Show scaled encoder values.|boolean|📖|||📝|🗑|
+|`show_spread`<br>Show plant spread in the garden map.|boolean|📖|||📝|🗑|
+|`show_farmbot`<br>Show FarmBot in the garden map.|boolean|📖|||📝|🗑|
+|`show_plants`<br>Show plants in the garden map.|boolean|📖|||📝|🗑|
+|`show_points`<br>Show map points in the garden ma.|boolean|📖|||📝|🗑|
+|`x_axis_inverted`<br>Invert x axis jog buttons.|boolean|📖|||📝|🗑|
+|`y_axis_inverted`<br>Invert y axis jog buttons.|boolean|📖|||📝|🗑|
+|`z_axis_inverted`<br>Invert z axis jog buttons.|boolean|📖|||📝|🗑|
+|`bot_origin_quadrant`<br>Select a map origin by clicking on one of the four quadrants to adjust the garden map to your viewing angle.|1-4|📖|||📝|🗑|
+|`zoom_level`<br>Garden map zoom level.|-9-3|📖|||📝|🗑|
+|`success_log`<br>Success log verbosity setting.|0-3|📖|||📝|🗑|
+|`busy_log`<br>Busy log verbosity setting.|0-3|📖|||📝|🗑|
+|`warn_log`<br>Warning log verbosity setting.|0-3|📖|||📝|🗑|
+|`error_log`<br>Error log verbosity setting.|0-3|📖|||📝|🗑|
+|`info_log`<br>Info log verbosity setting.|0-3|📖|||📝|🗑|
+|`fun_log`<br>Fun log verbosity setting.|0-3|📖|||📝|🗑|
+|`debug_log`<br>Debug log verbosity setting.|0-3|📖|||📝|🗑|
+|`stub_config`<br>Sub config.|boolean|📖|||📝|🗑|
+|`show_first_party_farmware`<br>Unused.|boolean|📖|||📝|🗑|
+|`enable_browser_speak`<br>Have the browser also read aloud log messages on the "Speak" channel that are spoken by FarmBot.|boolean|📖|||📝|🗑|
+|`show_images`<br>Show photos in the garden map.|boolean|📖|||📝|🗑|
+|`photo_filter_begin`<br>Show photos after this date and time.|timestamp \| null|📖|||📝|🗑|
+|`photo_filter_end`<br>Show photos before this date and time.|timestamp \| null|📖|||📝|🗑|
+|`discard_unsaved`<br>Don't ask about saving work before closing browser tab. Warning: may cause loss of data.|boolean|📖|||📝|🗑|
+|`xy_swap`<br>Swap map X and Y axes, making the Y axis horizontal and X axis vertical. This setting will also swap the X and Y jog control buttons in the Move widget.|boolean|📖|||📝|🗑|
+|`home_button_homing`<br>Configure the home button to find home instead of moving to home.|boolean|📖|||📝|🗑|
+|`show_motor_plot`<br>Show motor position graph.|boolean|📖|||📝|🗑|
+|`show_historic_points`<br>Show removed weeds in the garden map.|boolean|📖|||📝|🗑|
+|`show_sensor_readings`<br>Show sensor readings in the garden map.|boolean|📖|||📝|🗑|
+|`show_dev_menu`<br>Unused.|boolean|📖|||📝|🗑|
+|`internal_use`<br>Developer setting storage.|string|📖|||📝|🗑|
+|`time_format_24_hour`<br>Display times using the 24-hour format.|boolean|📖|||📝|🗑|
+|`show_pins`<br>Show raw pin lists in Read Sensor, Control Peripheral, and If Statement steps.|boolean|📖|||📝|🗑|
+|`disable_emergency_unlock_confirmation`<br>Don't confirm when unlocking FarmBot after an emergency stop.|boolean|📖|||📝|🗑|
+|`map_size_x`<br>Custom x map dimension (in millimeters). These values set the size of the garden map unless `dynamic_map` is enabled.|integer|📖|||📝|🗑|
+|`map_size_y`<br>Custom y map dimension (in millimeters). These values set the size of the garden map unless `dynamic_map` is enabled.|integer|📖|||📝|🗑|
+|`expand_step_options`<br>Choose whether advanced step options are open or closed by default.|boolean|📖|||📝|🗑|
+|`hide_sensors`<br>Hide the sensors panel.|boolean|📖|||📝|🗑|
+|`confirm_plant_deletion`<br>Show a confirmation dialog when deleting a plant.|boolean|📖|||📝|🗑|
+|`confirm_sequence_deletion`<br>Show a confirmation dialog when deleting a sequence.|boolean|📖|||📝|🗑|
+|`discard_unsaved_sequences`<br>Don't ask about saving sequence work before closing browser tab. Warning: may cause loss of data.|boolean|📖|||📝|🗑|
+|`user_interface_read_only_mode`<br>Disallow account data changes. This does not prevent Lua or FarmBot OS from changing settings.|boolean|📖|||📝|🗑|
+|`assertion_log`<br>Assertion log verbosity setting.|0-3|📖|||📝|🗑|
+|`show_zones`<br>Show point group location areas in the garden map.|boolean|📖|||📝|🗑|
+|`show_weeds`<br>Show weeds in the garden map.|boolean|📖|||📝|🗑|
+|`display_map_missed_steps`<br>Display high motor load warning indicators in map. Requires `display_trail` and stall detection to be enabled.|boolean|📖|||📝|🗑|
+|`time_format_seconds`<br>Add seconds to time displays.|boolean|📖|||📝|🗑|
+|`crop_images`<br>Crop images displayed in the garden map to remove black borders from image rotation. Crop amount determined by CAMERA ROTATION value.|boolean|📖|||📝|🗑|
+|`show_camera_view_area`<br>Show the camera's field of view in the garden map.|boolean|📖|||📝|🗑|
+|`view_celery_script`<br>View raw data representation of sequence steps.|boolean|📖|||📝|🗑|
+|`highlight_modified_settings`<br>Highlight settings that have been changed from their default values.|boolean|📖|||📝|🗑|
+|`show_advanced_settings`<br>Show advanced settings.|boolean|📖|||📝|🗑|
+|`show_soil_interpolation_map`<br>Show soil height interpolation map in the garden map.|boolean|📖|||📝|🗑|
+|`show_moisture_interpolation_map`<br>Show soil moisture interpolation map in the garden map.|boolean|📖|||📝|🗑|
+|`clip_image_layer`<br>Remove portions of images that extend beyond the garden map boundaries.|boolean|📖|||📝|🗑|
+|`beep_verbosity`<br>Beep upon log message verbosity level.|0-3|📖|||📝|🗑|
+|`landing_page`<br>Panel to show upon loading the app.|string|📖|||📝|🗑|
+|`go_button_axes`<br>Default axes to move when a GO TO LOCATION button is pressed.|"X" \| "Y" \| "Z" \| "XY" \| "XYZ"|📖|||📝|🗑|
+|`show_uncropped_camera_view_area`<br>Show the camera's uncropped and unrotated field of view in the garden map when `clip_image_layer` is enabled.|boolean|📖|||📝|🗑|
+|`default_plant_depth`<br>When adding plants to the map from the web app, set each new plant's depth to this value (in millimeters).|integer|📖|||📝|🗑|
+|`show_missed_step_plot`<br>Show motor load graph.|boolean|📖|||📝|🗑|
+|`enable_3d_electronics_box_top`<br>Show the push buttons in 3D instead of 2D.|boolean|📖|||📝|🗑|
+
+__GET /api/web_app_config__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/web_app_config'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-{
-  "password_confirmation": "Password123",
-  "password": "Password123",
-  "email": "delbert.veum@johns.info",
-  "name": "Frank"
-}
-```
-
-**Response**
-
-```
-{
-  "message": "Check your email!"
-}
-```
-
-#  POST /api/users/control_certificate
-
-**Request**
-
-```
-{
-  "email": "jerold@kemmer-hagenes.com",
-  "password": "password456"
-}
-```
-
-**Response**
-
-```
-Empty Response
-```
-
-#  POST /api/users/resend_verification
-
-**Request**
-
-```
-{
-  "email": "aurelio@kozey.net"
-}
-```
-
-**Response**
-
-```
-{
-  "user": "Check your email!"
-}
-```
-
-#  PUT /api/web_app_config
-
-**Request**
-
-```
-{
-  "info_log": 23,
-  "bot_origin_quadrant": -1
-}
-```
-
-**Response**
-
-```
+output:
+```json
 {
   "id": 2,
   "created_at": "2022-02-02T23:14:24.408Z",
@@ -6099,121 +2610,101 @@ Empty Response
   "show_farmbot": true,
   "show_plants": true,
   "show_points": true,
-  "x_axis
-```
-
-#  PUT /api/web_app_config
-
-**Request**
-
-```
-{
-  "device_id": 99
+  "x_axis_inverted": false,
+  "y_axis_inverted": false,
+  "z_axis_inverted": false,
+  "bot_origin_quadrant": 2,
+  "zoom_level": -2,
+  "success_log": 1,
+  "busy_log": 1,
+  "warn_log": 1,
+  "error_log": 1,
+  "info_log": 1,
+  "fun_log": 1,
+  "debug_log": 1,
+  "stub_config": false,
+  "show_first_party_farmware": false,
+  "enable_browser_speak": false,
+  "show_images": true,
+  "photo_filter_begin": null,
+  "photo_filter_end": null,
+  "discard_unsaved": false,
+  "xy_swap": false,
+  "home_button_homing": true,
+  "show_motor_plot": false,
+  "show_historic_points": false,
+  "show_sensor_readings": false,
+  "show_dev_menu": false,
+  "internal_use": null,
+  "time_format_24_hour": false,
+  "show_pins": false,
+  "disable_emergency_unlock_confirmation": true,
+  "map_size_x": 2900,
+  "map_size_y": 1400,
+  "expand_step_options": false,
+  "hide_sensors": false,
+  "confirm_plant_deletion": true,
+  "confirm_sequence_deletion": true,
+  "discard_unsaved_sequences": false,
+  "user_interface_read_only_mode": false,
+  "assertion_log": 1,
+  "show_zones": false,
+  "show_weeds": true,
+  "display_map_missed_steps": false,
+  "time_format_seconds": false,
+  "crop_images": true,
+  "show_camera_view_area": true,
+  "view_celery_script": false,
+  "highlight_modified_settings": true,
+  "show_advanced_settings": false,
+  "show_soil_interpolation_map": false,
+  "show_moisture_interpolation_map": false,
+  "clip_image_layer": true,
+  "beep_verbosity": 0,
+  "landing_page": "plants",
+  "go_button_axes": "XY",
+  "show_uncropped_camera_view_area": false,
+  "default_plant_depth": 5,
+  "show_missed_step_plot": false,
+  "enable_3d_electronics_box_top": true
 }
 ```
 
-**Response**
+# webcam_feeds
 
+See [webcam feeds](https://software.farm.bot/docs/webcam-feeds).
+
+|Method|Description|
+|---|---|
+|`GET` /api/webcam_feeds|Get an array of all webcam feeds.|
+|`GET` /api/webcam_feeds/:id|Get a single webcam feed by id.|
+|`POST` /api/webcam_feeds|Create a new webcam feed.|
+|`PATCH` /api/webcam_feeds/:id|Edit a single webcam feed by id.|
+|`DELETE` /api/webcam_feeds/:id|Delete a single webcam feed by id.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
+|`name`<br>Webcam feed label.|string|📖|📖|📝(required)|📝|🗑|
+|`url`<br>Webcam feed URL.|string|📖|📖|📝(required)|📝|🗑|
+
+__GET /api/webcam_feeds__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/webcam_feeds'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-{
-  "id": 3,
-  "created_at": "2022-02-02T23:14:24.474Z",
-  "updated_at": "2022-02-02T23:14:24.474Z",
-  "device_id": 87,
-  "confirm_step_deletion": false,
-  "disable_animations": false,
-  "disable_i18n": false,
-  "display_trail": true,
-  "dynamic_map": false,
-  "encoder_figure": false,
-  "hide_webcam_widget": false,
-  "legend_menu_open": true,
-  "raw_encoders": false,
-  "scaled_encoders": false,
-  "show_spread": true,
-  "show_farmbot": true,
-  "show_plants": true,
-  "show_points": true,
-  "x_axis
-```
-
-#  PUT /api/web_app_config
-
-**Request**
-
-```
-{
-  "info_log": 23,
-  "bot_origin_quadrant": -1,
-  "internal_use": "null"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 4,
-  "created_at": "2022-02-02T23:14:24.521Z",
-  "updated_at": "2022-02-02T23:14:24.536Z",
-  "device_id": 88,
-  "confirm_step_deletion": false,
-  "disable_animations": false,
-  "disable_i18n": false,
-  "display_trail": true,
-  "dynamic_map": false,
-  "encoder_figure": false,
-  "hide_webcam_widget": false,
-  "legend_menu_open": true,
-  "raw_encoders": false,
-  "scaled_encoders": false,
-  "show_spread": true,
-  "show_farmbot": true,
-  "show_plants": true,
-  "show_points": true,
-  "x_axis
-```
-
-#  DELETE /api/web_app_config
-
-**Response**
-
-```
-Empty Response
-```
-
-#  GET /api/web_app_config
-
-**Response**
-
-```
-{
-  "id": 8,
-  "created_at": "2022-02-02T23:14:24.672Z",
-  "updated_at": "2022-02-02T23:14:24.672Z",
-  "device_id": 90,
-  "confirm_step_deletion": false,
-  "disable_animations": false,
-  "disable_i18n": false,
-  "display_trail": true,
-  "dynamic_map": false,
-  "encoder_figure": false,
-  "hide_webcam_widget": false,
-  "legend_menu_open": true,
-  "raw_encoders": false,
-  "scaled_encoders": false,
-  "show_spread": true,
-  "show_farmbot": true,
-  "show_plants": true,
-  "show_points": true,
-  "x_axis
-```
-
-#  GET /api/webcam_feeds
-
-**Response**
-
-```
+output:
+```json
 [
   {
     "id": 14,
@@ -6221,273 +2712,53 @@ Empty Response
     "updated_at": "2022-02-02T23:14:53.317Z",
     "url": "0",
     "name": "feed 0"
-  },
-  {
-    "id": 15,
-    "created_at": "2022-02-02T23:14:53.322Z",
-    "updated_at": "2022-02-02T23:14:53.322Z",
-    "url": "1",
-    "name": "feed 1"
   }
 ]
 ```
 
-#  POST /api/webcam_feeds
+# wizard_step_results
 
-**Request**
+Used by [setup wizard](https://my.farm.bot/app/designer/setup).
 
+|Method|Description|
+|---|---|
+|`GET` /api/wizard_step_results|Get an array of all wizard step results.|
+|`POST` /api/wizard_step_results|Create a new wizard step result.|
+|`PATCH` /api/wizard_step_results/:id|Edit a single wizard step result by id.|
+|`DELETE` /api/wizard_step_results/:id|Delete a single wizard step result by id.|
+
+|Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
+|---|---|:---:|:---:|:---:|:---:|:---:|
+|`id`<br>Unique identifier set by the database.|integer|📖||||🗑|
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
+|`answer`<br>Wizard step success?|boolean|📖||📝|📝|🗑|
+|`outcome`<br>Error message.|string|📖||📝|📝|🗑|
+|`slug`<br>Wizard step UUID.|string|📖||📝|📝|🗑|
+
+__GET /api/wizard_step_results__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/wizard_step_results'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+response = requests.get(url, headers=headers)
+print(json.dumps(response.json(), indent=2))
 ```
-{
-  "name": "name1",
-  "url": "url1"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 23,
-  "created_at": "2022-02-02T23:15:47.730Z",
-  "updated_at": "2022-02-02T23:15:47.730Z",
-  "url": "url1",
-  "name": "name1"
-}
-```
-
-#  DELETE /api/webcam_feeds/20
-
-**Response**
-
-```
-Empty Response
-```
-
-#  GET /api/webcam_feeds/22
-
-**Response**
-
-```
-{
-  "id": 22,
-  "created_at": "2022-02-02T23:15:47.684Z",
-  "updated_at": "2022-02-02T23:15:47.684Z",
-  "url": "Url!",
-  "name": "Name!"
-}
-```
-
-#  PATCH /api/webcam_feeds/9
-
-**Request**
-
-```
-{
-  "url": "/foo.jpg",
-  "name": "ok"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 9,
-  "created_at": "2022-02-02T23:14:39.358Z",
-  "updated_at": "2022-02-02T23:14:39.372Z",
-  "url": "/foo.jpg",
-  "name": "ok"
-}
-```
-
-#  GET /api/wizard_step_results
-
-**Response**
-
-```
+output:
+```json
 [
   {
     "id": 5,
     "created_at": "2022-02-02T23:15:34.279Z",
     "updated_at": "2022-02-02T23:15:34.279Z",
     "answer": false,
-    "outcome": "Leech Life",
-    "slug": "Poliwrath"
-  },
-  {
-    "id": 6,
-    "created_at": "2022-02-02T23:15:34.283Z",
-    "updated_at": "2022-02-02T23:15:34.283Z",
-    "answer": false,
-    "outcome": "Dizzy Punch",
-    "slug": "Caterpie"
-  },
-  {
-    "id": 7,
-    "created_at": "2022-02-02T23:15:34.287Z",
-    "updated_at": "2022-02-02T23:15:34.287Z",
-    "answer":
+    "outcome": "error",
+    "slug": "intro"
+  }
+]
 ```
-
-#  POST /api/wizard_step_results
-
-**Request**
-
-```
-{
-  "slug": "MY_SLUG"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 10,
-  "created_at": "2022-02-02T23:15:34.374Z",
-  "updated_at": "2022-02-02T23:15:34.374Z",
-  "answer": null,
-  "outcome": null,
-  "slug": "MY_SLUG"
-}
-```
-
-#  DELETE /api/wizard_step_results/11
-
-**Response**
-
-```
-Empty Response
-```
-
-#  PATCH /api/wizard_step_results/9
-
-**Request**
-
-```
-{
-  "slug": "MY_SLUG"
-}
-```
-
-**Response**
-
-```
-{
-  "id": 9,
-  "created_at": "2022-02-02T23:15:34.326Z",
-  "updated_at": "2022-02-02T23:15:34.339Z",
-  "answer": false,
-  "outcome": "Bone Club",
-  "slug": "MY_SLUG"
-}
-```
-
-#  GET /app/nope.jpg
-
-**Request**
-
-```
-{
-  "path": "nope.jpg"
-}
-```
-
-**Response**
-
-```
-Empty Response
-```
-
-#  POST /csp_reports
-
-**Response**
-
-```
-{
-  "problem": "Crashed while parsing report"
-}
-```
-
-#  POST /csp_reports.json
-
-**Response**
-
-```
-{
-}
-```
-
-#  POST /direct_upload
-
-**Request**
-
-```
-{
-  "file": "fake_file",
-  "key": "fake_key"
-}
-```
-
-**Response**
-
-```
-Empty Response
-```
-
-#  GET /featured
-
-**Response**
-
-```
-Empty Response
-```
-
-#  GET /os
-
-**Response**
-
-```
-Empty Response
-```
-
-#  GET /tos_update
-
-**Response**
-
-```
-Empty Response
-```
-
-#  GET /verify/632a1740-855d-4f62-9c99-b2109b91ab3e
-
-**Request**
-
-```
-{
-  "token": "632a1740-855d-4f62-9c99-b2109b91ab3e"
-}
-```
-
-**Response**
-
-```
-Empty Response
-```
-
-#  GET /verify/9a67a4a5-e98f-463f-b3b9-5132b5914d76
-
-**Request**
-
-```
-{
-  "token": "9a67a4a5-e98f-463f-b3b9-5132b5914d76"
-}
-```
-
-**Response**
-
-```
-Empty Response
-```
-

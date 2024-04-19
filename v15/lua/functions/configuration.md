@@ -82,7 +82,7 @@ firmware_version()
 
 # get_device(property?)
 
-Get **device properties**. This is the same [device resource found on the API](../../docs/web-app/api-docs.md#get-apidevice).
+Get **device properties**. This is the same [device resource found on the API](../../docs/web-app/api-docs.md#device).
 
 ```lua
 -- Get all properties:
@@ -102,7 +102,7 @@ toast("Device ID is " .. id)
 
 # get_fbos_config(property?)
 
-Get **FarmBot OS configuration properties**. This is the same [FarmBot OS configuration resource found on the API](../../docs/web-app/api-docs.md#get-apifbos_config).
+Get **FarmBot OS configuration properties**. This is the same [FarmBot OS configuration resource found on the API](../../docs/web-app/api-docs.md#fbos_config).
 
 ```lua
 -- Get all properties:
@@ -122,7 +122,7 @@ toast("FarmBot firmware hardware is " .. firmware_hardware)
 
 # get_firmware_config(property?)
 
-Get **firmware configuration properties**. This is the same [firmware configuration resource found on the API](../../docs/web-app/api-docs.md#get-apifirmware_config).
+Get **firmware configuration properties**. This is the same [firmware configuration resource found on the API](../../docs/web-app/api-docs.md#firmware_config).
 
 ```lua
 -- Get all properties:
@@ -142,7 +142,7 @@ toast("Encoder enabled Z is " .. encoder_enabled_z)
 
 # update_device(params)
 
-Update **device properties**. This is the same [device resource found on the API](../../docs/web-app/api-docs.md#get-apidevice).
+Update **device properties**. This is the same [device resource found on the API](../../docs/web-app/api-docs.md#device).
 
 ```lua
 update_device({key = "value"})
@@ -153,7 +153,7 @@ update_device({name = "Test Farmbot"})
 
 # update_fbos_config()
 
-Update **FarmBot OS configuration properties**. This is the same [FarmBot OS configuration resource found on the API](../../docs/web-app/api-docs.md#get-apifbos_config).
+Update **FarmBot OS configuration properties**. This is the same [FarmBot OS configuration resource found on the API](../../docs/web-app/api-docs.md#fbos_config).
 
 ```lua
 update_fbos_config({key = "value"})
@@ -164,7 +164,7 @@ update_fbos_config({disable_factory_reset = true})
 
 # update_firmware_config(params)
 
-Update **firmware configuration properties**. This is the same [firmware configuration resource found on the API](../../docs/web-app/api-docs.md#get-apifirmware_config).
+Update **firmware configuration properties**. This is the same [firmware configuration resource found on the API](../../docs/web-app/api-docs.md#firmware_config).
 
 ```lua
 update_firmware_config({key = "value"})
