@@ -730,12 +730,12 @@ Used by [settings](https://software.farm.bot/docs/settings).
 |`device_id`<br>Unique device identifier set by the database.|integer|📖||||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
-|`encoder_enabled_x`<br>Enable encoders or stall detection for the x axis.|integer|📖|||📝|🗑|
-|`encoder_enabled_y`<br>Enable encoders or stall detection for the y axis.|integer|📖|||📝|🗑|
-|`encoder_enabled_z`<br>Enable encoders or stall detection for the z axis.|integer|📖|||📝|🗑|
-|`encoder_invert_x`<br>Invert the encoders on the x axis.|integer|📖|||📝|🗑|
-|`encoder_invert_y`<br>Invert the encoders on the y axis.|integer|📖|||📝|🗑|
-|`encoder_invert_z`<br>Invert the encoders on the z axis.|integer|📖|||📝|🗑|
+|`encoder_enabled_x`<br>Enable encoders or stall detection for the x axis.|0 \| 1|📖|||📝|🗑|
+|`encoder_enabled_y`<br>Enable encoders or stall detection for the y axis.|0 \| 1|📖|||📝|🗑|
+|`encoder_enabled_z`<br>Enable encoders or stall detection for the z axis.|0 \| 1|📖|||📝|🗑|
+|`encoder_invert_x`<br>Invert the encoders on the x axis.|0 \| 1|📖|||📝|🗑|
+|`encoder_invert_y`<br>Invert the encoders on the y axis.|0 \| 1|📖|||📝|🗑|
+|`encoder_invert_z`<br>Invert the encoders on the z axis.|0 \| 1|📖|||📝|🗑|
 |`encoder_missed_steps_decay_x`<br>Reduction to missed step total for every good step for the x axis.|integer|📖|||📝|🗑|
 |`encoder_missed_steps_decay_y`<br>Reduction to missed step total for every good step for the y axis.|integer|📖|||📝|🗑|
 |`encoder_missed_steps_decay_z`<br>Reduction to missed step total for every good step for the z axis.|integer|📖|||📝|🗑|
@@ -745,83 +745,83 @@ Used by [settings](https://software.farm.bot/docs/settings).
 |`encoder_scaling_x`<br>10000 * (motor resolution) / (encoder resolution).|integer|📖|||📝|🗑|
 |`encoder_scaling_y`<br>10000 * (motor resolution) / (encoder resolution).|integer|📖|||📝|🗑|
 |`encoder_scaling_z`<br>10000 * (motor resolution) / (encoder resolution).|integer|📖|||📝|🗑|
-|`encoder_type_x`<br>.Unused|integer|📖|||📝|🗑|
-|`encoder_type_y`<br>.Unused|integer|📖|||📝|🗑|
-|`encoder_type_z`<br>.Unused|integer|📖|||📝|🗑|
-|`encoder_use_for_pos_x`<br>.Use the encoders for calculating movements on the x axis.|integer|📖|||📝|🗑|
-|`encoder_use_for_pos_y`<br>.Use the encoders for calculating movements on the y axis.|integer|📖|||📝|🗑|
-|`encoder_use_for_pos_z`<br>.Use the encoders for calculating movements on the z axis.|integer|📖|||📝|🗑|
+|`encoder_type_x`<br>.Unused|0 \| 1|📖|||📝|🗑|
+|`encoder_type_y`<br>.Unused|0 \| 1|📖|||📝|🗑|
+|`encoder_type_z`<br>.Unused|0 \| 1|📖|||📝|🗑|
+|`encoder_use_for_pos_x`<br>.Use the encoders for calculating movements on the x axis.|0 \| 1|📖|||📝|🗑|
+|`encoder_use_for_pos_y`<br>.Use the encoders for calculating movements on the y axis.|0 \| 1|📖|||📝|🗑|
+|`encoder_use_for_pos_z`<br>.Use the encoders for calculating movements on the z axis.|0 \| 1|📖|||📝|🗑|
 |`movement_axis_nr_steps_x`<br>X axis length in steps.|integer|📖|||📝|🗑|
 |`movement_axis_nr_steps_y`<br>Y axis length in steps.|integer|📖|||📝|🗑|
 |`movement_axis_nr_steps_z`<br>Z axis length in steps.|integer|📖|||📝|🗑|
-|`movement_enable_endpoints_x`<br>Enable endstops for the x axis.|integer|📖|||📝|🗑|
-|`movement_enable_endpoints_y`<br>Enable endstops for the y axis.|integer|📖|||📝|🗑|
-|`movement_enable_endpoints_z`<br>Enable endstops for the z axis.|integer|📖|||📝|🗑|
-|`movement_home_at_boot_x`<br>Find home upon startup for the x axis.|integer|📖|||📝|🗑|
-|`movement_home_at_boot_y`<br>Find home upon startup for the y axis.|integer|📖|||📝|🗑|
-|`movement_home_at_boot_z`<br>Find home upon startup for the z axis.|integer|📖|||📝|🗑|
+|`movement_enable_endpoints_x`<br>Enable endstops for the x axis.|0 \| 1|📖|||📝|🗑|
+|`movement_enable_endpoints_y`<br>Enable endstops for the y axis.|0 \| 1|📖|||📝|🗑|
+|`movement_enable_endpoints_z`<br>Enable endstops for the z axis.|0 \| 1|📖|||📝|🗑|
+|`movement_home_at_boot_x`<br>Find home upon startup for the x axis.|0 \| 1|📖|||📝|🗑|
+|`movement_home_at_boot_y`<br>Find home upon startup for the y axis.|0 \| 1|📖|||📝|🗑|
+|`movement_home_at_boot_z`<br>Find home upon startup for the z axis.|0 \| 1|📖|||📝|🗑|
 |`movement_home_spd_x`<br>X axis homing speed in steps per second.|integer|📖|||📝|🗑|
 |`movement_home_spd_y`<br>Y axis homing speed in steps per second.|integer|📖|||📝|🗑|
 |`movement_home_spd_z`<br>Z axis homing speed in steps per second.|integer|📖|||📝|🗑|
-|`movement_home_up_x`<br>Restrict travel to negative coordinate locations for the x axis.|integer|📖|||📝|🗑|
-|`movement_home_up_y`<br>Restrict travel to negative coordinate locations for the y axis.|integer|📖|||📝|🗑|
-|`movement_home_up_z`<br>Restrict travel to negative coordinate locations for the z axis.|integer|📖|||📝|🗑|
-|`movement_invert_endpoints_x`<br>Swap the min and max limit switches for the x axis.|integer|📖|||📝|🗑|
-|`movement_invert_endpoints_y`<br>Swap the min and max limit switches for the y axis.|integer|📖|||📝|🗑|
-|`movement_invert_endpoints_z`<br>Swap the min and max limit switches for the z axis.|integer|📖|||📝|🗑|
-|`movement_invert_motor_x`<br>Invert motor direction for the x axis.|integer|📖|||📝|🗑|
-|`movement_invert_motor_y`<br>Invert motor direction for the y axis.|integer|📖|||📝|🗑|
-|`movement_invert_motor_z`<br>Invert motor direction for the z axis.|integer|📖|||📝|🗑|
-|`movement_keep_active_x`<br>Always power motors on the x axis.|integer|📖|||📝|🗑|
-|`movement_keep_active_y`<br>Always power motors on the y axis.|integer|📖|||📝|🗑|
-|`movement_keep_active_z`<br>Always power motors on the z axis.|integer|📖|||📝|🗑|
+|`movement_home_up_x`<br>Restrict travel to negative coordinate locations for the x axis.|0 \| 1|📖|||📝|🗑|
+|`movement_home_up_y`<br>Restrict travel to negative coordinate locations for the y axis.|0 \| 1|📖|||📝|🗑|
+|`movement_home_up_z`<br>Restrict travel to negative coordinate locations for the z axis.|0 \| 1|📖|||📝|🗑|
+|`movement_invert_endpoints_x`<br>Swap the min and max limit switches for the x axis.|0 \| 1|📖|||📝|🗑|
+|`movement_invert_endpoints_y`<br>Swap the min and max limit switches for the y axis.|0 \| 1|📖|||📝|🗑|
+|`movement_invert_endpoints_z`<br>Swap the min and max limit switches for the z axis.|0 \| 1|📖|||📝|🗑|
+|`movement_invert_motor_x`<br>Invert motor direction for the x axis.|0 \| 1|📖|||📝|🗑|
+|`movement_invert_motor_y`<br>Invert motor direction for the y axis.|0 \| 1|📖|||📝|🗑|
+|`movement_invert_motor_z`<br>Invert motor direction for the z axis.|0 \| 1|📖|||📝|🗑|
+|`movement_keep_active_x`<br>Always power motors on the x axis.|0 \| 1|📖|||📝|🗑|
+|`movement_keep_active_y`<br>Always power motors on the y axis.|0 \| 1|📖|||📝|🗑|
+|`movement_keep_active_z`<br>Always power motors on the z axis.|0 \| 1|📖|||📝|🗑|
 |`movement_max_spd_x`<br>Max speed in steps per second for the x axis.|integer|📖|||📝|🗑|
 |`movement_max_spd_y`<br>Max speed in steps per second for the y axis.|integer|📖|||📝|🗑|
 |`movement_max_spd_z`<br>Max speed in steps per second for the z axis.|integer|📖|||📝|🗑|
 |`movement_min_spd_x`<br>Minimum speed in steps per second for the x axis.|integer|📖|||📝|🗑|
 |`movement_min_spd_y`<br>Minimum speed in steps per second for the y axis.|integer|📖|||📝|🗑|
 |`movement_min_spd_z`<br>Minimum speed in steps per second for the z axis.|integer|📖|||📝|🗑|
-|`movement_secondary_motor_invert_x`<br>Invert the direction of the 2nd x axis motor.|integer|📖|||📝|🗑|
-|`movement_secondary_motor_x`<br>Enable the 2nd x axis motor.|integer|📖|||📝|🗑|
+|`movement_secondary_motor_invert_x`<br>Invert the direction of the 2nd x axis motor.|0 \| 1|📖|||📝|🗑|
+|`movement_secondary_motor_x`<br>Enable the 2nd x axis motor.|0 \| 1|📖|||📝|🗑|
 |`movement_step_per_mm_x`<br>Number of steps per millimeter on the x axis.|integer|📖|||📝|🗑|
 |`movement_step_per_mm_y`<br>Number of steps per millimeter on the y axis.|integer|📖|||📝|🗑|
 |`movement_step_per_mm_z`<br>Number of steps per millimeter on the z axis.|integer|📖|||📝|🗑|
 |`movement_steps_acc_dec_x`<br>Number of steps used to accelerate for the x axis.|integer|📖|||📝|🗑|
 |`movement_steps_acc_dec_y`<br>Number of steps used to accelerate for the y axis.|integer|📖|||📝|🗑|
 |`movement_steps_acc_dec_z`<br>Number of steps used to accelerate for the z axis.|integer|📖|||📝|🗑|
-|`movement_stop_at_home_x`<br>Enable stop at home for the x axis.|integer|📖|||📝|🗑|
-|`movement_stop_at_home_y`<br>Enable stop at home for the y axis.|integer|📖|||📝|🗑|
-|`movement_stop_at_home_z`<br>Enable stop at home for the z axis.|integer|📖|||📝|🗑|
-|`movement_stop_at_max_x`<br>Enable stop at max for the x axis.|integer|📖|||📝|🗑|
-|`movement_stop_at_max_y`<br>Enable stop at max for the y axis.|integer|📖|||📝|🗑|
-|`movement_stop_at_max_z`<br>Enable stop at max for the z axis.|integer|📖|||📝|🗑|
+|`movement_stop_at_home_x`<br>Enable stop at home for the x axis.|0 \| 1|📖|||📝|🗑|
+|`movement_stop_at_home_y`<br>Enable stop at home for the y axis.|0 \| 1|📖|||📝|🗑|
+|`movement_stop_at_home_z`<br>Enable stop at home for the z axis.|0 \| 1|📖|||📝|🗑|
+|`movement_stop_at_max_x`<br>Enable stop at max for the x axis.|0 \| 1|📖|||📝|🗑|
+|`movement_stop_at_max_y`<br>Enable stop at max for the y axis.|0 \| 1|📖|||📝|🗑|
+|`movement_stop_at_max_z`<br>Enable stop at max for the z axis.|0 \| 1|📖|||📝|🗑|
 |`movement_timeout_x`<br>Amount of time to wait for a command to execute before stopping in seconds for the x axis.|integer|📖|||📝|🗑|
 |`movement_timeout_y`<br>Amount of time to wait for a command to execute before stopping in seconds for the y axis.|integer|📖|||📝|🗑|
 |`movement_timeout_z`<br>Amount of time to wait for a command to execute before stopping in seconds for the z axis.|integer|📖|||📝|🗑|
 |`param_config_ok`<br>Unused.|integer|📖|||📝|🗑|
-|`param_e_stop_on_mov_err`<br>E-Stop upon movement error.|integer|📖|||📝|🗑|
+|`param_e_stop_on_mov_err`<br>E-Stop upon movement error.|0 \| 1|📖|||📝|🗑|
 |`param_mov_nr_retry`<br>Number of times to retry a movement.|integer|📖|||📝|🗑|
 |`param_test`<br>Unused.|integer|📖|||📝|🗑|
-|`param_use_eeprom`<br>Unused.|integer|📖|||📝|🗑|
+|`param_use_eeprom`<br>Unused.|0 \| 1|📖|||📝|🗑|
 |`param_version`<br>Unused.|integer|📖|||📝|🗑|
-|`pin_guard_1_active_state`<br>Pin guard 1 active state.|integer|📖|||📝|🗑|
-|`pin_guard_1_pin_nr`<br>Pin guard 1 pin number.|integer|📖|||📝|🗑|
+|`pin_guard_1_active_state`<br>Pin guard 1 active state.|0 \| 1|📖|||📝|🗑|
+|`pin_guard_1_pin_nr`<br>Pin guard 1 pin number.|0-69|📖|||📝|🗑|
 |`pin_guard_1_time_out`<br>Pin guard 1 number of seconds before turning the pin to the inactive state.|integer|📖|||📝|🗑|
-|`pin_guard_2_active_state`<br>Pin guard 2 active state.|integer|📖|||📝|🗑|
-|`pin_guard_2_pin_nr`<br>Pin guard 2 pin number.|integer|📖|||📝|🗑|
+|`pin_guard_2_active_state`<br>Pin guard 2 active state.|0 \| 1|📖|||📝|🗑|
+|`pin_guard_2_pin_nr`<br>Pin guard 2 pin number.|0-69|📖|||📝|🗑|
 |`pin_guard_2_time_out`<br>Pin guard 2 number of seconds before turning the pin to the inactive state.|integer|📖|||📝|🗑|
-|`pin_guard_3_active_state`<br>Pin guard 3 active state.|integer|📖|||📝|🗑|
-|`pin_guard_3_pin_nr`<br>Pin guard 3 pin number.|integer|📖|||📝|🗑|
+|`pin_guard_3_active_state`<br>Pin guard 3 active state.|0 \| 1|📖|||📝|🗑|
+|`pin_guard_3_pin_nr`<br>Pin guard 3 pin number.|0-69|📖|||📝|🗑|
 |`pin_guard_3_time_out`<br>Pin guard 3 number of seconds before turning the pin to the inactive state.|integer|📖|||📝|🗑|
-|`pin_guard_4_active_state`<br>Pin guard 4 active state.|integer|📖|||📝|🗑|
-|`pin_guard_4_pin_nr`<br>Pin guard 4 pin number.|integer|📖|||📝|🗑|
+|`pin_guard_4_active_state`<br>Pin guard 4 active state.|0 \| 1|📖|||📝|🗑|
+|`pin_guard_4_pin_nr`<br>Pin guard 4 pin number.|0-69|📖|||📝|🗑|
 |`pin_guard_4_time_out`<br>Pin guard 4 number of seconds before turning the pin to the inactive state.|integer|📖|||📝|🗑|
-|`pin_guard_5_active_state`<br>Pin guard 5 active state.|integer|📖|||📝|🗑|
-|`pin_guard_5_pin_nr`<br>Pin guard 5 pin number.|integer|📖|||📝|🗑|
+|`pin_guard_5_active_state`<br>Pin guard 5 active state.|0 \| 1|📖|||📝|🗑|
+|`pin_guard_5_pin_nr`<br>Pin guard 5 pin number.|0-69|📖|||📝|🗑|
 |`pin_guard_5_time_out`<br>Pin guard 5 number of seconds before turning the pin to the inactive state.|integer|📖|||📝|🗑|
-|`movement_invert_2_endpoints_x`<br>Enable for normally closed (NC), disable for normally open (NO).|integer|📖|||📝|🗑|
-|`movement_invert_2_endpoints_y`<br>Enable for normally closed (NC), disable for normally open (NO).|integer|📖|||📝|🗑|
-|`movement_invert_2_endpoints_z`<br>Enable for normally closed (NC), disable for normally open (NO).|integer|📖|||📝|🗑|
+|`movement_invert_2_endpoints_x`<br>Enable for normally closed (NC), disable for normally open (NO).|0 \| 1|📖|||📝|🗑|
+|`movement_invert_2_endpoints_y`<br>Enable for normally closed (NC), disable for normally open (NO).|0 \| 1|📖|||📝|🗑|
+|`movement_invert_2_endpoints_z`<br>Enable for normally closed (NC), disable for normally open (NO).|0 \| 1|📖|||📝|🗑|
 |`movement_microsteps_x`<br>Number of microsteps per step on the x axis.|integer|📖|||📝|🗑|
 |`movement_microsteps_y`<br>Number of microsteps per step on the y axis.|integer|📖|||📝|🗑|
 |`movement_microsteps_z`<br>Number of microsteps per step on the z axis.|integer|📖|||📝|🗑|
@@ -840,14 +840,14 @@ Used by [settings](https://software.farm.bot/docs/settings).
 |`movement_calibration_deadzone_x`<br>Distance in steps to group calibration retries for the x axis.|integer|📖|||📝|🗑|
 |`movement_calibration_deadzone_y`<br>Distance in steps to group calibration retries for the y axis.|integer|📖|||📝|🗑|
 |`movement_calibration_deadzone_z`<br>Distance in steps to group calibration retries for the z axis.|integer|📖|||📝|🗑|
-|`movement_axis_stealth_x`<br>Enable quiet mode for the x axis.|integer|📖|||📝|🗑|
-|`movement_axis_stealth_y`<br>Enable quiet mode for the y axis.|integer|📖|||📝|🗑|
-|`movement_axis_stealth_z`<br>Enable quiet mode for the z axis.|integer|📖|||📝|🗑|
+|`movement_axis_stealth_x`<br>Enable quiet mode for the x axis.|0 \| 1|📖|||📝|🗑|
+|`movement_axis_stealth_y`<br>Enable quiet mode for the y axis.|0 \| 1|📖|||📝|🗑|
+|`movement_axis_stealth_z`<br>Enable quiet mode for the z axis.|0 \| 1|📖|||📝|🗑|
 |`movement_calibration_retry_total_x`<br>Total number of times to retry calibration for the x axis.|integer|📖|||📝|🗑|
 |`movement_calibration_retry_total_y`<br>Total number of times to retry calibration for the y axis.|integer|📖|||📝|🗑|
 |`movement_calibration_retry_total_z`<br>Total number of times to retry calibration for the z axis.|integer|📖|||📝|🗑|
-|`pin_report_1_pin_nr`<br>Report values of the pin periodically.|integer|📖|||📝|🗑|
-|`pin_report_2_pin_nr`<br>Report values of the pin periodically.|integer|📖|||📝|🗑|
+|`pin_report_1_pin_nr`<br>Report values of the pin periodically.|0-69|📖|||📝|🗑|
+|`pin_report_2_pin_nr`<br>Report values of the pin periodically.|0-69|📖|||📝|🗑|
 
 __GET /api/firmware_config__
 ```python
