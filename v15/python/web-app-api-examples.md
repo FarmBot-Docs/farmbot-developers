@@ -53,4 +53,8 @@ print(json.dumps(response.json(), indent=2))
 ```
 You should see a copy of the log message now saved in your FarmBot Web App account in the output.
 
-For a list of available endpoints, see [the REST API resource list](../docs/web-app/rest-api.md#resources) and [API example requests](../docs/web-app/api-docs.md).
+For a list of available endpoints, see [the REST API resource list](../docs/web-app/rest-api.md#resources).
+
+# What's next?
+
+ * [API example requests](../docs/web-app/api-docs.md)

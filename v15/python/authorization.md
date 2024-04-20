@@ -8,14 +8,21 @@ description: "Use Python to get a token for authorizing requests"
 include callout.html
 type="warning"
 title="Storing your authorization token"
-content="Store your authorization token securely. It grants full control over your FarmBot and access to your FarmBot Web App account."
+content="Store your authorization token securely. It grants full access and control over your FarmBot and your FarmBot Web App account."
 %}
 
 {%
 include callout.html
 type="info"
 title="Libraries required"
-content='The following examples require either the FarmBot Python library or the **Requests** library. To install, run `python -m pip install farmbot requests` in the command line.'
+content='The following examples require either the FarmBot Python library or the **Requests** library. To install, run `python -m pip install farmbot requests` in the command line. Your system may require you to use `python3` instead of `python`. Using a [virtual environment](https://docs.python.org/3/library/venv.html) is highly recommended. If you see an error ending with `callback_api_version`, run `python -m pip install --upgrade paho-mqtt==1.6.1`.'
+%}
+
+{%
+include callout.html
+type="info"
+title="Running python code"
+content='You can execute python code by pasting it into a new file such as `run.py` which can be executed via `python run.py` in the command line.'
 %}
 
 # Get your token
