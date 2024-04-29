@@ -29,6 +29,24 @@ else
 end
 ```
 
+__optional arguments__
+
+These arguments will only apply if a **USB Camera** is selected (`{key: "camera", value: "USB"}`) and **ROTATE DURING CAPTURE** is disabled (`{key: "take_photo_disable_rotation_adjustment", value: "1"}`).
+
+These arguments can also be set via [`farmware_envs`](../../docs/web-app/api-docs.md#farmware_envs):
+ * `{key: "take_photo_width", value: "200"}`
+ * `{key: "take_photo_height", value: "100"}`
+ * `{key: "take_photo_args", value: "[\"-s\",\"brightness=100%\"]"}`
+
+```lua
+-- specify width and height (not exact or cropped, the camera will use the closest available resolution to the provided values)
+take_photo(200, 100)
+-- add args
+take_photo({"-s", "brightness=100%"})
+-- specify width and height and add args
+take_photo(200, 100, {"-s", "brightness=100%"})
+```
+
 # photo_grid()
 
 Every FarmBot has a different garden size and camera viewport. `photo_grid()` returns a **metadata object** about the **point grid** required to perform a scan of the full garden. It returns a table with the following properties:
@@ -97,6 +115,17 @@ response, error = http({
     headers = headers,
     body = json.encode(body)
 })
+```
+
+__optional arguments__
+
+```lua
+-- specify width and height (not exact or cropped, the camera will use the closest available resolution to the provided values)
+photo = take_photo_raw(200, 100)
+-- add args
+photo = take_photo_raw({"-s", "brightness=100%"})
+-- specify width and height and add args
+photo = take_photo_raw(200, 100, {"-s", "brightness=100%"})
 ```
 
 # base64.encode()

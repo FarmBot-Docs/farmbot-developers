@@ -19,6 +19,15 @@ wait(5000)
 wait(10000, {job = "Passing the time", status = "Watching paint dry"})
 ```
 
+# current_year()
+
+**Returns a number representing the current year**.
+
+```lua
+-- Print the current year
+toast(current_year())
+```
+
 # current_month()
 
 **Returns a number representing the current month** where January is `1` and December is `12`.
@@ -26,6 +35,15 @@ wait(10000, {job = "Passing the time", status = "Watching paint dry"})
 ```lua
 -- Print the current month
 toast(current_month())
+```
+
+# current_day()
+
+**Returns a number representing the current day of the month**.
+
+```lua
+-- Print the current day of the month
+toast(current_day())
 ```
 
 # current_hour()
