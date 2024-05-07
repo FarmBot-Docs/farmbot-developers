@@ -29,23 +29,55 @@ else
 end
 ```
 
-__optional arguments__
+__Optional arguments__
 
-These arguments will only apply if a **USB Camera** is selected (`{key: "camera", value: "USB"}`) and **ROTATE DURING CAPTURE** is disabled (`{key: "take_photo_disable_rotation_adjustment", value: "1"}`).
+{%
+include callout.html
+type="info"
+content='The following options can only be used if a **USB Camera** is selected and **ROTATE DURING CAPTURE** is disabled.
+'%}
 
-These arguments can also be set via [`farmware_envs`](../../docs/web-app/api-docs.md#farmware_envs):
+|Argument    |Recommended Value  |Range                  |
+|------------|-------------------|-----------------------|
+|Resolution  |640, 480           |Will not necessarily produce an exact sized or cropped image; the camera will use the closest available resolution.|
+|`brightness`|35%<br>_89_        |0% - 100%<br>_0 - 255_ |
+|`contrast`  |35%<br>_44_        |0% - 100%<br>_0 - 127_ |
+|`saturation`|50%<br>_64_        |0% - 100%<br>_0 - 127_ |
+|`hue`       |50%<br>_0_         |0% - 100%<br>_-15 - 15_|
+
+Arguments other than resolution can accept either a percentage or a raw value.
+
+```lua
+-- Take a photo with a specified width and height
+take_photo(200, 100)
+
+-- Take a photo with the brightness set to 100%
+take_photo({"-s", "brightness=100%"})
+
+-- Take a photo with the saturation set to 70% and the hue set to 3
+take_photo({
+  "-s", "saturation=70%",
+  "-s", "hue=3"
+})
+
+-- Take a photo with a specified width and height and the contrast set to 40%
+take_photo(200, 100, {"-s", "contrast=40%"})
+```
+
+{%
+include callout.html
+type="warning"
+title="Optional arguments will persist until reboot"
+content='The camera will remember any optional argument settings until you change them to another value or until the FarmBot is rebooted. If you want to reset all values to their defaults, reboot the device.
+'%}
+
+Arguments can also be set using [Custom Settings](https://software.farm.bot/docs/custom-settings) or via the API using the [`farmware_envs` endpoint](../../docs/web-app/api-docs.md#farmware_envs):
+
  * `{key: "take_photo_width", value: "200"}`
  * `{key: "take_photo_height", value: "100"}`
  * `{key: "take_photo_args", value: "[\"-s\",\"brightness=100%\"]"}`
 
-```lua
--- specify width and height (not exact or cropped, the camera will use the closest available resolution to the provided values)
-take_photo(200, 100)
--- add args
-take_photo({"-s", "brightness=100%"})
--- specify width and height and add args
-take_photo(200, 100, {"-s", "brightness=100%"})
-```
+If the arguments are set this way, they will be remembered by your FarmBot even through reboots, but can still be overridden on a case by case basis by calling `take_photo()` with different arguments.
 
 # photo_grid()
 
@@ -117,16 +149,9 @@ response, error = http({
 })
 ```
 
-__optional arguments__
+__Optional arguments__
 
-```lua
--- specify width and height (not exact or cropped, the camera will use the closest available resolution to the provided values)
-photo = take_photo_raw(200, 100)
--- add args
-photo = take_photo_raw({"-s", "brightness=100%"})
--- specify width and height and add args
-photo = take_photo_raw(200, 100, {"-s", "brightness=100%"})
-```
+See [`take_photo()`](#take_photo) for available optional arguments and examples. All options can be used with `take_photo_raw()`.
 
 # base64.encode()
 
