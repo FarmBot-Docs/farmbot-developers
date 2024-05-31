@@ -230,9 +230,9 @@ See [curves](https://software.farm.bot/docs/curves).
 |`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`name`<br>Curve name.|string|📖|📖|📝(required)|📝|🗑|
-|`type`<br>Curve type.|"water" \| "spread" \| "height"|📖|📖|📝(required)|📝|🗑|
-|`data`<br>Curve data.|{[day: string]: value: integer}|📖|📖|📝(required)|📝|🗑|
+|`name`<br>Curve name.|string|📖|📖|📝<br>(required)|📝|🗑|
+|`type`<br>Curve type.|"water" \| "spread" \| "height"|📖|📖|📝<br>(required)|📝|🗑|
+|`data`<br>Curve data.|{[day: string]: value: integer}|📖|📖|📝<br>(required)|📝|🗑|
 
 __POST /api/curves__
 ```python
@@ -391,7 +391,7 @@ output:
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
-|`password`<br>Account password.|string|||📝(required)|||
+|`password`<br>Account password.|string|||📝<br>(required)|||
 
 ## device/seed
 
@@ -401,7 +401,7 @@ output:
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
-|`product_line`<br>FarmBot model.|"express_1.0" \| "express_1.1" \| "express_1.2" \| "express_xl_1.0" \| "express_xl_1.1" \| "express_xl_1.2" \| "genesis_1.2" \| "genesis_1.3" \| "genesis_1.4" \| "genesis_1.5" \| "genesis_1.6" \| "genesis_1.7" \| "genesis_xl_1.4" \| "genesis_xl_1.5" \| "genesis_xl_1.6" \| "genesis_xl_1.7" \| "none"|||📝(required)|||
+|`product_line`<br>FarmBot model.|"express_1.0" \| "express_1.1" \| "express_1.2" \| "express_xl_1.0" \| "express_xl_1.1" \| "express_xl_1.2" \| "genesis_1.2" \| "genesis_1.3" \| "genesis_1.4" \| "genesis_1.5" \| "genesis_1.6" \| "genesis_1.7" \| "genesis_xl_1.4" \| "genesis_xl_1.5" \| "genesis_xl_1.6" \| "genesis_xl_1.7" \| "none"|||📝<br>(required)|||
 |`demo`<br>Seed a demo account.|boolean|||📝|||
 
 ## device/sync
@@ -465,8 +465,8 @@ See [events](https://software.farm.bot/docs/events).
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
 |`start_time`<br>Date and time to begin the farm event.|timestamp|📖|📖|📝|📝|🗑|
 |`end_time`<br>Date and time to end the farm event.|timestamp|📖|📖|📝|📝|🗑|
-|`repeat`<br>Number of times to repeat the farm event.|integer|📖|📖|📝(required)|📝|🗑|
-|`time_unit`<br>Time period for repeat.|"never" \| "minutely" \| "hourly" \| "daily" \| "weekly" \| "monthly" \| "yearly"|📖|📖|📝(required)|📝|🗑|
+|`repeat`<br>Number of times to repeat the farm event.|integer|📖|📖|📝<br>(required)|📝|🗑|
+|`time_unit`<br>Time period for repeat.|"never" \| "minutely" \| "hourly" \| "daily" \| "weekly" \| "monthly" \| "yearly"|📖|📖|📝<br>(required)|📝|🗑|
 |`executable_id`<br>The ID of the sequence or regimen to execute.|integer|📖|📖|📝|📝|🗑|
 |`executable_type`<br>The type of resource to execute.|"Sequence" \| "Regimen"|📖|📖|📝|📝|🗑|
 |`body`<br>Variable data.|Array|📖|📖|📝|📝|🗑|
@@ -533,8 +533,8 @@ See [custom settings](https://software.farm.bot/docs/custom-settings).
 |`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`key`<br>Environment variable label.|string|📖|📖|📝(required)|📝|🗑|
-|`value`<br>Environment variable value.|string|📖|📖|📝(required)|📝|🗑|
+|`key`<br>Environment variable label.|string|📖|📖|📝<br>(required)|📝|🗑|
+|`value`<br>Environment variable value.|string|📖|📖|📝<br>(required)|📝|🗑|
 
 __GET /api/farmware_envs__
 ```python
@@ -1007,9 +1007,9 @@ Used by [sequences](https://software.farm.bot/docs/sequences).
 |`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`parent_id`<br>ID of the parent folder, if any.|integer \| null|📖|📖|📝|📝(required)|🗑|
-|`name`<br>Folder name.|string|📖|📖|📝(required)|📝|🗑|
-|`color`<br>Folder color.|string|📖|📖|📝(required)|📝|🗑|
+|`parent_id`<br>ID of the parent folder, if any.|integer \| null|📖|📖|📝|📝<br>(required)|🗑|
+|`name`<br>Folder name.|string|📖|📖|📝<br>(required)|📝|🗑|
+|`color`<br>Folder color.|string|📖|📖|📝<br>(required)|📝|🗑|
 
 __GET /api/folders__
 ```python
@@ -1150,7 +1150,7 @@ Used for [photos](https://software.farm.bot/docs/photos).
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
 |`attachment_processed_at`<br>Date and time when image was processed.|timestamp|📖|📖|📝||🗑|
-|`attachment_url`<br>Image URL.|string|📖|📖|📝(required)||🗑|
+|`attachment_url`<br>Image URL.|string|📖|📖|📝<br>(required)||🗑|
 |`meta`<br>Image info.|{name: string, x: float, y: float, z: float}|📖|📖|📝||🗑|
 
 __GET /api/images__
@@ -1202,7 +1202,7 @@ Used for [logs](https://software.farm.bot/docs/jobs-and-logs).
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
 |`channels`<br>Array of transmission channels.|("ticker" \| "toast" \| "email" \| "espeak")[]|📖||📝||🗑|
-|`message`<br>Log message.|string|📖||📝(required)||🗑|
+|`message`<br>Log message.|string|📖||📝<br>(required)||🗑|
 |`meta`<br>Unused.|null|📖||📝||🗑|
 |`major_version`<br>FarmBot OS major version.|string|📖||📝||🗑|
 |`minor_version`<br>FarmBot OS minor version.|string|📖||📝||🗑|
@@ -1275,7 +1275,7 @@ output:
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
-|`email`<br>Account email address.|string|||📝(required)|||
+|`email`<br>Account email address.|string|||📝<br>(required)|||
 
 ## change
 
@@ -1285,9 +1285,9 @@ output:
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
-|`password`<br>New account password.|string||||📝(required)||
-|`password_confirmation`<br>New account password.|string||||📝(required)||
-|`id`<br>Token.|string||||📝(required)||
+|`password`<br>New account password.|string||||📝<br>(required)||
+|`password_confirmation`<br>New account password.|string||||📝<br>(required)||
+|`id`<br>Token.|string||||📝<br>(required)||
 
 # peripherals
 
@@ -1306,8 +1306,8 @@ Used by [peripherals](https://software.farm.bot/docs/peripherals).
 |`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`pin`<br>Pin number.|integer|📖|📖|📝(required)|📝|🗑|
-|`label`<br>Peripheral name.|string|📖|📖|📝(required)|📝|🗑|
+|`pin`<br>Pin number.|integer|📖|📖|📝<br>(required)|📝|🗑|
+|`label`<br>Peripheral name.|string|📖|📖|📝<br>(required)|📝|🗑|
 |`mode`<br>Pin mode.|0-1|📖|📖||📝|🗑|
 
 __GET /api/peripherals__
@@ -1365,7 +1365,7 @@ Used by [push buttons](https://software.farm.bot/docs/peripherals).
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
 |`sequence_id`<br>ID of sequence to execute.|integer \| null|📖|📖|📝|📝|🗑|
 |`special_action`<br>Action to perform.|"emergency_lock" \| "emergency_unlock" \| "power_off" \| "read_status" \| "reboot" \| "sync" \| "take_photo" \| null|📖|📖|📝|📝|🗑|
-|`pin_num`<br>Button pin number.|integer|📖|📖|📝(required)|📝|🗑|
+|`pin_num`<br>Button pin number.|integer|📖|📖|📝<br>(required)|📝|🗑|
 |`binding_type`<br>"standard": execute a sequence, "special": perform an action.|"standard" \| "special"|📖|📖||||
 
 __GET /api/pin_bindings__
@@ -1424,10 +1424,10 @@ Used by [gardens](https://software.farm.bot/docs/gardens).
 |`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`saved_garden_id`<br>ID of the saved garden to which the plant belongs.|integer|📖||📝(required)|📝|🗑|
+|`saved_garden_id`<br>ID of the saved garden to which the plant belongs.|integer|📖||📝<br>(required)|📝|🗑|
 |`radius`<br>Size of the plant.|float|📖||📝|📝|🗑|
-|`x`<br>x coordinate.|float|📖||📝(required)|📝|🗑|
-|`y`<br>y coordinate.|float|📖||📝(required)|📝|🗑|
+|`x`<br>x coordinate.|float|📖||📝<br>(required)|📝|🗑|
+|`y`<br>y coordinate.|float|📖||📝<br>(required)|📝|🗑|
 |`z`<br>z coordinate.|float|📖||📝|📝|🗑|
 |`name`<br>Plant name.|string|📖||📝|📝|🗑|
 |`openfarm_slug`<br>Plant type (from OpenFarm).|string|📖||📝|📝|🗑|
@@ -1481,8 +1481,8 @@ Used by [groups](https://software.farm.bot/docs/groups).
 |`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`name`<br>Group name.|string|📖|📖|📝(required)|📝|🗑|
-|`point_ids`<br>Array of manually included point IDs.|integer[]|📖|📖|📝(required)|📝|🗑|
+|`name`<br>Group name.|string|📖|📖|📝<br>(required)|📝|🗑|
+|`point_ids`<br>Array of manually included point IDs.|integer[]|📖|📖|📝<br>(required)|📝|🗑|
 |`sort_type`<br>Sort type. See [point group sorting](../../other/how-it-works/point-group-sorting.md).|"xy_ascending" \| "xy_descending" \| "yx_ascending" \| "yx_descending" \| "xy_alternating" \| "yx_alternating" \| "nn" \| "random"|📖|📖|📝|📝|🗑|
 |`criteria`<br>Point group criteria for automatic point inclusion.|See below and [groups](https://software.farm.bot/docs/groups).|📖|📖|📝|📝|🗑|
 
@@ -1566,11 +1566,11 @@ Notes:
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|✅|✅|✅|✅|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|✅|✅|✅|✅|
 |`name`<br>Point name.|string|📖|📖|📝|📝|🗑|✅|✅|✅|✅|
-|`pointer_type`<br>Point type.|"GenericPointer" \| "Plant" \| "ToolSlot" \| "Weed"|📖|📖|📝(required)|📝|🗑|✅|✅|✅|✅|
+|`pointer_type`<br>Point type.|"GenericPointer" \| "Plant" \| "ToolSlot" \| "Weed"|📖|📖|📝<br>(required)|📝|🗑|✅|✅|✅|✅|
 |`meta`<br>Additional properties.|object|📖|📖|📝|📝|🗑|✅|✅|✅|✅|
-|`x`<br>x coordinate.|float|📖|📖|📝(required)|📝|🗑|✅|✅|✅|✅|
-|`y`<br>y coordinate.|float|📖|📖|📝(required)|📝|🗑|✅|✅|✅|✅|
-|`z`<br>z coordinate.|float|📖|📖|📝(required)|📝|🗑|✅|✅|✅|✅|
+|`x`<br>x coordinate.|float|📖|📖|📝<br>(required)|📝|🗑|✅|✅|✅|✅|
+|`y`<br>y coordinate.|float|📖|📖|📝<br>(required)|📝|🗑|✅|✅|✅|✅|
+|`z`<br>z coordinate.|float|📖|📖|📝<br>(required)|📝|🗑|✅|✅|✅|✅|
 |`openfarm_slug`<br>Plant type (from OpenFarm).|string|📖|📖|📝|📝|🗑|✅||||
 |`plant_stage`<br>Point status.|"planned" \| "planted" \| "harvested" \| "sprouted" \| "active" \| "removed" \| "pending"|📖|📖|📝|📝|🗑|✅||✅||
 |`planted_at`<br>Date and time planted in garden.|timestamp|📖|📖|📝|📝|🗑|✅||||
@@ -1740,10 +1740,10 @@ See [regimens](https://software.farm.bot/docs/regimens).
 |`device_id`<br>Unique device identifier set by the database.|integer|📖|📖|||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`name`<br>Regimen name.|string|📖|📖|📝(required)|📝|🗑|
-|`color`<br>Regimen color.|"blue" \| "green" \| "yellow" \| "orange" \| "purple" \| "pink" \| "gray" \| "red"|📖|📖|📝(required)|📝|🗑|
+|`name`<br>Regimen name.|string|📖|📖|📝<br>(required)|📝|🗑|
+|`color`<br>Regimen color.|"blue" \| "green" \| "yellow" \| "orange" \| "purple" \| "pink" \| "gray" \| "red"|📖|📖|📝<br>(required)|📝|🗑|
 |`body`<br>Variable data.|Array|📖|📖|📝|📝|🗑|
-|`regimen_items`<br>Sequence executions scheduled in the regimen.|Array (`time_offset` is in milliseconds)|📖|📖|📝(required)|📝|🗑|
+|`regimen_items`<br>Sequence executions scheduled in the regimen.|Array (`time_offset` is in milliseconds)|📖|📖|📝<br>(required)|📝|🗑|
 
 __GET /api/regimens__
 ```python
@@ -1813,8 +1813,8 @@ Used by the [FarmBot OS download page](https://os.farm.bot) and FarmBot OS OTA u
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|||||
 |`image_url`<br>URL of FarmBot OS release .fw file.|string|📖|||||
 |`version`<br>FarmBot OS release version.|string|📖|||||
-|`platform`<br>FarmBot OS computer model.|"rpi" \| "rpi3" \| "rpi4"|📝(required) 📖|||||
-|`channel`<br>Release channel.|"stable" \| "beta" \| "alpha"|📝(required) 📖|||||
+|`platform`<br>FarmBot OS computer model.|"rpi" \| "rpi3" \| "rpi4"|📖|||||
+|`channel`<br>Release channel.|"stable" \| "beta" \| "alpha"|📖|||||
 |`dot_img_url`<br>URL of FarmBot OS release .img file.|string|📖|||||
 
 __GET /api/releases__
@@ -1865,7 +1865,7 @@ Used by [gardens](https://software.farm.bot/docs/gardens).
 |`device_id`<br>Unique device identifier set by the database.|integer|📖||||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
-|`name`<br>Saved garden name.|string|📖||📝(required)|📝|🗑|
+|`name`<br>Saved garden name.|string|📖||📝<br>(required)|📝|🗑|
 |`notes`<br>Notes.|string|📖||📝|📝|🗑|
 
 __GET /api/saved_gardens__
@@ -1923,11 +1923,11 @@ output:
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
 |`mode`<br>Sensor pin read mode, `0` for digital, `1` for analog.|0 \| 1|📖|📖|📝||🗑|
-|`pin`<br>Sensor pin number.|0-69|📖|📖|📝(required)||🗑|
-|`value`<br>Sensor value.|0-1023|📖|📖|📝(required)||🗑|
-|`x`<br>x coordinate.|float|📖|📖|📝(required)||🗑|
-|`y`<br>y coordinate.|float|📖|📖|📝(required)||🗑|
-|`z`<br>z coordinate.|float|📖|📖|📝(required)||🗑|
+|`pin`<br>Sensor pin number.|0-69|📖|📖|📝<br>(required)||🗑|
+|`value`<br>Sensor value.|0-1023|📖|📖|📝<br>(required)||🗑|
+|`x`<br>x coordinate.|float|📖|📖|📝<br>(required)||🗑|
+|`y`<br>y coordinate.|float|📖|📖|📝<br>(required)||🗑|
+|`z`<br>z coordinate.|float|📖|📖|📝<br>(required)||🗑|
 |`read_at`<br>Date and time of sensor reading.|timestamp|📖|📖|📝||🗑|
 
 __GET /api/sensor_readings__
@@ -1978,9 +1978,9 @@ See [sensors](https://software.farm.bot/docs/sensors).
 |`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`mode`<br>Sensor pin read mode, `0` for digital, `1` for analog.|0 \| 1|📖|📖|📝(required)|📝|🗑|
-|`pin`<br>Sensor pin number.|0-69|📖|📖|📝(required)|📝|🗑|
-|`label`<br>Sensor name.|string|📖|📖|📝(required)|📝|🗑|
+|`mode`<br>Sensor pin read mode, `0` for digital, `1` for analog.|0 \| 1|📖|📖|📝<br>(required)|📝|🗑|
+|`pin`<br>Sensor pin number.|0-69|📖|📖|📝<br>(required)|📝|🗑|
+|`label`<br>Sensor name.|string|📖|📖|📝<br>(required)|📝|🗑|
 
 __GET /api/sensors__
 ```python
@@ -2089,18 +2089,18 @@ See [sequences](https://software.farm.bot/docs/sequences).
 |`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`args`<br>Scope declaration.|Object|📖|📖|📝|📝(required)|🗑|
+|`args`<br>Scope declaration.|Object|📖|📖|📝|📝<br>(required)|🗑|
 |`color`<br>Sequence color.|"blue" \| "green" \| "yellow" \| "orange" \| "purple" \| "pink" \| "gray" \| "red"|📖|📖|📝|📝|🗑|
 |`folder_id`<br>ID of the parent folder.|integer|📖|📖|📝|📝|🗑|
 |`forked`<br>Local changes to a shared sequence.|boolean|📖|📖|📝|📝|🗑|
-|`name`<br>Sequence name.|string|📖|📖|📝(required)|📝(required)|🗑|
+|`name`<br>Sequence name.|string|📖|📖|📝<br>(required)|📝<br>(required)|🗑|
 |`pinned`<br>Add the sequence to the pinned sequence list.|boolean|📖|📖|📝|📝|🗑|
 |`copyright`<br>Copyright holder.|string|📖|📖|📝|📝|🗑|
 |`description`<br>Sequence description (markdown).|string|📖|📖|📝|📝|🗑|
 |`sequence_versions`<br>A list of published versions of the sequence.|integer[]|📖|📖|📝|📝|🗑|
 |`sequence_version_id`<br>ID of the sequence version the sequence was imported from.|integer|📖|📖|📝|📝|🗑|
 |`kind`<br>"sequence"|"sequence"|📖|📖|📝|📝|🗑|
-|`body`<br>Sequence steps.|Array|📖|📖|📝(required)|📝(required)|🗑|
+|`body`<br>Sequence steps.|Array|📖|📖|📝<br>(required)|📝<br>(required)|🗑|
 
 __GET /api/sequences__
 ```python
@@ -2190,7 +2190,7 @@ output:
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
-|`copyright`<br>Copyright holder.|string|||📝(required)|||
+|`copyright`<br>Copyright holder.|string|||📝<br>(required)|||
 
 ## sequences/:id/unpublish
 
@@ -2253,7 +2253,7 @@ Used by [the history tab of the connectivity pop-up](https://software.farm.bot/d
 |`id`<br>Unique identifier set by the database.|integer|📖||||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
-|`target`<br>FarmBot OS computer model.|"rpi" \| "rpi3" \| "rpi4"|📖||📝(required)||🗑|
+|`target`<br>FarmBot OS computer model.|"rpi" \| "rpi3" \| "rpi4"|📖||📝<br>(required)||🗑|
 |`soc_temp`<br>CPU temperature.|integer|📖||📝||🗑|
 |`throttled`<br>RPi throttle state.|"0x#####"|📖||📝||🗑|
 |`wifi_level_percent`<br>WiFi signal strength percent.|0-100|📖||📝||🗑|
@@ -2386,9 +2386,9 @@ Used for [tools](https://software.farm.bot/docs/tools).
 |`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`name`<br>Tool name.|string|📖|📖|📝(required)|📝|🗑|
-|`status`<br>Tool status.|"active" \| "inactive"|📖|📖|||🗑|
-|`flow_rate_ml_per_s`<br>Watering nozzle flow rate in mL per second.|integer|📖|📖|📝|📝|🗑|
+|`name`<br>Tool name.|string|📖|📖|📝<br>(required)|📝|🗑|
+|`status`<br>Whether a tool is assigned to a slot or not. Does not indicate if a tool is currently mounted by the UTM. Use `device.mounted_tool_id` to check if the tool is mounted or not.|"active" \| "inactive"|📖|📖|||🗑|
+|`flow_rate_ml_per_s`<br>Watering nozzle flow rate in mL per second. Field only shown in the frontend if tool name includes "Watering Nozzle".|integer|📖|📖|📝|📝|🗑|
 
 __GET /api/tools__
 ```python
@@ -2431,10 +2431,10 @@ Account user information.
 |`id`<br>Unique identifier set by the database.|integer|📖||||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
-|`name`<br>User name.|string|📖||📝(required)|📝||
-|`email`<br>Email address.|string|📖||📝(required)|📝||
-|`password`<br>Password.|string|||📝(required)|||
-|`password_confirmation`<br>Password.|string|||📝(required)|||
+|`name`<br>User name.|string|📖||📝<br>(required)|📝||
+|`email`<br>Email address.|string|📖||📝<br>(required)|📝||
+|`password`<br>Password.|string|||📝<br>(required)|||
+|`password_confirmation`<br>Password.|string|||📝<br>(required)|||
 |`new_password`<br>Password.|string|||||📝|
 |`new_password_confirmation`<br>Password.|string|||||📝|
 |`agree_to_terms`<br>Agreed to terms?.|boolean|||📝|||
@@ -2475,8 +2475,8 @@ output:
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
-|`email`<br>Email address.|string|||📝(required)|||
-|`password`<br>Password.|string|||📝(required)|||
+|`email`<br>Email address.|string|||📝<br>(required)|||
+|`password`<br>Password.|string|||📝<br>(required)|||
 
 ## users/resend_verification
 
@@ -2486,7 +2486,7 @@ output:
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
-|`email`<br>Email address.|string|||📝(required)|||
+|`email`<br>Email address.|string|||📝<br>(required)|||
 
 # web_app_config
 
@@ -2687,8 +2687,8 @@ See [webcam feeds](https://software.farm.bot/docs/webcam-feeds).
 |`id`<br>Unique identifier set by the database.|integer|📖|📖|||🗑|
 |`created_at`<br>Date and time of creation set by the database.|timestamp|📖|📖|||🗑|
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
-|`name`<br>Webcam feed label.|string|📖|📖|📝(required)|📝|🗑|
-|`url`<br>Webcam feed URL.|string|📖|📖|📝(required)|📝|🗑|
+|`name`<br>Webcam feed label.|string|📖|📖|📝<br>(required)|📝|🗑|
+|`url`<br>Webcam feed URL.|string|📖|📖|📝<br>(required)|📝|🗑|
 
 __GET /api/webcam_feeds__
 ```python
