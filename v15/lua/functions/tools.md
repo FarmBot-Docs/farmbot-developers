@@ -51,6 +51,28 @@ content='In order to add a **WATER FLOW RATE (ML/S)** value to a tool, the tool 
 ![water flow rate](_images/water_flow_rate.png)'
 %}
 
+# get_tool(params)
+
+**Get a tool** by the given `id` or `name`. Returns a table with the tool's `id`, `name`, and `flow_rate_ml_per_s`.
+
+{%
+include callout.html
+type="info"
+content="Note that the tool object does not include the coordinates of the **slot** that it is assigned to."
+%}
+
+```lua
+-- Get a tool by its ID
+tool = get_tool({id = 123})
+toast(tool.name)
+```
+
+```lua
+-- Get a tool by its name
+tool = get_tool({name = "Watering Nozzle"})
+toast(tool.flow_rate_ml_per_s)
+```
+
 # mount_tool(tool)
 
 **Mounts the given tool** and pulls it out of its slot, taking into account the slot's direction.
@@ -76,20 +98,7 @@ tool = variable("Tool")
 mount_tool(tool)
 ```
 
-To mount a specific tool without using variables, fetch the tool from the FarmBot API using its ID:
-
-```lua
--- The ID for the tool you wish to mount
-tool_id = 1
-
--- Fetch the tool from the API
-tool = api({method = "get", url = "/api/tools/" .. tool_id})
-
--- Mount the tool
-mount_tool(tool)
-```
-
-Alternatively, simply specify a tool name:
+You may also simply mount a tool by its name:
 
 ```lua
 -- Mount a tool by name
