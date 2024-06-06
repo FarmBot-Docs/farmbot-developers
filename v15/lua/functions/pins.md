@@ -6,7 +6,7 @@ description: "List of pin Lua functions in FarmBot OS"
 
 # new_sensor_reading(params)
 
-**Plots a sensor reading point** which can be viewed from the [sensors panel](https://my.farm.bot/app/designer/sensors). Accepts a table of parameters that include the X, Y, and Z coordinates of the reading (usually the FarmBot's current position), the pin number, the pin mode (analog or digital), and the value.
+**Plots a sensor reading point** which can be viewed from the [sensors panel](https://my.farm.bot/app/designer/sensors). Accepts a table of parameters that include the X, Y, and Z coordinates of the reading (usually the FarmBot's current position), the pin number, the pin mode (analog or digital), the value, and the time in UTC at which the sensor was read at.
 
 The `mode` must be either `0` for `digital` readings or `1` for `analog` readings.
 
@@ -20,30 +20,34 @@ content="Calling `new_sensor_reading()` does not perform any readings, it only r
 local pin_63 = 63 -- Tool verification pin
 local pin_value = read_pin(pin_63)
 local xyz = get_xyz()
+local read_at = utc()
 
 -- Create a digital sensor reading for Pin 63 at the current position
 new_sensor_reading({
-  x=xyz.x,
-  y=xyz.y,
-  z=xyz.z,
-  mode=0,
-  pin=pin_63,
-  value=pin_value
+  x = xyz.x,
+  y = xyz.y,
+  z = xyz.z,
+  mode = 0,
+  pin = pin_63,
+  value = pin_value,
+  read_at = read_at
 })
 ```
 
 ```lua
 local pin_59 = 59 -- Soil moisture sensor pin
 local pin_value = read_pin(pin_59, "analog")
+local read_at = utc()
 
 -- Create an analog sensor reading for Pin 59 at the position (100, 200, 0)
 new_sensor_reading({
-  x=100,
-  y=200,
-  z=0,
-  mode=1,
-  pin=pin_59,
-  value=pin_value
+  x = 100,
+  y = 200,
+  z = 0,
+  mode = 1,
+  pin = pin_59,
+  value = pin_value,
+  read_at = read_at
 })
 ```
 
