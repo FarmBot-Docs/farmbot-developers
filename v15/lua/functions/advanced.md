@@ -37,7 +37,7 @@ sequence(subsequence.id, variable)
 
 # rpc()
 
-**Wraps a CeleryScript node into an `rpc_request`**.
+**Wraps a CeleryScript node into an `rpc_request` and executes it**.
 
 ```lua
 command = {
@@ -60,6 +60,12 @@ content='You can use the **[VIEW CELERYSCRIPT](https://software.farm.bot/docs/se
 # cs_eval(celeryscript_ast)
 
 **Executes arbitrary CeleryScript nodes**.
+
+{%
+include callout.html
+type="warning"
+content='In most cases, you should use the [`rpc()`](#rpc) function instead of `cs_eval()`. Using `cs_eval()` without properly wrapping the command into an `rpc-request` is not recommended and will likely not work.'
+%}
 
 ```lua
 cs_eval({
