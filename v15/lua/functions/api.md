@@ -17,6 +17,13 @@ Performs an **HTTP request to the FarmBot API**. This convenience function provi
  * Returns `nil` if there was an error.
  * Errors are sent to the log stream (if any).
 
+{%
+include callout.html
+type="warning"
+title="Making requests"
+content="Making requests other than GET to the API will permanently alter the data in your account. Be especially careful making DELETE requests and POST requests to singular resources, like the /device endpoint, as the API will destroy data that cannot be recovered. Altering data through the API may cause account instability."
+%}
+
 ```lua
 -- Create a new point at (200, 200, 0) with a radius of 100
 result = api({
@@ -87,6 +94,13 @@ include callout.html
 type="info"
 title="Using the FarmBot API?"
 content="If you are making an API call to the FarmBot API, we recommend the simpler [api()](#apioptions) helper."
+%}
+
+{%
+include callout.html
+type="warning"
+title="Making requests"
+content="Making requests other than GET to the API will permanently alter the data in your account. Be especially careful making DELETE requests and POST requests to singular resources, like the /device endpoint, as the API will destroy data that cannot be recovered. Altering data through the API may cause account instability."
 %}
 
 ```lua

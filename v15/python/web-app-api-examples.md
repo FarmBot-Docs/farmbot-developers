@@ -15,6 +15,13 @@ content='To get the authorization token required in these examples (`TOKEN`), se
 
 {%
 include callout.html
+type="warning"
+title="Making requests"
+content="Making requests other than GET to the API will permanently alter the data in your account. Be especially careful making DELETE requests and POST requests to singular resources, like the /device endpoint, as the API will destroy data that cannot be recovered. Altering data through the API may cause account instability."
+%}
+
+{%
+include callout.html
 type="info"
 title="Libraries required"
 content='The following examples require the Requests library. To install, run `python -m pip install requests` in the command line.'
