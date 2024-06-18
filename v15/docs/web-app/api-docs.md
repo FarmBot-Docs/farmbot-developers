@@ -312,35 +312,33 @@ See [FarmBot settings](https://software.farm.bot/docs/farmbot-settings).
 |Method|Description|
 |---|---|
 |`GET` /api/device|Get the device object.|
-|`POST` /api/device|Create a new device.|
 |`PATCH` /api/device|Edit the device object.|
-|`DELETE` /api/device|Delete the device object.|
 
 |Field|Type|`GET`|`GET/:id`|`POST`|`PATCH`|`DELETE`|
 |---|---|:---:|:---:|:---:|:---:|:---:|
-|`id`<br>Unique identifier set by the database.|integer|📖||||🗑|
-|`created_at`<br>Date and time of creation set by the database.|timestamp|📖||||🗑|
-|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖||||🗑|
-|`fb_order_number`<br>Order number.|string \| null|📖|||📝|🗑|
-|`fbos_version`<br>FarmBot OS version.|string|📖||||🗑|
-|`indoor`<br>Is your FarmBot indoors?|boolean|📖||📝|📝|🗑|
-|`last_saw_api`<br>Datetime of last API visit.|timestamp|📖||||🗑|
-|`lat`<br>Latitude.|float|📖||📝|📝|🗑|
-|`lng`<br>Longitude.|float|📖||📝|📝|🗑|
-|`mounted_tool_id`<br>The ID of the tool currently attached to the UTM.|integer|📖|||📝|🗑|
-|`name`<br>FarmBot name.|string|📖||📝|📝|🗑|
-|`ota_hour`<br>Over-the-air update local time.|0-23 \| null|📖|||📝|🗑|
-|`ota_hour_utc`<br>Over-the-air update UTC time.|0-23 \| null|📖||||🗑|
-|`rpi`<br>FarmBot computer model.|"3" \| "4" \| "01" \| "02"|📖||📝|📝|🗑|
-|`serial_number`<br>FarmBot serial number.|string|📖||||🗑|
-|`setup_completed_at`<br>Datetime device setup completed.|timestamp|📖|||📝|🗑|
-|`throttled_at`<br>Datetime device throttle begin.|timestamp|📖||||🗑|
-|`throttled_until`<br>Datetime device throttle end.|timestamp|📖||||🗑|
-|`timezone`<br>Timezone.|string|📖||📝|📝|🗑|
-|`max_log_age_in_days`<br>Logs deleted after __ days.|integer|📖||||🗑|
-|`max_sequence_count`<br>Maximum number of allowed sequences.|integer|📖||||🗑|
-|`max_sequence_length`<br>Maximum allowed sequence length.|integer|📖||||🗑|
-|`tz_offset_hrs`<br>Hours offset from UTC.|integer|📖||||🗑|
+|`id`<br>Unique identifier set by the database.|integer|📖|||||
+|`created_at`<br>Date and time of creation set by the database.|timestamp|📖|||||
+|`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|||||
+|`fb_order_number`<br>Order number.|string \| null|📖|||📝||
+|`fbos_version`<br>FarmBot OS version.|string|📖|||||
+|`indoor`<br>Is your FarmBot indoors?|boolean|📖|||📝||
+|`last_saw_api`<br>Datetime of last API visit.|timestamp|📖|||||
+|`lat`<br>Latitude.|float|📖|||📝||
+|`lng`<br>Longitude.|float|📖|||📝||
+|`mounted_tool_id`<br>The ID of the tool currently attached to the UTM.|integer|📖|||📝||
+|`name`<br>FarmBot name.|string|📖|||📝||
+|`ota_hour`<br>Over-the-air update local time.|0-23 \| null|📖|||📝||
+|`ota_hour_utc`<br>Over-the-air update UTC time.|0-23 \| null|📖|||||
+|`rpi`<br>FarmBot computer model.|"3" \| "4" \| "01" \| "02"|📖|||📝||
+|`serial_number`<br>FarmBot serial number.|string|📖|||||
+|`setup_completed_at`<br>Datetime device setup completed.|timestamp|📖|||📝||
+|`throttled_at`<br>Datetime device throttle begin.|timestamp|📖|||||
+|`throttled_until`<br>Datetime device throttle end.|timestamp|📖|||||
+|`timezone`<br>Timezone.|string|📖|||📝||
+|`max_log_age_in_days`<br>Logs deleted after __ days.|integer|📖|||||
+|`max_sequence_count`<br>Maximum number of allowed sequences.|integer|📖|||||
+|`max_sequence_length`<br>Maximum allowed sequence length.|integer|📖|||||
+|`tz_offset_hrs`<br>Hours offset from UTC.|integer|📖|||||
 
 __GET /api/device__
 ```python
