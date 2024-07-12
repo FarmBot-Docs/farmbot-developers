@@ -6,7 +6,7 @@ description: "List of jobs Lua functions in FarmBot OS"
 
 # set_job(name, params?)
 
-**Creates or updates a job** in the [jobs popup](https://software.farm.bot/docs/jobs). This is useful for tracking long running tasks such as photo grids.
+**Creates or updates a job** in the [jobs popup](https://software.farm.bot/docs/jobs-and-logs). This is useful for tracking long running tasks such as photo grids.
 
 The `params` argument is an optional table with the following optional fields: `status`, `percent`, and `time`. When a job is first created, it will initialize with a `status` of `Working`, a `percent` of `0`, and a `time` set to the current time, unless explicitly defined otherwise.
 
