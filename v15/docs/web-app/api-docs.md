@@ -1248,6 +1248,46 @@ output:
 ]
 ```
 
+__POST /api/logs__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/logs'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+payload = {
+    'message': 'Hello World!',
+    'type': 'success',
+    'channels': ['toast'],
+}
+response = requests.post(url, headers=headers, json=payload)
+print(json.dumps(response.json(), indent=2))
+```
+output:
+```json
+{
+  "id": 1234567,
+  "created_at": 1643843034,
+  "updated_at": "2022-02-02T23:14:54.423Z",
+  "channels": [
+    "toast"
+  ],
+  "message": "Hello World!",
+  "meta": null,
+  "major_version": null,
+  "minor_version": null,
+  "patch_version": null,
+  "type": "success",
+  "verbosity": 1,
+  "x": null,
+  "y": null,
+  "z": null
+}
+```
+
 ## logs/search
 
 |Method|Description|
@@ -1669,6 +1709,51 @@ output:
     "gantry_mounted": false
   }
 ]
+```
+
+__POST /api/points__
+```python
+import json
+import requests
+
+# TOKEN = ...
+
+url = f'https:{TOKEN['token']['unencoded']['iss']}/api/points'
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
+payload = {
+    'pointer_type': 'Plant',
+    'name': 'Strawberry',
+    'openfarm_slug': 'strawberry',
+    'x': 1,
+    'y': 2,
+    'z': 3,
+}
+response = requests.post(url, headers=headers, json=payload)
+print(json.dumps(response.json(), indent=2))
+```
+output:
+```json
+{
+  "id": 123,
+  "created_at": "2022-02-02T23:14:25.964Z",
+  "updated_at": "2022-02-02T23:14:25.964Z",
+  "device_id": 99,
+  "name": "Strawberry",
+  "pointer_type": "Plant",
+  "meta": {},
+  "x": 1,
+  "y": 2,
+  "z": 3,
+  "openfarm_slug": "strawberry",
+  "plant_stage": "planned",
+  "planted_at": null,
+  "radius": 25.0,
+  "depth": 0,
+  "water_curve_id": null,
+  "spread_curve_id": null,
+  "height_curve_id": null
+}
 ```
 
 ## points/search
