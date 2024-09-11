@@ -84,6 +84,8 @@ Used for [Lua code generation](https://software.farm.bot/v15/app/sequences/seque
 |`reaction`<br>The feedback for the outcome of the prompt.|"good" \| "bad"|||📝|||
 
 __POST /api/ai_feedbacks__
+
+__via Python__
 ```python
 import json
 import requests
@@ -99,6 +101,18 @@ payload = {
 }
 response = requests.post(url, headers=headers, json=payload)
 print(json.dumps(response.json(), indent=2))
+```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_post('ai_feedbacks', {'prompt': 'write code', 'reaction': 'good'})
 ```
 output:
 ```json
@@ -130,6 +144,8 @@ Used by the [message center](https://software.farm.bot/docs/message-center).
 |`priority`<br>Importance for sorting.|integer|📖||||🗑|
 
 __GET /api/alerts__
+
+__via Python__
 ```python
 import json
 import requests
@@ -142,6 +158,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('alerts')
+```
+
 output:
 ```json
 [
@@ -157,6 +186,8 @@ output:
 ```
 
 __DELETE /api/alerts/1__
+
+__via Python__
 ```python
 import json
 import requests
@@ -169,6 +200,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.delete(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_delete('alerts', 1)
+```
+
 output:
 ```json
 {
@@ -192,6 +236,8 @@ output:
 |*corpus*<br>Celery Script corpus.|object|📖|||||
 
 __GET /api/corpus__
+
+__via Python__
 ```python
 import json
 import requests
@@ -204,6 +250,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('corpus')
+```
+
 output:
 ```json
 {
@@ -235,6 +294,8 @@ See [curves](https://software.farm.bot/docs/curves).
 |`data`<br>Curve data.|{[day: string]: value: integer}|📖|📖|📝<br>(required)|📝|🗑|
 
 __POST /api/curves__
+
+__via Python__
 ```python
 import json
 import requests
@@ -255,6 +316,26 @@ payload = {
 response = requests.post(url, headers=headers, json=payload)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_post('curves', {
+    'name': 'Curve 1',
+    'type': 'water',
+    'data': {
+        '1': 1,
+        '100': 100
+    }
+})
+```
+
 output:
 ```json
 {
@@ -284,6 +365,8 @@ Used for [demo.farm.bot](http://demo.farm.bot).
 |`product_line`<br>FarmBot model.|"express_1.0" \| "express_1.1" \| "express_1.2" \| "express_xl_1.0" \| "express_xl_1.1" \| "express_xl_1.2" \| "genesis_1.2" \| "genesis_1.3" \| "genesis_1.4" \| "genesis_1.5" \| "genesis_1.6" \| "genesis_1.7" \| "genesis_xl_1.4" \| "genesis_xl_1.5" \| "genesis_xl_1.6" \| "genesis_xl_1.7" \| "none"|||📝|||
 
 __POST /api/demo_account__
+
+__via Python__
 ```python
 import json
 import requests
@@ -300,6 +383,22 @@ payload = {
 response = requests.post(url, headers=headers, json=payload)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_post('demo_account', {
+    'secret': 'password',
+    'product_line': 'genesis_1.7',
+})
+```
+
 output:
 ```json
 {}
@@ -341,6 +440,8 @@ See [FarmBot settings](https://software.farm.bot/docs/farmbot-settings).
 |`tz_offset_hrs`<br>Hours offset from UTC.|integer|📖|||||
 
 __GET /api/device__
+
+__via Python__
 ```python
 import json
 import requests
@@ -353,6 +454,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('device')
+```
+
 output:
 ```json
 {
@@ -415,6 +529,8 @@ output:
 |`POST` /api/export_data|Request account data export.|
 
 __POST /api/export_data__
+
+__via Python__
 ```python
 import json
 import requests
@@ -427,6 +543,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.post(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_post('export_data')
+```
+
 output:
 ```json
 {
@@ -470,6 +599,8 @@ See [events](https://software.farm.bot/docs/events).
 |`body`<br>Variable data.|Array|📖|📖|📝|📝|🗑|
 
 __GET /api/farm_events__
+
+__via Python__
 ```python
 import json
 import requests
@@ -482,6 +613,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('farm_events')
+```
+
 output:
 ```json
 [
@@ -535,6 +679,8 @@ See [custom settings](https://software.farm.bot/docs/custom-settings).
 |`value`<br>Environment variable value.|string|📖|📖|📝<br>(required)|📝|🗑|
 
 __GET /api/farmware_envs__
+
+__via Python__
 ```python
 import json
 import requests
@@ -547,6 +693,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('farmware_envs')
+```
+
 output:
 ```json
 [
@@ -596,6 +755,8 @@ See [FarmBot settings](https://software.farm.bot/docs/farmbot-settings).
 |`gantry_height`<br>The distance in millimeters between the bottom of FarmBot's tool head and the bottom of the gantry main beam when the Z-axis is fully raised.|integer|📖|||📝|🗑|
 
 __GET /api/fbos_config__
+
+__via Python__
 ```python
 import json
 import requests
@@ -608,6 +769,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('fbos_config')
+```
+
 output:
 ```json
 {
@@ -652,6 +826,8 @@ See featured sequences [list](https://my.farm.bot/featured) and [docs](https://s
 |`color`<br>Sequence color.|string|📖|||||
 
 __GET /api/featured_sequences__
+
+__via Python__
 ```python
 import json
 import requests
@@ -664,6 +840,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('featured_sequences')
+```
+
 output:
 ```json
 [
@@ -691,6 +880,8 @@ Used by [help](https://software.farm.bot/docs/help) and the [setup wizard](https
 |`slug`<br>Source of feedback.|string|||📝|||
 
 __POST /api/feedback__
+
+__via Python__
 ```python
 import json
 import requests
@@ -707,6 +898,22 @@ payload = {
 response = requests.post(url, headers=headers, json=payload)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_post('feedback', {
+    'message': 'feedback',
+    'slug': 'intro',
+})
+```
+
 output:
 ```json
 {}
@@ -848,6 +1055,8 @@ Used by [settings](https://software.farm.bot/docs/settings).
 |`pin_report_2_pin_nr`<br>Report values of the pin periodically.|0-69|📖|||📝|🗑|
 
 __GET /api/firmware_config__
+
+__via Python__
 ```python
 import json
 import requests
@@ -860,6 +1069,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('firmware_config')
+```
+
 output:
 ```json
 {
@@ -1010,6 +1232,8 @@ Used by [sequences](https://software.farm.bot/docs/sequences).
 |`color`<br>Folder color.|string|📖|📖|📝<br>(required)|📝|🗑|
 
 __GET /api/folders__
+
+__via Python__
 ```python
 import json
 import requests
@@ -1022,6 +1246,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('folders')
+```
+
 output:
 ```json
 [
@@ -1057,6 +1294,8 @@ Used by the [message center](https://software.farm.bot/docs/message-center). To 
 |`content`<br>Bulletin content.|string||📖||||
 
 __GET /api/global_bulletins/:slug__
+
+__via Python__
 ```python
 import json
 import requests
@@ -1069,6 +1308,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('global_bulletins/Okra')
+```
+
 output:
 ```json
 {
@@ -1103,6 +1355,8 @@ output:
 |*any*<br>Any config set by the server.|string|📖|||||
 
 __GET /api/global_config__
+
+__via Python__
 ```python
 import json
 import requests
@@ -1115,6 +1369,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('global_config')
+```
+
 output:
 ```json
 {
@@ -1152,6 +1419,8 @@ Used for [photos](https://software.farm.bot/docs/photos).
 |`meta`<br>Image info.|{name: string, x: float, y: float, z: float}|📖|📖|📝||🗑|
 
 __GET /api/images__
+
+__via Python__
 ```python
 import json
 import requests
@@ -1164,6 +1433,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('images')
+```
+
 output:
 ```json
 [
@@ -1212,6 +1494,8 @@ Used for [logs](https://software.farm.bot/docs/jobs-and-logs).
 |`z`<br>z coordinate at time of log.|float|📖||📝||🗑|
 
 __GET /api/logs__
+
+__via Python__
 ```python
 import json
 import requests
@@ -1224,6 +1508,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('logs')
+```
+
 output:
 ```json
 [
@@ -1249,6 +1546,8 @@ output:
 ```
 
 __POST /api/logs__
+
+__via Python__
 ```python
 import json
 import requests
@@ -1266,6 +1565,23 @@ payload = {
 response = requests.post(url, headers=headers, json=payload)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_post('logs', {
+  'message': 'Hello World!',
+  'type': 'success',
+  'channels': ['toast'],
+})
+```
+
 output:
 ```json
 {
@@ -1349,6 +1665,8 @@ Used by [peripherals](https://software.farm.bot/docs/peripherals).
 |`mode`<br>Pin mode.|0-1|📖|📖||📝|🗑|
 
 __GET /api/peripherals__
+
+__via Python__
 ```python
 import json
 import requests
@@ -1361,6 +1679,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('peripherals')
+```
+
 output:
 ```json
 [
@@ -1407,6 +1738,8 @@ Used by [push buttons](https://software.farm.bot/docs/peripherals).
 |`binding_type`<br>"standard": execute a sequence, "special": perform an action.|"standard" \| "special"|📖|📖||||
 
 __GET /api/pin_bindings__
+
+__via Python__
 ```python
 import json
 import requests
@@ -1419,6 +1752,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('pin_bindings')
+```
+
 output:
 ```json
 [
@@ -1471,6 +1817,8 @@ Used by [gardens](https://software.farm.bot/docs/gardens).
 |`openfarm_slug`<br>Plant type (from OpenFarm).|string|📖||📝|📝|🗑|
 
 __GET /api/plant_templates__
+
+__via Python__
 ```python
 import json
 import requests
@@ -1483,6 +1831,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('plant_templates')
+```
+
 output:
 ```json
 [
@@ -1525,6 +1886,8 @@ Used by [groups](https://software.farm.bot/docs/groups).
 |`criteria`<br>Point group criteria for automatic point inclusion.|See below and [groups](https://software.farm.bot/docs/groups).|📖|📖|📝|📝|🗑|
 
 __GET /api/point_groups__
+
+__via Python__
 ```python
 import json
 import requests
@@ -1537,6 +1900,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('point_groups')
+```
+
 output:
 ```json
 [
@@ -1624,6 +2000,8 @@ Notes:
 |`filter`<br>Filter points.|"all" \| "old" \| "kept"|📝|||||||||
 
 __GET /api/points__
+
+__via Python__
 ```python
 import json
 import requests
@@ -1636,6 +2014,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('points')
+```
+
 output:
 ```json
 [
@@ -1712,6 +2103,8 @@ output:
 ```
 
 __POST /api/points__
+
+__via Python__
 ```python
 import json
 import requests
@@ -1732,6 +2125,26 @@ payload = {
 response = requests.post(url, headers=headers, json=payload)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_post('points', {
+  'pointer_type': 'Plant',
+  'name': 'Strawberry',
+  'openfarm_slug': 'strawberry',
+  'x': 1,
+  'y': 2,
+  'z': 3,
+})
+```
+
 output:
 ```json
 {
@@ -1782,6 +2195,8 @@ output:
 |`GET` /api/public_key|Get the public key.|
 
 __GET /api/public_key__
+
+__via Python__
 ```python
 import json
 import requests
@@ -1792,6 +2207,19 @@ url = f'https:{TOKEN['token']['unencoded']['iss']}/api/public_key'
 response = requests.get(url)
 print(response.text)
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('public_key')
+```
+
 output:
 ```
 -----BEGIN PUBLIC KEY-----
@@ -1829,6 +2257,8 @@ See [regimens](https://software.farm.bot/docs/regimens).
 |`regimen_items`<br>Sequence executions scheduled in the regimen.|Array (`time_offset` is in milliseconds)|📖|📖|📝<br>(required)|📝|🗑|
 
 __GET /api/regimens__
+
+__via Python__
 ```python
 import json
 import requests
@@ -1841,6 +2271,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('regimens')
+```
+
 output:
 ```json
 [
@@ -1901,6 +2344,8 @@ Used by the [FarmBot OS download page](https://os.farm.bot) and FarmBot OS OTA u
 |`dot_img_url`<br>URL of FarmBot OS release .img file.|string|📖|||||
 
 __GET /api/releases__
+
+__via Python__
 ```python
 import json
 import requests
@@ -1917,6 +2362,19 @@ payload = {
 response = requests.get(url, headers=headers, json=payload)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('releases')
+```
+
 output:
 ```json
 {
@@ -1952,6 +2410,8 @@ Used by [gardens](https://software.farm.bot/docs/gardens).
 |`notes`<br>Notes.|string|📖||📝|📝|🗑|
 
 __GET /api/saved_gardens__
+
+__via Python__
 ```python
 import json
 import requests
@@ -1964,6 +2424,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('saved_gardens')
+```
+
 output:
 ```json
 [
@@ -2014,6 +2487,8 @@ output:
 |`read_at`<br>Date and time of sensor reading.|timestamp|📖|📖|📝||🗑|
 
 __GET /api/sensor_readings__
+
+__via Python__
 ```python
 import json
 import requests
@@ -2026,6 +2501,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('sensor_readings')
+```
+
 output:
 ```json
 [
@@ -2066,6 +2554,8 @@ See [sensors](https://software.farm.bot/docs/sensors).
 |`label`<br>Sensor name.|string|📖|📖|📝<br>(required)|📝|🗑|
 
 __GET /api/sensors__
+
+__via Python__
 ```python
 import json
 import requests
@@ -2078,6 +2568,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('sensors')
+```
+
 output:
 ```json
 [
@@ -2113,6 +2616,8 @@ Sequence versions are created when a sequence is published for sharing. Also see
 |`body`<br>Sequence steps.|Array||📖||||
 
 __GET /api/sequence_versions/8__
+
+__via Python__
 ```python
 import json
 import requests
@@ -2125,6 +2630,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('sequence_versions', 8)
+```
+
 output:
 ```json
 {
@@ -2186,6 +2704,8 @@ See [sequences](https://software.farm.bot/docs/sequences).
 |`body`<br>Sequence steps.|Array|📖|📖|📝<br>(required)|📝<br>(required)|🗑|
 
 __GET /api/sequences__
+
+__via Python__
 ```python
 import json
 import requests
@@ -2198,6 +2718,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('sequences')
+```
+
 output:
 ```json
 [
@@ -2290,6 +2823,8 @@ Used for [photos](https://software.farm.bot/docs/photos).
 |`GET` /api/storage_auth|Get the image storage policy object.|
 
 __GET /api/storage_auth__
+
+__via Python__
 ```python
 import json
 import requests
@@ -2302,6 +2837,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('storage_auth')
+```
+
 output:
 ```json
 {
@@ -2348,6 +2896,8 @@ Used by [the history tab of the connectivity pop-up](https://software.farm.bot/d
 |`firmware_hardware`<br>Firmware installed on the Farmduino or microcontroller.|"arduino" \| "farmduino" \| "farmduino_k14" \| "farmduino_k15" \| "farmduino_k16" \| "farmduino_k17" \| "express_k10" \| "express_k11" \| "express_k12"|📖||📝||🗑|
 
 __GET /api/telemetries__
+
+__via Python__
 ```python
 import json
 import requests
@@ -2360,6 +2910,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('telemetries')
+```
+
 output:
 ```json
 [
@@ -2419,6 +2982,8 @@ __Unencoded Token__
 |`mqtt_ws`<br>MQTT WS URL.|string|
 
 __GET /api/tokens__
+
+__via Python__
 ```python
 import json
 import requests
@@ -2431,6 +2996,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('tokens')
+```
+
 output:
 ```json
 {
@@ -2474,6 +3052,8 @@ Used for [tools](https://software.farm.bot/docs/tools).
 |`flow_rate_ml_per_s`<br>Watering nozzle flow rate in mL per second. Field only shown in the frontend if tool name includes "Watering Nozzle".|integer|📖|📖|📝|📝|🗑|
 
 __GET /api/tools__
+
+__via Python__
 ```python
 import json
 import requests
@@ -2486,6 +3066,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('tools')
+```
+
 output:
 ```json
 {
@@ -2524,6 +3117,8 @@ Account user information.
 |`language`<br>User language (used for [auto-generation](#ai)).|string|📖||📝|📝|🗑|
 
 __GET /api/users__
+
+__via Python__
 ```python
 import json
 import requests
@@ -2536,6 +3131,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('users')
+```
+
 output:
 ```json
 [
@@ -2660,6 +3268,8 @@ See [settings](https://software.farm.bot/docs/settings).
 |`enable_3d_electronics_box_top`<br>Show the push buttons in 3D instead of 2D.|boolean|📖|||📝|🗑|
 
 __GET /api/web_app_config__
+
+__via Python__
 ```python
 import json
 import requests
@@ -2672,6 +3282,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('web_app_config')
+```
+
 output:
 ```json
 {
@@ -2774,6 +3397,8 @@ See [webcam feeds](https://software.farm.bot/docs/webcam-feeds).
 |`url`<br>Webcam feed URL.|string|📖|📖|📝<br>(required)|📝|🗑|
 
 __GET /api/webcam_feeds__
+
+__via Python__
 ```python
 import json
 import requests
@@ -2786,6 +3411,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('webcam_feeds')
+```
+
 output:
 ```json
 [
@@ -2820,6 +3458,8 @@ Used by [setup wizard](https://my.farm.bot/app/designer/setup).
 |`slug`<br>Wizard step UUID.|string|📖||📝|📝|🗑|
 
 __GET /api/wizard_step_results__
+
+__via Python__
 ```python
 import json
 import requests
@@ -2832,6 +3472,19 @@ headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
 response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
+
+__via FarmBot Sidecar Starter Pack__
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.api_get('wizard_step_results')
+```
+
 output:
 ```json
 [

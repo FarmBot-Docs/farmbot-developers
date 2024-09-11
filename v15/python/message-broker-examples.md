@@ -17,12 +17,25 @@ content='To get the authorization token required in these examples (`TOKEN`), se
 include callout.html
 type="info"
 title="Libraries required"
-content='The following examples require either the FarmBot Python library or the **Paho MQTT** library. To install, run `python -m pip install farmbot paho-mqtt` in the command line.'
+content='The following examples require either the FarmBot Python library, the FarmBot Sidecar Starter Pack, or the **Paho MQTT** library. To install, run `python -m pip install farmbot farmbot-sidecar-starter-pack paho-mqtt` in the command line.'
 %}
 
 # Show FarmBot communications
 
 Listen in on FarmBot's activities and requests made via Python or the FarmBot Web App frontend. Running this can be helpful while going through the rest of the examples. Included in all communications between FarmBot and the Web App are FarmBot status updates; reviewing the output from this example will show many of the data fields available to track in the next example.
+
+## via FarmBot Sidecar Starter Pack
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.listen(stop_count=100)
+```
+You should see a stream of status updates if your FarmBot is online. Type <Ctrl + C> to stop.
 
 ## via Python
 ```python
@@ -56,6 +69,19 @@ client.loop_forever()
 You should see a stream of status updates if your FarmBot is online. Type <Ctrl + C> to stop.
 
 # Track specific data updates
+
+## via FarmBot Sidecar Starter Pack
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.listen_for_status_changes(stop_count=100, diff_only=False, info_path="location_data.position")
+```
+You should see position reports if your FarmBot is online. Type <Ctrl + C> to stop.
 
 ## via FarmBot Python library
 ```python
@@ -120,6 +146,21 @@ content="If you plan on sending many messages (more than 10 messages within a 5 
 %}
 
 # Send a single message
+
+## via FarmBot Sidecar Starter Pack
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.message('Hello World!')
+```
+You should see the message sent in the output.
+
+For a list of FarmBot commands available to the FarmBot Sidecar Starter Pack library, see [the FarmBot Sidecar Starter Pack documentation](./sidecar-starter-pack.md).
 
 ## via FarmBot Python library
 ```python
@@ -186,6 +227,20 @@ You should see 'connected' and 'message sent' in the output.
 For a list of Celery Script commands, see [the list of available nodes](../docs/celery-script/nodes.md#available-nodes).
 
 # Send multiple messages
+
+## via FarmBot Sidecar Starter Pack
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.message('Hello World!')
+fb.message('second message')
+```
+You should see the messages sent in the output.
 
 ## via FarmBot Python library
 ```python
@@ -269,6 +324,9 @@ You should see 'connected', 'messages sent', and 'disconnected' in the output.
 # Additional FarmBot Python library examples:
  * [Move to coordinate and send message](https://github.com/FarmBot/farmbot-py/blob/main/example.py)
  * [Move FarmBot using keyboard inputs](https://github.com/FarmBot/farmbot-py/blob/main/example_threads.py)
+
+# Additional FarmBot Sidecar Starter Pack examples:
+ * [FarmBot Sidecar Starter Pack examples](./sidecar-starter-pack.md#additional-examples)
 
 # What's next?
 

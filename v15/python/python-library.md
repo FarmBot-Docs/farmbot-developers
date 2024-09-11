@@ -10,7 +10,7 @@ FarmBot, Inc. provides a Python wrapper library, [`farmbot-py`](https://github.c
 include callout.html
 type="info"
 title="Options available"
-content='When applicable, the following pages provide usage examples of the FarmBot Python library. Examples without usage of the library are also provided.'
+content='When applicable, the following pages provide usage examples of the FarmBot Python library. Examples with usage of the [FarmBot Sidecar Starter Pack library](./sidecar-starter-pack.md) and without usage of any FarmBot libraries are also provided.'
 %}
 
 # Getting started

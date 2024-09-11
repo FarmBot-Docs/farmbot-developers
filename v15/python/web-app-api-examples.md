@@ -24,10 +24,25 @@ content="Making requests other than GET to the API will permanently alter the da
 include callout.html
 type="info"
 title="Libraries required"
-content='The following examples require the Requests library. To install, run `python -m pip install requests` in the command line.'
+content='The following examples require either the FarmBot Sidecar Starter Pack or the Requests library. To install, run `python -m pip install farmbot-sidecar-starter-pack requests` in the command line.'
 %}
 
 # GET points
+
+## via FarmBot Sidecar Starter Pack
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+points = fb.api_get('points')
+```
+You should see a list of your FarmBot Web App account points in the output.
+
+## via Python
 
 ```python
 import json
@@ -44,6 +59,21 @@ print(json.dumps(points, indent=2))
 You should see a list of your FarmBot Web App account points in the output.
 
 # POST log message
+
+## via FarmBot Sidecar Starter Pack
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+
+# TOKEN = ...
+
+fb = Farmbot()
+fb.set_token(TOKEN)
+
+fb.log('Hello!', message_type='info')
+```
+You should see a copy of the log message now saved in your FarmBot Web App account in the output.
+
+## via Python
 
 ```python
 import json

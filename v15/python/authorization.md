@@ -15,7 +15,7 @@ content="Store your authorization token securely. It grants full access and cont
 include callout.html
 type="info"
 title="Libraries required"
-content='The following examples require either the FarmBot Python library or the **Requests** library. To install, run `python -m pip install farmbot requests` in the command line. Your system may require you to use `python3` instead of `python`. Using a [virtual environment](https://docs.python.org/3/library/venv.html) is highly recommended. If you see an error ending with `callback_api_version`, run `python -m pip install --upgrade paho-mqtt==1.6.1`.'
+content='The following examples require either the FarmBot Python library, the FarmBot Sidecar Starter Pack, or the **Requests** library. To install, run `python -m pip install farmbot farmbot-sidecar-starter-pack requests` in the command line. Your system may require you to use `python3` instead of `python`. Using a [virtual environment](https://docs.python.org/3/library/venv.html) is highly recommended. If you see an error ending with `callback_api_version`, run `python -m pip install --upgrade paho-mqtt==1.6.1`.'
 %}
 
 {%
@@ -26,6 +26,21 @@ content='You can execute python code by pasting it into a new file such as `run.
 %}
 
 # Get your token
+
+## via the FarmBot Sidecar Starter Pack
+```python
+from farmbot_sidecar_starter_pack import Farmbot
+from getpass import getpass
+
+# inputs
+SERVER = input('FarmBot Web App account server (press <Enter> for https://my.farm.bot): ') or 'https://my.farm.bot'
+EMAIL = input('FarmBot Web App account login email: ')
+PASSWORD = getpass('FarmBot Web App account login password: ')
+
+fb = Farmbot()
+TOKEN = fb.get_token(EMAIL, PASSWORD, SERVER)
+print(f'{TOKEN = }')
+```
 
 ## via FarmBot Python library
 ```python

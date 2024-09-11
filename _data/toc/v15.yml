@@ -124,6 +124,37 @@ contents:
     url: python
     top: true
     pages:
+      - title: Sidecar Starter Pack
+        url: sidecar-starter-pack
+        pages:
+          - title: API
+            url: api
+          - title: Message Broker
+            url: message-broker
+          - title: Configuration
+            url: configuration
+          - title: Coordinates
+            url: coordinates
+          - title: Curves
+            url: curves
+          - title: E-Stop and Unlock
+            url: e-stop-and-unlock
+          - title: Images
+            url: images
+          - title: Jobs
+            url: jobs
+          - title: Messages
+            url: messages
+          - title: Movements
+            url: movements
+          - title: Pins
+            url: pins
+          - title: Time
+            url: time
+          - title: Tools
+            url: tools
+          - title: Advanced
+            url: advanced
       - title: Python Library
         url: python-library
       - title: Authorization
