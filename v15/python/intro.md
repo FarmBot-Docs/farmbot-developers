@@ -19,7 +19,7 @@ In a command line terminal, run:
 ```bash
 python3 -m venv py_venv
 source py_venv/bin/activate
-python -m pip install farmbot
+python -m pip install --upgrade farmbot
 ```
 
 This will install the FarmBot Python library into your environment so that it can be used via `from farmbot import Farmbot` as shown in examples.

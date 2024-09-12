@@ -24,7 +24,7 @@ content="Making requests other than GET to the API will permanently alter the da
 include callout.html
 type="info"
 title="Libraries required"
-content='The following examples require either the FarmBot Python library or the Requests library. To install, run `python -m pip install farmbot requests` in the command line.'
+content='The following examples require either the FarmBot Python library or the Requests library. To install, run `python -m pip install --upgrade farmbot requests` in the command line.'
 %}
 
 # GET points

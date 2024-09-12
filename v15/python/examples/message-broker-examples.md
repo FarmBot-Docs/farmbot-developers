@@ -17,7 +17,7 @@ content='To get the authorization token required in these examples (`TOKEN`), se
 include callout.html
 type="info"
 title="Libraries required"
-content='The following examples require either the FarmBot Python library or the **Paho MQTT** library. To install, run `python -m pip install farmbot paho-mqtt` in the command line.'
+content='The following examples require either the FarmBot Python library or the **Paho MQTT** library. To install, run `python -m pip install --upgrade farmbot paho-mqtt` in the command line.'
 %}
 
 # Show FarmBot communications
