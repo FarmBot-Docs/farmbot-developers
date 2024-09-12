@@ -15,7 +15,7 @@ content="Store your authorization token securely. It grants full access and cont
 include callout.html
 type="info"
 title="Libraries required"
-content='The following examples require either the FarmBot Python library or the **Requests** library. To install, run `python -m pip install farmbot requests` in the command line. Your system may require you to use `python3` instead of `python`. Using a [virtual environment](https://docs.python.org/3/library/venv.html) is highly recommended. If you see an error ending with `callback_api_version`, run `python -m pip install --upgrade paho-mqtt==1.6.1`.'
+content='The following examples require either the FarmBot Python library or the **Requests** library. To install, run `python -m pip install farmbot requests` in the command line. Your system may require you to use `python3` instead of `python`. Using a [virtual environment](https://docs.python.org/3/library/venv.html) is highly recommended.
 %}
 
 {%
