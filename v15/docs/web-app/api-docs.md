@@ -103,9 +103,9 @@ response = requests.post(url, headers=headers, json=payload)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -159,9 +159,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -201,9 +201,9 @@ response = requests.delete(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -251,9 +251,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -317,9 +317,9 @@ response = requests.post(url, headers=headers, json=payload)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -384,9 +384,9 @@ response = requests.post(url, headers=headers, json=payload)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -455,9 +455,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -544,9 +544,9 @@ response = requests.post(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -614,9 +614,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -694,9 +694,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -770,9 +770,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -841,9 +841,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -899,9 +899,9 @@ response = requests.post(url, headers=headers, json=payload)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -1070,9 +1070,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -1247,9 +1247,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -1309,9 +1309,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -1370,9 +1370,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -1434,9 +1434,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -1509,9 +1509,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -1566,9 +1566,9 @@ response = requests.post(url, headers=headers, json=payload)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -1680,9 +1680,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -1753,9 +1753,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -1832,9 +1832,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -1901,9 +1901,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -2015,9 +2015,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -2126,9 +2126,9 @@ response = requests.post(url, headers=headers, json=payload)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -2208,9 +2208,9 @@ response = requests.get(url)
 print(response.text)
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -2272,9 +2272,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -2363,9 +2363,9 @@ response = requests.get(url, headers=headers, json=payload)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -2425,9 +2425,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -2502,9 +2502,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -2569,9 +2569,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -2631,9 +2631,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -2719,9 +2719,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -2838,9 +2838,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -2911,9 +2911,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -2997,9 +2997,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -3067,9 +3067,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -3132,9 +3132,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -3283,9 +3283,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -3412,9 +3412,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 
@@ -3473,9 +3473,9 @@ response = requests.get(url, headers=headers)
 print(json.dumps(response.json(), indent=2))
 ```
 
-__via FarmBot Sidecar Starter Pack__
+__via FarmBot Python library__
 ```python
-from farmbot_sidecar_starter_pack import Farmbot
+from farmbot import Farmbot
 
 # TOKEN = ...
 

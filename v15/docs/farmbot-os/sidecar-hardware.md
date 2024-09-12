@@ -10,7 +10,7 @@ In situations where you need to install special drivers or Python modules, we re
 
 Once the sidecar is configured, there are a number of ways you can support interaction between the FarmBot's CPU and the sidecar:
 
- * If the device has a reasonably reliable internet connection, you can have the sidecar talk to FBOS via [FarmBot.py](https://github.com/FarmBot/farmbot-py) or [FarmBot.js](https://github.com/FarmBot/farmbot-js). This is the easiest option.
+ * If the device has a reasonably reliable internet connection, you can have the sidecar talk to FBOS via [Python](../../python/intro.md) or [FarmBot.js](https://github.com/FarmBot/farmbot-js). This is the easiest option.
  * You can run a serial line from the FarmBot to the sidecar and use the Lua [UART helpers](../../lua/functions/uart.md) to send messages between the devices.
  * The sidecar can trigger a "pin binding" which activates a sequence on FBOS whenever the sidecar pulls a GPIO line high.
  * You could create an HTTP server that resides on the sidecar module and [make HTTP calls from Lua code in a sequence](../../lua/functions/api.md#httpparams).

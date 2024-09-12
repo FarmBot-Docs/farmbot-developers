@@ -1,5 +1,5 @@
 ---
-permalink: /docs/python-library
+permalink: /docs/python
 page_path: /python/intro
 layout: redirect
 ---

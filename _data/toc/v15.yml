@@ -124,8 +124,14 @@ contents:
     url: python
     top: true
     pages:
-      - title: Sidecar Starter Pack
-        url: sidecar-starter-pack
+      - title: Intro
+        url: intro
+      - title: Authorization
+        url: authorization
+      - title: Settings
+        url: settings
+      - title: Functions
+        url: functions
         pages:
           - title: API
             url: api
@@ -155,14 +161,13 @@ contents:
             url: tools
           - title: Advanced
             url: advanced
-      - title: Python Library
-        url: python-library
-      - title: Authorization
-        url: authorization
-      - title: Message Broker Examples
-        url: message-broker-examples
-      - title: Web App API Examples
-        url: web-app-api-examples
+      - title: Examples
+        url: examples
+        pages:
+        - title: Message Broker Examples
+          url: message-broker-examples
+        - title: Web App API Examples
+          url: web-app-api-examples
   - title: Other Resources
     url: other
     top: true

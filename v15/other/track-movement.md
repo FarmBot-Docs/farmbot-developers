@@ -15,7 +15,7 @@ Thus, if you want to track the position of FarmBot in realtime, you must write s
 
 # Using MQTT
 
-FarmBot uses [MQTT](../docs/message-broker.md#mqtt) to transmit data about its internal state. This data includes position information. It is re-broadcast every time the position changes. The most basic way to read this information is to use an MQTT client like [MQTTx](https://mqttx.app/) or an MQTT library like [Paho MQTT](../python/message-broker-examples.md).
+FarmBot uses [MQTT](../docs/message-broker.md#mqtt) to transmit data about its internal state. This data includes position information. It is re-broadcast every time the position changes. The most basic way to read this information is to use an MQTT client like [MQTTx](https://mqttx.app/) or an MQTT library like [Paho MQTT](../python/examples/message-broker-examples.md).
 
 In this first example, we will attempt to connect to FarmBot directly using an MQTT client. The main advantage of this approach is that it can work in any programming language that supports MQTT. The main disadvantage is that this method is more difficult to set up than FarmBot.js or FarmBot.py.
 
@@ -168,41 +168,47 @@ FarmBot Position: (358, 540.8, 0)
 
 # Using FarmBotPy
 
-FarmBot, Inc. also provides a Python wrapper library. You can learn more about the Python version on the [Python library page](../python/python-library.md).
+FarmBot, Inc. also provides a Python wrapper library. You can learn more about the Python version on the [Python library page](../python/intro.md).
 
 ```python
-from farmbot import Farmbot, FarmbotToken
+from farmbot import Farmbot
 
-raw_token = FarmbotToken.download_token("test@example.com",
-                                        "password",
-                                        "https://my.farm.bot")
+# TOKEN = ...
 
-fb = Farmbot(raw_token)
+fb = Farmbot()
+fb.set_token(TOKEN)
+fb.set_verbosity(1)
 
-class MyHandler:
-    def on_connect(self, bot, mqtt_client):
-        pass
-
-    def on_response(self, bot, response):
-        pass
-
-    def on_error(self, bot, response):
-        pass
-
-    def on_log(self, bot, log):
-        pass
-
-    def on_change(self, bot, state):
-        print("NEW BOT STATE TREE AVAILABLE:")
-        print(state)
-        print("Current position: (%.2f, %.2f, %.2f)" % bot.position())
-
-fb.connect(MyHandler())
+fb.listen_for_status_changes(stop_count=3, diff_only=False, info_path="location_data.position")
 ```
 You should see the following output after running the code above:
 
 ```
-NEW BOT STATE TREE AVAILABLE:
-{...}
-Current position: (358.00, 540.80, 0.00)
+Listening to message broker channel 'status' until 3 messages are received...
+    Connected to message broker.
+    Connected to message broker channel 'status'
+    Now listening to message broker channel 'status'
+    ...
+    New message location_data.position from bot/device_456/status (2024-09-12 10:00:30)
+    {
+        "x": 358,
+        "y": 540.8,
+        "z": 0
+    }
+    ...
+    New message location_data.position from bot/device_456/status (2024-09-12 10:00:33)
+    {
+        "x": 358,
+        "y": 540.8,
+        "z": 0
+    }
+    ...
+    New message location_data.position from bot/device_456/status (2024-09-12 10:00:39)
+    {
+        "x": 358,
+        "y": 540.8,
+        "z": 0
+    }
+3 messages received after 10 seconds
+    Stopped listening to all message broker channels.
 ```

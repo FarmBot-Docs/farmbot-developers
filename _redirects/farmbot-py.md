@@ -1,5 +1,5 @@
 ---
 permalink: /docs/farmbot-py
-page_path: /python/python-library
+page_path: /python/intro
 layout: redirect
 ---
