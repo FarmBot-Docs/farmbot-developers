@@ -9,7 +9,7 @@ This example script will copy all plants from one FarmBot account to another. Th
 {%
 include callout.html
 type="info"
-title="Limitations apply
+title="Limitations apply"
 content="The script will not copy any water, height, or spread curves ids associated with a plant because the curve resources will not exist in the target account."
 %}
 
