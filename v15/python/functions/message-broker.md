@@ -16,7 +16,7 @@ If a stop count greater than 1 is provided, the command will listen indefinitely
 
 `message_options` is a dictionary that can contain the following items:
  * `filters`: A dictionary of filters to apply to incoming messages that can contain the following items:
-   * `topic`: A list of topic keys.
+   * `topic`: A string that the message topic should contain.
    * `content`: A dictionary of content filters. Each key is a data path, and each value is a string that must appear in the data at that path.
  * `path`: A string that specifies the path to the data to return, using dot notation to access nested data.
  * `diff_only`: A boolean that specifies whether to return only the difference from the first message received.
@@ -39,7 +39,7 @@ fb.listen(
     duration=math.inf,
     message_options={
         'filters': {
-            'topic': ['Image'],
+            'topic': 'sync/Image',
             'content': {'body.attachment_url': 'storage'},
         },
         'path': 'body.attachment_url',
