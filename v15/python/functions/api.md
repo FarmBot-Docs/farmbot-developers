@@ -16,8 +16,15 @@ content="Making requests other than `GET` to the API will **permanently alter** 
 {%
 include callout.html
 type="success"
+title="API endpoint list"
+content="Not sure which endpoint to access? [Find the list here](../../docs/web-app/rest-api.md#resources)."
+%}
+
+{%
+include callout.html
+type="success"
 title="API endpoint documentation"
-content="Not sure which endpoint to access? [Find the list here](../../docs/web-app/api-docs.md)."
+content="Not sure what should be included in data updates? [See the API docs here](../../docs/web-app/api-docs.md)."
 %}
 
 # api_get(endpoint, database_id=None)

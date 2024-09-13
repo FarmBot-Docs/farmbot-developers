@@ -30,6 +30,14 @@ fb.toast(f"Height: {size['z']}mm")
 
 Calculates the **coordinates of a seed tray cell**, such as `B3`, based on the cell label and the coordinates of the center of the seed tray. See the [Pick from Seed Tray featured sequence](https://my.farm.bot/app/shared/sequence/32) for an example.
 
+`tray_cell` should be one of the following:
+|        |        |        |        |
+| ------ | ------ | ------ | ------ |
+| `"D1"` | `"D2"` | `"D3"` | `"D4"` |
+| `"C1"` | `"C2"` | `"C3"` | `"C4"` |
+| `"B1"` | `"B2"` | `"B3"` | `"B4"` |
+| `"A1"` | `"A2"` | `"A3"` | `"A4"` |
+
 ```python
 cell = fb.get_seed_tray_cell("Seed Tray", "B3")
 cell_depth = 5
@@ -55,20 +63,6 @@ Gets the current **x, y, and z coordinates** of the FarmBot.
 position = fb.get_xyz()
 fb.toast(f"FarmBot's X coordinate is: {position['x']}")
 ```
-
-# group(group_id=None)
-
-Returns group info.
-
-```python
-group_info = fb.group(1234)
-```
-
-{%
-include callout.html
-type="info"
-content="Find a group's ID by navigating to the group in the web app and copying the number at the end of the URL."
-%}
 
 # safe_z()
 

@@ -45,6 +45,8 @@ fb.shutdown()
 
 # set_home(axis="all")
 
+`axis` can be one of `"x"`, `"y"`, `"z"`, or `"all"`.
+
 **Sets the current position as home** for the given axis or all axes.
 
 ```python
@@ -104,12 +106,19 @@ type="info"
 content="The conditional statement will be evaluated by the FarmBot device rather than your Python code."
 %}
 
+| Argument | Description |
+| --- | --- |
+| `variable` | `"x"`, `"y"`, `"z"`, one of `"pin0"` through `"pin69"`, or a sensor or peripheral name. If using a sensor or peripheral name, `named_pin_type` must be specified. |
+| `operator` | `"<"`, `">"`, `"is"`, `"not"`, `"is_undefined"` |
+| `value` | integer |
+| `then_sequence_name` | The name of the sequence to execute if the condition is true. |
+| `else_sequence_name` | The name of the sequence to execute if the condition is false. |
+| `named_pin_type` | `"Sensor"` or `"Peripheral"`, if using a sensor or peripheral name for `variable` |
+
 ```python
 # If the soil moisture sensor reading is greater than 500, execute the "Water Plant" sequence
 fb.if_statement("Soil Moisture", ">", 500, then_sequence_name="Water Plant", named_pin_type="Sensor")
 ```
-
-`named_pin_type` options include "Sensor" and "Peripheral".
 
 {%
 include callout.html
@@ -120,6 +129,12 @@ content="Sequence ID lookups are cached. See [clearing the cache](../settings.md
 # assertion(lua_code, assertion_type, recovery_sequence_name=None)
 
 **Executes a sequence based on an assertion**.
+
+| Argument | Description |
+| --- | --- |
+| `lua_code` | A Lua script that will be evaluated by the FarmBot device. The return value will determine if the assertion passes or fails. |
+| `assertion_type` | `"abort"`, `"recover"`, `"abort_recover"`, `"continue"` |
+| `recovery_sequence_name` | The name of the sequence to execute if the assertion fails. |
 
 ```python
 fb.assertion("return 2 + 2", "recover", recovery_sequence_name="Find Home")

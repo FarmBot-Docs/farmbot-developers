@@ -110,6 +110,9 @@ fb.write_pin(13, value=128, mode="analog")
 
 **Controls a servo motor** connected to the given pin by setting the angle.
 
+`pin` is typically one of the Farmduino servo pins: `4`, `5`, `6`, or `11`.
+`angle` must be between `0` and `180`.
+
 ```python
 # Set the servo motor connected to pin 4 to 90 degrees
 fb.control_servo(4, angle=90)
