@@ -187,8 +187,8 @@ from farmbot import Farmbot
 fb = Farmbot()
 fb.set_token(TOKEN)
 
-fb.message('Hello World!')
-fb.message('second message')
+fb.send_message('Hello World!')
+fb.send_message('second message')
 ```
 You should see the messages sent in the output.
 

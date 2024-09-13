@@ -12,30 +12,30 @@ description: "List of messaging Python functions in the FarmBot Python library"
 fb.debug("This just happened")
 ```
 
-# message(message_str, message_type="info", channel="ticker")
+# send_message(message_str, message_type="info", channels=None)
 
 **Sends a message** to the logs channel and optionally as a toast, email, or as synthesized spoken word.
 
 - The first required parameter is the message, which may be either a string or a number.
 - The second parameter is the log `type`, which is optional but must be one of the following string values: `assertion`, `busy`, `debug`, `error`, `fun`, `info`, `success`, `warn`.
-- The third parameter is the log channel, which is optional but must be one of the following available channels: `toast`, `email`, `espeak`.
+- The third parameter is the log channel, which is optional but must be a list of channels that may include: `toast`, `email`, `espeak`.
 
 ```python
 # Send an error message to the default logs channel:
-fb.message("Movement failed.", message_type="error")
+fb.send_message("Movement failed.", message_type="error")
 
 # Send a success message to the logs channel and by email:
-fb.message("You've got mail!", message_type="success", channel="email")
+fb.send_message("You've got mail!", message_type="success", channels=["email"])
 
 # Compose and send a more complex message:
 position = fb.get_xyz()
 message = f"Movement failed. The FarmBot is currently at {position} and is not moving."
-fb.message(message, message_type="error", channel="toast")
+fb.send_message(message, message_type="error", channels=["toast"])
 ```
 
-# log(message_str, message_type="info", channel="ticker")
+# log(message_str, message_type="info", channels=None)
 
-Same as `message()`, but adds a log message directly to the API instead of through FarmBot OS over the message broker.
+Same as `send_message()`, but adds a log message directly to the API instead of through FarmBot OS over the message broker.
 
 # toast(message_str, message_type="info")
 

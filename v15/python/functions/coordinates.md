@@ -9,11 +9,10 @@ description: "List of coordinate Python functions in the FarmBot Python library"
 Returns `True` if the device is **within the tolerance range** of the provided coordinate.
 
 ```python
-if fb.check_position({"x": 0, "y": 0, "z": 0}, 1.23) then
+if fb.check_position({"x": 0, "y": 0, "z": 0}, 1.23):
   fb.toast("FarmBot is at the home position", "success")
-else
+else:
   fb.toast("FarmBot is not at the home position", "warn")
-end
 ```
 
 # garden_size()
