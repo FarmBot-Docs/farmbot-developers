@@ -164,6 +164,10 @@ contents:
       - title: Examples
         url: examples
         pages:
+        - title: Copy Plants to New Account
+          url: copy-plants-to-new-account
+        - title: Segment FarmBot Images
+          url: segment-farmbot-images
         - title: Message Broker Examples
           url: message-broker-examples
         - title: Web App API Examples
