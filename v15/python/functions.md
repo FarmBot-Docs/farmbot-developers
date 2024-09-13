@@ -1,7 +1,7 @@
 ---
-title: "FarmBot Python library functions"
+title: "Python Functions"
 slug: "functions"
-description: "Use Python to communicate directly with FarmBot"
+description: "Directory of functions included in the FarmBot Python library"
 ---
 
 # What's next?
@@ -20,3 +20,4 @@ description: "Use Python to communicate directly with FarmBot"
  * [Tools](functions/tools.md)
  * [Time](functions/time.md)
  * [Advanced](functions/advanced.md)
+ * [Examples](examples.md)

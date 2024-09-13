@@ -101,6 +101,6 @@ with open('farmbot_authorization_token.json', 'r') as f:
 
 # What's next?
 
- * [Examples](examples.md)
- * [Functions](functions.md)
  * [Settings](settings.md)
+ * [Functions](functions.md)
+ * [Examples](examples.md)

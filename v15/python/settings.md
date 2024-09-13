@@ -1,5 +1,5 @@
 ---
-title: "FarmBot Python library setting"
+title: "Python Library Settings"
 slug: "settings"
 description: "Use Python to communicate directly with FarmBot"
 ---
@@ -42,5 +42,5 @@ fb.clear_cache()
 
 # What's next?
 
- * [Examples](examples.md)
  * [Functions](functions.md)
+ * [Examples](examples.md)
