@@ -6,7 +6,7 @@ description: "List of advanced Python functions in the FarmBot Python library"
 
 # sequence(name)
 
-**Executes a subsequence**.
+**Executes a subsequence** by name.
 
 ```python
 # Execute a subsequence
@@ -54,7 +54,7 @@ fb.set_home()
 
 # connect_broker()
 
-Establish persistent connection to send messages via message broker.
+Establish a persistent connection to send messages via the [message broker](../../docs/message-broker.md).
 
 ```python
 fb.connect_broker()
@@ -62,7 +62,7 @@ fb.connect_broker()
 
 # disconnect_broker()
 
-Disconnect from the message broker.
+Disconnect from the [message broker](../../docs/message-broker.md).
 
 ```python
 fb.disconnect_broker()
@@ -70,12 +70,12 @@ fb.disconnect_broker()
 
 # publish(message)
 
-Publish a message to the message broker.
+Publish a message to the [message broker](../../docs/message-broker.md).
 
 {%
 include callout.html
 type="info"
-content="Messages sent over the message broker must be properly formatted Celery Script. [See the docs here](../../docs/celery-script.md)."
+content="Messages sent over the [message broker](../../docs/message-broker.md) must be properly formatted **Celery Script**. [See the docs here](../../docs/celery-script.md)."
 %}
 
 ```python
@@ -98,10 +98,18 @@ fb.lua("wait(5000)")
 
 **Executes a sequence based on a conditional statement**.
 
+{%
+include callout.html
+type="info"
+content="The conditional statement will be evaluated by the FarmBot device rather than your Python code."
+%}
+
 ```python
 # If the soil moisture sensor reading is greater than 500, execute the "Water Plant" sequence
 fb.if_statement("Soil Moisture", ">", 500, then_sequence_name="Water Plant", named_pin_type="Sensor")
 ```
+
+`named_pin_type` options include "Sensor" and "Peripheral".
 
 {%
 include callout.html
@@ -125,4 +133,4 @@ content="Sequence ID lookups are cached. See [clearing the cache](../settings.md
 
 # What's next?
 
- * [intro](../intro.md)
+ * [Examples](../examples.md)

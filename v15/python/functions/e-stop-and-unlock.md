@@ -1,5 +1,5 @@
 ---
-title: "E-stop and Unlock"
+title: "E-Stop and Unlock"
 slug: "e-stop-and-unlock"
 description: "List of E-stop and Unlock Python functions in the FarmBot Python library"
 ---

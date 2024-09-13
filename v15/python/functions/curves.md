@@ -66,3 +66,7 @@ if plant['water_curve_id']:
 else:
     fb.toast("Plant has no assigned water curve.", "warn")
 ```
+
+# What's next?
+
+ * [E-Stop and Unlock](./e-stop-and-unlock.md)

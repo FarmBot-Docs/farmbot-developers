@@ -1,6 +1,7 @@
 ---
 title: "Python Examples"
 slug: "examples"
+description: "Examples showcasing various ways in which you might use the FarmBot Python library to augment and expand upon your FarmBot's capabilities."
 ---
 
 # What's next?

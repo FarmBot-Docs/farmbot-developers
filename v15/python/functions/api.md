@@ -8,9 +8,9 @@ Perform **HTTP requests to the FarmBot API**.
 
 {%
 include callout.html
-type="warning"
+type="danger"
 title="Making requests"
-content="Making requests other than GET to the API will permanently alter the data in your account. Be especially careful making DELETE requests and POST requests to singular resources, like the /device endpoint, as the API will destroy data that cannot be recovered. Altering data through the API may cause account instability."
+content="Making requests other than `GET` to the API will **permanently alter** the data in your account. Be especially careful making `DELETE` requests and `POST` requests to singular resources, like the /device endpoint, as the API will destroy data that cannot be recovered. Altering data through the API may cause account instability."
 %}
 
 {%

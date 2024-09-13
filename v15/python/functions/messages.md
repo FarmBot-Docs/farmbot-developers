@@ -35,7 +35,7 @@ fb.send_message(message, message_type="error", channels=["toast"])
 
 # log(message_str, message_type="info", channels=None)
 
-Same as `send_message()`, but adds a log message directly to the API instead of through FarmBot OS over the message broker.
+Same as `send_message()`, but adds a log message directly to the API instead of through FarmBot OS over the message broker. The frontend will need to be refreshed to show this message in the browser.
 
 # toast(message_str, message_type="info")
 
