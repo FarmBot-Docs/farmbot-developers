@@ -87,7 +87,7 @@ fb.wait(500)
 
 # lua(lua_code)
 
-**Executes a Lua script** on the Farmfb.
+**Executes a Lua script** on the FarmBot.
 
 ```python
 # Execute a Lua script

@@ -49,7 +49,7 @@ content="Tray ID lookups are cached. See [clearing the cache](../settings.md#cle
 
 # get_xyz()
 
-Gets the current **x, y, and z coordinates** of the Farmfb.
+Gets the current **x, y, and z coordinates** of the FarmBot.
 
 ```python
 position = fb.get_xyz()
