@@ -28,6 +28,7 @@ content='You can execute python code by pasting it into a new file such as `run.
 # Get your token
 
 ## via the FarmBot Python library
+
 ```python
 from farmbot import Farmbot
 from getpass import getpass
@@ -43,6 +44,7 @@ print(f'{TOKEN = }')
 ```
 
 ## via Python
+
 ```python
 import json
 from getpass import getpass
@@ -64,23 +66,26 @@ print(f'{TOKEN = }')
 
 # Use your token
 
-Use the value of `TOKEN` in examples.
-You may either copy and paste the token data in,
-or save it to a file and load it when needed.
-Consider the security of the approach you choose.
+Use the value of `TOKEN` in examples. You may either copy and paste the token data in, or save it to a file and load it when needed. Consider the security of the approach you choose.
 
 ## Copy and paste
+
 Replace the following line when it appears in examples:
+
 ```python
 # TOKEN = ...
 ```
+
 with your token data pasted from running the [get your token](#get-your-token) example code above. For example:
+
 ```python
 TOKEN = {"token": {"unencoded":{"aud":"unknown","sub":123,"iat":1234567890,"jti":"b52b68fb-5cc2-a9be-7aaf-ecc8837a2fa9","iss":"//my.farm.bot:443","exp":1234567890,"mqtt":"abc-def.rmq.cloudamqp.com","bot":"device_456","vhost":"xqigvtsn","mqtt_ws":"wss://abc-def.rmq.cloudamqp.com:443/ws/mqtt"},"encoded":"rFr6edHr11GDLITjaanofZxC4dM6TCC9UuHG.Kzx87wRkKvejWWjuigwX0i3hO8hi97pJ70m1bD2I5JRuksjE6E3gRIOVwoF5f8X4UCtftuVCsGttOayPxKUiuLMKZRJlUEH7ssyXCawVeBUf34B5NAy172aqdm3WGsQkFITOQgCTjKddYXn7Fs2rZow3N9YCkbYhoweoFyndhdF9ST8NmMgpFm3VfocYgNKukGI1gi2LjYoRdyPtdjGK1jwW3KKqyNWuOfkQVNxCg6c9xvQDqnbxiDLRfySn8HOQ9ElsXlN9LIv8PGN07EKKcbkyxsSXmYWHfwn8dOnzeNdL4OFiYNyLyB51YC4cukVROhMKfBbv3Vam6PgObmU4Jq2HF5xEru4MPORt741s8im84oP6.OqDC3SUJ7TSNV1NYii5BOONidacLifUfdaRGwjD05XNXdMCWlulnDCD4CWy7kFEAwA8pqxx9lCfqaA7ezK6054DLhtk0gsWu7gQ3oTjg1fZXinIiI2fLmxXhyisoFrudzwqryhwSmBQMAz3eVkdeyouJTgphFrbXjWnRYEk41iNXT275h68j3EtxSDqOpCZi4kqcuBUPltjS063FEYXa1JKzHThUQFpGVP2wg6doEWaNPAadjBBvOK7Ja6SEIONmiDNa3AfKqYgWoKGRyhQ2fFCZjnx53d7EgVRdBDdVxHhX6P7RghHZcAZ7d5cODz9d7b6IZWbyVDOj4Zd8RkRNQN"}, "user": {}}
 ```
 
 ## Saving to and loading from a file
+
 Add the following to the end of the [get your token](#get-your-token) example code above and run it again with the addition.
+
 ```python
 # save token to file
 with open('farmbot_authorization_token.json', 'w') as f:
@@ -89,10 +94,13 @@ with open('farmbot_authorization_token.json', 'w') as f:
 ```
 
 Replace the following line when it appears in examples:
+
 ```python
 # TOKEN = ...
 ```
+
 with:
+
 ```python
 # load token from file
 with open('farmbot_authorization_token.json', 'r') as f:
