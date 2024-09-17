@@ -27,7 +27,7 @@ title="API endpoint documentation"
 content="Not sure what should be included in data updates? [See the API docs here](../../docs/web-app/api-docs.md)."
 %}
 
-# api_get(endpoint, database_id=None)
+# api_get(endpoint, database_id=None, payload=None)
 
 Get information about a specific endpoint.
 
@@ -46,7 +46,7 @@ peripheral = fb.api_get("peripherals", 12345)
 device = fb.api_get("device")
 ```
 
-# api_post(endpoint, new_data)
+# api_post(endpoint, payload=None)
 
 Create new information contained within an endpoint.
 
@@ -59,7 +59,7 @@ new_peripheral = fb.api_post("peripherals", {
 })
 ```
 
-# api_patch(endpoint, new_data, database_id=None)
+# api_patch(endpoint, payload, database_id=None)
 
 Change information contained within an endpoint.
 
@@ -70,7 +70,7 @@ updated_peripheral = fb.api_patch("peripherals", {
 }, 12345)
 ```
 
-# api_delete(endpoint, database_id)
+# api_delete(endpoint, database_id, payload=None)
 
 Delete information contained within an endpoint.
 

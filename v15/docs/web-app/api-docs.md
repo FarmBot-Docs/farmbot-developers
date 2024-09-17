@@ -2372,7 +2372,10 @@ from farmbot import Farmbot
 fb = Farmbot()
 fb.set_token(TOKEN)
 
-fb.api_get('releases')
+fb.api_get('releases', payload={
+    'channel': 'stable',
+    'platform': 'rpi3',
+})
 ```
 
 output:

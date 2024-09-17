@@ -90,8 +90,6 @@ import requests
 
 # TOKEN = ...
 
-headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
-           'content-type': 'application/json'}
 new_cabbage = {
     "name": "Cabbage",              # Point name
     "pointer_type": "Plant",        # Point type
@@ -101,12 +99,22 @@ new_cabbage = {
     "openfarm_slug": "cabbage",     # Plant type
     "plant_stage": "planned",       # Point status
 }
+
+headers = {'Authorization': 'Bearer ' + TOKEN['token']['encoded'],
+           'content-type': 'application/json'}
 response = requests.post(f'https:{TOKEN['token']['unencoded']['iss']}/api/points',
                          headers=headers, json=new_cabbage)
 print(json.dumps(response.json(), indent=2))
 ```
 
 # POST log message
+
+{%
+include callout.html
+type="info"
+title="Note"
+content='The preferred method of logging messages is with [send_message()](../functions/messages.md#send_messagemessage_str-message_typeinfo-channelsnone). Using the example below, the frontend will need to be refreshed to show the log message in the browser.'
+%}
 
 ## via FarmBot Python library
 ```python
