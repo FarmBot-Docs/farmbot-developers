@@ -1,36 +1,28 @@
 ---
 title: "Segment FarmBot Images"
 slug: "segment-farmbot-images"
-description: "Use the FarmBot Python library and the Segment Anything Model to segment images from a FarmBot account"
+description: "Use the FarmBot Python library and the Segment Anything Model to segment images taken by a FarmBot"
 ---
 
-This script demonstrates how to use the **Segment Anything Model** (SAM) to segment images from a FarmBot account. See [https://github.com/facebookresearch/segment-anything](https://github.com/facebookresearch/segment-anything) for additional installation requirements and to download a SAM model.
+This script demonstrates how to use the **Segment Anything Model** (SAM) to segment images taken by a FarmBot. An image URL can be obtained either from the API or by listening to the message broker.
 
-# Example 1: Segmenting an image of a plant
+![plant segmentation example](_images/plant_segmentation_example.jpeg)
 
-Input image:
-
-![input image](_images/plant_segmentation_input.jpeg)
-
-`vit_l` model output:
-
-![vit_l output](_images/plant_segmentation_output.png)
-
-# Example 2: Segmenting an image of the FarmBot toolbay and other objects
-
-Input image:
-
-![input image](_images/toolbay_segmentation_input.jpeg)
-
-`vit_l` model output:
-
-![vit_l output](_images/toolbay_segmentation_output.png)
+![toolbay segmentation example](_images/toolbay_segmentation_example.jpeg)
 
 # Code
+
+{%
+include callout.html
+type="info"
+title="Installing SAM"
+content='See the [Segment Anything documentation](https://github.com/facebookresearch/segment-anything) for additional installation requirements and to download a SAM model for use with the following code.'
+%}
 
 ```python
 import json
 import time
+import math
 import requests
 import numpy as np
 from PIL import Image
@@ -41,36 +33,59 @@ from segment_anything import SamPredictor, SamAutomaticMaskGenerator, sam_model_
 
 # Add the SAM model you've downloaded to the current directory and list its path and type here.
 # The vit_l model (1.25GB) used in this example provides a good balance between speed and results.
-# On an M3 Mac, it takes about 80 seconds to segment a 640 x 480 image with the vit_l model.
+# It will take 20 to 100 seconds using a CPU to segment a 640 x 480 image with the vit_l model.
+# Using a machine with a CUDA-enabled GPU will be much faster.
 model_checkpoint = "sam_vit_l_0b3195.pth"
 model_type = "vit_l"
+
+# Set image_url_source to "api" to get the URL of the last uploaded image from the FarmBot API.
+# Set image_url_source to "broker" to listen to the message broker for the URL of the next image uploaded.
+image_url_source = "api"
 
 # Initialize the FarmBot class
 bot = Farmbot()
 token = bot.get_token("user@email.com", "password")
 bot.set_verbosity(0)
 
-# Get images from the FarmBot API
-images = bot.api_get("images")
-image_urls = [image["attachment_url"] for image in images]
+# Get the URL of the last uploaded image from the FarmBot API
+if image_url_source == "api":
+    print("Getting the URL of the last uploaded image from the FarmBot API...")
+    images = bot.api_get("images")
+    image_urls = [image["attachment_url"] for image in images]
 
-if bot.state.verbosity > 0:
-    print(json.dumps(image_urls, indent=2))
+    if bot.state.verbosity > 0:
+        print(json.dumps(image_urls, indent=2))
 
-if len(image_urls) == 0:
-    print("No images found")
-    exit(1)
+    if len(image_urls) == 0:
+        print("No images found")
+        exit(1)
 
-print(len(image_urls), "images found")
+    print(len(image_urls), "images found")
 
-# Download the first image
-url = image_urls[0]
+    url = image_urls[0]
+
+# Listen to the message broker for the URL of the next image uploaded
+elif image_url_source == "broker":
+    print("Listening to the message broker for the URL of the next image uploaded...")
+    bot.listen(
+        duration=math.inf,
+        message_options={
+            'filters': {
+                'topic': 'sync/Image',
+                'content': {'body.attachment_url': 'storage'},
+            },
+            'path': 'body.attachment_url',
+        }
+    )
+    url = bot.state.last_messages['sync_excerpt'][-1]
+
+# Download the image
 first_image = requests.get(url)
 
 if first_image.status_code == 200:
-    print("Downloaded first image from URL:", url)
+    print("Downloaded image from URL:", url)
 else:
-    print("Failed to download first image from URL:", url)
+    print("Failed to download image from URL:", url)
     exit(1)
 
 img = Image.open(BytesIO(first_image.content))
