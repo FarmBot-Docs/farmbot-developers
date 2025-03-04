@@ -114,6 +114,13 @@ grid.each(function(cell)
 end)
 ```
 
+{%
+include callout.html
+type="warning"
+title="Each iteration runs in its own execution context"
+content="Variables declared outside the `grid.each` iterator function will not be accessible within the function. Furthermore, variables within the iterator function will not persist across iterations or be available outside the function scope. To store and retrieve persistent variables that can be accessed both inside and outside the iterator function, use [env()](../functions/configuration.md#envkey-value--envkey)."
+%}
+
 # group(id)
 
 Returns a table of **current group member IDs**, sorted by the group's **SORT BY** method.

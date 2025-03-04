@@ -116,6 +116,13 @@ grid.each(function(cell)
 end)
 ```
 
+{%
+include callout.html
+type="warning"
+title="Each iteration runs in its own execution context"
+content="Variables declared outside the `grid.each` iterator function will not be accessible within the function. Furthermore, variables within the iterator function will not persist across iterations or be available outside the function scope. To store and retrieve persistent variables that can be accessed both inside and outside the iterator function, use [env()](../functions/configuration.md#envkey-value--envkey)."
+%}
+
 # take_photo_raw()
 
 **Takes a photo** using the device camera and **holds it in memory**. This is useful when uploading photos to 3rd party APIs. If your use case requires taking hundreds or thousands of photos per day, you can use `take_photo_raw()` to upload your images to a third-party image hosting provider that does not impose the same image hosting limits as the web app.
