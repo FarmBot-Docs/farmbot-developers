@@ -11,13 +11,13 @@ Unfortunately, you cannot track the device position in realtime via Lua or the s
  * The sequence editor does not have facilities to track position, aside from simple template variables in [SEND MESSAGE](https://software.farm.bot/v15/app/sequences/sequence-commands/logic#send-message).
  * It is not possible to easily track the position in Lua because the Lua environment does not support concurrent operations. It is possible to read the bot position via [read_status()](../lua/functions/configuration.md#read_statuspath) or [get_xyz()](../lua/functions/coordinates.md#get_xyz), but not in realtime. That is to say, you cannot send commands and read the position at the same time.
 
-Thus, if you want to track the position of FarmBot in realtime, you must write software that runs off-device using [MQTT](#using-mqtt), [FarmBot.JS](#using-farmbotjs) or [FarmBot.py](#using-farmbotpy).
+Thus, if you want to track the position of FarmBot in realtime, you must write software that runs off-device using [MQTT](#using-mqtt), [FarmBotPy](#using-farmbotpy) or [FarmBotJS](#using-farmbotjs).
 
 # Using MQTT
 
 FarmBot uses [MQTT](../docs/message-broker.md#mqtt) to transmit data about its internal state. This data includes position information. It is re-broadcast every time the position changes. The most basic way to read this information is to use an MQTT client like [MQTTx](https://mqttx.app/) or an MQTT library like [Paho MQTT](../python/examples/message-broker-examples.md).
 
-In this first example, we will attempt to connect to FarmBot directly using an MQTT client. The main advantage of this approach is that it can work in any programming language that supports MQTT. The main disadvantage is that this method is more difficult to set up than FarmBot.js or FarmBot.py.
+In this first example, we will attempt to connect to FarmBot directly using an MQTT client. The main advantage of this approach is that it can work in any programming language that supports MQTT. The main disadvantage is that this method is more difficult to set up than FarmBotJS or FarmBotPy.
 
 ## Step 1: Generate a Token via `curl` (or Similar)
 
@@ -138,7 +138,7 @@ There are many more useful status properties available, such as `informational_s
 
 Dealing with raw MQTT connections is difficult for users who are not familiar with the protocol. We have written a Javascript and Python wrapper library. **FarmBotJS is the library that powers the FarmBot Web App.** It is extremely stable and mature. FarmBotJS is a great first choice for developers building new projects in 2022 and beyond.
 
-An example written in Javascript is provided below. Please see the [official FarmBotJS documentation](https://github.com/FarmBot/farmbot-js) for more details.
+An example written in Javascript is provided below. Please see the [official FarmBotJS documentation](../docs/farmbot-js.md) for more details.
 
 ```javascript
 const Farmbot = require("farmbot").Farmbot;

@@ -56,7 +56,7 @@ If you are attempting to connect to the message broker from a web browser, you w
  * Building custom device control software.
  * Remotely debugging device issues in a browser.
 
-The best way to connect to the broker via WebSockets is with [FarmBot JS](../docs/farmbot-js.md) (easy). Some advanced users may prefer to directly connect via [MQTT.js](https://github.com/mqttjs/MQTT.js), though this is not appropriate for any use case other than debugging.
+The best way to connect to the broker via WebSockets is with [FarmBotPy](../python/intro.md) or [FarmBotJS](../docs/farmbot-js.md) (easy). Some advanced users may prefer to directly connect via [MQTT.js](https://github.com/mqttjs/MQTT.js), though this is not appropriate for any use case other than debugging.
 
 ## MQTT
 

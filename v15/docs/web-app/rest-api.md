@@ -13,7 +13,7 @@ The **REST API** is an HTTP web server commonly referred to as "The API", "The R
 {%
 include callout.html
 type="info"
-content="Generally speaking, the REST API does _not_ control FarmBot. Device control is handled by the [Message Broker](../message-broker.md), [CeleryScript](../celery-script.md), and [FarmBot JS](../farmbot-js.md)."
+content="Generally speaking, the REST API does _not_ control FarmBot. Device control is handled by the [Message Broker](../message-broker.md), [CeleryScript](../celery-script.md), [FarmBotPy](../../python/intro.md) and [FarmBotJS](../farmbot-js.md)."
 %}
 
 # Specifications

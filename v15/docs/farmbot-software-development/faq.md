@@ -22,7 +22,7 @@ Not at this time. The only software that supports Raspberry Pi is FarmBot OS. Do
 FarmBot is comprised of many different software systems and the language used varies across projects. Generally speaking, we use a combination of C++, [Ruby](https://www.ruby-lang.org/en/), [Elixir](https://elixir-lang.org), and [TypeScript](https://www.typescriptlang.org).
 
 # Do I need to know Elixir to program FarmBot?
-No. The best approach is to write a standalone application that interacts with FarmBot externally via [REST API](../web-app/rest-api.md), [FarmBot JS](../farmbot-js.md) or the [Message Broker](../../docs/message-broker.md).
+No. The best approach is to write a standalone application that interacts with FarmBot externally via [REST API](../web-app/rest-api.md), [FarmBotPy](../../python/intro.md), [FarmBotJS](../farmbot-js.md) or the [Message Broker](../../docs/message-broker.md).
 
 # Should I clone FarmBot OS on GitHub or use the image?
 You almost certainly want the image. The only exception is if you plan on modifying the FarmBot OS source code.

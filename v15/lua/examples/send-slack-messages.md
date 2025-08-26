@@ -67,4 +67,4 @@ Once the sequence is verified to be working, you can run it in a variety of ways
 * By binding the sequence to a physical button on the device via a [pin binding](https://software.farm.bot/docs/pin-bindings).
 * From within a parent sequence, via an <span class="fb-step fb-execute">EXECUTE</span> command.
 * On a recurring schedule, via an [event](https://software.farm.bot/docs/events).
-* Via third party software, using [FarmBot JS](https://github.com/FarmBot/farmbot-js).
+* Via third party software, using [FarmBotPy](../../python/intro.md) or [FarmBotJS](../../docs/farmbot-js.md).

@@ -12,11 +12,11 @@ With adequate experience, it is possible for a developer to read and write Celer
 
 # Intended audience
 
-This document is intended for advanced software development and debugging. Many software developers can avoid the low level details of Celery Script by using the [FarmBotJS library](https://github.com/FarmBot/farmbot-js). All of the low-level details of CeleryScript are abstracted away when using a wrapper library.
+This document is intended for advanced software development and debugging. Many software developers can avoid the low level details of Celery Script by using the [FarmBotPy](../python/intro.md) or [FarmBotJS](/farmbot-js.md) libraries. All of the low-level details of CeleryScript are abstracted away when using a wrapper library.
 
 CeleryScript knowledge is required only if you prefer to not use the wrapper library, are developing new features for the FarmBot platform, or are trying to debug specific problems with the system. It's also a great way for an intrepid software developer to learn FarmBot system internals.
 
-Javascript developers are encouraged to use [FarmBot JS](farmbot-js.md) instead of raw CeleryScript for most use cases.
+Javascript developers are encouraged to use [FarmBotPy](../python/intro.md) or [FarmBotJS](farmbot-js.md) instead of raw CeleryScript for most use cases.
 
 **If you are writing CeleryScript for a new or unsupported language** you are highly encouraged to write your own wrapper library, as writing CeleryScript by hand is tedious, error-prone and likely to have future compatibility issues. Conversely, migrating and managing auto-generated CeleryScript is often a trivial task that can be accomplished via scripting.
 

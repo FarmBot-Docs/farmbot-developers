@@ -12,7 +12,7 @@ Welcome to the FarmBot developer documentation hub! Here you'll find technical i
 |                                                |   |
 |------------------------------------------------|---|
 |[FarmBot on GitHub](http://github.farm.bot) |Production repos
-|[FarmBot.JS](/farmbot-js.md)                |Javascript library for interacting with FarmBot from the web
+|[FarmBotJS](/farmbot-js.md)                |Javascript library for interacting with FarmBot from the web
 |[Python](../python/intro.md)          |Python library for interacting with FarmBot
 |[Lua](../lua/intro.md)                             |Information for using Lua in FarmBot sequences
 |[Example API requests](/web-app/api-docs.md)|Reference for interacting with the API
