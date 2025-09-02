@@ -40,7 +40,7 @@ If you have the above set up you will need the following software dependencies. 
 |[Nerves Bootstrapper](https://hexdocs.pm/nerves/installation.html#Linux)|Required
 |GNU Make + GCC                |Required
 |Git                           |Required
-|Arduino                       |Optional. You can do one of:<br>  * Set the `ARDUINO_INSTALL_DIR` environment variable<br><br>  * Execute `.circleci/setup_arduino.sh`
+|Arduino                       |Optional. `apt install avrdude` and `usermod -aG dialout $USER`
 |Python                        |Optional
 |opencv-python                 |Optional
 
