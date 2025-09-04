@@ -189,8 +189,6 @@ contents:
             url: interpolation
       - title: Track Movement
         url: track-movement
-      - title: OpenFarm
-        url: openfarm
       - title: Security Vulnerabilities
         url: responsible-disclosure-of-security-vulnerabilities
       - title: GitHub
