@@ -38,15 +38,6 @@ wait(2000)
 complete_job(job_name)
 ```
 
-# set_job_progress()
-
-{%
-include callout.html
-type="warning"
-title="Deprecated"
-content="This is a low-level function that has been superseded by [set_job()](#set_jobname-params)."
-%}
-
 # get_job(name)
 
 **Gets a job** by name.
@@ -68,15 +59,6 @@ toast("Job progress: " .. job.percent .. "%")
 
 complete_job(job_name)
 ```
-
-# get_job_progress()
-
-{%
-include callout.html
-type="warning"
-title="Deprecated"
-content="This is a low-level function that has been superseded by [get_job()](#get_jobname)."
-%}
 
 # complete_job(name)
 
