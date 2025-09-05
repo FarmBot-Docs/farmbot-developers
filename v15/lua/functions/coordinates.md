@@ -130,6 +130,91 @@ toast("Width: " .. size.y .. "mm")
 toast("Height: " .. size.z .. "mm")
 ```
 
+# get_generic_points({filters})
+
+Returns a table of **generic points**, filtered by the optional parameters. Available filters include: `min_radius`, `max_radius`, `min_age`, `max_age`, `color`, and `at_soil_level`.
+
+```lua
+points = get_generic_points()
+toast("Total number of generic points: " .. #points)
+
+points = get_generic_points({at_soil_level="true"})
+toast("Points at soil level: " .. #points)
+
+points = get_generic_points({color="blue", min_radius=10})
+toast("Blue points with minimum radius of 10: " .. #points)
+
+points = get_generic_points({max_age=2})
+toast("Points younger than 2 days: " .. #points)
+```
+
+# get_plants({filters})
+
+Returns a table of **planted plants**, filtered by the optional parameters. Available filters include: `min_radius`, `max_radius`, `min_age`, `max_age`, `plant_stage`, and `openfarm_slug`.
+
+{%
+include callout.html
+type="info"
+content='By default, a `plant_stage="planted"` filter is applied.'
+%}
+
+```lua
+plants = get_plants()
+toast("Total number of planted plants: " .. #plants)
+
+plants = get_plants({plant_stage="sprouted"})
+toast("Sprouted plants: " .. #plants)
+
+plants = get_plants({min_radius=10, max_age=5})
+toast("Planted plants with minimum radius of 10 and maximum age of 5: " .. #plants)
+
+plants = get_plants({openfarm_slug="broccoli"})
+toast("Planted Broccoli plants: " .. #plants)
+```
+
+# get_weeds({filters})
+
+Returns a table of **active weeds**, filtered by the optional parameters. Available filters include: `min_radius`, `max_radius`, `min_age`, `max_age`, `plant_stage`, and `color`.
+
+{%
+include callout.html
+type="info"
+content='By default, a `plant_stage="active"` filter is applied.'
+%}
+
+```lua
+weeds = get_weeds()
+toast("Total number of active weeds: " .. #weeds)
+
+weeds = get_weeds({plant_stage="pending"})
+toast("Pending weeds: " .. #weeds)
+
+weeds = get_weeds({min_radius=10, max_age=5})
+toast("Active weeds with minimum radius of 10 and maximum age of 5: " .. #weeds)
+```
+
+# get_group(id|name)
+
+Returns a table of **current group members**, sorted by the group's **SORT BY** method. You may get a group by name or id.
+
+```lua
+group_members = get_group("All plants")
+for _, plant in pairs(group_members) do
+    move{x=plant.x, y=plant.y, z=0}
+end
+```
+
+```lua
+group_members = get_group(1234)
+toast(#group_members)
+```
+
+{%
+include callout.html
+type="info"
+content="Find a group's ID by navigating to the group in the web app and copying the number at the end of the URL."
+%}
+
 # get_seed_tray_cell(tray, cell)
 
 Calculates the **coordinates of a seed tray cell**, such as `B3`, based on the cell label and the coordinates of the center of the seed tray. See the [Pick from Seed Tray featured sequence](https://my.farm.bot/app/shared/sequence/32) for an example.
