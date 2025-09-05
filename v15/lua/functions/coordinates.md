@@ -34,6 +34,17 @@ else
 end
 ```
 
+# garden_size()
+
+Returns a table with an `x`, `y`, and `z` attribute representing the **length, width, and height in mm of FarmBot's working volume** according to the **AXIS LENGTH** settings.
+
+```lua
+size = garden_size()
+toast("Length: " .. size.x .. "mm")
+toast("Width: " .. size.y .. "mm")
+toast("Height: " .. size.z .. "mm")
+```
+
 # get_generic_points({filters})
 
 Returns a table of **generic points**, filtered by the optional parameters. Available filters include: `min_radius`, `max_radius`, `min_age`, `max_age`, `color`, and `at_soil_level`.
@@ -118,17 +129,6 @@ include callout.html
 type="info"
 content="Find a group's ID by navigating to the group in the web app and copying the number at the end of the URL."
 %}
-
-# garden_size()
-
-Returns a table with an `x`, `y`, and `z` attribute representing the **length, width, and height in mm of FarmBot's working volume** according to the **AXIS LENGTH** settings.
-
-```lua
-size = garden_size()
-toast("Length: " .. size.x .. "mm")
-toast("Width: " .. size.y .. "mm")
-toast("Height: " .. size.z .. "mm")
-```
 
 # get_seed_tray_cell(tray, cell)
 
