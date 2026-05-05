@@ -3,6 +3,7 @@ url: https://developer.farm.bot
 description: Documentation for 3rd-party developers to work with the FarmBot API
 logo: /assets/images/documentation.png
 remote_theme: FarmBot-Docs/farmbot-theme@main
+repository: FarmBot-Docs/farmbot-developers
 baseurl: /
 color: '#0c4d8a'
 latest_version_number: 15
@@ -11,6 +12,9 @@ plugins:
   - jekyll-redirect-from
   - jekyll-remote-theme
   - jekyll-seo-tag
+  - jekyll-github-metadata
+  - jekyll-default-layout
+  - jekyll-relative-links
 include:
   - _images
   - _redirects

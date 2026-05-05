@@ -4,6 +4,6 @@ _site
 .jekyll-metadata
 .bundle
 vendor
-Gemfile
+.tool-versions
 Gemfile.lock
 *.log

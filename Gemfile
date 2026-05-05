@@ -1,7 +1,18 @@
 source 'https://rubygems.org'
 
-gem 'github-pages', group: :jekyll_plugins
+gem 'jekyll'
+gem 'jekyll-github-metadata'
+gem 'jekyll-default-layout'
+gem 'jekyll-redirect-from'
+gem 'jekyll-relative-links'
+gem 'jekyll-remote-theme'
+gem 'jekyll-seo-tag'
+gem 'jekyll-theme-cayman'
+gem 'jemoji'
+gem 'ostruct'
 
 group :jekyll_plugins do
   gem 'jekyll-algolia'
 end
+
+ruby '~> 4.0.0'
