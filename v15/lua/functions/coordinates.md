@@ -6,7 +6,7 @@ description: "List of coordinate Lua functions in FarmBot OS"
 
 # coordinate(x, y, z)
 
-**Generates a coordinate** for use in location-based functions such as `move_absolute` and `check_position`.
+**Generates a coordinate** for use in location-based functions such as `move_absolute`, `check_position`, and `verify_in_bounds`.
 
 ```lua
 coordinate(1.0, 20, 30)
@@ -31,6 +31,18 @@ if check_position(home, 0.5) then
   toast("FarmBot is at the home position", "success")
 else
   toast("FarmBot is not at the home position", "warn")
+end
+```
+
+# verify_in_bounds(coordinate)
+
+Returns `true` if the supplied coordinates satisfy the enabled firmware movement limits. Only supplied axes are checked. Checks respect each axis's **STOP AT HOME** and **STOP AT MAX** settings, **AXIS LENGTH**, and Z-axis direction set by **NEGATIVE COORDINATES ONLY**. Returns `false` and displays an error toast if a limit is exceeded.
+
+```lua
+if verify_in_bounds({x = 0, y = 0,  z = 0}) then
+  toast("Coordinate passes enabled movement limits.", "success")
+else
+  toast("Coordinate fails enabled movement limits.", "warn")
 end
 ```
 

@@ -6,7 +6,7 @@ description: "List of tool Lua functions in FarmBot OS"
 
 # dismount_tool()
 
-**Dismounts the currently mounted tool** into it's assigned slot, taking into account the slot's direction.
+**Dismounts the currently mounted tool** into its assigned slot, taking into account the slot's direction. The tool slot must be stationary (`mount_stage = 0`) and have a slot direction.
 
 {%
 include callout.html
@@ -25,14 +25,14 @@ find_home()
 
 # dispense(mL, params?)
 
-**Dispenses the given amount of liquid in milliliters**. Defaults to using the "Watering Nozzle" tool, its **WATER FLOW RATE (ML/S)** value, and the solenoid valve operated by pin `8`.
+**Dispenses the given amount of liquid in milliliters**. Defaults to using the tool with type "watering_nozzle", its **WATER FLOW RATE (ML/S)** value, and the solenoid valve operated by pin `8`.
 
 ```lua
 -- Dispense 100 mL of water using default values
 dispense(100)
 ```
 
-The `params` argument is optional and can be used to override the default `tool_name` (and therefore the **WATER FLOW RATE (ML/S)** value) as well as which `pin` to operate.
+The optional `params` argument can select a tool by `tool_name` instead of the default watering nozzle, using that tool's **WATER FLOW RATE (ML/S)** value. It can also override which `pin` to operate.
 
 ```lua
 -- Dispense 200 mL of fertilizer using a custom tool operated by pin 7
@@ -40,20 +40,20 @@ dispense(200, {tool_name = "Custom Watering Nozzle 2", pin = 7})
 ```
 
 ```lua
--- Dispense 300 mL of water with the standard "Watering Nozzle" tool, but using a solenoid valve operated by pin 10
+-- Dispense 300 mL of water with the default watering nozzle, but using a solenoid valve operated by pin 10
 dispense(300, {pin = 10})
 ```
 
 {%
 include callout.html
 type="info"
-content='In order to add a **WATER FLOW RATE (ML/S)** value to a tool, the tool name must contain "Watering Nozzle" in the name.
+content='In order to add a **WATER FLOW RATE (ML/S)** value to a tool, the tool type must be "watering_nozzle".
 ![water flow rate](_images/water_flow_rate.png)'
 %}
 
 # get_tool(params)
 
-**Get a tool** by the given `id` or `name`. Returns a table with the tool's `id`, `name`, and `flow_rate_ml_per_s`.
+**Get a tool** by the given `id`, `type`, or `name`. Returns a table with the tool's `id`, `type`, `name`, `utm_mountable`, `effector_offset_x`, `effector_offset_y`, `effector_offset_z`, and `flow_rate_ml_per_s`. Returns `nil` if no matching tool exists.
 
 {%
 include callout.html
@@ -64,18 +64,60 @@ content="Note that the tool object does not include the coordinates of the **slo
 ```lua
 -- Get a tool by its ID
 tool = get_tool({id = 123})
-toast(tool.name)
+if tool then
+  toast(tool.name)
+end
+```
+
+```lua
+-- Get a tool by its type
+tool = get_tool({type = "seeder"})
+if tool then
+  toast(tool.name)
+end
 ```
 
 ```lua
 -- Get a tool by its name
 tool = get_tool({name = "Watering Nozzle"})
-toast(tool.flow_rate_ml_per_s)
+if tool then
+  toast(tool.flow_rate_ml_per_s)
+end
+```
+
+# get_slot_for_tool(params)
+
+**Get a tool slot** by the given tool `id`, `type`, or `name`. Returns a table with the tool slot's `x`, `y`, `z`, `tool_id`, `pullout_direction`, `mount_stage`, `mount_offset_x`, `mount_offset_y`, and `mount_offset_z`.
+
+Returns `nil` if no matching tool or assigned slot exists. Returned coordinates are stored slot coordinates; mounting offsets are not applied.
+
+```lua
+-- Get a tool slot by its tool ID
+slot = get_slot_for_tool({id = 123})
+if slot then
+  toast(slot.x)
+end
+```
+
+```lua
+-- Get a tool slot by its tool type
+slot = get_slot_for_tool({type = "seeder"})
+if slot then
+  toast(slot.x)
+end
+```
+
+```lua
+-- Get a tool slot by its tool name
+slot = get_slot_for_tool({name = "Watering Nozzle"})
+if slot then
+  toast(slot.x)
+end
 ```
 
 # mount_tool(tool)
 
-**Mounts the given tool** and pulls it out of its slot, taking into account the slot's direction.
+**Mounts the given tool** and pulls it out of its slot, taking into account the slot's direction. The tool slot must be stationary (`mount_stage = 0`) and have a slot direction.
 
 {%
 include callout.html
@@ -105,9 +147,11 @@ You may also simply mount a tool by its name:
 mount_tool("My Tool")
 ```
 
-# verify_tool()
+# verify_tool(params?)
 
 **Verifies if a tool is mounted to the UTM** by checking the UTM's tool verification pin as well as the **MOUNTED TOOL** field in FarmBot's state tree. Returns `true` if a tool is mounted or `false` if no tool is mounted.
+
+If an `id`, `type`, or `name` is provided in the `params` table, `verify_tool` returns `false` if the mounted tool does not match. All provided fields must match.
 
 {%
 include callout.html
@@ -125,6 +169,24 @@ content="The `verify_tool()` functionality is built-in to the `mount_tool()` and
 -- Exit sequence if tool verification fails (no tool)
 if not verify_tool() then
   return
+end
+```
+
+```lua
+-- Exit sequence if tool verification fails (no seeder tool)
+if not verify_tool({type = "seeder"}) then
+  return
+end
+```
+
+# get_mounted_tool()
+
+Convenience function for `get_tool({id = get_device("mounted_tool_id")})`. Returns the tool selected in the **MOUNTED TOOL** field, or `nil` if no tool is selected or the tool cannot be found.
+
+```lua
+local mounted_tool = get_mounted_tool()
+if mounted_tool then
+  toast(mounted_tool.name)
 end
 ```
 

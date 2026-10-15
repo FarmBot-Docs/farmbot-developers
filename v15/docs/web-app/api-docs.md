@@ -515,6 +515,7 @@ output:
 |---|---|:---:|:---:|:---:|:---:|:---:|
 |`product_line`<br>FarmBot model.|"express_1.0" \| "express_1.1" \| "express_1.2" \| "express_xl_1.0" \| "express_xl_1.1" \| "express_xl_1.2" \| "genesis_1.2" \| "genesis_1.3" \| "genesis_1.4" \| "genesis_1.5" \| "genesis_1.6" \| "genesis_1.7" \| "genesis_xl_1.4" \| "genesis_xl_1.5" \| "genesis_xl_1.6" \| "genesis_xl_1.7" \| "none"|||📝<br>(required)|||
 |`demo`<br>Seed a demo account.|boolean|||📝|||
+|`force_fallback_install`<br>Use local featured sequence fallbacks.|boolean|||📝|||
 
 ## device/sync
 
@@ -1663,6 +1664,7 @@ Used by [peripherals](https://software.farm.bot/docs/peripherals).
 |`pin`<br>Pin number.|integer|📖|📖|📝<br>(required)|📝|🗑|
 |`label`<br>Peripheral name.|string|📖|📖|📝<br>(required)|📝|🗑|
 |`mode`<br>Pin mode.|0-1|📖|📖||📝|🗑|
+|`type`<br>Peripheral type.|"lighting" \| "rotary_tool" \| "vacuum" \| "water" \| "none"|📖|📖|📝<br>(required)|📝|🗑|
 
 __GET /api/peripherals__
 
@@ -1701,6 +1703,7 @@ output:
     "updated_at": "2022-02-02T23:14:14.106Z",
     "pin": 1,
     "label": "MyString",
+    "type": "none",
     "mode": 0
   },
   {
@@ -1709,6 +1712,7 @@ output:
     "updated_at": "2022-02-02T23:14:14.118Z",
     "pin": 2,
     "label": "MyString",
+    "type": "rotary_tool",
     "mode": 0
   }
 ]
@@ -1996,8 +2000,14 @@ Notes:
 |`height_curve_id`<br>ID of the height curve for the plant.|integer|📖|📖|📝|📝|🗑|✅||||
 |`pullout_direction`<br>Tool slot direction.|0-4|📖|📖|📝|📝|🗑||||✅|
 |`tool_id`<br>ID of the tool in the tool slot.|integer|📖|📖|📝|📝|🗑||||✅|
-|`gantry_mounted`<br>Is the tool slot mounted on the gantry?|boolean|📖|📖|📝|📝|🗑||||✅|
+|`mount_stage`<br>Axis the tool slot is mounted on. 0: none, 1: x-axis (gantry), 2: y-axis (cross-slide), 3: z-axis|0\|1\|2\|3|📖|📖|📝|📝|🗑||||✅|
+|`mount_offset_x`<br>X-axis mounting offset in millimeters. Only enabled in the frontend if `mount_stage` > 0.|float|📖|📖|📝|📝|🗑||||✅|
+|`mount_offset_y`<br>Y-axis mounting offset in millimeters. Only enabled in the frontend if `mount_stage` > 1.|float|📖|📖|📝|📝|🗑||||✅|
+|`mount_offset_z`<br>Z-axis mounting offset in millimeters. Only enabled in the frontend if `mount_stage` > 2.|float|📖|📖|📝|📝|🗑||||✅|
+|`gantry_mounted`<br>**DEPRECATED** Use `mount_stage` of `1` instead.|boolean|📖|📖|📝|📝|🗑||||✅|
 |`filter`<br>Filter points.|"all" \| "old" \| "kept"|📝|||||||||
+
+For each mounted axis of a tool slot, the resolved coordinate is FarmBot's current coordinate plus the corresponding mounting offset. Unmounted axes use the slot's stored coordinates.
 
 __GET /api/points__
 
@@ -2097,6 +2107,10 @@ output:
     "z": 6.0,
     "tool_id": null,
     "pullout_direction": 0,
+    "mount_stage": 0,
+    "mount_offset_x": 0.0,
+    "mount_offset_y": 0.0,
+    "mount_offset_z": 0.0,
     "gantry_mounted": false
   }
 ]
@@ -2555,6 +2569,7 @@ See [sensors](https://software.farm.bot/docs/sensors).
 |`mode`<br>Sensor pin read mode, `0` for digital, `1` for analog.|0 \| 1|📖|📖|📝<br>(required)|📝|🗑|
 |`pin`<br>Sensor pin number.|0-69|📖|📖|📝<br>(required)|📝|🗑|
 |`label`<br>Sensor name.|string|📖|📖|📝<br>(required)|📝|🗑|
+|`type`<br>Sensor type.|"soil_moisture" \| "tool_verification" \| "current" \| "none"|📖|📖|📝<br>(required)|📝|🗑|
 
 __GET /api/sensors__
 
@@ -2593,6 +2608,7 @@ output:
     "updated_at": "2022-02-02T23:14:40.839Z",
     "pin": 3,
     "label": "My Sensor",
+    "type": "none",
     "mode": 1
   }
 ]
@@ -3052,7 +3068,13 @@ Used for [tools](https://software.farm.bot/docs/tools).
 |`updated_at`<br>Date and time of most recent update set by the database.|timestamp|📖|📖|||🗑|
 |`name`<br>Tool name.|string|📖|📖|📝<br>(required)|📝|🗑|
 |`status`<br>Whether a tool is assigned to a slot or not. Does not indicate if a tool is currently mounted by the UTM. Use `device.mounted_tool_id` to check if the tool is mounted or not.|"active" \| "inactive"|📖|📖|||🗑|
-|`flow_rate_ml_per_s`<br>Watering nozzle flow rate in mL per second. Field only shown in the frontend if tool name includes "Watering Nozzle".|integer|📖|📖|📝|📝|🗑|
+|`flow_rate_ml_per_s`<br>Watering nozzle flow rate in mL per second. Field only shown in the frontend if tool type is "watering_nozzle".|integer|📖|📖|📝|📝|🗑|
+|`type`<br>Tool type.|"rotary_tool" \| "seed_bin" \| "seed_tray" \| "seed_trough" \| "seeder" \| "soil_sensor" \| "watering_nozzle" \| "weeder" \| "none"|📖|📖|📝<br>(required)|📝|🗑|
+|`utm_mountable`<br>Is the tool mountable by the UTM?|boolean|📖|📖|📝|📝|🗑|
+|`effector_offset_x`<br>X-axis offset in millimeters for the tool effector.|float|📖|📖|📝|📝|🗑|
+|`effector_offset_y`<br>Y-axis offset in millimeters for the tool effector.|float|📖|📖|📝|📝|🗑|
+|`effector_offset_z`<br>Z-axis offset in millimeters for the tool effector.|float|📖|📖|📝|📝|🗑|
+|`seeder_tip_z_offset`<br>**DEPRECATED** Use `effector_offset_z` instead. Note that a positive `seeder_tip_z_offset` becomes a negative `effector_offset_z`.|float|📖|📖|📝|📝|🗑|
 
 __GET /api/tools__
 
@@ -3090,7 +3112,13 @@ output:
   "updated_at": "2022-02-02T23:14:39.322Z",
   "name": "Watering Nozzle",
   "status": "active",
-  "flow_rate_ml_per_s": 0
+  "flow_rate_ml_per_s": 0,
+  "type": "watering_nozzle",
+  "utm_mountable": true,
+  "effector_offset_x": 0.0,
+  "effector_offset_y": 0.0,
+  "effector_offset_z": 0.0,
+  "seeder_tip_z_offset": 0.0
 }
 ```
 
