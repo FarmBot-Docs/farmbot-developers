@@ -222,4 +222,72 @@ plant = variable("Plant")
 
 -- Water the plant based on its age and watering curve, using a solenoid valve operated by pin 10
 water(plant, {pin = 10})
+
+-- Use a named nozzle for both movement offsets and dispensing flow rate
+water(plant, {tool_name = "Custom Watering Nozzle 2", pin = 7})
+```
+
+# resolve_tool_move(params)
+
+**Calculates movement coordinates for a tool's end effector**, accounting for the tool's effector offsets and its slot's mounting offsets. Returns a new table suitable for passing to [move()](movements.md#moveargs), without moving FarmBot.
+
+Accepts the same parameters as [move()](movements.md#moveargs), plus `id`, `name`, or `type` to select the tool using the same fields as [get_tool()](#get_toolparams). The supplied coordinates specify the desired position of the tool's end effector.
+
+For each supplied coordinate, the result is calculated as:
+
+```text
+resolved coordinate = target - mounting offset - effector offset + offset
+```
+
+Mounting offsets come from the tool's assigned slot and depend on its `mount_stage`:
+
+|Mount stage|Mounting offsets applied|
+|-----------|------------------------|
+|`0` (stationary)|None.
+|`1` (gantry)|X.
+|`2` (cross-slide)|X and Y.
+|`3` (Z-axis)|X, Y, and Z.
+
+```lua
+-- Calculate a target for a tool named "Seeder" without moving FarmBot
+local target = resolve_tool_move({
+  name = "Seeder",
+  x = 100,
+  y = 200,
+  z = -50,
+  offset = {z = 5},
+  safe_z = true
+})
+
+-- Inspect the resolved coordinates before moving
+toast("Resolved Z coordinate: " .. target.z)
+move(target)
+```
+
+For example, with a stationary slot, an `effector_offset_z` of `-30`, a target `z` of `-50`, and an `offset.z` of `5`, the resolved Z coordinate is `-15`.
+
+# move_with_tool(params)
+
+**Moves a tool's end effector to the given target**, accounting for effector and mounting offsets. Equivalent to `move(resolve_tool_move(params))`. Accepts the same parameters as [resolve_tool_move()](#resolve_tool_moveparams).
+
+```lua
+-- Position the watering nozzle's end effector above a plant
+local plant = variable("Plant")
+move_with_tool({
+  type = "watering_nozzle",
+  x = plant.x,
+  y = plant.y,
+  z = plant.z + 25,
+  speed = 50,
+  safe_z = true
+})
+```
+
+```lua
+-- Move only the seeder's end effector to an absolute X coordinate
+move_with_tool({name = "Seeder", x = 100})
+
+-- Move 10 mm along Y relative to the current position
+-- Relative-only moves do not apply effector or mounting offsets
+move_with_tool({name = "Seeder", offset = {y = 10}})
 ```

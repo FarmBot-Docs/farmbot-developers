@@ -46,6 +46,10 @@ else
 end
 ```
 
+# resolve_tool_move(params)
+
+See [tools](tools.md#resolve_tool_moveparams).
+
 # get_generic_points({filters})
 
 Returns a table of **generic points**, filtered by the optional parameters. Available filters include: `min_radius`, `max_radius`, `min_age`, `max_age`, `color`, and `at_soil_level`.
@@ -231,6 +235,8 @@ content="Find a group's ID by navigating to the group in the web app and copying
 
 Calculates the **coordinates of a seed tray cell**, such as `B3`, based on the cell label and the coordinates of the center of the seed tray. See the [Pick from Seed Tray featured sequence](https://my.farm.bot/app/shared/sequence/32) for an example.
 
+The returned coordinates locate the cell itself; no seeder effector offset is included. Use [move_with_tool()](tools.md#move_with_toolparams) to position the seeder at the cell.
+
 ```lua
 tray = variable("Seed Tray")
 cell_label = variable("Seed Tray Cell")
@@ -241,8 +247,10 @@ cell_depth = 5
 local cell_coordinates = " (" .. cell.x .. ", " .. cell.y .. ", " .. cell.z - cell_depth .. ")"
 toast("Picking up seed from cell " .. cell_label .. cell_coordinates)
 
--- Safe Z move to above the cell
-move_absolute({
+-- Mount the seeder before running this movement
+-- Safe Z move to position the seeder above the cell
+move_with_tool({
+    type = "seeder",
     x = cell.x,
     y = cell.y,
     z = cell.z + 25,
