@@ -25,6 +25,7 @@ go_to_home("all")
 
 * When an `x`, `y`, or `z` coordinate is omitted, the current position along that axis will be maintained unless an `offset` is provided for that axis.
 * An optional `offset` table with `x`, `y`, and/or `z` values adds offsets in millimeters to the target coordinates. For an axis with an absolute coordinate, the offset is added to that coordinate. For an axis without an absolute coordinate, the offset is added to the current position.
+* An optional `variance` table with `x`, `y`, and/or `z` values adds a random offset in millimeters to each specified axis. Each value sets the maximum variation in either direction from the target coordinate, including any `offset`. For example, `variance={x=5}` varies the target X coordinate by up to 5 mm in either direction. Omitted axes have no variance.
 * An optional `speed` argument will modify the speed of the movement as a percentage of the maximum speed.
 * An optional `safe_z` argument can be set to `true` to perform the movement in three steps: first, the Z axis will be moved to the **SAFE HEIGHT**, then the X and Y axes will be moved to their new position, and finally the Z axis will be moved to the new position. This is useful for avoiding collisions with plants.
 
@@ -55,6 +56,9 @@ move{offset={x=10, z=-5}}
 
 -- Move to X=110 and Y=200, keeping Z constant
 move{x=100, y=200, offset={x=10}}
+
+-- Move to a random X between 95 and 105 and Y between 190 and 210
+move{x=100, y=200, variance={x=5, y=10}}
 ```
 
 An optional `grouping` string controls which axes move together. Axes within a group move simultaneously, and commas separate movement steps. For example, `"xy,z"` moves X and Y together, then Z; `"z,y,x"` moves each axis separately.
